@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+  <title>Fisio Pedía - Diccionario del Cuerpo Humano para Estudiantes de Fisioterapia</title>
+  <meta name="description" content="Diccionario educativo del cuerpo humano con explicaciones sencillas, ejemplos cotidianos, diccionario visual, flashcards 3D y quizzes para estudiantes de Fisioterapia."/>
+  
+  <!-- Tipografía Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            primary: "#00685f",
+            "on-primary": "#ffffff",
+            "primary-container": "#008378",
+            "on-primary-container": "#f4fffc",
+            secondary: "#565e74",
+            "on-secondary": "#ffffff",
+            "secondary-container": "#dae2fd",
+            surface: "#f5faf8",
+            "on-surface": "#171d1c",
+            "on-surface-variant": "#3d4947",
+            "surface-container-lowest": "#ffffff",
+            "surface-container-low": "#f0f5f2",
+            "surface-container": "#eaefed",
+            "surface-container-high": "#e4e9e7",
+            "surface-container-highest": "#dee4e1",
+            "slate-surface": "#F8FAFC",
+            "slate-subtle": "#F1F5F9",
+            "slate-border": "#E2E8F0",
+            "slate-muted": "#64748B",
+            "slate-strong": "#1E293B",
+            "cyan-accent": "#06B6D4",
+            "amber-quiz": "#F59E0B",
+            "coral-alert": "#F43F5E",
+            "cat-muscles": "#0D9488",
+            "cat-bones": "#0284C7",
+            "cat-joints": "#6366F1",
+            "cat-movements": "#F59E0B"
+          },
+          fontFamily: {
+            "display": ["Plus Jakarta Sans", "sans-serif"],
+            "headline-lg": ["Plus Jakarta Sans", "sans-serif"],
+            "headline-md": ["Plus Jakarta Sans", "sans-serif"],
+            "headline-sm": ["Plus Jakarta Sans", "sans-serif"],
+            "label-md": ["Plus Jakarta Sans", "sans-serif"],
+            "label-sm": ["Plus Jakarta Sans", "sans-serif"],
+            "label-caps": ["Plus Jakarta Sans", "sans-serif"],
+            "body-lg": ["Inter", "sans-serif"],
+            "body-md": ["Inter", "sans-serif"],
+            "body-sm": ["Inter", "sans-serif"]
+          },
+          spacing: {
+            "gutter": "1.5rem",
+            "margin": "2rem",
+            "space-xs": "0.25rem",
+            "space-sm": "0.5rem",
+            "space-md": "1rem",
+            "space-lg": "1.5rem",
+            "space-xl": "2.5rem"
+          }
+        }
+      }
+    };
+  </script>
+
+  <!-- Estilos Personalizados -->
+  <link rel="stylesheet" href="css/custom.css"/>
+</head>
+<body class="bg-surface font-body-md text-on-surface antialiased safe-bottom-padding selection:bg-primary/20 selection:text-primary">
+
+  <!-- CABECERA PRINCIPAL (DESKTOP & TABLET) -->
+  <header class="fixed top-0 left-0 w-full z-50 bg-surface-container-lowest/90 backdrop-blur-md shadow-[0_1px_8px_rgba(0,0,0,0.04)] border-b border-slate-border/50">
+    <div class="h-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between gap-4">
+      
+      <!-- LOGO -->
+      <a href="#explorador" class="flex items-center gap-3 group">
+        <div class="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center text-primary group-hover:scale-105 transition-transform shadow-xs">
+          <span class="material-symbols-outlined text-2xl font-bold">accessibility_new</span>
+        </div>
+        <div class="flex flex-col">
+          <span class="font-headline-sm text-xl text-primary tracking-tight leading-none font-bold">Fisio Pedía</span>
+          <span class="font-label-caps text-[11px] text-slate-muted uppercase tracking-wider mt-1">Diccionario del Cuerpo Humano</span>
+        </div>
+      </a>
+
+      <!-- BUSCADOR RÁPIDO DESKTOP -->
+      <div class="hidden xl:flex items-center flex-1 max-w-md mx-4">
+        <a href="#explorador" class="w-full flex items-center justify-between px-4 py-2 bg-surface-container-low hover:bg-surface-container-high rounded-xl text-on-surface-variant transition-colors border border-slate-border/60">
+          <div class="flex items-center gap-2">
+            <span class="material-symbols-outlined text-slate-muted text-lg">search</span>
+            <span class="font-body-sm text-sm text-on-surface-variant">Buscar músculo, articulación...</span>
+          </div>
+          <kbd class="hidden sm:inline-block font-label-caps text-[11px] px-2 py-0.5 rounded bg-surface-container-highest text-on-surface-variant font-mono">Ctrl+K</kbd>
+        </a>
+      </div>
+
+      <!-- MENÚ DE NAVEGACIÓN DESKTOP -->
+      <nav class="hidden lg:flex items-center gap-1">
+        <a href="#explorador" data-route-nav="explorador" class="px-3.5 py-2 rounded-lg font-label-md text-sm text-on-surface-variant hover:bg-surface-container-high transition-colors">
+          Explorador
+        </a>
+        <a href="#terminos" data-route-nav="termino" class="px-3.5 py-2 rounded-lg font-label-md text-sm text-on-surface-variant hover:bg-surface-container-high transition-colors">
+          Términos Anatómicos
+        </a>
+        <a href="#favoritos" data-route-nav="favoritos" class="px-3.5 py-2 rounded-lg font-label-md text-sm text-on-surface-variant hover:bg-surface-container-high transition-colors flex items-center gap-1.5">
+          <span>Mis Favoritos &amp; Flashcards</span>
+          <span class="fav-count-badge hidden px-2 py-0.5 rounded-full bg-amber-quiz/20 text-amber-quiz text-xs font-bold">0</span>
+        </a>
+        <a href="#quizzes" data-route-nav="quizzes" class="px-3.5 py-2 rounded-lg font-label-md text-sm text-on-surface-variant hover:bg-surface-container-high transition-colors">
+          Cuestionarios
+        </a>
+      </nav>
+
+      <!-- ACCIONES DE CABECERA -->
+      <div class="flex items-center gap-3">
+        <div class="hidden sm:flex items-center gap-1.5 px-3 py-1 rounded-full bg-amber-quiz/10 border border-amber-quiz/20">
+          <span class="font-label-sm text-xs font-bold text-amber-quiz">🔥 Repaso Activo</span>
+        </div>
+        <a href="#favoritos" class="relative p-2 rounded-full text-on-surface-variant hover:bg-surface-container-high transition-colors" title="Mis Favoritos">
+          <span class="material-symbols-outlined text-xl">bookmark</span>
+          <span class="fav-count-badge hidden absolute top-1 right-1 w-4 h-4 rounded-full bg-amber-quiz text-slate-strong text-[10px] font-bold flex items-center justify-center">0</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- CONTENIDO PRINCIPAL -->
+  <main class="w-full pt-20 bg-surface">
+    <!-- BANNER DE AVISO ÉTICO / PEDAGÓGICO OBLIGATORIO (PRD) -->
+    <div class="w-full bg-surface-container-low px-4 py-2.5 border-b border-slate-border/50">
+      <div class="max-w-7xl mx-auto flex items-center justify-center gap-2 text-center">
+        <span class="material-symbols-outlined text-sm text-primary shrink-0">info</span>
+        <p class="font-body-sm text-xs sm:text-sm text-on-surface-variant">
+          <strong>Fisio Pedía</strong> es una herramienta pedagógica de apoyo al estudio. No diagnostica enfermedades, no recomienda tratamientos ni sustituye la consulta médica o libros oficiales.
+        </p>
+      </div>
+    </div>
+
+    <!-- CONTENEDOR REACTIVO DONDE SE CARGA LA VISTA -->
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+      <div id="app-main-content" class="flex flex-col w-full min-h-[60vh]">
+        <!-- Renderizado dinámico por js/app.js -->
+        <div class="p-12 text-center text-slate-muted flex flex-col items-center justify-center">
+          <span class="material-symbols-outlined text-4xl animate-spin text-primary mb-2">sync</span>
+          <p class="text-sm">Cargando compendio pedagógico...</p>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- PIE DE PÁGINA (DESKTOP & MOBILE) -->
+  <footer class="w-full bg-surface-container-lowest mt-16 shadow-[0_1px_8px_rgba(0,0,0,0.04)] border-t border-slate-border/50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 flex flex-col md:flex-row items-center justify-between gap-6">
+      <div class="flex items-center gap-3">
+        <div class="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center text-primary">
+          <span class="material-symbols-outlined text-xl font-bold">accessibility_new</span>
+        </div>
+        <div class="flex flex-col">
+          <span class="font-headline-sm text-lg text-primary font-bold">Fisio Pedía</span>
+          <span class="font-body-sm text-xs text-slate-muted">Diccionario interactivo del cuerpo humano y biomecánica</span>
+        </div>
+      </div>
+
+      <div class="flex flex-wrap items-center justify-center gap-6 text-sm">
+        <a href="#explorador" class="text-on-surface-variant hover:text-primary transition-colors">Inicio</a>
+        <a href="#terminos" class="text-on-surface-variant hover:text-primary transition-colors">Términos Anatómicos</a>
+        <a href="#favoritos" class="text-on-surface-variant hover:text-primary transition-colors">Mis Favoritos &amp; Flashcards</a>
+        <a href="#quizzes" class="text-on-surface-variant hover:text-primary transition-colors">Cuestionarios</a>
+      </div>
+
+      <p class="font-body-sm text-xs text-slate-muted text-center md:text-right">
+        Diseñado para estudiantes de Fisioterapia y Ciencias de la Salud.<br/>
+        100% Client-Side • Sin servidor ni registro
+      </p>
+    </div>
+  </footer>
+
+  <!-- BARRA DE NAVEGACIÓN INFERIOR PARA CELULARES (MOBILE BOTTOM NAV) -->
+  <nav class="lg:hidden fixed bottom-0 left-0 w-full z-50 bg-surface-container-lowest/95 backdrop-blur-md border-t border-slate-border flex items-center justify-around py-2 px-2 shadow-lg">
+    <a href="#explorador" data-route-mobile="explorador" class="flex flex-col items-center justify-center p-1 text-primary">
+      <span class="material-symbols-outlined text-2xl">search</span>
+      <span class="text-[11px] font-medium mt-0.5">Explorador</span>
+    </a>
+    <a href="#terminos" data-route-mobile="termino" class="flex flex-col items-center justify-center p-1 text-slate-muted">
+      <span class="material-symbols-outlined text-2xl">menu_book</span>
+      <span class="text-[11px] font-medium mt-0.5">Términos</span>
+    </a>
+    <a href="#favoritos" data-route-mobile="favoritos" class="flex flex-col items-center justify-center p-1 text-slate-muted relative">
+      <span class="material-symbols-outlined text-2xl">style</span>
+      <span class="fav-count-badge hidden absolute top-0 right-2 w-3.5 h-3.5 rounded-full bg-amber-quiz text-slate-strong text-[9px] font-bold flex items-center justify-center">0</span>
+      <span class="text-[11px] font-medium mt-0.5">Flashcards</span>
+    </a>
+    <a href="#quizzes" data-route-mobile="quizzes" class="flex flex-col items-center justify-center p-1 text-slate-muted">
+      <span class="material-symbols-outlined text-2xl">quiz</span>
+      <span class="text-[11px] font-medium mt-0.5">Quizzes</span>
+    </a>
+  </nav>
+
+  <!-- SCRIPTS DE LA APLICACIÓN -->
+  <script src="data/terms.js"></script>
+  <script src="data/quizzes.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
