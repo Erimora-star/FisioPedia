@@ -24,13 +24,32 @@
     quizCompleted: false
   };
 
-  // --- PERSISTENCIA CON FISIOSTORAGE ---
+  // --- PERSISTENCIA CON FISIOSTORAGE & FIRESTORE ---
   function loadInitialState() {
     if (typeof FisioStorage !== 'undefined') {
       const favList = FisioStorage.getFavorites();
       state.favorites = new Set(favList);
       const stats = FisioStorage.getQuizStats();
       if (stats && stats.streak) state.quizStreak = stats.streak;
+
+      // Suscripciones reactivas a Cloud Firestore
+      FisioStorage.subscribe('favorites-updated', (newFavs) => {
+        state.favorites = new Set(newFavs);
+        updateFavoritesBadges();
+        if (state.route === 'favoritos' || state.route === 'explorador') {
+          renderCurrentRoute();
+        }
+      });
+
+      FisioStorage.subscribe('status-changed', (cloudStatus) => {
+        if (typeof updateCloudStatusUI === 'function') {
+          updateCloudStatusUI(cloudStatus);
+        }
+      });
+
+      FisioStorage.subscribe('sync-completed', () => {
+        showToast('Datos sincronizados con Firestore', 'cloud_done');
+      });
     } else {
       state.favorites = new Set(['propiocepcion', 'flexion-extension', 'tendon-aquiles']);
     }
@@ -342,6 +361,93 @@
             <!-- Brazo móvil en 45 grados -->
             <line x1="140" y1="130" x2="225" y2="45" stroke="#0D9488" stroke-width="7" stroke-linecap="round"/>
             <text x="210" y="35" fill="#0D9488" font-size="11" font-weight="bold" font-family="Plus Jakarta Sans">Brazo móvil (ROM)</text>
+          </svg>
+        `;
+
+      case 'biceps':
+        return `
+          <svg class="w-full h-auto max-w-sm mx-auto" viewBox="0 0 360 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect width="360" height="200" rx="12" fill="#F8FAFC"/>
+            <!-- Húmero de fondo -->
+            <rect x="165" y="30" width="22" height="130" rx="8" fill="#CBD5E1"/>
+            <!-- Vientre Muscular Bíceps -->
+            <path d="M 160 55 C 130 85 130 115 160 145 C 185 135 185 70 160 55 Z" fill="#0D9488" opacity="0.88"/>
+            <!-- Tendón Proximal Doble Cabeza -->
+            <line x1="160" y1="55" x2="140" y2="25" stroke="#94A3B8" stroke-width="4" stroke-linecap="round"/>
+            <line x1="165" y1="55" x2="185" y2="25" stroke="#94A3B8" stroke-width="4" stroke-linecap="round"/>
+            <!-- Inserción en Tuberosidad del Radio -->
+            <line x1="160" y1="145" x2="145" y2="175" stroke="#0284C7" stroke-width="5" stroke-linecap="round"/>
+            <circle cx="145" cy="175" r="5" fill="#0284C7"/>
+            <text x="50" y="95" fill="#0D9488" font-size="11" font-weight="bold" font-family="Plus Jakarta Sans">Bíceps Braquial</text>
+            <text x="50" y="110" fill="#64748B" font-size="9" font-family="Inter">Flexor + Supinador</text>
+            <text x="195" y="25" fill="#64748B" font-size="9" font-family="Inter">C. Corta / C. Larga</text>
+            <text x="160" y="180" fill="#0284C7" font-size="9" font-weight="bold" font-family="Plus Jakarta Sans">Tuberosidad Radio</text>
+          </svg>
+        `;
+
+      case 'fascia_plantar':
+        return `
+          <svg class="w-full h-auto max-w-sm mx-auto" viewBox="0 0 360 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect width="360" height="200" rx="12" fill="#F8FAFC"/>
+            <!-- Silueta arco del pie -->
+            <path d="M 60 135 C 80 110 140 100 220 125 L 300 135 C 290 150 250 155 210 150 L 90 155 Z" fill="#E2E8F0"/>
+            <!-- Calcáneo -->
+            <circle cx="85" cy="135" r="20" fill="#94A3B8"/>
+            <text x="45" y="125" fill="#475569" font-size="10" font-family="Inter">Calcáneo</text>
+            <!-- Fascia plantar tensa (Banda elástica) -->
+            <path d="M 90 148 Q 180 135 285 142" stroke="#0D9488" stroke-width="6" stroke-linecap="round"/>
+            <!-- Zona de dolor por fascitis -->
+            <circle cx="95" cy="148" r="7" fill="#F43F5E"/>
+            <circle cx="95" cy="148" r="14" stroke="#F43F5E" stroke-width="1.5" stroke-dasharray="3 3"/>
+            <text x="180" y="95" text-anchor="middle" fill="#00685f" font-size="11" font-weight="bold" font-family="Plus Jakarta Sans">Mecanismo de Windlass (Cuerda de Arco)</text>
+            <text x="180" y="172" text-anchor="middle" fill="#0D9488" font-size="10" font-weight="bold" font-family="Plus Jakarta Sans">Banda Fibrosa Aponeurótica</text>
+            <text x="110" y="132" fill="#F43F5E" font-size="9" font-weight="bold" font-family="Plus Jakarta Sans">Zona Fascitis</text>
+          </svg>
+        `;
+
+      case 'psoas':
+        return `
+          <svg class="w-full h-auto max-w-sm mx-auto" viewBox="0 0 360 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect width="360" height="200" rx="12" fill="#F8FAFC"/>
+            <!-- Columna lumbar -->
+            <rect x="170" y="15" width="22" height="60" rx="4" fill="#94A3B8"/>
+            <text x="200" y="35" fill="#64748B" font-size="9" font-family="Inter">Vértebras L1-L5</text>
+            <!-- Pelvis / Fosa Ilíaca -->
+            <path d="M 125 50 C 95 65 90 110 135 125" stroke="#CBD5E1" stroke-width="10" stroke-linecap="round" fill="none"/>
+            <!-- Músculo Psoas-Ilíaco convergente -->
+            <path d="M 172 30 C 150 70 145 110 135 155 L 150 155 C 160 115 178 70 182 30 Z" fill="#0D9488" opacity="0.85"/>
+            <!-- Trocánter menor fémur -->
+            <circle cx="140" cy="160" r="7" fill="#F59E0B"/>
+            <text x="40" y="85" fill="#0D9488" font-size="11" font-weight="bold" font-family="Plus Jakarta Sans">Psoas Mayor + Ilíaco</text>
+            <text x="40" y="100" fill="#64748B" font-size="9" font-family="Inter">Flexor Primordial de Cadera</text>
+            <text x="155" y="165" fill="#F59E0B" font-size="9" font-weight="bold" font-family="Plus Jakarta Sans">Trocánter Menor</text>
+          </svg>
+        `;
+
+      case 'cadena_cinetica':
+        return `
+          <svg class="w-full h-auto max-w-sm mx-auto" viewBox="0 0 360 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect width="360" height="200" rx="12" fill="#F8FAFC"/>
+            <!-- Separador central -->
+            <line x1="180" y1="20" x2="180" y2="180" stroke="#E2E8F0" stroke-width="2" stroke-dasharray="4 4"/>
+            <!-- Cadena Abierta (CCA) -->
+            <g transform="translate(10, 20)">
+              <text x="80" y="20" text-anchor="middle" fill="#0D9488" font-size="11" font-weight="bold" font-family="Plus Jakarta Sans">Cadena Abierta (CCA)</text>
+              <circle cx="80" cy="60" r="8" fill="#64748B"/>
+              <line x1="80" y1="60" x2="80" y2="110" stroke="#64748B" stroke-width="6" stroke-linecap="round"/>
+              <line x1="80" y1="110" x2="120" y2="135" stroke="#0D9488" stroke-width="6" stroke-linecap="round"/>
+              <circle cx="120" cy="135" r="6" fill="#0D9488"/>
+              <text x="80" y="160" text-anchor="middle" fill="#64748B" font-size="9" font-family="Inter">Extremo Libre (Patada/Curl)</text>
+            </g>
+            <!-- Cadena Cerrada (CCC) -->
+            <g transform="translate(190, 20)">
+              <text x="80" y="20" text-anchor="middle" fill="#6366F1" font-size="11" font-weight="bold" font-family="Plus Jakarta Sans">Cadena Cerrada (CCC)</text>
+              <line x1="30" y1="140" x2="130" y2="140" stroke="#1E293B" stroke-width="4" stroke-linecap="round"/>
+              <line x1="80" y1="60" x2="55" y2="105" stroke="#64748B" stroke-width="6" stroke-linecap="round"/>
+              <line x1="55" y1="105" x2="80" y2="138" stroke="#6366F1" stroke-width="6" stroke-linecap="round"/>
+              <circle cx="80" cy="138" r="6" fill="#6366F1"/>
+              <text x="80" y="160" text-anchor="middle" fill="#64748B" font-size="9" font-family="Inter">Extremo Fijo (Sentadilla/Piso)</text>
+            </g>
           </svg>
         `;
 
@@ -1713,6 +1819,15 @@
       } else {
         // Cuestionario finalizado
         state.quizCompleted = true;
+        if (typeof FisioStorage !== 'undefined') {
+          FisioStorage.saveQuizStats({
+            totalAttempted: FISIOPEDIA_QUIZZES.length,
+            totalCorrect: state.quizScore,
+            lastScore: Math.round((state.quizScore / FISIOPEDIA_QUIZZES.length) * 100),
+            streak: state.quizStreak + 1,
+            completedAt: new Date().toISOString()
+          });
+        }
         renderCurrentRoute();
       }
     },
@@ -1727,10 +1842,283 @@
     }
   };
 
+  // --- GESTIÓN DE LA NUBE Y FIREBASE MODAL ---
+  function updateCloudStatusUI(cloudInfo) {
+    if (!cloudInfo) return;
+    const pillIcon = document.getElementById('cloud-pill-icon');
+    const pillText = document.getElementById('cloud-pill-text');
+    const pillDot = document.getElementById('cloud-pill-dot');
+
+    const modalDot = document.getElementById('modal-status-dot');
+    const modalLabel = document.getElementById('modal-status-label');
+    const modalProject = document.getElementById('modal-status-project');
+    const modalSync = document.getElementById('modal-status-sync');
+
+    const status = cloudInfo.status || 'unconfigured';
+
+    if (pillIcon && pillText && pillDot) {
+      if (status === 'connected') {
+        pillIcon.textContent = 'cloud_done';
+        pillIcon.className = 'material-symbols-outlined text-base text-emerald-600';
+        pillText.textContent = 'Nube: Activa';
+        pillDot.className = 'w-2 h-2 rounded-full bg-emerald-500 animate-pulse';
+      } else if (status === 'connecting') {
+        pillIcon.textContent = 'sync';
+        pillIcon.className = 'material-symbols-outlined text-base text-blue-500 animate-spin';
+        pillText.textContent = 'Conectando...';
+        pillDot.className = 'w-2 h-2 rounded-full bg-blue-500';
+      } else if (status === 'error') {
+        pillIcon.textContent = 'cloud_off';
+        pillIcon.className = 'material-symbols-outlined text-base text-coral-alert';
+        pillText.textContent = 'Nube: Error';
+        pillDot.className = 'w-2 h-2 rounded-full bg-coral-alert';
+      } else {
+        pillIcon.textContent = 'cloud_queue';
+        pillIcon.className = 'material-symbols-outlined text-base text-slate-muted';
+        pillText.textContent = 'Nube: Local';
+        pillDot.className = 'w-2 h-2 rounded-full bg-slate-muted';
+      }
+    }
+
+    if (modalLabel && modalDot && modalProject && modalSync) {
+      if (status === 'connected') {
+        modalLabel.textContent = '🟢 Conectado a Firestore';
+        modalDot.className = 'w-2.5 h-2.5 rounded-full bg-emerald-500';
+        modalProject.textContent = cloudInfo.projectId || 'Proyecto activo';
+      } else if (status === 'connecting') {
+        modalLabel.textContent = '🔵 Conectando...';
+        modalDot.className = 'w-2.5 h-2.5 rounded-full bg-blue-500 animate-pulse';
+        modalProject.textContent = cloudInfo.projectId || 'Iniciando sesión anónima';
+      } else if (status === 'error') {
+        modalLabel.textContent = '🔴 Error de Conexión';
+        modalDot.className = 'w-2.5 h-2.5 rounded-full bg-coral-alert';
+        modalProject.textContent = cloudInfo.projectId || 'Error';
+      } else {
+        modalLabel.textContent = '⚪ Modo Local Offline';
+        modalDot.className = 'w-2.5 h-2.5 rounded-full bg-slate-muted';
+        modalProject.textContent = 'Sin vincular';
+      }
+
+      if (cloudInfo.lastSync) {
+        try {
+          const d = new Date(cloudInfo.lastSync);
+          modalSync.textContent = d.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) + ' (' + d.toLocaleDateString() + ')';
+        } catch (_) {
+          modalSync.textContent = cloudInfo.lastSync;
+        }
+      } else {
+        modalSync.textContent = 'Almacenado local';
+      }
+    }
+  }
+
+  function parseFirebaseSnippet(rawText) {
+    if (!rawText || !rawText.trim()) return null;
+    const text = rawText.trim();
+
+    try {
+      const obj = JSON.parse(text);
+      if (obj.apiKey && obj.projectId) return obj;
+    } catch (_) {}
+
+    const extract = (key) => {
+      const regex = new RegExp(`${key}\\s*:\\s*["']([^"']+)["']`, 'i');
+      const m = text.match(regex);
+      return m ? m[1].trim() : '';
+    };
+
+    const apiKey = extract('apiKey');
+    const projectId = extract('projectId');
+    const authDomain = extract('authDomain');
+    const storageBucket = extract('storageBucket');
+    const messagingSenderId = extract('messagingSenderId');
+    const appId = extract('appId');
+
+    if (apiKey && projectId) {
+      return {
+        apiKey,
+        projectId,
+        authDomain: authDomain || `${projectId}.firebaseapp.com`,
+        storageBucket: storageBucket || `${projectId}.appspot.com`,
+        messagingSenderId: messagingSenderId || '',
+        appId: appId || ''
+      };
+    }
+
+    return null;
+  }
+
+  function initCloudSyncUI() {
+    const btnHeader = document.getElementById('btn-cloud-sync');
+    const btnFooter = document.getElementById('btn-footer-cloud');
+    const modal = document.getElementById('modal-cloud-sync');
+    const btnClose = document.getElementById('modal-cloud-close');
+
+    const tabConfig = document.getElementById('tab-btn-config');
+    const tabGuide = document.getElementById('tab-btn-guide');
+    const contentConfig = document.getElementById('tab-content-config');
+    const contentGuide = document.getElementById('tab-content-guide');
+
+    const textarea = document.getElementById('input-firebase-config-json');
+    const alertBox = document.getElementById('modal-cloud-alert');
+
+    const btnSave = document.getElementById('btn-save-cloud-config');
+    const btnTest = document.getElementById('btn-test-cloud-connection');
+    const btnSync = document.getElementById('btn-force-sync');
+    const btnDisconnect = document.getElementById('btn-disconnect-cloud');
+
+    function showAlert(msg, type = 'info') {
+      if (!alertBox) return;
+      alertBox.classList.remove('hidden', 'bg-emerald-50', 'text-emerald-800', 'border-emerald-200', 'bg-coral-alert/10', 'text-coral-alert', 'bg-blue-50', 'text-blue-800');
+      
+      let styleClass = 'bg-blue-50 text-blue-800 border border-blue-200';
+      let icon = 'info';
+      if (type === 'success') {
+        styleClass = 'bg-emerald-50 text-emerald-800 border border-emerald-200';
+        icon = 'check_circle';
+      } else if (type === 'error') {
+        styleClass = 'bg-coral-alert/10 text-coral-alert border border-coral-alert/30';
+        icon = 'error';
+      }
+      alertBox.className = `p-3.5 rounded-xl text-xs font-medium flex items-center gap-2 ${styleClass}`;
+      alertBox.innerHTML = `<span class="material-symbols-outlined text-base">${icon}</span><span>${msg}</span>`;
+    }
+
+    function openModal() {
+      if (!modal) return;
+      modal.classList.remove('hidden');
+
+      if (typeof FisioStorage !== 'undefined') {
+        const cloud = FisioStorage.getCloudStatus();
+        updateCloudStatusUI(cloud);
+        if (cloud.config && textarea && !textarea.value) {
+          textarea.value = JSON.stringify(cloud.config, null, 2);
+        }
+      }
+    }
+
+    function closeModal() {
+      if (!modal) return;
+      modal.classList.add('hidden');
+    }
+
+    if (btnHeader) btnHeader.addEventListener('click', openModal);
+    if (btnFooter) btnFooter.addEventListener('click', openModal);
+    if (btnClose) btnClose.addEventListener('click', closeModal);
+
+    if (modal) {
+      modal.addEventListener('click', (e) => {
+        if (e.target === modal) closeModal();
+      });
+    }
+
+    if (tabConfig && tabGuide && contentConfig && contentGuide) {
+      tabConfig.addEventListener('click', () => {
+        tabConfig.className = 'py-3 px-4 font-label-md text-sm border-b-2 border-primary text-primary font-bold cursor-pointer transition-colors';
+        tabGuide.className = 'py-3 px-4 font-label-md text-sm border-b-2 border-transparent text-slate-muted hover:text-on-surface cursor-pointer transition-colors';
+        contentConfig.classList.remove('hidden');
+        contentGuide.classList.add('hidden');
+      });
+
+      tabGuide.addEventListener('click', () => {
+        tabGuide.className = 'py-3 px-4 font-label-md text-sm border-b-2 border-primary text-primary font-bold cursor-pointer transition-colors';
+        tabConfig.className = 'py-3 px-4 font-label-md text-sm border-b-2 border-transparent text-slate-muted hover:text-on-surface cursor-pointer transition-colors';
+        contentGuide.classList.remove('hidden');
+        contentConfig.classList.add('hidden');
+      });
+    }
+
+    if (btnSave) {
+      btnSave.addEventListener('click', async () => {
+        const raw = textarea ? textarea.value : '';
+        const parsed = parseFirebaseSnippet(raw);
+
+        if (!parsed) {
+          showAlert('No se pudieron detectar las credenciales. Asegúrate de incluir al menos apiKey y projectId.', 'error');
+          return;
+        }
+
+        showAlert('Conectando a Cloud Firestore...', 'info');
+        btnSave.disabled = true;
+
+        try {
+          const success = await FisioStorage.saveCloudConfig(parsed);
+          if (success) {
+            showAlert('¡Conectado exitosamente a Firebase Firestore! Tus datos están sincronizados en la nube.', 'success');
+            showToast('Conectado a Firestore', 'cloud_done');
+          } else {
+            showAlert('No fue posible completar la conexión. Verifica tus credenciales o las reglas de Firestore.', 'error');
+          }
+        } catch (err) {
+          showAlert(`Error: ${err.message}`, 'error');
+        } finally {
+          btnSave.disabled = false;
+        }
+      });
+    }
+
+    if (btnTest) {
+      btnTest.addEventListener('click', async () => {
+        const raw = textarea ? textarea.value : '';
+        const parsed = parseFirebaseSnippet(raw);
+
+        if (!parsed) {
+          showAlert('Ingresa una configuración válida antes de probar la conexión.', 'error');
+          return;
+        }
+
+        showAlert('Probando comunicación con Firestore...', 'info');
+        btnTest.disabled = true;
+
+        try {
+          const result = await FisioStorage.testCloudConnection(parsed);
+          if (result.success) {
+            showAlert(`✅ ${result.message}`, 'success');
+          } else {
+            showAlert(`❌ Falló la prueba: ${result.message}`, 'error');
+          }
+        } catch (e) {
+          showAlert(`Error en prueba: ${e.message}`, 'error');
+        } finally {
+          btnTest.disabled = false;
+        }
+      });
+    }
+
+    if (btnSync) {
+      btnSync.addEventListener('click', async () => {
+        showAlert('Sincronizando favoritos y puntuaciones...', 'info');
+        const ok = await FisioStorage.syncNow();
+        if (ok) {
+          showAlert('¡Sincronización completada con éxito!', 'success');
+          showToast('Sincronización completa', 'sync');
+        } else {
+          showAlert('No hay una sesión activa de Firebase para sincronizar.', 'error');
+        }
+      });
+    }
+
+    if (btnDisconnect) {
+      btnDisconnect.addEventListener('click', async () => {
+        await FisioStorage.disconnectCloud();
+        if (textarea) textarea.value = '';
+        showAlert('Desconectado. Ahora la aplicación almacena tus datos localmente en este navegador.', 'info');
+        showToast('Modo Local Offline activo', 'cloud_off');
+      });
+    }
+
+    if (typeof FisioStorage !== 'undefined') {
+      setTimeout(() => {
+        updateCloudStatusUI(FisioStorage.getCloudStatus());
+      }, 500);
+    }
+  }
+
   // --- INICIALIZACIÓN DE LA APLICACIÓN ---
   document.addEventListener('DOMContentLoaded', () => {
     loadInitialState();
     initRouter();
+    initCloudSyncUI();
 
     // Atajos de teclado:
     // Ctrl+K / Cmd+K para enfocar búsqueda

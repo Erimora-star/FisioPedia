@@ -5,33 +5,62 @@ Fisio Pedía es una aplicación web educativa interactiva desarrollada para estu
 
 ---
 
-## 🚀 Características Principales (100% Client-Side)
+## 🚀 Características Principales (Arquitectura Híbrida: Local + Nube)
 
 1. 🔍 **Buscador de Términos Anatómicos**:
    - Búsqueda en tiempo real por nombre, concepto o metáfora cotidiana.
    - Atajo de teclado rápido `Ctrl + K` / `Cmd + K`.
    - Filtros por categoría: *Músculos*, *Huesos & Tendones*, *Articulaciones*, *Movimientos*.
-   - Filtros por región corporal: *Columna*, *Hombro*, *Codo*, *Mano*, *Cadera*, *Rodilla*, *Tobillo*.
+   - Filtros por región corporal: *Columna*, *Hombro*, *Codo*, *Mano*, *Cadera*, *Rodilla*, *Tobillo*, *Control Global*.
 
 2. 💡 **Explicaciones Sencillas y Cotidianas**:
    - Definición técnica rigurosa complementada con *"En palabras sencillas"*.
    - Metáforas de la vida diaria (ej. *abotonar una camisa a ciegas*, *pedir sopa con la mano*, *frenar en seco*, *alcanzar la taza de café*).
-   - Casos clínicos reales de fisioterapia y rehabilitación (esguince recidivante, manguito rotador, LCA).
-   - Síntesis de voz para escuchar la pronunciación fonética de cada término.
+   - Casos clínicos reales de fisioterapia y rehabilitación (esguince recidivante, manguito rotador, LCA, pinzamiento, meniscopatía).
+   - Síntesis de voz fonética médica en español con Web Speech API.
 
-3. 🖼️ **Diccionario Visual Biomecánico**:
-   - Ilustraciones vectoriales (SVG) de planos, ejes, husos neuromusculares, receptores de Golgi, articulaciones y ligamentos.
+3. 🖼️ **Diccionario Visual Biomecánico Integral (SVG)**:
+   - Ilustraciones vectoriales (SVG) de planos, ejes, husos neuromusculares, receptores de Golgi, articulaciones, ligamentos, cadenas cinéticas y goniometría.
    - Fichas estructuradas de origen, inserción, inervación y goniometría.
 
 4. ⭐ **Favoritos & Flashcards 3D**:
    - Guarda términos para repasar posteriormente con un solo clic.
-   - Persistencia local en el navegador (`localStorage`) sin necesidad de registro ni servidor.
    - Visor de tarjetas didácticas en 3D con volteo interactivo (*flip card*).
-   - Mezclador de baraja (*shuffle*) y conteo de progreso.
+   - Mezclador de baraja (*shuffle*) y conteo de progreso sincronizado.
 
 5. 📝 **Cuestionarios de Autoevaluación**:
-   - Preguntas basadas en situaciones cotidianas de consulta kinésica.
-   - Retroalimentación inmediata con justificación pedagógica y puntuación de aciertos.
+   - 10 preguntas basadas en situaciones cotidianas de consulta kinésica.
+   - Retroalimentación inmediata con justificación pedagógica, racha de estudio y cálculo de aciertos (+100 XP).
+
+6. ☁️ **Sincronización en la Nube con Google Firebase & Cloud Firestore**:
+   - **Modo Offline-First**: Funciona de forma 100% autónoma y privada en el navegador con `localStorage`.
+   - **Modo Nube en Tiempo Real**: Conecta con Firebase Firestore con un solo clic para sincronizar favoritos y resultados de pruebas entre tus dispositivos (celular y computadora) en tiempo real mediante listeners `onSnapshot` y autenticación anónima silenciosa.
+   - Panel de control integrado en la aplicación con asistente interactivo de configuración y prueba de conectividad.
+
+---
+
+## ⚙️ Configuración de Firebase & Firestore (Opcional)
+
+Puedes activar la sincronización en la nube de dos formas:
+
+### Opción 1: Desde la propia aplicación (Recomendada)
+1. Abre `index.html` en tu navegador.
+2. Haz clic en el botón **"Nube: Local"** en la barra superior o en el pie de página.
+3. Pega el objeto `firebaseConfig` obtenido de tu [Firebase Console](https://console.firebase.google.com).
+4. Haz clic en **"Guardar y Conectar"** o en **"Probar Conexión"**.
+
+### Opción 2: Mediante archivo de configuración
+Copia `js/firebase-config.example.js` como `js/firebase-config.js` y asigna tus credenciales:
+```javascript
+window.FISIOPEDIA_FIREBASE_CONFIG = {
+  apiKey: "AIzaSy...",
+  authDomain: "tu-proyecto.firebaseapp.com",
+  projectId: "tu-proyecto",
+  storageBucket: "tu-proyecto.appspot.com",
+  messagingSenderId: "1234567890",
+  appId: "1:1234567890:web:abcdef"
+};
+```
 
 ---
 
@@ -40,10 +69,19 @@ Fisio Pedía es una herramienta de apoyo al estudio pedagógico. **No diagnostic
 
 ---
 
-## 📱 Compatibilidad Móvil y Desktop
-- 100% responsivo para cualquier navegador de celular (Safari, Chrome) y computador.
-- Barra de navegación inferior móvil para acceso rápido con una mano.
-- Sin inicio de sesión ni base de datos externa.
+## 🧪 Pruebas Automatizadas
+
+Para validar que todos los archivos, términos, quizzes y esquemas SVG funcionen al 100%:
+
+### En Windows (PowerShell):
+```powershell
+powershell -ExecutionPolicy Bypass -File tests\verify_app.ps1
+```
+
+### En Mac / Linux (Python 3):
+```bash
+python3 tests/verify_app.py
+```
 
 ---
 
