@@ -1,10 +1,10 @@
-// Fisio Pedía - Lógica de Aplicación
-// SPA interactiva, sin servidor, con localStorage, Flashcards 3D y Quizzes.
+// Fisio Pedía - Lógica de Aplicación Completa
+// SPA interactiva conectada a FisioStorage, con Diccionario Visual SVG integral, Flashcards 3D y Quizzes.
 
 (function () {
   'use strict';
 
-  // --- ESTADO GLOBAL ---
+  // --- ESTADO GLOBAL REACTIVO ---
   const state = {
     route: 'explorador',
     selectedTermId: 'propiocepcion',
@@ -15,36 +15,30 @@
     sortBy: 'populares',
     flashcardIndex: 0,
     flashcardFlipped: false,
+    flashcardCategory: 'todas',
     quizIndex: 0,
     quizScore: 0,
     quizStreak: 4,
     quizUserAnswers: {},
-    quizSubmitted: {}
+    quizSubmitted: {},
+    quizCompleted: false
   };
 
-  // --- LOCAL STORAGE HELPERS ---
-  const STORAGE_KEY = 'fisiopedia_favs_v1';
-  function loadFavorites() {
-    try {
-      const saved = localStorage.getItem(STORAGE_KEY);
-      if (saved) {
-        state.favorites = new Set(JSON.parse(saved));
-      } else {
-        // Favoritos iniciales sugeridos para primera experiencia
-        state.favorites = new Set(['propiocepcion', 'flexion-extension', 'tendon-aquiles']);
-        saveFavorites();
-      }
-    } catch (e) {
-      console.warn('LocalStorage no disponible:', e);
-      state.favorites = new Set(['propiocepcion', 'flexion-extension']);
+  // --- PERSISTENCIA CON FISIOSTORAGE ---
+  function loadInitialState() {
+    if (typeof FisioStorage !== 'undefined') {
+      const favList = FisioStorage.getFavorites();
+      state.favorites = new Set(favList);
+      const stats = FisioStorage.getQuizStats();
+      if (stats && stats.streak) state.quizStreak = stats.streak;
+    } else {
+      state.favorites = new Set(['propiocepcion', 'flexion-extension', 'tendon-aquiles']);
     }
   }
 
-  function saveFavorites() {
-    try {
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(Array.from(state.favorites)));
-    } catch (e) {
-      console.warn('Error guardando en LocalStorage:', e);
+  function persistFavorites() {
+    if (typeof FisioStorage !== 'undefined') {
+      FisioStorage.saveFavorites(Array.from(state.favorites));
     }
     updateFavoritesBadges();
   }
@@ -57,7 +51,7 @@
       state.favorites.add(id);
       showToast('Guardado en tus favoritos', 'bookmark');
     }
-    saveFavorites();
+    persistFavorites();
     renderCurrentRoute();
   }
 
@@ -70,7 +64,7 @@
     });
   }
 
-  // --- TOAST NOTIFICATIONS ---
+  // --- NOTIFICACIONES TOAST ---
   function showToast(message, icon = 'info') {
     let toast = document.getElementById('fisiopedia-toast');
     if (!toast) {
@@ -90,127 +84,274 @@
     }, 2400);
   }
 
-  // --- AUDIO / PRONUNCIACIÓN ---
+  // --- AUDIO / PRONUNCIACIÓN MÉDICA ---
   function speakTerm(termName) {
     if ('speechSynthesis' in window) {
       window.speechSynthesis.cancel();
       const utterance = new SpeechSynthesisUtterance(termName);
       utterance.lang = 'es-ES';
-      utterance.rate = 0.9;
+      utterance.rate = 0.88;
       window.speechSynthesis.speak(utterance);
-      showToast(`Reproduciendo pronunciación: ${termName}`, 'volume_up');
+      showToast(`Pronunciando: ${termName}`, 'volume_up');
     } else {
       showToast('Síntesis de voz no disponible en este navegador', 'volume_off');
     }
   }
 
-  // --- GENERADOR DE SVG ANATÓMICOS DIDÁCTICOS ---
+  // --- GENERADOR INTEGRAL DE DICCIONARIO VISUAL (SVG) ---
   function getTermSvg(type) {
     switch (type) {
       case 'propiocepcion':
         return `
-          <svg class="w-full h-auto max-w-sm mx-auto" viewBox="0 0 400 220" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <defs>
-              <linearGradient id="muscleGrad" x1="50" y1="110" x2="350" y2="110" gradientUnits="userSpaceOnUse">
-                <stop offset="0%" stop-color="#E2E8F0"/>
-                <stop offset="25%" stop-color="#0D9488"/>
-                <stop offset="75%" stop-color="#0D9488"/>
-                <stop offset="100%" stop-color="#E2E8F0"/>
-              </linearGradient>
-            </defs>
-            <path d="M 20 70 Q 40 70 45 90 L 45 130 Q 40 150 20 150 Z" fill="#94A3B8" opacity="0.6"/>
-            <path d="M 45 95 L 100 98 L 100 122 L 45 125 Z" fill="#CBD5E1"/>
-            <path d="M 100 98 C 140 60 240 60 290 98 L 290 122 C 240 160 140 160 100 122 Z" fill="url(#muscleGrad)" opacity="0.85"/>
-            <path d="M 290 98 L 350 95 L 350 125 L 290 122 Z" fill="#CBD5E1"/>
-            <path d="M 375 70 Q 355 70 350 90 L 350 130 Q 355 150 375 150 Z" fill="#94A3B8" opacity="0.6"/>
-            <g id="spindle">
-              <ellipse cx="195" cy="110" rx="35" ry="14" fill="#00685f" fill-opacity="0.25"/>
-              <path d="M 165 110 Q 175 100 185 110 T 205 110 T 225 110" stroke="#00685f" stroke-width="2.5" fill="none"/>
-              <circle cx="195" cy="110" r="4" fill="#00685f"/>
-              <path d="M 195 106 C 195 65 230 35 280 30" stroke="#0D9488" stroke-width="2" stroke-dasharray="3 3"/>
-              <text x="285" y="32" fill="#0D9488" font-size="10" font-family="Plus Jakarta Sans" font-weight="bold">Huso Neuromuscular (Ia)</text>
-            </g>
-            <g id="golgi">
-              <rect x="290" y="102" width="28" height="16" rx="4" fill="#F59E0B" fill-opacity="0.35"/>
-              <path d="M 292 110 L 316 110" stroke="#F59E0B" stroke-width="3" stroke-linecap="round"/>
-              <circle cx="304" cy="110" r="4" fill="#F59E0B"/>
-              <path d="M 304 102 C 304 70 330 45 350 35" stroke="#F59E0B" stroke-width="2" stroke-dasharray="3 3"/>
-              <text x="290" y="180" fill="#F59E0B" font-size="10" font-family="Plus Jakarta Sans" font-weight="bold">Órgano Tendinoso de Golgi (Ib)</text>
-            </g>
+          <svg class="w-full h-auto max-w-sm mx-auto" viewBox="0 0 360 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect width="360" height="200" rx="12" fill="#F8FAFC"/>
+            <!-- Vientre muscular -->
+            <path d="M 60 100 C 110 50 250 50 300 100 C 250 150 110 150 60 100 Z" fill="#0D9488" opacity="0.85"/>
+            <!-- Tendones -->
+            <rect x="20" y="93" width="45" height="14" rx="3" fill="#94A3B8"/>
+            <rect x="295" y="93" width="45" height="14" rx="3" fill="#94A3B8"/>
+            <!-- Huso Neuromuscular -->
+            <ellipse cx="180" cy="100" rx="30" ry="12" fill="#00685f" fill-opacity="0.3"/>
+            <path d="M 155 100 Q 165 92 175 100 T 195 100 T 205 100" stroke="#FFFFFF" stroke-width="2.5" fill="none"/>
+            <circle cx="180" cy="100" r="4" fill="#FFFFFF"/>
+            <text x="180" y="70" text-anchor="middle" fill="#0D9488" font-size="10" font-weight="bold" font-family="Plus Jakarta Sans">Huso Neuromuscular (Longitud)</text>
+            <!-- Órgano Tendinoso de Golgi -->
+            <rect x="290" y="90" width="22" height="20" rx="4" fill="#F59E0B" fill-opacity="0.4"/>
+            <circle cx="301" cy="100" r="3.5" fill="#F59E0B"/>
+            <text x="290" y="140" fill="#F59E0B" font-size="10" font-weight="bold" font-family="Plus Jakarta Sans">Golgi (Tensión)</text>
           </svg>
         `;
+
       case 'flexion_extension':
         return `
-          <svg class="w-full h-auto max-w-sm mx-auto" viewBox="0 0 320 200" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <circle cx="160" cy="120" r="10" fill="#00685f"/>
+          <svg class="w-full h-auto max-w-sm mx-auto" viewBox="0 0 360 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect width="360" height="200" rx="12" fill="#F8FAFC"/>
+            <circle cx="180" cy="120" r="12" fill="#00685f"/>
             <!-- Brazo fijo -->
-            <line x1="160" y1="120" x2="260" y2="120" stroke="#64748B" stroke-width="8" stroke-linecap="round"/>
-            <!-- Segmento en flexión -->
-            <line x1="160" y1="120" x2="100" y2="40" stroke="#0D9488" stroke-width="8" stroke-linecap="round"/>
-            <!-- Segmento en extensión -->
-            <line x1="160" y1="120" x2="60" y2="120" stroke="#F59E0B" stroke-width="8" stroke-dasharray="6 4" stroke-linecap="round"/>
+            <line x1="180" y1="120" x2="280" y2="120" stroke="#64748B" stroke-width="8" stroke-linecap="round"/>
+            <!-- Flexión -->
+            <line x1="180" y1="120" x2="110" y2="40" stroke="#0D9488" stroke-width="8" stroke-linecap="round"/>
+            <!-- Extensión -->
+            <line x1="180" y1="120" x2="80" y2="120" stroke="#F59E0B" stroke-width="7" stroke-dasharray="6 4" stroke-linecap="round"/>
             <!-- Arco de movimiento -->
-            <path d="M 220 120 A 60 60 0 0 0 125 70" stroke="#0D9488" stroke-width="2.5" fill="none" stroke-dasharray="3 3"/>
-            <text x="140" y="60" fill="#0D9488" font-size="11" font-weight="bold" font-family="Plus Jakarta Sans">Flexión (- ángulo)</text>
-            <text x="50" y="145" fill="#F59E0B" font-size="11" font-weight="bold" font-family="Plus Jakarta Sans">Extensión (+ ángulo)</text>
-            <text x="145" y="145" fill="#1E293B" font-size="10" font-family="Inter">Eje Transversal</text>
+            <path d="M 240 120 A 60 60 0 0 0 135 65" stroke="#0D9488" stroke-width="2.5" fill="none" stroke-dasharray="4 3"/>
+            <text x="115" y="30" fill="#0D9488" font-size="11" font-weight="bold" font-family="Plus Jakarta Sans">FLEXIÓN (Disminuye ángulo)</text>
+            <text x="50" y="145" fill="#F59E0B" font-size="11" font-weight="bold" font-family="Plus Jakarta Sans">EXTENSIÓN (Aumenta ángulo)</text>
           </svg>
         `;
+
+      case 'abduccion_aduccion':
+        return `
+          <svg class="w-full h-auto max-w-sm mx-auto" viewBox="0 0 360 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect width="360" height="200" rx="12" fill="#F8FAFC"/>
+            <!-- Línea media del cuerpo -->
+            <line x1="180" y1="20" x2="180" y2="180" stroke="#CBD5E1" stroke-width="2" stroke-dasharray="4 4"/>
+            <text x="185" y="30" fill="#94A3B8" font-size="9" font-family="Inter">Línea Media</text>
+            <!-- Centro articular (Hombro / Cadera) -->
+            <circle cx="180" cy="90" r="8" fill="#00685f"/>
+            <!-- Abducción (se aleja) -->
+            <line x1="180" y1="90" x2="70" y2="40" stroke="#0D9488" stroke-width="7" stroke-linecap="round"/>
+            <path d="M 120 90 Q 110 65 90 55" stroke="#0D9488" stroke-width="2" fill="none" marker-end="url(#arrow)"/>
+            <text x="40" y="30" fill="#0D9488" font-size="11" font-weight="bold" font-family="Plus Jakarta Sans">ABDUCCIÓN (Separa)</text>
+            <!-- Aducción (se acerca) -->
+            <line x1="180" y1="90" x2="195" y2="160" stroke="#6366F1" stroke-width="7" stroke-linecap="round"/>
+            <text x="210" y="150" fill="#6366F1" font-size="11" font-weight="bold" font-family="Plus Jakarta Sans">ADUCCIÓN (Añade al centro)</text>
+          </svg>
+        `;
+
+      case 'rotacion':
+        return `
+          <svg class="w-full h-auto max-w-sm mx-auto" viewBox="0 0 360 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect width="360" height="200" rx="12" fill="#F8FAFC"/>
+            <!-- Húmero central -->
+            <rect x="170" y="30" width="20" height="130" rx="8" fill="#CBD5E1"/>
+            <line x1="180" y1="15" x2="180" y2="185" stroke="#64748B" stroke-width="2" stroke-dasharray="4 3"/>
+            <!-- Giro Rotación Interna -->
+            <path d="M 160 80 C 130 90 130 110 160 120" stroke="#0D9488" stroke-width="3" fill="none"/>
+            <text x="60" y="105" fill="#0D9488" font-size="10" font-weight="bold" font-family="Plus Jakarta Sans">Rot. Interna</text>
+            <!-- Giro Rotación Externa -->
+            <path d="M 200 80 C 230 90 230 110 200 120" stroke="#F59E0B" stroke-width="3" fill="none"/>
+            <text x="235" y="105" fill="#F59E0B" font-size="10" font-weight="bold" font-family="Plus Jakarta Sans">Rot. Externa</text>
+          </svg>
+        `;
+
+      case 'supinacion_pronacion':
+        return `
+          <svg class="w-full h-auto max-w-sm mx-auto" viewBox="0 0 360 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect width="360" height="200" rx="12" fill="#F8FAFC"/>
+            <!-- Supinación (Radio y Cúbito paralelos) -->
+            <g transform="translate(40, 30)">
+              <rect x="10" y="20" width="12" height="100" rx="4" fill="#0D9488"/>
+              <rect x="35" y="20" width="12" height="100" rx="4" fill="#64748B"/>
+              <text x="30" y="140" text-anchor="middle" fill="#0D9488" font-size="11" font-weight="bold" font-family="Plus Jakarta Sans">SUPINACIÓN</text>
+              <text x="30" y="155" text-anchor="middle" fill="#64748B" font-size="9" font-family="Inter">Palma arriba (Paralelos)</text>
+            </g>
+            <!-- Pronación (Radio cruza cúbito) -->
+            <g transform="translate(200, 30)">
+              <rect x="35" y="20" width="12" height="100" rx="4" fill="#64748B"/>
+              <line x1="10" y1="20" x2="60" y2="120" stroke="#F59E0B" stroke-width="12" stroke-linecap="round"/>
+              <text x="35" y="140" text-anchor="middle" fill="#F59E0B" font-size="11" font-weight="bold" font-family="Plus Jakarta Sans">PRONACIÓN</text>
+              <text x="35" y="155" text-anchor="middle" fill="#64748B" font-size="9" font-family="Inter">Radio cruza sobre Cúbito</text>
+            </g>
+          </svg>
+        `;
+
+      case 'inversion_eversion':
+        return `
+          <svg class="w-full h-auto max-w-sm mx-auto" viewBox="0 0 360 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect width="360" height="200" rx="12" fill="#F8FAFC"/>
+            <!-- Pie en Inversión -->
+            <g transform="translate(40, 25)">
+              <ellipse cx="60" cy="90" rx="40" ry="20" transform="rotate(-25 60 90)" fill="#0D9488" opacity="0.8"/>
+              <text x="60" y="145" text-anchor="middle" fill="#0D9488" font-size="11" font-weight="bold" font-family="Plus Jakarta Sans">INVERSIÓN</text>
+              <text x="60" y="160" text-anchor="middle" fill="#64748B" font-size="9" font-family="Inter">Planta hacia adentro (85% esguinces)</text>
+            </g>
+            <!-- Pie en Eversión -->
+            <g transform="translate(200, 25)">
+              <ellipse cx="60" cy="90" rx="40" ry="20" transform="rotate(25 60 90)" fill="#6366F1" opacity="0.8"/>
+              <text x="60" y="145" text-anchor="middle" fill="#6366F1" font-size="11" font-weight="bold" font-family="Plus Jakarta Sans">EVERSIÓN</text>
+              <text x="60" y="160" text-anchor="middle" fill="#64748B" font-size="9" font-family="Inter">Planta hacia afuera</text>
+            </g>
+          </svg>
+        `;
+
       case 'tendon_aquiles':
         return `
-          <svg class="w-full h-auto max-w-sm mx-auto" viewBox="0 0 320 200" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <!-- Pantorrilla / Gastrocnemios -->
-            <path d="M 120 20 C 100 50 100 80 130 110 L 150 110 C 180 80 180 50 160 20 Z" fill="#0D9488" opacity="0.8"/>
-            <!-- Tendón de Aquiles -->
-            <rect x="133" y="110" width="16" height="55" rx="3" fill="#0284C7"/>
-            <!-- Calcáneo (Talón) -->
-            <path d="M 120 165 C 120 155 135 155 145 165 C 160 175 185 175 195 165 L 195 185 L 120 185 Z" fill="#94A3B8"/>
-            <!-- Indicador de inserción -->
-            <circle cx="141" cy="165" r="5" fill="#F43F5E"/>
-            <text x="160" y="135" fill="#0284C7" font-size="11" font-weight="bold" font-family="Plus Jakarta Sans">Tendón de Aquiles</text>
-            <text x="160" y="150" fill="#64748B" font-size="9" font-family="Inter">Zona hipovascular crítica</text>
-            <text x="60" y="60" fill="#0D9488" font-size="10" font-weight="bold" font-family="Plus Jakarta Sans">Tríceps Sural</text>
-            <text x="60" y="180" fill="#64748B" font-size="10" font-family="Inter">Calcáneo</text>
+          <svg class="w-full h-auto max-w-sm mx-auto" viewBox="0 0 360 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect width="360" height="200" rx="12" fill="#F8FAFC"/>
+            <!-- Gemelos / Sóleo -->
+            <path d="M 140 20 C 120 50 120 80 150 105 L 170 105 C 200 80 200 50 180 20 Z" fill="#0D9488" opacity="0.85"/>
+            <!-- Tendón Aquileo -->
+            <rect x="152" y="105" width="18" height="55" rx="3" fill="#0284C7"/>
+            <!-- Calcáneo -->
+            <path d="M 135 160 C 135 150 150 150 160 160 C 175 170 205 170 215 160 L 215 185 L 135 185 Z" fill="#94A3B8"/>
+            <circle cx="161" cy="160" r="5" fill="#F43F5E"/>
+            <text x="185" y="130" fill="#0284C7" font-size="11" font-weight="bold" font-family="Plus Jakarta Sans">Tendón de Aquiles</text>
+            <text x="185" y="145" fill="#64748B" font-size="9" font-family="Inter">Zona hipovascular (2-6 cm)</text>
+            <text x="65" y="60" fill="#0D9488" font-size="10" font-weight="bold" font-family="Plus Jakarta Sans">Tríceps Sural</text>
+            <text x="65" y="175" fill="#64748B" font-size="10" font-family="Inter">Calcáneo (Talón)</text>
           </svg>
         `;
-      case 'lca':
-        return `
-          <svg class="w-full h-auto max-w-sm mx-auto" viewBox="0 0 320 200" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <!-- Fémur distal -->
-            <path d="M 110 20 L 110 70 Q 110 90 130 95 Q 160 100 160 70 Q 160 100 190 95 Q 210 90 210 70 L 210 20 Z" fill="#CBD5E1"/>
-            <!-- Tibia proximal -->
-            <path d="M 105 130 Q 160 120 215 130 L 210 185 L 110 185 Z" fill="#94A3B8"/>
-            <!-- Ligamento Cruzado Anterior (LCA) -->
-            <line x1="185" y1="80" x2="135" y2="130" stroke="#059669" stroke-width="7" stroke-linecap="round"/>
-            <!-- Ligamento Cruzado Posterior (LCP) -->
-            <line x1="135" y1="80" x2="185" y2="130" stroke="#6366F1" stroke-width="5" stroke-dasharray="4 3" stroke-linecap="round"/>
-            <text x="40" y="105" fill="#059669" font-size="11" font-weight="bold" font-family="Plus Jakarta Sans">LCA (freno anterior)</text>
-            <text x="210" y="115" fill="#6366F1" font-size="10" font-family="Plus Jakarta Sans">LCP (freno posterior)</text>
-          </svg>
-        `;
+
       case 'manguito_rotador':
         return `
-          <svg class="w-full h-auto max-w-sm mx-auto" viewBox="0 0 320 200" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <!-- Cabeza humeral -->
-            <circle cx="160" cy="110" r="45" fill="#CBD5E1"/>
-            <!-- Cavidad glenoidea -->
-            <path d="M 115 65 Q 105 110 115 155" stroke="#64748B" stroke-width="8" stroke-linecap="round"/>
+          <svg class="w-full h-auto max-w-sm mx-auto" viewBox="0 0 360 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect width="360" height="200" rx="12" fill="#F8FAFC"/>
+            <!-- Cabeza del húmero -->
+            <circle cx="180" cy="105" r="45" fill="#CBD5E1"/>
+            <text x="180" y="110" text-anchor="middle" fill="#475569" font-size="11" font-family="Inter">Húmero</text>
+            <!-- Escápula / Glenoides -->
+            <path d="M 130 55 Q 120 105 130 155" stroke="#64748B" stroke-width="9" stroke-linecap="round"/>
+            <text x="60" y="110" fill="#64748B" font-size="11" font-weight="bold" font-family="Plus Jakarta Sans">Escápula</text>
             <!-- Músculos Manguito -->
-            <path d="M 130 40 Q 160 55 190 80" stroke="#0D9488" stroke-width="8" stroke-linecap="round"/>
-            <path d="M 175 145 Q 150 155 125 150" stroke="#F59E0B" stroke-width="6" stroke-linecap="round"/>
-            <text x="175" y="45" fill="#0D9488" font-size="10" font-weight="bold" font-family="Plus Jakarta Sans">1. Supraespinoso</text>
-            <text x="180" y="165" fill="#F59E0B" font-size="10" font-weight="bold" font-family="Plus Jakarta Sans">2. Infraespinoso</text>
-            <text x="40" y="115" fill="#1E293B" font-size="10" font-weight="bold" font-family="Plus Jakarta Sans">Escápula</text>
-            <text x="145" y="115" fill="#1E293B" font-size="10" font-family="Inter">Húmero</text>
+            <path d="M 145 35 Q 180 50 215 75" stroke="#0D9488" stroke-width="8" stroke-linecap="round"/>
+            <text x="210" y="45" fill="#0D9488" font-size="10" font-weight="bold" font-family="Plus Jakarta Sans">1. Supraespinoso</text>
+            <path d="M 195 145 Q 170 155 140 148" stroke="#F59E0B" stroke-width="7" stroke-linecap="round"/>
+            <text x="195" y="170" fill="#F59E0B" font-size="10" font-weight="bold" font-family="Plus Jakarta Sans">2. Infraespinoso / Redondo</text>
           </svg>
         `;
+
+      case 'lca':
+      case 'lcp':
+      case 'lcm':
+        return `
+          <svg class="w-full h-auto max-w-sm mx-auto" viewBox="0 0 360 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect width="360" height="200" rx="12" fill="#F8FAFC"/>
+            <!-- Fémur -->
+            <path d="M 130 20 L 130 70 Q 130 90 150 95 Q 180 100 180 70 Q 180 100 210 95 Q 230 90 230 70 L 230 20 Z" fill="#CBD5E1"/>
+            <text x="180" y="45" text-anchor="middle" fill="#475569" font-size="10" font-family="Inter">Fémur</text>
+            <!-- Tibia -->
+            <path d="M 125 135 Q 180 125 235 135 L 230 185 L 130 185 Z" fill="#94A3B8"/>
+            <text x="180" y="170" text-anchor="middle" fill="#FFFFFF" font-size="10" font-family="Inter">Tibia</text>
+            <!-- LCA -->
+            <line x1="205" y1="80" x2="155" y2="135" stroke="#059669" stroke-width="${type === 'lca' ? '8' : '4'}" stroke-linecap="round"/>
+            <text x="50" y="100" fill="#059669" font-size="10" font-weight="bold" font-family="Plus Jakarta Sans">LCA (freno ant.)</text>
+            <!-- LCP -->
+            <line x1="155" y1="80" x2="205" y2="135" stroke="#6366F1" stroke-width="${type === 'lcp' ? '8' : '4'}" stroke-dasharray="4 3" stroke-linecap="round"/>
+            <text x="240" y="100" fill="#6366F1" font-size="10" font-weight="bold" font-family="Plus Jakarta Sans">LCP (freno post.)</text>
+            <!-- LCM -->
+            <line x1="128" y1="65" x2="125" y2="145" stroke="#0284C7" stroke-width="${type === 'lcm' ? '8' : '4'}" stroke-linecap="round"/>
+            <text x="35" y="130" fill="#0284C7" font-size="10" font-weight="bold" font-family="Plus Jakarta Sans">LCM (valgo)</text>
+          </svg>
+        `;
+
+      case 'cuadriceps':
+      case 'isquiotibiales':
+        return `
+          <svg class="w-full h-auto max-w-sm mx-auto" viewBox="0 0 360 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect width="360" height="200" rx="12" fill="#F8FAFC"/>
+            <!-- Muslo -->
+            <path d="M 140 20 C 120 70 120 120 150 150 L 175 150 C 205 120 205 70 185 20 Z" fill="${type === 'cuadriceps' ? '#0D9488' : '#F59E0B'}" opacity="0.85"/>
+            <!-- Rótula y tendón rotuliano -->
+            <circle cx="162" cy="155" r="9" fill="#E2E8F0" stroke="#64748B" stroke-width="2"/>
+            <rect x="158" y="164" width="8" height="20" fill="#0284C7"/>
+            <text x="162" y="90" text-anchor="middle" fill="#FFFFFF" font-size="12" font-weight="bold" font-family="Plus Jakarta Sans">
+              ${type === 'cuadriceps' ? '4 Vientres (Extensión)' : 'Isquiotibiales (Flexión)'}
+            </text>
+            <text x="162" y="108" text-anchor="middle" fill="#FFFFFF" font-size="9" font-family="Inter">
+              ${type === 'cuadriceps' ? 'Recto, vasto med, lat, interm.' : 'Bíceps fem, semitend, semimembr.'}
+            </text>
+          </svg>
+        `;
+
+      case 'meniscos':
+        return `
+          <svg class="w-full h-auto max-w-sm mx-auto" viewBox="0 0 360 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect width="360" height="200" rx="12" fill="#F8FAFC"/>
+            <!-- Platillo tibial -->
+            <ellipse cx="180" cy="100" rx="110" ry="60" fill="#E2E8F0"/>
+            <!-- Menisco Medial (Forma de C) -->
+            <path d="M 110 65 A 40 40 0 0 0 110 135" stroke="#0D9488" stroke-width="16" stroke-linecap="round" fill="none"/>
+            <text x="90" y="45" fill="#0D9488" font-size="11" font-weight="bold" font-family="Plus Jakarta Sans">Menisco Medial ("C")</text>
+            <!-- Menisco Lateral (Forma de O casi cerrada) -->
+            <ellipse cx="230" cy="100" rx="28" ry="32" stroke="#6366F1" stroke-width="15" fill="none"/>
+            <text x="210" y="45" fill="#6366F1" font-size="11" font-weight="bold" font-family="Plus Jakarta Sans">Menisco Lateral ("O")</text>
+          </svg>
+        `;
+
+      case 'disco':
+        return `
+          <svg class="w-full h-auto max-w-sm mx-auto" viewBox="0 0 360 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect width="360" height="200" rx="12" fill="#F8FAFC"/>
+            <!-- Vértebra superior -->
+            <rect x="110" y="25" width="140" height="35" rx="6" fill="#94A3B8"/>
+            <!-- Disco intervertebral -->
+            <rect x="115" y="65" width="130" height="26" rx="8" fill="#CBD5E1"/>
+            <!-- Anillo fibroso -->
+            <rect x="115" y="65" width="130" height="26" rx="8" stroke="#0D9488" stroke-width="3" fill="none"/>
+            <!-- Núcleo pulposo gel -->
+            <ellipse cx="180" cy="78" rx="20" ry="7" fill="#06B6D4"/>
+            <!-- Vértebra inferior -->
+            <rect x="110" y="95" width="140" height="35" rx="6" fill="#94A3B8"/>
+            <text x="180" y="160" text-anchor="middle" fill="#0D9488" font-size="11" font-weight="bold" font-family="Plus Jakarta Sans">Anillo Fibroso + Núcleo Pulposo Hidrofílico</text>
+          </svg>
+        `;
+
+      case 'goniometria':
+        return `
+          <svg class="w-full h-auto max-w-sm mx-auto" viewBox="0 0 360 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect width="360" height="200" rx="12" fill="#F8FAFC"/>
+            <!-- Fulcro / Eje central -->
+            <circle cx="140" cy="130" r="35" fill="#E2E8F0" stroke="#00685f" stroke-width="3"/>
+            <circle cx="140" cy="130" r="6" fill="#00685f"/>
+            <!-- Escala graduada -->
+            <path d="M 175 130 A 35 35 0 0 0 140 95" stroke="#94A3B8" stroke-width="2" stroke-dasharray="2 3"/>
+            <!-- Brazo fijo -->
+            <line x1="140" y1="130" x2="270" y2="130" stroke="#64748B" stroke-width="7" stroke-linecap="round"/>
+            <text x="210" y="150" fill="#64748B" font-size="10" font-family="Inter">Brazo fijo</text>
+            <!-- Brazo móvil en 45 grados -->
+            <line x1="140" y1="130" x2="225" y2="45" stroke="#0D9488" stroke-width="7" stroke-linecap="round"/>
+            <text x="210" y="35" fill="#0D9488" font-size="11" font-weight="bold" font-family="Plus Jakarta Sans">Brazo móvil (ROM)</text>
+          </svg>
+        `;
+
       default:
         return `
-          <svg class="w-full h-auto max-w-sm mx-auto" viewBox="0 0 320 180" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <rect x="40" y="30" width="240" height="120" rx="12" fill="#F0FDFA" stroke="#0D9488" stroke-width="2" stroke-dasharray="4 4"/>
-            <circle cx="160" cy="90" r="30" fill="#0D9488" fill-opacity="0.15"/>
-            <path d="M 150 90 L 160 80 L 170 90 M 160 82 L 160 102" stroke="#0D9488" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-            <text x="100" y="135" fill="#0D9488" font-size="11" font-weight="bold" font-family="Plus Jakarta Sans">Ilustración Biomecánica</text>
+          <svg class="w-full h-auto max-w-sm mx-auto" viewBox="0 0 360 180" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect width="360" height="180" rx="12" fill="#F8FAFC"/>
+            <circle cx="180" cy="90" r="32" fill="#0D9488" fill-opacity="0.15"/>
+            <path d="M 170 90 L 180 80 L 190 90 M 180 82 L 180 102" stroke="#0D9488" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+            <text x="180" y="135" text-anchor="middle" fill="#0D9488" font-size="11" font-weight="bold" font-family="Plus Jakarta Sans">Esquema Biomecánico Oficial</text>
           </svg>
         `;
     }
@@ -263,7 +404,6 @@
       }
     });
 
-    // Mobile Bottom Nav
     const mobileLinks = document.querySelectorAll('[data-route-mobile]');
     mobileLinks.forEach(link => {
       const targetRoute = link.getAttribute('data-route-mobile');
@@ -302,7 +442,6 @@
   // --- FILTRADO DE TÉRMINOS ---
   function getFilteredTerms() {
     return FISIOPEDIA_TERMS.filter(term => {
-      // Búsqueda de texto
       if (state.searchTerm) {
         const q = state.searchTerm.toLowerCase().trim();
         const matchesName = term.name.toLowerCase().includes(q);
@@ -311,11 +450,9 @@
         const matchesExample = term.everydayExample.toLowerCase().includes(q);
         if (!matchesName && !matchesSimple && !matchesTech && !matchesExample) return false;
       }
-      // Filtro de categoría
       if (state.selectedCategory !== 'todos') {
         if (term.category !== state.selectedCategory) return false;
       }
-      // Filtro de región
       if (state.selectedRegion !== 'todas') {
         if (term.region !== state.selectedRegion && term.region !== 'general') return false;
       }
@@ -343,12 +480,12 @@
         <div class="relative z-10 max-w-4xl mx-auto flex flex-col items-center text-center">
           <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-surface-container-lowest shadow-sm mb-4">
             <span class="flex h-2 w-2 rounded-full bg-cat-muscles animate-pulse"></span>
-            <span class="font-label-caps text-label-caps text-primary uppercase tracking-wider">Compendio Clínico Pedagógico</span>
+            <span class="font-label-caps text-label-caps text-primary uppercase tracking-wider font-bold">Compendio Clínico Pedagógico</span>
             <span class="text-slate-muted text-xs">•</span>
             <span class="font-label-sm text-label-sm text-on-surface-variant font-medium">Ciclo 2025</span>
           </div>
 
-          <h1 class="font-headline-lg text-headline-lg text-on-surface tracking-tight max-w-2xl">
+          <h1 class="font-headline-lg text-headline-lg text-on-surface tracking-tight max-w-2xl font-bold">
             Aprende anatomía sin enredarte en tecnicismos
           </h1>
           <p class="font-body-lg text-body-lg text-on-surface-variant mt-3 max-w-xl">
@@ -356,7 +493,7 @@
           </p>
 
           <!-- BUSCADOR CON CATEGORÍAS -->
-          <div class="w-full mt-8 bg-surface-container-lowest rounded-2xl shadow-md p-2.5 sm:p-3 flex flex-col gap-3">
+          <div class="w-full mt-8 bg-surface-container-lowest rounded-2xl shadow-md p-2.5 sm:p-3 flex flex-col gap-3 border border-slate-border/50">
             <div class="relative flex items-center w-full">
               <span class="material-symbols-outlined absolute left-4 text-primary text-2xl select-none">search</span>
               <input
@@ -364,7 +501,7 @@
                 type="text"
                 autocomplete="off"
                 value="${state.searchTerm}"
-                placeholder="Escribe un término (ej. Propiocepción, Isquiotibiales, Extensión...)"
+                placeholder="Escribe un término (ej. Propiocepción, Isquiotibiales, Extensión, Menisco...)"
                 class="w-full pl-12 pr-12 py-3.5 bg-transparent font-body-md text-body-md text-on-surface placeholder:text-slate-muted focus:outline-none"
               />
               ${state.searchTerm ? `
@@ -376,20 +513,20 @@
 
             <!-- CHIPS DE TIPO EN EL BUSCADOR -->
             <div class="flex items-center gap-2 overflow-x-auto pb-1 px-1 no-scrollbar" id="category-filter-chips">
-              <span class="font-label-sm text-label-sm text-slate-muted mr-1 hidden sm:inline-block">Tipo:</span>
-              <button data-cat="todos" class="px-3 py-1.5 rounded-full font-label-sm text-label-sm whitespace-nowrap transition-all ${state.selectedCategory === 'todos' ? 'bg-primary text-on-primary shadow-sm' : 'bg-surface-container-high text-on-surface-variant hover:bg-surface-container-highest'}">
-                Todos
+              <span class="font-label-sm text-label-sm text-slate-muted mr-1 hidden sm:inline-block font-bold">Tipo:</span>
+              <button data-cat="todos" class="px-3 py-1.5 rounded-full font-label-sm text-label-sm whitespace-nowrap transition-all ${state.selectedCategory === 'todos' ? 'bg-primary text-on-primary shadow-sm font-bold' : 'bg-surface-container-high text-on-surface-variant hover:bg-surface-container-highest'}">
+                Todos (${FISIOPEDIA_TERMS.length})
               </button>
-              <button data-cat="musculos" class="px-3 py-1.5 rounded-full font-label-sm text-label-sm whitespace-nowrap transition-all ${state.selectedCategory === 'musculos' ? 'bg-primary text-on-primary shadow-sm' : 'bg-surface-container-high text-on-surface-variant hover:bg-surface-container-highest'}">
+              <button data-cat="musculos" class="px-3 py-1.5 rounded-full font-label-sm text-label-sm whitespace-nowrap transition-all ${state.selectedCategory === 'musculos' ? 'bg-primary text-on-primary shadow-sm font-bold' : 'bg-surface-container-high text-on-surface-variant hover:bg-surface-container-highest'}">
                 <span class="inline-block w-2 h-2 rounded-full bg-cat-muscles mr-1.5"></span>Músculos
               </button>
-              <button data-cat="huesos" class="px-3 py-1.5 rounded-full font-label-sm text-label-sm whitespace-nowrap transition-all ${state.selectedCategory === 'huesos' ? 'bg-primary text-on-primary shadow-sm' : 'bg-surface-container-high text-on-surface-variant hover:bg-surface-container-highest'}">
+              <button data-cat="huesos" class="px-3 py-1.5 rounded-full font-label-sm text-label-sm whitespace-nowrap transition-all ${state.selectedCategory === 'huesos' ? 'bg-primary text-on-primary shadow-sm font-bold' : 'bg-surface-container-high text-on-surface-variant hover:bg-surface-container-highest'}">
                 <span class="inline-block w-2 h-2 rounded-full bg-cat-bones mr-1.5"></span>Huesos y Tendones
               </button>
-              <button data-cat="articulaciones" class="px-3 py-1.5 rounded-full font-label-sm text-label-sm whitespace-nowrap transition-all ${state.selectedCategory === 'articulaciones' ? 'bg-primary text-on-primary shadow-sm' : 'bg-surface-container-high text-on-surface-variant hover:bg-surface-container-highest'}">
+              <button data-cat="articulaciones" class="px-3 py-1.5 rounded-full font-label-sm text-label-sm whitespace-nowrap transition-all ${state.selectedCategory === 'articulaciones' ? 'bg-primary text-on-primary shadow-sm font-bold' : 'bg-surface-container-high text-on-surface-variant hover:bg-surface-container-highest'}">
                 <span class="inline-block w-2 h-2 rounded-full bg-cat-joints mr-1.5"></span>Articulaciones
               </button>
-              <button data-cat="movimientos" class="px-3 py-1.5 rounded-full font-label-sm text-label-sm whitespace-nowrap transition-all ${state.selectedCategory === 'movimientos' ? 'bg-primary text-on-primary shadow-sm' : 'bg-surface-container-high text-on-surface-variant hover:bg-surface-container-highest'}">
+              <button data-cat="movimientos" class="px-3 py-1.5 rounded-full font-label-sm text-label-sm whitespace-nowrap transition-all ${state.selectedCategory === 'movimientos' ? 'bg-primary text-on-primary shadow-sm font-bold' : 'bg-surface-container-high text-on-surface-variant hover:bg-surface-container-highest'}">
                 <span class="inline-block w-2 h-2 rounded-full bg-cat-movements mr-1.5"></span>Movimientos
               </button>
             </div>
@@ -397,11 +534,12 @@
 
           <!-- TENDENCIAS RÁPIDAS -->
           <div class="flex flex-wrap items-center justify-center gap-2 mt-4 text-left">
-            <span class="font-label-caps text-label-caps text-slate-muted uppercase">Tendencias:</span>
+            <span class="font-label-caps text-label-caps text-slate-muted uppercase font-bold">Tendencias:</span>
             <button class="quick-tag-btn px-2.5 py-1 rounded bg-surface-container-high hover:bg-primary/10 font-label-sm text-label-sm text-on-surface-variant transition-colors" data-tag="Propiocepción">Propiocepción</button>
-            <button class="quick-tag-btn px-2.5 py-1 rounded bg-surface-container-high hover:bg-primary/10 font-label-sm text-label-sm text-on-surface-variant transition-colors" data-tag="LCA">Ligamento Cruzado (LCA)</button>
+            <button class="quick-tag-btn px-2.5 py-1 rounded bg-surface-container-high hover:bg-primary/10 font-label-sm text-label-sm text-on-surface-variant transition-colors" data-tag="LCA">LCA Rodilla</button>
             <button class="quick-tag-btn px-2.5 py-1 rounded bg-surface-container-high hover:bg-primary/10 font-label-sm text-label-sm text-on-surface-variant transition-colors" data-tag="Manguito">Manguito Rotador</button>
-            <button class="quick-tag-btn px-2.5 py-1 rounded bg-surface-container-high hover:bg-primary/10 font-label-sm text-label-sm text-on-surface-variant transition-colors" data-tag="Flexión">Flexión y Extensión</button>
+            <button class="quick-tag-btn px-2.5 py-1 rounded bg-surface-container-high hover:bg-primary/10 font-label-sm text-label-sm text-on-surface-variant transition-colors" data-tag="Menisco">Meniscos</button>
+            <button class="quick-tag-btn px-2.5 py-1 rounded bg-surface-container-high hover:bg-primary/10 font-label-sm text-label-sm text-on-surface-variant transition-colors" data-tag="Fascia">Fascia Plantar</button>
           </div>
         </div>
       </section>
@@ -411,9 +549,9 @@
         <div class="flex items-center justify-between mb-4">
           <div class="flex items-center gap-2">
             <span class="material-symbols-outlined text-primary text-xl">accessibility_new</span>
-            <h2 class="font-headline-sm text-headline-sm text-on-surface">Explora por Región Corporal</h2>
+            <h2 class="font-headline-sm text-headline-sm text-on-surface font-bold">Explora por Región Corporal</h2>
           </div>
-          <span class="font-label-caps text-label-caps text-slate-muted">FILTRADO ANATÓMICO</span>
+          <span class="font-label-caps text-label-caps text-slate-muted font-bold">ANATOMÍA REGIONAL</span>
         </div>
 
         <div class="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-8 gap-3" id="region-filter-group">
@@ -433,15 +571,15 @@
         <div class="flex items-center justify-between mb-4">
           <div class="flex items-center gap-2">
             <span class="material-symbols-outlined text-amber-quiz text-2xl" style="font-variation-settings: 'FILL' 1;">stars</span>
-            <h2 class="font-headline-sm text-headline-sm text-on-surface">Término del Día</h2>
+            <h2 class="font-headline-sm text-headline-sm text-on-surface font-bold">Término del Día</h2>
             <span class="ml-2 px-2.5 py-0.5 rounded-full bg-amber-quiz/15 text-amber-quiz font-label-caps text-label-caps uppercase font-bold">Destacado</span>
           </div>
-          <a class="font-label-sm text-label-sm text-primary hover:underline flex items-center gap-1 cursor-pointer" onclick="window.location.hash='#terminos'">
+          <a class="font-label-sm text-label-sm text-primary hover:underline flex items-center gap-1 cursor-pointer font-bold" onclick="window.location.hash='#terminos'">
             Ver compendio completo <span class="material-symbols-outlined text-base">arrow_forward</span>
           </a>
         </div>
 
-        <div class="w-full bg-surface-container-lowest rounded-2xl p-6 sm:p-8 lg:p-10 shadow-md relative overflow-hidden">
+        <div class="w-full bg-surface-container-lowest rounded-2xl p-6 sm:p-8 lg:p-10 shadow-md relative overflow-hidden border border-slate-border/50">
           <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start relative z-10">
             <!-- 7 Cols: Explicación y Definición -->
             <div class="lg:col-span-7 flex flex-col">
@@ -452,13 +590,13 @@
                 <span class="px-3 py-1 rounded-full bg-surface-container-high text-on-surface-variant font-label-caps text-label-caps uppercase">
                   ${featuredTerm.regionLabel}
                 </span>
-                <span class="flex items-center gap-1 font-label-sm text-label-sm text-slate-muted ml-auto">
+                <span class="flex items-center gap-1 font-label-sm text-label-sm text-slate-muted ml-auto font-medium">
                   <span class="material-symbols-outlined text-sm">schedule</span> ${featuredTerm.readingTime}
                 </span>
               </div>
 
               <div class="flex items-baseline gap-3">
-                <h3 class="font-headline-lg text-headline-lg text-primary tracking-tight">${featuredTerm.name}</h3>
+                <h3 class="font-headline-lg text-headline-lg text-primary tracking-tight font-bold">${featuredTerm.name}</h3>
                 <button onclick="window.fisiopediaApp.speak('${featuredTerm.name}')" class="p-1.5 rounded-full hover:bg-surface-container-high text-slate-muted hover:text-primary transition-colors" type="button" title="Escuchar pronunciación">
                   <span class="material-symbols-outlined text-xl">volume_up</span>
                 </button>
@@ -469,7 +607,7 @@
               </p>
 
               <!-- En palabras sencillas -->
-              <div class="mt-5 p-4 rounded-xl bg-surface-container-low flex items-start gap-3.5">
+              <div class="mt-5 p-4 rounded-xl bg-surface-container-low flex items-start gap-3.5 border-l-4 border-cat-muscles">
                 <div class="p-2 rounded-lg bg-cat-muscles/15 text-cat-muscles shrink-0">
                   <span class="material-symbols-outlined text-2xl">lightbulb</span>
                 </div>
@@ -484,7 +622,7 @@
               </div>
 
               <!-- Ejemplo cotidiano -->
-              <div class="mt-4 p-4 rounded-xl bg-amber-quiz/10 flex items-start gap-3.5">
+              <div class="mt-4 p-4 rounded-xl bg-amber-quiz/10 flex items-start gap-3.5 border-l-4 border-amber-quiz">
                 <div class="p-2 rounded-lg bg-amber-quiz/20 text-amber-quiz shrink-0">
                   <span class="material-symbols-outlined text-2xl">emoji_objects</span>
                 </div>
@@ -500,7 +638,7 @@
 
               <!-- CTAs -->
               <div class="mt-6 flex flex-wrap items-center gap-3">
-                <a href="#termino/${featuredTerm.id}" class="px-5 py-2.5 rounded-lg bg-primary hover:bg-primary/90 text-on-primary font-label-md text-label-md shadow-sm transition-all flex items-center gap-2">
+                <a href="#termino/${featuredTerm.id}" class="px-5 py-2.5 rounded-lg bg-primary hover:bg-primary/90 text-on-primary font-label-md text-label-md shadow-sm transition-all flex items-center gap-2 font-bold">
                   <span>Ver ficha anatómica completa</span>
                   <span class="material-symbols-outlined text-lg">arrow_forward</span>
                 </a>
@@ -512,12 +650,12 @@
             </div>
 
             <!-- 5 Cols: Diagrama Visual -->
-            <div class="lg:col-span-5 flex flex-col h-full justify-between bg-surface-container-low rounded-xl p-5 shadow-inner">
+            <div class="lg:col-span-5 flex flex-col h-full justify-between bg-surface-container-low rounded-xl p-5 shadow-inner border border-slate-border/50">
               <div class="flex items-center justify-between mb-3">
                 <span class="font-label-sm text-label-sm text-on-surface-variant font-semibold flex items-center gap-1.5">
                   <span class="material-symbols-outlined text-sm text-cat-muscles">visibility</span> Diccionario Visual
                 </span>
-                <span class="text-xs px-2 py-0.5 rounded bg-surface-container-lowest text-slate-muted">Receptores Periféricos</span>
+                <span class="text-xs px-2 py-0.5 rounded bg-surface-container-lowest text-slate-muted font-mono">Esquema</span>
               </div>
 
               <div class="relative w-full rounded-lg overflow-hidden bg-surface-container-highest p-4 flex items-center justify-center">
@@ -527,9 +665,9 @@
               <div class="mt-4 pt-3 flex items-center justify-between text-xs text-on-surface-variant border-t border-slate-border/50">
                 <div class="flex items-center gap-1.5">
                   <span class="material-symbols-outlined text-sm text-primary">healing</span>
-                  <span>Aplicación en rehabilitación articular</span>
+                  <span>Rehabilitación funcional</span>
                 </div>
-                <span class="font-semibold text-primary">Relevancia Alta</span>
+                <span class="font-bold text-primary">Relevancia 10/10</span>
               </div>
             </div>
           </div>
@@ -540,20 +678,20 @@
       <section class="mt-14 w-full">
         <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-6">
           <div>
-            <h2 class="font-headline-sm text-headline-sm text-on-surface">
+            <h2 class="font-headline-sm text-headline-sm text-on-surface font-bold">
               ${state.searchTerm ? `Resultados de búsqueda (${filteredTerms.length})` : 'Términos Anatómicos y Biomecánicos'}
             </h2>
             <p class="font-body-sm text-body-sm text-on-surface-variant">
-              ${state.searchTerm ? `Mostrando conceptos coincidentes con "${state.searchTerm}"` : 'Los conceptos más consultados por estudiantes de Fisioterapia.'}
+              ${state.searchTerm ? `Mostrando conceptos coincidentes con "${state.searchTerm}"` : `Explora los ${FISIOPEDIA_TERMS.length} conceptos esenciales de Fisioterapia.`}
             </p>
           </div>
 
           <!-- Tabs de ordenamiento -->
           <div class="inline-flex p-1 rounded-xl bg-surface-container-high self-start sm:self-auto">
-            <button data-sort="populares" class="sort-tab-btn px-3 py-1 rounded-lg font-label-sm text-label-sm transition-all ${state.sortBy === 'populares' ? 'bg-surface-container-lowest text-on-surface shadow-xs font-semibold' : 'text-on-surface-variant hover:text-on-surface'}">
-              Más buscados
+            <button data-sort="populares" class="sort-tab-btn px-3 py-1 rounded-lg font-label-sm text-label-sm transition-all ${state.sortBy === 'populares' ? 'bg-surface-container-lowest text-on-surface shadow-xs font-bold' : 'text-on-surface-variant hover:text-on-surface'}">
+              Más consultados
             </button>
-            <button data-sort="az" class="sort-tab-btn px-3 py-1 rounded-lg font-label-sm text-label-sm transition-all ${state.sortBy === 'az' ? 'bg-surface-container-lowest text-on-surface shadow-xs font-semibold' : 'text-on-surface-variant hover:text-on-surface'}">
+            <button data-sort="az" class="sort-tab-btn px-3 py-1 rounded-lg font-label-sm text-label-sm transition-all ${state.sortBy === 'az' ? 'bg-surface-container-lowest text-on-surface shadow-xs font-bold' : 'text-on-surface-variant hover:text-on-surface'}">
               Orden A-Z
             </button>
           </div>
@@ -563,9 +701,9 @@
           <div class="p-12 text-center rounded-2xl bg-surface-container-lowest border border-dashed border-slate-border">
             <span class="material-symbols-outlined text-5xl text-slate-muted mb-2">search_off</span>
             <h3 class="font-headline-sm text-headline-sm text-on-surface">No encontramos términos con esa búsqueda</h3>
-            <p class="font-body-md text-body-md text-slate-muted mt-1">Prueba con palabras como flexión, ligamento, manguito o selecciona otra categoría.</p>
-            <button onclick="window.fisiopediaApp.clearSearch()" class="mt-4 px-4 py-2 rounded-lg bg-primary text-on-primary font-label-md text-label-md shadow-sm">
-              Ver todos los términos
+            <p class="font-body-md text-body-md text-slate-muted mt-1">Prueba con términos como flexión, ligamento, manguito o quita los filtros de categoría.</p>
+            <button onclick="window.fisiopediaApp.clearSearch()" class="mt-4 px-4 py-2 rounded-lg bg-primary text-on-primary font-label-md text-label-md shadow-sm font-bold">
+              Restablecer búsqueda
             </button>
           </div>
         ` : `
@@ -579,7 +717,7 @@
       <section class="mt-14 w-full">
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
           <!-- Banner Flashcards -->
-          <div class="relative bg-gradient-to-br from-primary/10 via-surface-container-lowest to-surface-container-low rounded-2xl p-6 sm:p-8 flex flex-col justify-between overflow-hidden shadow-sm">
+          <div class="relative bg-gradient-to-br from-primary/10 via-surface-container-lowest to-surface-container-low rounded-2xl p-6 sm:p-8 flex flex-col justify-between overflow-hidden shadow-sm border border-slate-border/50">
             <div>
               <div class="flex items-start justify-between">
                 <div class="p-3 rounded-xl bg-primary text-on-primary">
@@ -590,16 +728,16 @@
                 </span>
               </div>
               <div class="mt-6">
-                <h3 class="font-headline-sm text-headline-sm text-on-surface">
+                <h3 class="font-headline-sm text-headline-sm text-on-surface font-bold">
                   Flashcards 3D de Estudio
                 </h3>
                 <p class="font-body-md text-body-md text-on-surface-variant mt-2 max-w-md">
-                  Repasa tus <strong class="text-primary font-semibold">${state.favorites.size} términos favoritos</strong> con tarjetas de volteo tridimensional y nemotecnias.
+                  Repasa tus <strong class="text-primary font-semibold">${state.favorites.size} términos favoritos</strong> con tarjetas de volteo tridimensional, nemotecnias y retroalimentación activa.
                 </p>
               </div>
             </div>
             <div class="mt-8 flex items-center gap-3">
-              <a href="#favoritos" class="px-5 py-2.5 rounded-lg bg-primary hover:bg-primary/90 text-on-primary font-label-md text-label-md shadow-sm transition-all flex items-center gap-2">
+              <a href="#favoritos" class="px-5 py-2.5 rounded-lg bg-primary hover:bg-primary/90 text-on-primary font-label-md text-label-md shadow-sm transition-all flex items-center gap-2 font-bold">
                 <span>Practicar Flashcards</span>
                 <span class="material-symbols-outlined text-lg">play_arrow</span>
               </a>
@@ -607,7 +745,7 @@
           </div>
 
           <!-- Banner Quizzes -->
-          <div class="relative bg-gradient-to-br from-amber-quiz/10 via-surface-container-lowest to-surface-container-low rounded-2xl p-6 sm:p-8 flex flex-col justify-between overflow-hidden shadow-sm">
+          <div class="relative bg-gradient-to-br from-amber-quiz/10 via-surface-container-lowest to-surface-container-low rounded-2xl p-6 sm:p-8 flex flex-col justify-between overflow-hidden shadow-sm border border-slate-border/50">
             <div>
               <div class="flex items-start justify-between">
                 <div class="p-3 rounded-xl bg-amber-quiz text-slate-strong">
@@ -618,11 +756,11 @@
                 </span>
               </div>
               <div class="mt-6">
-                <h3 class="font-headline-sm text-headline-sm text-on-surface">
-                  Cuestionarios de Práctica Breves
+                <h3 class="font-headline-sm text-headline-sm text-on-surface font-bold">
+                  Cuestionarios de Práctica (${FISIOPEDIA_QUIZZES.length} Preguntas)
                 </h3>
                 <p class="font-body-md text-body-md text-on-surface-variant mt-2 max-w-md">
-                  Responde preguntas cortas de la vida cotidiana para comprobar lo aprendido con retroalimentación inmediata.
+                  Responde preguntas cortas de la vida cotidiana para comprobar lo aprendido con justificación anatómica y cálculo de puntaje.
                 </p>
               </div>
             </div>
@@ -642,13 +780,13 @@
     return `
       <button
         data-region="${id}"
-        class="region-btn flex flex-col items-center justify-center p-3.5 rounded-xl ${isActive ? 'bg-primary text-on-primary shadow-md ring-2 ring-primary/30' : 'bg-surface-container-lowest hover:bg-surface-container-low shadow-sm text-on-surface'} transition-all text-center group"
+        class="region-btn flex flex-col items-center justify-center p-3.5 rounded-xl ${isActive ? 'bg-primary text-on-primary shadow-md ring-2 ring-primary/30' : 'bg-surface-container-lowest hover:bg-surface-container-low shadow-sm text-on-surface'} transition-all text-center group border border-slate-border/40"
         type="button"
       >
         <div class="w-10 h-10 rounded-full ${isActive ? 'bg-white/20 text-white' : 'bg-primary/10 text-primary'} flex items-center justify-center group-hover:scale-110 transition-transform">
           <span class="material-symbols-outlined text-xl">${icon}</span>
         </div>
-        <span class="font-label-sm text-label-sm mt-2.5">${label}</span>
+        <span class="font-label-sm text-label-sm mt-2.5 font-bold">${label}</span>
       </button>
     `;
   }
@@ -656,7 +794,7 @@
   function renderTermCard(term) {
     const isFav = state.favorites.has(term.id);
     return `
-      <article class="flex flex-col justify-between bg-surface-container-lowest rounded-2xl p-6 shadow-sm hover:shadow-md transition-shadow group border border-slate-border/40">
+      <article class="flex flex-col justify-between bg-surface-container-lowest rounded-2xl p-6 shadow-sm hover:shadow-md transition-shadow group border border-slate-border/50">
         <div>
           <div class="flex items-center justify-between">
             <span class="px-3 py-1 rounded-full ${term.categoryClass} font-label-caps text-label-caps uppercase font-bold">
@@ -674,12 +812,12 @@
             </button>
           </div>
 
-          <h3 class="font-headline-sm text-headline-sm text-on-surface mt-4 group-hover:text-primary transition-colors cursor-pointer" onclick="window.location.hash='#termino/${term.id}'">
+          <h3 class="font-headline-sm text-headline-sm text-on-surface mt-4 group-hover:text-primary transition-colors cursor-pointer font-bold" onclick="window.location.hash='#termino/${term.id}'">
             ${term.name}
           </h3>
 
-          <div class="mt-3 p-3 rounded-lg bg-surface-container-low">
-            <span class="font-label-caps text-label-caps uppercase text-cat-muscles block mb-1">En el día a día</span>
+          <div class="mt-3 p-3 rounded-lg bg-surface-container-low border border-slate-border/30">
+            <span class="font-label-caps text-label-caps uppercase text-cat-muscles block mb-1 font-bold">En el día a día</span>
             <p class="font-body-sm text-body-sm text-on-surface leading-snug line-clamp-3">
               ${term.everydayExample}
             </p>
@@ -687,15 +825,15 @@
 
           <div class="mt-4 pt-2 text-xs text-on-surface-variant flex items-center justify-between">
             <span class="text-slate-muted">Región: <strong class="text-on-surface">${term.regionLabel}</strong></span>
-            <span class="text-slate-muted">${term.readingTime}</span>
+            <span class="text-slate-muted font-medium">${term.readingTime}</span>
           </div>
         </div>
 
         <div class="mt-6 pt-4 border-t border-slate-border/50 flex items-center justify-between">
-          <a href="#termino/${term.id}" class="font-label-sm text-label-sm text-primary flex items-center gap-1 group-hover:translate-x-1 transition-transform">
-            Leer definición sencilla <span class="material-symbols-outlined text-base">arrow_forward</span>
+          <a href="#termino/${term.id}" class="font-label-sm text-label-sm text-primary flex items-center gap-1 group-hover:translate-x-1 transition-transform font-bold">
+            Ver explicación sencilla <span class="material-symbols-outlined text-base">arrow_forward</span>
           </a>
-          <button onclick="window.fisiopediaApp.speak('${term.name}')" class="text-slate-muted hover:text-primary p-1" title="Escuchar">
+          <button onclick="window.fisiopediaApp.speak('${term.name}')" class="text-slate-muted hover:text-primary p-1" title="Escuchar pronunciación">
             <span class="material-symbols-outlined text-base">volume_up</span>
           </button>
         </div>
@@ -710,8 +848,6 @@
     if (searchInput) {
       searchInput.addEventListener('input', (e) => {
         state.searchTerm = e.target.value;
-        const filtered = getFilteredTerms();
-        // Re-render only terms grid if possible or trigger smooth update
         renderCurrentRoute();
         const freshInput = document.getElementById('main-search-input');
         if (freshInput) {
@@ -728,7 +864,7 @@
       });
     }
 
-    // Category chips
+    // Filtros de categoría
     document.querySelectorAll('#category-filter-chips button[data-cat]').forEach(btn => {
       btn.addEventListener('click', () => {
         state.selectedCategory = btn.getAttribute('data-cat');
@@ -736,7 +872,7 @@
       });
     });
 
-    // Quick tag buttons
+    // Etiquetas rápidas
     document.querySelectorAll('.quick-tag-btn').forEach(btn => {
       btn.addEventListener('click', () => {
         state.searchTerm = btn.getAttribute('data-tag');
@@ -744,7 +880,7 @@
       });
     });
 
-    // Region buttons
+    // Filtros de región
     document.querySelectorAll('.region-btn').forEach(btn => {
       btn.addEventListener('click', () => {
         state.selectedRegion = btn.getAttribute('data-region');
@@ -752,7 +888,7 @@
       });
     });
 
-    // Sort tabs
+    // Ordenamiento
     document.querySelectorAll('.sort-tab-btn').forEach(btn => {
       btn.addEventListener('click', () => {
         state.sortBy = btn.getAttribute('data-sort');
@@ -772,27 +908,27 @@
       <!-- Migas de pan -->
       <div class="flex flex-wrap items-center justify-between gap-space-sm mb-space-md">
         <div class="flex items-center gap-2 text-on-surface-variant font-label-sm text-label-sm">
-          <a href="#explorador" class="hover:text-primary transition-colors flex items-center gap-1">
+          <a href="#explorador" class="hover:text-primary transition-colors flex items-center gap-1 font-medium">
             <span class="material-symbols-outlined text-sm">home</span> Inicio
           </a>
           <span class="text-outline-variant font-bold">/</span>
-          <a href="#explorador" class="hover:text-primary transition-colors">Diccionario</a>
+          <a href="#explorador" class="hover:text-primary transition-colors font-medium">Diccionario</a>
           <span class="text-outline-variant font-bold">/</span>
           <span class="text-primary font-bold">${term.categoryLabel}</span>
           <span class="text-outline-variant font-bold">/</span>
-          <span class="text-on-surface font-semibold">${term.name}</span>
+          <span class="text-on-surface font-bold">${term.name}</span>
         </div>
         <div class="flex items-center gap-space-sm">
-          <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-surface-container-high text-on-surface-variant font-label-caps text-label-caps tracking-wider">
+          <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-surface-container-high text-on-surface-variant font-label-caps text-label-caps tracking-wider font-bold">
             <span class="w-2 h-2 rounded-full bg-cat-muscles animate-pulse"></span>
-            GUÍA DE ESTUDIO 2025
+            REVISIÓN ANATÓMICA OFICIAL
           </span>
         </div>
       </div>
 
       <!-- Selector rápido de términos -->
       <div class="mb-6 flex items-center gap-2 overflow-x-auto pb-2 no-scrollbar">
-        <span class="text-xs font-semibold text-slate-muted uppercase whitespace-nowrap mr-2">Otros términos:</span>
+        <span class="text-xs font-bold text-slate-muted uppercase whitespace-nowrap mr-2">Otros términos:</span>
         ${FISIOPEDIA_TERMS.map(t => `
           <button onclick="window.location.hash='#termino/${t.id}'" class="px-3 py-1.5 rounded-full font-label-sm text-label-sm whitespace-nowrap transition-all ${t.id === term.id ? 'bg-primary text-on-primary font-bold shadow-sm' : 'bg-surface-container-lowest hover:bg-surface-container-low text-on-surface border border-slate-border/50'}">
             ${t.name}
@@ -805,7 +941,7 @@
         <!-- COLUMNA IZQUIERDA (7 columnas): Contenido Pedagógico -->
         <section class="lg:col-span-7 flex flex-col gap-space-lg">
           <!-- 1. Cabecera -->
-          <div class="bg-surface-container-lowest rounded-xl p-space-lg shadow-sm relative overflow-hidden">
+          <div class="bg-surface-container-lowest rounded-xl p-space-lg shadow-sm relative overflow-hidden border border-slate-border/50">
             <div class="flex flex-wrap items-center gap-space-sm mb-space-sm">
               <span class="px-3 py-1 rounded-full ${term.categoryClass} font-label-caps text-label-caps tracking-wide font-bold">
                 ${term.categoryLabel}
@@ -822,10 +958,10 @@
             <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-space-md mt-space-xs">
               <div>
                 <div class="flex items-center gap-space-sm flex-wrap">
-                  <h1 class="font-display text-headline-lg text-on-surface tracking-tight leading-tight">
+                  <h1 class="font-display text-headline-lg text-on-surface tracking-tight leading-tight font-bold">
                     ${term.name}
                   </h1>
-                  <button onclick="window.fisiopediaApp.speak('${term.name}')" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-surface-container hover:bg-surface-container-high text-primary font-label-sm text-label-sm transition-all active:scale-95 shadow-sm" type="button" title="Escuchar pronunciación fonética">
+                  <button onclick="window.fisiopediaApp.speak('${term.name}')" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-surface-container hover:bg-surface-container-high text-primary font-label-sm text-label-sm transition-all active:scale-95 shadow-sm font-bold" type="button" title="Escuchar pronunciación fonética">
                     <span class="material-symbols-outlined text-base text-primary">volume_up</span>
                     <span>${term.pronunciation}</span>
                   </button>
@@ -837,18 +973,18 @@
               </div>
             </div>
 
-            <!-- Barra de Acciones de Estudio -->
-            <div class="mt-space-lg pt-space-md flex flex-wrap items-center justify-between gap-space-sm bg-surface-container-low rounded-lg p-space-sm">
-              <button onclick="window.fisiopediaApp.toggleFav('${term.id}')" class="inline-flex items-center gap-2 px-3.5 py-2 rounded-lg ${isFav ? 'bg-amber-quiz text-slate-strong font-bold' : 'bg-primary text-on-primary'} font-label-md text-label-md shadow-sm transition-all">
+            <!-- Acciones de Estudio -->
+            <div class="mt-space-lg pt-space-md flex flex-wrap items-center justify-between gap-space-sm bg-surface-container-low rounded-lg p-space-sm border border-slate-border/40">
+              <button onclick="window.fisiopediaApp.toggleFav('${term.id}')" class="inline-flex items-center gap-2 px-3.5 py-2 rounded-lg ${isFav ? 'bg-amber-quiz text-slate-strong font-bold' : 'bg-primary text-on-primary font-bold'} font-label-md text-label-md shadow-sm transition-all">
                 <span class="material-symbols-outlined text-base" style="font-variation-settings: 'FILL' 1;">
                   ${isFav ? 'bookmark_added' : 'bookmark'}
                 </span>
                 <span>${isFav ? 'Guardado en Mis Favoritos' : 'Guardar en Mis Favoritos'}</span>
               </button>
 
-              <button onclick="window.location.hash='#favoritos'" class="inline-flex items-center gap-1.5 px-3 py-2 rounded-lg bg-surface-container-lowest text-on-surface-variant hover:text-primary font-label-sm text-label-sm shadow-sm transition-colors">
+              <button onclick="window.location.hash='#favoritos'" class="inline-flex items-center gap-1.5 px-3 py-2 rounded-lg bg-surface-container-lowest text-on-surface-variant hover:text-primary font-label-sm text-label-sm shadow-sm transition-colors font-semibold">
                 <span class="material-symbols-outlined text-base text-primary">style</span>
-                <span>Estudiar en Flashcards</span>
+                <span>Repasar en Flashcards 3D</span>
               </button>
             </div>
           </div>
@@ -859,26 +995,26 @@
             <div class="bg-surface-container-lowest rounded-xl p-space-md shadow-sm relative flex flex-col justify-between border border-slate-border/50">
               <div class="space-y-space-xs">
                 <div class="flex items-center justify-between mb-1">
-                  <span class="font-label-caps text-label-caps text-slate-muted uppercase tracking-wider flex items-center gap-1">
+                  <span class="font-label-caps text-label-caps text-slate-muted uppercase tracking-wider flex items-center gap-1 font-bold">
                     <span class="material-symbols-outlined text-sm text-cat-bones">menu_book</span>
                     Definición Técnica / Libro Oficial
                   </span>
                 </div>
-                <h2 class="font-headline-sm text-headline-sm text-on-surface leading-snug">
+                <h2 class="font-headline-sm text-headline-sm text-on-surface leading-snug font-bold">
                   Perspectiva Biomecánica
                 </h2>
                 <p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed pt-1">
                   "${term.technicalDef}"
                 </p>
               </div>
-              <div class="mt-space-md pt-space-xs flex items-center justify-between text-slate-muted font-label-caps text-label-caps">
+              <div class="mt-space-md pt-space-xs flex items-center justify-between text-slate-muted font-label-caps text-label-caps font-bold">
                 <span>Rigor Académico</span>
                 <span class="material-symbols-outlined text-sm">science</span>
               </div>
             </div>
 
             <!-- Sencillo -->
-            <div class="bg-surface-container-low rounded-xl p-space-md shadow-sm relative flex flex-col justify-between border-2 border-primary/20">
+            <div class="bg-surface-container-low rounded-xl p-space-md shadow-sm relative flex flex-col justify-between border-2 border-primary/30">
               <div class="space-y-space-xs">
                 <div class="flex items-center justify-between mb-1">
                   <span class="font-label-caps text-label-caps text-primary font-bold uppercase tracking-wider flex items-center gap-1">
@@ -889,14 +1025,14 @@
                     Clave de Examen
                   </span>
                 </div>
-                <h2 class="font-headline-sm text-headline-sm text-primary leading-snug">
+                <h2 class="font-headline-sm text-headline-sm text-primary leading-snug font-bold">
                   Fisio Pedía
                 </h2>
-                <p class="font-body-sm text-body-sm text-on-surface leading-relaxed pt-1 font-medium">
+                <p class="font-body-sm text-body-sm text-on-surface leading-relaxed pt-1 font-semibold">
                   "${term.simpleExplanation}"
                 </p>
               </div>
-              <div class="mt-space-md pt-space-xs flex items-center justify-between text-primary font-label-caps text-label-caps">
+              <div class="mt-space-md pt-space-xs flex items-center justify-between text-primary font-label-caps text-label-caps font-bold">
                 <span>Para retención a largo plazo</span>
                 <span class="material-symbols-outlined text-sm">emoji_objects</span>
               </div>
@@ -917,7 +1053,7 @@
                   <span class="text-outline-variant">•</span>
                   <span class="font-label-sm text-label-sm text-slate-muted">Ejemplo real</span>
                 </div>
-                <h3 class="font-headline-sm text-headline-sm text-on-surface">
+                <h3 class="font-headline-sm text-headline-sm text-on-surface font-bold">
                   ${term.everydayTitle}
                 </h3>
                 <p class="font-body-md text-body-md text-on-surface-variant mt-2 leading-relaxed">
@@ -934,7 +1070,7 @@
                 <span class="w-8 h-8 rounded-lg bg-cat-muscles/15 text-cat-muscles flex items-center justify-center">
                   <span class="material-symbols-outlined text-lg">medical_services</span>
                 </span>
-                <h3 class="font-headline-sm text-headline-sm text-on-surface">
+                <h3 class="font-headline-sm text-headline-sm text-on-surface font-bold">
                   ${term.clinicalTitle}
                 </h3>
               </div>
@@ -966,16 +1102,16 @@
                 <span class="font-label-caps text-label-caps text-cat-muscles font-bold uppercase tracking-wider">
                   Diccionario Visual
                 </span>
-                <h3 class="font-headline-sm text-headline-sm text-on-surface">
+                <h3 class="font-headline-sm text-headline-sm text-on-surface font-bold">
                   Representación Anatómica
                 </h3>
               </div>
-              <span class="px-2 py-1 rounded bg-surface-container text-on-surface-variant font-label-caps text-label-caps">
-                Esquema
+              <span class="px-2 py-1 rounded bg-surface-container text-on-surface-variant font-label-caps text-label-caps font-mono">
+                Esquema SVG
               </span>
             </div>
 
-            <div class="bg-surface-container-low rounded-xl p-4 flex items-center justify-center overflow-hidden">
+            <div class="bg-surface-container-low rounded-xl p-4 flex items-center justify-center overflow-hidden border border-slate-border/40">
               ${getTermSvg(term.svgType)}
             </div>
 
@@ -991,7 +1127,7 @@
           </div>
 
           <!-- Botón de regreso -->
-          <a href="#explorador" class="w-full flex items-center justify-center gap-2 p-3 rounded-xl bg-surface-container-low hover:bg-surface-container-high text-on-surface font-label-md text-label-md transition-colors">
+          <a href="#explorador" class="w-full flex items-center justify-center gap-2 p-3 rounded-xl bg-surface-container-low hover:bg-surface-container-high text-on-surface font-label-md text-label-md transition-colors font-bold border border-slate-border/40">
             <span class="material-symbols-outlined text-base">arrow_back</span>
             <span>Volver al Explorador de Términos</span>
           </a>
@@ -1000,17 +1136,24 @@
     `;
   }
 
-  function bindTerminoEvents() {
-    // Eventos específicos de ficha de término si aplican
-  }
+  function bindTerminoEvents() {}
 
   // ==========================================
   // VISTA 3: MIS FAVORITOS & FLASHCARDS 3D
   // ==========================================
   function renderFavoritosView() {
-    const favTerms = FISIOPEDIA_TERMS.filter(t => state.favorites.has(t.id));
-    const activeDeck = favTerms.length > 0 ? favTerms : FISIOPEDIA_TERMS;
+    let activeDeck = FISIOPEDIA_TERMS.filter(t => state.favorites.has(t.id));
+    if (activeDeck.length === 0) {
+      activeDeck = FISIOPEDIA_TERMS; // Muestra todo el compendio si aún no hay favoritos
+    }
+
+    if (state.flashcardCategory !== 'todas') {
+      const filtered = activeDeck.filter(t => t.category === state.flashcardCategory);
+      if (filtered.length > 0) activeDeck = filtered;
+    }
+
     const currentCard = activeDeck[state.flashcardIndex % activeDeck.length];
+    const favCount = state.favorites.size;
 
     return `
       <!-- Encabezado de Sección y Metadatos -->
@@ -1018,16 +1161,16 @@
         <div class="max-w-[65ch]">
           <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cat-muscles/10 text-primary mb-2">
             <span class="material-symbols-outlined text-sm">psychology</span>
-            <span class="font-label-caps text-label-caps uppercase tracking-wider">Técnica de Repetición Activa</span>
+            <span class="font-label-caps text-label-caps uppercase tracking-wider font-bold">Repetición Activa & Memoria Visual</span>
           </div>
-          <h1 class="font-headline-lg text-headline-lg text-on-surface tracking-tight">Mi Espacio de Estudio &amp; Favoritos</h1>
+          <h1 class="font-headline-lg text-headline-lg text-on-surface tracking-tight font-bold">Mi Espacio de Estudio &amp; Favoritos</h1>
           <p class="font-body-md text-body-md text-on-surface-variant mt-1">
             Repasa los términos guardados mediante fichas interactivas en 3D, metáforas de la vida diaria y refuerzo visual.
           </p>
         </div>
 
         <div class="flex items-center gap-space-sm">
-          <button id="shuffle-deck-btn" class="flex items-center gap-2 px-space-md py-2.5 rounded-lg bg-surface-container-low hover:bg-surface-container-high text-on-surface-variant font-label-md text-label-md transition-all shadow-sm">
+          <button id="shuffle-deck-btn" class="flex items-center gap-2 px-space-md py-2.5 rounded-lg bg-surface-container-low hover:bg-surface-container-high text-on-surface font-label-md text-label-md transition-all shadow-sm font-bold border border-slate-border/50">
             <span class="material-symbols-outlined text-lg">shuffle</span>
             <span>Mezclar Tarjetas</span>
           </button>
@@ -1036,10 +1179,10 @@
 
       <!-- Métricas Superiores -->
       <div class="grid grid-cols-1 md:grid-cols-3 gap-space-md mb-space-xl">
-        <div class="bg-surface-container-lowest p-space-lg rounded-xl shadow-sm flex items-center justify-between border border-slate-border/40">
+        <div class="bg-surface-container-lowest p-space-lg rounded-xl shadow-sm flex items-center justify-between border border-slate-border/50">
           <div class="flex flex-col">
-            <span class="font-label-caps text-label-caps uppercase text-slate-muted">Términos Guardados</span>
-            <span class="font-display text-display text-on-surface mt-1 leading-none">${state.favorites.size}</span>
+            <span class="font-label-caps text-label-caps uppercase text-slate-muted font-bold">Términos en Favoritos</span>
+            <span class="font-display text-display text-on-surface mt-1 leading-none font-bold">${favCount}</span>
             <span class="font-body-sm text-body-sm text-on-surface-variant mt-2 flex items-center gap-1">
               <span class="material-symbols-outlined text-cat-bones text-sm">bookmark</span>
               Guardados en este dispositivo
@@ -1050,15 +1193,15 @@
           </div>
         </div>
 
-        <div class="bg-surface-container-lowest p-space-lg rounded-xl shadow-sm flex items-center justify-between border border-slate-border/40">
+        <div class="bg-surface-container-lowest p-space-lg rounded-xl shadow-sm flex items-center justify-between border border-slate-border/50">
           <div class="flex flex-col">
-            <span class="font-label-caps text-label-caps uppercase text-slate-muted">Total en Compendio</span>
+            <span class="font-label-caps text-label-caps uppercase text-slate-muted font-bold">Compendio Total</span>
             <div class="flex items-baseline gap-2 mt-1">
-              <span class="font-display text-display text-primary leading-none">${FISIOPEDIA_TERMS.length}</span>
-              <span class="font-label-md text-label-md text-primary font-bold">conceptos</span>
+              <span class="font-display text-display text-primary leading-none font-bold">${FISIOPEDIA_TERMS.length}</span>
+              <span class="font-label-md text-label-md text-primary font-bold">términos</span>
             </div>
             <div class="w-36 h-2 bg-surface-container-high rounded-full overflow-hidden mt-3">
-              <div class="bg-primary h-full rounded-full" style="width: ${Math.round((state.favorites.size / FISIOPEDIA_TERMS.length) * 100)}%"></div>
+              <div class="bg-primary h-full rounded-full" style="width: ${Math.round((favCount / FISIOPEDIA_TERMS.length) * 100)}%"></div>
             </div>
           </div>
           <div class="w-14 h-14 rounded-full bg-primary/10 text-primary flex items-center justify-center">
@@ -1066,16 +1209,16 @@
           </div>
         </div>
 
-        <div class="bg-surface-container-lowest p-space-lg rounded-xl shadow-sm flex items-center justify-between border border-slate-border/40">
+        <div class="bg-surface-container-lowest p-space-lg rounded-xl shadow-sm flex items-center justify-between border border-slate-border/50">
           <div class="flex flex-col">
-            <span class="font-label-caps text-label-caps uppercase text-slate-muted">Modo de Repaso</span>
+            <span class="font-label-caps text-label-caps uppercase text-slate-muted font-bold">Modo de Repaso</span>
             <div class="flex items-baseline gap-2 mt-1">
-              <span class="font-display text-display text-amber-quiz leading-none">3D</span>
+              <span class="font-display text-display text-amber-quiz leading-none font-bold">3D</span>
               <span class="font-label-sm text-label-sm text-amber-quiz font-bold">Flashcard</span>
             </div>
             <span class="font-body-sm text-body-sm text-slate-muted mt-2 flex items-center gap-1">
               <span class="material-symbols-outlined text-amber-quiz text-sm">touch_app</span>
-              Haz clic para girar la ficha
+              Clic para voltear ficha
             </span>
           </div>
           <div class="w-14 h-14 rounded-full bg-amber-quiz/15 text-amber-quiz flex items-center justify-center">
@@ -1086,13 +1229,13 @@
 
       <!-- VISOR INTERACTIVO 3D DE FLASHCARDS -->
       <div class="w-full bg-gradient-to-br from-surface-container-lowest via-surface-container-low to-surface-container-lowest p-6 md:p-10 rounded-2xl shadow-md mb-space-xl relative overflow-hidden border border-slate-border/60">
-        <div class="flex items-center justify-between mb-4">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-6">
           <div class="flex items-center gap-2">
             <span class="w-2.5 h-2.5 rounded-full bg-amber-quiz animate-pulse"></span>
             <span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider font-bold">Modo Activo de Repaso</span>
           </div>
           <span class="font-label-md text-label-md text-primary font-bold">
-            Tarjeta ${(state.flashcardIndex % activeDeck.length) + 1} de ${activeDeck.length} ${favTerms.length === 0 ? '(Todas)' : '(En Favoritos)'}
+            Tarjeta ${(state.flashcardIndex % activeDeck.length) + 1} de ${activeDeck.length}
           </span>
         </div>
 
@@ -1110,17 +1253,17 @@
                 </span>
                 <div class="flex items-center gap-1 text-slate-muted">
                   <span class="material-symbols-outlined text-lg">touch_app</span>
-                  <span class="font-label-sm text-label-sm">Clic para voltear</span>
+                  <span class="font-label-sm text-label-sm font-medium">Clic para voltear</span>
                 </div>
               </div>
 
               <div class="flex flex-col items-center justify-center text-center my-auto py-4">
-                <span class="font-label-caps text-label-caps uppercase text-slate-muted tracking-widest mb-2">${currentCard.regionLabel}</span>
-                <h2 class="font-headline-lg text-headline-lg text-slate-strong tracking-tight max-w-[20ch]">
+                <span class="font-label-caps text-label-caps uppercase text-slate-muted tracking-widest mb-2 font-bold">${currentCard.regionLabel}</span>
+                <h2 class="font-headline-lg text-headline-lg text-slate-strong tracking-tight max-w-[20ch] font-bold">
                   ${currentCard.name}
                 </h2>
                 <p class="font-body-md text-body-md text-slate-muted mt-3 max-w-[45ch]">
-                  ¿Recuerdas su definición sencilla y el ejemplo de la vida diaria?
+                  ¿Recuerdas cómo explicar este concepto en palabras sencillas y con un ejemplo de la vida diaria?
                 </p>
               </div>
 
@@ -1128,7 +1271,7 @@
                 <span class="font-body-sm text-body-sm text-slate-muted flex items-center gap-1">
                   <span class="material-symbols-outlined text-sm">schedule</span> ${currentCard.readingTime}
                 </span>
-                <button id="btn-flip-trigger" type="button" class="flex items-center gap-2 px-4 py-2 rounded-lg bg-surface-container-low hover:bg-surface-container-high text-on-surface font-label-md text-label-md transition-colors">
+                <button id="btn-flip-trigger" type="button" class="flex items-center gap-2 px-4 py-2 rounded-lg bg-surface-container-low hover:bg-surface-container-high text-on-surface font-label-md text-label-md transition-colors font-bold">
                   <span class="material-symbols-outlined text-lg text-primary">sync</span>
                   <span>Girar Ficha</span>
                 </button>
@@ -1143,21 +1286,21 @@
                     <span class="px-3 py-1 rounded-full font-label-caps text-label-caps uppercase bg-primary/10 text-primary font-bold">
                       En Palabras Sencillas
                     </span>
-                    <span class="px-2.5 py-1 rounded-full font-label-caps text-label-caps bg-surface-container-high text-on-surface-variant">
+                    <span class="px-2.5 py-1 rounded-full font-label-caps text-label-caps bg-surface-container-high text-on-surface-variant font-medium">
                       ${currentCard.regionLabel}
                     </span>
                   </div>
-                  <span class="font-label-caps text-label-caps text-slate-muted">Dorso de la ficha</span>
+                  <span class="font-label-caps text-label-caps text-slate-muted font-bold">Dorso</span>
                 </div>
 
-                <div class="p-4 rounded-xl bg-surface-container-low mb-4">
-                  <span class="font-label-caps text-label-caps text-primary font-bold block mb-1">Concepto Central:</span>
+                <div class="p-4 rounded-xl bg-surface-container-low mb-4 border-l-4 border-primary">
+                  <span class="font-label-caps text-label-caps text-primary font-bold block mb-1">Concepto Clave:</span>
                   <p class="font-body-md text-body-md text-on-surface font-medium leading-relaxed">
                     "${currentCard.simpleExplanation}"
                   </p>
                 </div>
 
-                <div class="p-4 rounded-xl bg-amber-quiz/10">
+                <div class="p-4 rounded-xl bg-amber-quiz/10 border-l-4 border-amber-quiz">
                   <span class="font-label-caps text-label-caps text-amber-quiz font-bold block mb-1">Ejemplo Cotidiano:</span>
                   <p class="font-body-sm text-body-sm text-on-surface leading-snug">
                     ${currentCard.everydayExample}
@@ -1169,7 +1312,7 @@
                 <a href="#termino/${currentCard.id}" class="text-xs text-primary font-bold hover:underline flex items-center gap-1">
                   Ver ficha completa <span class="material-symbols-outlined text-sm">arrow_forward</span>
                 </a>
-                <button id="btn-flip-back-trigger" type="button" class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-surface-container text-on-surface font-label-sm text-label-sm">
+                <button id="btn-flip-back-trigger" type="button" class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-surface-container text-on-surface font-label-sm text-label-sm font-bold">
                   <span class="material-symbols-outlined text-sm text-primary">sync</span>
                   Volver al frente
                 </button>
@@ -1180,11 +1323,11 @@
 
         <!-- CONTROLES DE LA BARAJA -->
         <div class="flex items-center justify-center gap-4">
-          <button id="prev-card-btn" class="flex items-center gap-1 px-4 py-2 rounded-xl bg-surface-container-lowest hover:bg-surface-container border border-slate-border text-on-surface font-label-md text-label-md shadow-sm transition-all">
+          <button id="prev-card-btn" class="flex items-center gap-1 px-4 py-2 rounded-xl bg-surface-container-lowest hover:bg-surface-container border border-slate-border text-on-surface font-label-md text-label-md shadow-sm transition-all font-bold">
             <span class="material-symbols-outlined text-base">arrow_back</span>
             <span>Anterior</span>
           </button>
-          <button id="next-card-btn" class="flex items-center gap-1 px-5 py-2 rounded-xl bg-primary hover:bg-primary/90 text-on-primary font-label-md text-label-md shadow-sm transition-all">
+          <button id="next-card-btn" class="flex items-center gap-1 px-5 py-2 rounded-xl bg-primary hover:bg-primary/90 text-on-primary font-label-md text-label-md shadow-sm transition-all font-bold">
             <span>Siguiente</span>
             <span class="material-symbols-outlined text-base">arrow_forward</span>
           </button>
@@ -1193,19 +1336,19 @@
 
       <!-- LISTA DE TÉRMINOS FAVORITOS GUARDADOS -->
       <section class="mt-8">
-        <h2 class="font-headline-sm text-headline-sm text-on-surface mb-4">Términos que estás repasando (${favTerms.length})</h2>
-        ${favTerms.length === 0 ? `
+        <h2 class="font-headline-sm text-headline-sm text-on-surface mb-4 font-bold">Términos que estás repasando (${favCount})</h2>
+        ${favCount === 0 ? `
           <div class="p-8 text-center rounded-2xl bg-surface-container-lowest border border-dashed border-slate-border">
             <span class="material-symbols-outlined text-4xl text-slate-muted mb-2">bookmark_border</span>
-            <p class="font-body-md text-body-md text-slate-muted">Aún no has guardado términos en favoritos.</p>
+            <p class="font-body-md text-body-md text-slate-muted font-medium">Aún no has guardado términos en favoritos.</p>
             <p class="font-body-sm text-body-sm text-slate-muted mt-1">Haz clic en el icono de guardar en cualquier término del explorador para tenerlo a mano aquí.</p>
-            <a href="#explorador" class="mt-4 inline-block px-4 py-2 rounded-lg bg-primary text-on-primary font-label-md text-label-md">
+            <a href="#explorador" class="mt-4 inline-block px-4 py-2 rounded-lg bg-primary text-on-primary font-label-md text-label-md font-bold">
               Explorar Términos
             </a>
           </div>
         ` : `
           <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-            ${favTerms.map(term => `
+            ${FISIOPEDIA_TERMS.filter(t => state.favorites.has(t.id)).map(term => `
               <div class="p-4 rounded-xl bg-surface-container-lowest border border-slate-border flex items-start justify-between gap-3 shadow-sm hover:shadow-md transition-shadow">
                 <div>
                   <span class="px-2.5 py-0.5 rounded-full ${term.categoryClass} text-[10px] uppercase font-bold tracking-wider">
@@ -1245,15 +1388,9 @@
       }
     }
 
-    if (cardElement) {
-      cardElement.addEventListener('click', toggleFlip);
-    }
-    if (btnFlip) {
-      btnFlip.addEventListener('click', toggleFlip);
-    }
-    if (btnFlipBack) {
-      btnFlipBack.addEventListener('click', toggleFlip);
-    }
+    if (cardElement) cardElement.addEventListener('click', toggleFlip);
+    if (btnFlip) btnFlip.addEventListener('click', toggleFlip);
+    if (btnFlipBack) btnFlipBack.addEventListener('click', toggleFlip);
 
     if (prevBtn) {
       prevBtn.addEventListener('click', () => {
@@ -1276,7 +1413,7 @@
         state.flashcardFlipped = false;
         state.flashcardIndex = Math.floor(Math.random() * FISIOPEDIA_TERMS.length);
         renderCurrentRoute();
-        showToast('Baraja mezclada aleatoriamente', 'shuffle');
+        showToast('Baraja mezclada', 'shuffle');
       });
     }
   }
@@ -1285,8 +1422,59 @@
   // VISTA 4: CUESTIONARIOS DE AUTOEVALUACIÓN
   // ==========================================
   function renderQuizzesView() {
-    const quiz = FISIOPEDIA_QUIZZES[state.quizIndex % FISIOPEDIA_QUIZZES.length];
     const totalQuestions = FISIOPEDIA_QUIZZES.length;
+
+    // Si terminó el cuestionario, mostrar pantalla de resultados / resumen
+    if (state.quizCompleted) {
+      const percentage = Math.round((state.quizScore / totalQuestions) * 100);
+      let medalColor = 'text-amber-quiz';
+      let title = '¡Buen esfuerzo!';
+      if (percentage >= 80) {
+        title = '¡Excelente dominio anatómico!';
+        medalColor = 'text-amber-quiz';
+      } else if (percentage >= 60) {
+        title = '¡Buen resultado!';
+        medalColor = 'text-cat-muscles';
+      }
+
+      return `
+        <div class="max-w-2xl mx-auto my-8 p-8 bg-surface-container-lowest rounded-2xl shadow-md border border-slate-border text-center">
+          <div class="w-20 h-20 mx-auto rounded-full bg-amber-quiz/10 flex items-center justify-center ${medalColor} mb-4">
+            <span class="material-symbols-outlined text-5xl">military_tech</span>
+          </div>
+          <span class="px-3 py-1 rounded-full bg-primary/10 text-primary font-label-caps text-label-caps uppercase font-bold">
+            Cuestionario Finalizado
+          </span>
+          <h2 class="font-headline-lg text-headline-lg text-slate-strong font-bold mt-3">${title}</h2>
+          <p class="font-body-md text-body-md text-slate-muted mt-2">
+            Obtuviste <strong class="text-primary font-bold">${state.quizScore} de ${totalQuestions} aciertos</strong> (${percentage}%).
+          </p>
+
+          <div class="grid grid-cols-2 gap-4 my-6">
+            <div class="p-4 rounded-xl bg-surface-container-low border border-slate-border/50">
+              <span class="text-xs text-slate-muted uppercase font-bold">Puntos Obtenidos</span>
+              <p class="text-2xl font-bold text-amber-quiz mt-1">${state.quizScore * 100} XP</p>
+            </div>
+            <div class="p-4 rounded-xl bg-surface-container-low border border-slate-border/50">
+              <span class="text-xs text-slate-muted uppercase font-bold">Tasa de Acierto</span>
+              <p class="text-2xl font-bold text-cat-muscles mt-1">${percentage}%</p>
+            </div>
+          </div>
+
+          <div class="flex items-center justify-center gap-3">
+            <button onclick="window.fisiopediaApp.resetQuiz()" class="px-6 py-3 rounded-xl bg-primary hover:bg-primary/90 text-on-primary font-label-md text-label-md font-bold shadow-sm transition-all flex items-center gap-2">
+              <span class="material-symbols-outlined text-lg">restart_alt</span>
+              <span>Practicar de nuevo</span>
+            </button>
+            <a href="#favoritos" class="px-5 py-3 rounded-xl bg-surface-container-low hover:bg-surface-container text-on-surface font-label-md text-label-md font-bold transition-all">
+              Repasar Flashcards
+            </a>
+          </div>
+        </div>
+      `;
+    }
+
+    const quiz = FISIOPEDIA_QUIZZES[state.quizIndex % totalQuestions];
     const progressPercent = Math.round(((state.quizIndex + 1) / totalQuestions) * 100);
     const selectedOptionId = state.quizUserAnswers[state.quizIndex];
     const isSubmitted = state.quizSubmitted[state.quizIndex] === true;
@@ -1303,9 +1491,9 @@
               <div class="flex items-center gap-2">
                 <span class="font-label-caps text-label-caps uppercase text-primary tracking-wider font-bold">Cuestionario Activo</span>
                 <span class="w-1.5 h-1.5 rounded-full bg-cat-muscles animate-pulse"></span>
-                <span class="font-label-sm text-label-sm text-slate-muted">Práctica de conceptos</span>
+                <span class="font-label-sm text-label-sm text-slate-muted font-medium">Autoevaluación clínica</span>
               </div>
-              <h1 class="font-headline-sm text-headline-sm text-slate-strong">Autoevaluación: Biomecánica &amp; Anatomía</h1>
+              <h1 class="font-headline-sm text-headline-sm text-slate-strong font-bold">Biomecánica &amp; Anatomía Práctica</h1>
             </div>
           </div>
 
@@ -1329,7 +1517,7 @@
         <div class="mt-space-sm p-space-md bg-surface-container-lowest rounded-xl shadow-sm flex flex-col gap-2 border border-slate-border/50">
           <div class="flex items-center justify-between">
             <div class="flex items-center gap-2">
-              <span class="font-label-md text-label-md text-slate-strong">Pregunta ${state.quizIndex + 1} de ${totalQuestions}</span>
+              <span class="font-label-md text-label-md text-slate-strong font-bold">Pregunta ${state.quizIndex + 1} de ${totalQuestions}</span>
               <span class="font-body-sm text-body-sm text-slate-muted">• ${quiz.category}</span>
             </div>
             <span class="font-label-caps text-label-caps text-primary uppercase font-bold">${progressPercent}% Completado</span>
@@ -1362,7 +1550,7 @@
 
             <!-- Enunciado -->
             <div>
-              <h2 class="font-headline-sm text-headline-sm text-slate-strong leading-snug">
+              <h2 class="font-headline-sm text-headline-sm text-slate-strong leading-snug font-bold">
                 ${quiz.question}
               </h2>
               <p class="font-body-md text-body-md text-on-surface-variant mt-2 leading-relaxed">
@@ -1397,7 +1585,7 @@
                 return `
                   <div
                     onclick="window.fisiopediaApp.selectQuizOption('${opt.id}')"
-                    class="w-full flex items-center justify-between p-4 rounded-xl ${cardClass} transition-all duration-150 relative"
+                    class="w-full flex items-center justify-between p-4 rounded-xl ${cardClass} transition-all duration-150 relative border border-slate-border/40"
                   >
                     <div class="flex items-center gap-space-md">
                       <div class="w-8 h-8 rounded-lg ${circleClass} flex items-center justify-center font-label-md text-label-md shrink-0 shadow-sm font-bold">
@@ -1416,7 +1604,7 @@
               }).join('')}
             </div>
 
-            <!-- Explicación post-respuesta -->
+            <!-- Explicación pedagógica -->
             ${isSubmitted ? `
               <div class="mt-4 p-4 rounded-xl bg-surface-container-low border-l-4 ${quiz.options.find(o => o.id === selectedOptionId)?.isCorrect ? 'border-cat-muscles bg-cat-muscles/10' : 'border-coral-alert bg-coral-alert/10'}">
                 <div class="flex items-center gap-2 mb-1">
@@ -1435,21 +1623,21 @@
 
             <!-- Botones de Acción -->
             <div class="mt-4 pt-4 border-t border-slate-border flex items-center justify-between">
-              <span class="text-xs text-slate-muted">Selecciona una opción y verifica tu conocimiento.</span>
+              <span class="text-xs text-slate-muted">Selecciona una opción para verificar tu respuesta.</span>
               ${!isSubmitted ? `
                 <button
                   onclick="window.fisiopediaApp.submitQuizAnswer()"
                   ${!selectedOptionId ? 'disabled' : ''}
-                  class="px-5 py-2.5 rounded-lg bg-primary hover:bg-primary/90 disabled:opacity-50 disabled:cursor-not-allowed text-on-primary font-label-md text-label-md shadow-sm transition-all"
+                  class="px-5 py-2.5 rounded-lg bg-primary hover:bg-primary/90 disabled:opacity-50 disabled:cursor-not-allowed text-on-primary font-label-md text-label-md shadow-sm transition-all font-bold"
                 >
                   Comprobar Respuesta
                 </button>
               ` : `
                 <button
                   onclick="window.fisiopediaApp.nextQuizQuestion()"
-                  class="px-5 py-2.5 rounded-lg bg-primary hover:bg-primary/90 text-on-primary font-label-md text-label-md shadow-sm transition-all flex items-center gap-2"
+                  class="px-5 py-2.5 rounded-lg bg-primary hover:bg-primary/90 text-on-primary font-label-md text-label-md shadow-sm transition-all flex items-center gap-2 font-bold"
                 >
-                  <span>${state.quizIndex + 1 < totalQuestions ? 'Siguiente Pregunta' : 'Completar Cuestionario'}</span>
+                  <span>${state.quizIndex + 1 < totalQuestions ? 'Siguiente Pregunta' : 'Ver Resultados Finales'}</span>
                   <span class="material-symbols-outlined text-base">arrow_forward</span>
                 </button>
               `}
@@ -1469,13 +1657,13 @@
             </p>
 
             <div class="mt-4 pt-3 border-t border-slate-border flex flex-col gap-2">
-              <span class="font-label-caps text-label-caps text-slate-muted">Eje &amp; Plano:</span>
+              <span class="font-label-caps text-label-caps text-slate-muted font-bold">Eje &amp; Plano:</span>
               <span class="font-label-sm text-label-sm font-semibold text-primary">${quiz.planeAxis}</span>
             </div>
 
             <div class="grid grid-cols-1 gap-2 mt-3">
               ${quiz.metrics.map(m => `
-                <div class="p-2.5 rounded-lg bg-surface-container-low flex items-center justify-between text-xs">
+                <div class="p-2.5 rounded-lg bg-surface-container-low flex items-center justify-between text-xs border border-slate-border/30">
                   <span class="text-slate-muted font-medium">${m.label}:</span>
                   <span class="font-bold text-on-surface">${m.value}</span>
                 </div>
@@ -1487,11 +1675,9 @@
     `;
   }
 
-  function bindQuizzesEvents() {
-    // Eventos específicos de quizzes si aplican
-  }
+  function bindQuizzesEvents() {}
 
-  // --- MÉTODOS PÚBLICOS EN WINDOW PARA LLAMADAS INLINE ---
+  // --- MÉTODOS PÚBLICOS GLOBALES ---
   window.fisiopediaApp = {
     toggleFav: (id) => toggleFavorite(id),
     speak: (term) => speakTerm(term),
@@ -1516,7 +1702,7 @@
         state.quizScore++;
         showToast('¡Respuesta correcta! +100 XP', 'verified');
       } else {
-        showToast('Respuesta incorrecta. Revisa la explicación.', 'error');
+        showToast('Respuesta incorrecta. Revisa la justificación.', 'error');
       }
       renderCurrentRoute();
     },
@@ -1525,11 +1711,8 @@
         state.quizIndex++;
         renderCurrentRoute();
       } else {
-        // Cuestionario completado
-        showToast(`¡Cuestionario finalizado! Obtuviste ${state.quizScore} de ${FISIOPEDIA_QUIZZES.length} aciertos.`, 'celebration');
-        state.quizIndex = 0;
-        state.quizSubmitted = {};
-        state.quizUserAnswers = {};
+        // Cuestionario finalizado
+        state.quizCompleted = true;
         renderCurrentRoute();
       }
     },
@@ -1538,17 +1721,21 @@
       state.quizScore = 0;
       state.quizSubmitted = {};
       state.quizUserAnswers = {};
+      state.quizCompleted = false;
       renderCurrentRoute();
       showToast('Cuestionario reiniciado', 'restart_alt');
     }
   };
 
-  // --- INICIALIZACIÓN ---
+  // --- INICIALIZACIÓN DE LA APLICACIÓN ---
   document.addEventListener('DOMContentLoaded', () => {
-    loadFavorites();
+    loadInitialState();
     initRouter();
 
-    // Atajo de teclado global Ctrl+K / Cmd+K para enfocar búsqueda
+    // Atajos de teclado:
+    // Ctrl+K / Cmd+K para enfocar búsqueda
+    // Barra espaciadora para girar flashcard
+    // Flechas izquierda y derecha para pasar flashcards
     window.addEventListener('keydown', (e) => {
       if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'k') {
         e.preventDefault();
@@ -1560,6 +1747,23 @@
             input.scrollIntoView({ behavior: 'smooth', block: 'center' });
           }
         }, 100);
+      } else if (state.route === 'favoritos') {
+        if (e.code === 'Space' && e.target.tagName !== 'INPUT') {
+          e.preventDefault();
+          const cardEl = document.getElementById('flashcard-3d-element');
+          if (cardEl) {
+            state.flashcardFlipped = !state.flashcardFlipped;
+            cardEl.classList.toggle('flipped', state.flashcardFlipped);
+          }
+        } else if (e.key === 'ArrowRight') {
+          state.flashcardFlipped = false;
+          state.flashcardIndex++;
+          renderCurrentRoute();
+        } else if (e.key === 'ArrowLeft') {
+          state.flashcardFlipped = false;
+          state.flashcardIndex = Math.max(0, state.flashcardIndex - 1);
+          renderCurrentRoute();
+        }
       }
     });
   });
