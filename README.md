@@ -8,31 +8,38 @@ Fisio Pedía es una aplicación web educativa interactiva desarrollada para estu
 ## 🚀 Características Principales (Arquitectura Híbrida: Local + Nube)
 
 1. 🔍 **Buscador de Términos Anatómicos**:
-   - Búsqueda en tiempo real por nombre, concepto o metáfora cotidiana.
+   - Búsqueda en tiempo real insensible a mayúsculas, minúsculas y tildes (normalización NFD).
+   - Busca en nombre, pronunciación, definiciones, analogías cotidianas y relevancia clínica.
    - Atajo de teclado rápido `Ctrl + K` / `Cmd + K`.
    - Filtros por categoría: *Músculos*, *Huesos & Tendones*, *Articulaciones*, *Movimientos*.
    - Filtros por región corporal: *Columna*, *Hombro*, *Codo*, *Mano*, *Cadera*, *Rodilla*, *Tobillo*, *Control Global*.
+   - Píldoras de filtros activos y botón de restablecimiento rápido.
 
-2. 💡 **Explicaciones Sencillas y Cotidianas**:
+2. 💡 **Explicaciones Sencillas y Cotidianas (30 Términos Esenciales)**:
    - Definición técnica rigurosa complementada con *"En palabras sencillas"*.
    - Metáforas de la vida diaria (ej. *abotonar una camisa a ciegas*, *pedir sopa con la mano*, *frenar en seco*, *alcanzar la taza de café*).
-   - Casos clínicos reales de fisioterapia y rehabilitación (esguince recidivante, manguito rotador, LCA, pinzamiento, meniscopatía).
+   - Casos clínicos reales de fisioterapia y rehabilitación (esguince recidivante, manguito rotador, LCA, pinzamiento, meniscopatía, síndrome piramidal, túnel carpiano, Trendelenburg).
    - Síntesis de voz fonética médica en español con Web Speech API.
+   - Botón para exportar e imprimir fichas de estudio a PDF.
 
-3. 🖼️ **Diccionario Visual Biomecánico Integral (SVG)**:
-   - Ilustraciones vectoriales (SVG) de planos, ejes, husos neuromusculares, receptores de Golgi, articulaciones, ligamentos, cadenas cinéticas y goniometría.
+3. 🖼️ **Diccionario Visual Biomecánico Integral (30 Esquemas SVG)**:
+   - Ilustraciones vectoriales (SVG) de planos, ejes, husos neuromusculares, receptores de Golgi, articulaciones, ligamentos, cadenas cinéticas, goniometría y biomecánica funcional.
    - Fichas estructuradas de origen, inserción, inervación y goniometría.
 
 4. ⭐ **Favoritos & Flashcards 3D**:
    - Guarda términos para repasar posteriormente con un solo clic.
    - Visor de tarjetas didácticas en 3D con volteo interactivo (*flip card*).
-   - Mezclador de baraja (*shuffle*) y conteo de progreso sincronizado.
+   - Navegación circular fluida hacia adelante y hacia atrás, mezclador de baraja (*shuffle*) y conteo de progreso sincronizado.
 
-5. 📝 **Cuestionarios de Autoevaluación**:
-   - 10 preguntas basadas en situaciones cotidianas de consulta kinésica.
+5. 📝 **Cuestionarios de Autoevaluación (15 Casos Clínicos)**:
+   - 15 preguntas basadas en situaciones cotidianas de consulta kinésica y examen clínico.
    - Retroalimentación inmediata con justificación pedagógica, racha de estudio y cálculo de aciertos (+100 XP).
 
-6. ☁️ **Sincronización en la Nube con Google Firebase & Cloud Firestore**:
+6. 📱 **Modo Offline & Progressive Web App (PWA)**:
+   - Instalable en celulares Android/iOS y ordenadores con `manifest.json`.
+   - Service Worker (`sw.js`) con estrategia de cache para estudiar sin internet en aulas y hospitales.
+
+7. ☁️ **Sincronización en la Nube con Google Firebase & Cloud Firestore**:
    - **Modo Offline-First**: Funciona de forma 100% autónoma y privada en el navegador con `localStorage`.
    - **Modo Nube en Tiempo Real**: Conecta con Firebase Firestore con un solo clic para sincronizar favoritos y resultados de pruebas entre tus dispositivos (celular y computadora) en tiempo real mediante listeners `onSnapshot` y autenticación anónima silenciosa.
    - Panel de control integrado en la aplicación con asistente interactivo de configuración y prueba de conectividad.
@@ -85,9 +92,15 @@ python3 tests/verify_app.py
 
 ---
 
-## 🌐 Publicación en GitHub Pages
-Para habilitar la web en vivo gratuitamente:
+## 🌐 Publicación en GitHub Pages (Despliegue Continuo)
+
+El proyecto cuenta con integración continua automática a través de **GitHub Actions** (`.github/workflows/deploy.yml`).
+
+Para activar o verificar la web en vivo:
 1. Ve a tu repositorio en GitHub: **[Erimora-star/FisioPedia](https://github.com/Erimora-star/FisioPedia)**
 2. Entra en **Settings** -> **Pages**.
-3. En **Build and deployment > Branch**, selecciona `main` y carpeta `/ (root)`.
-4. Haz clic en **Save**. En 1 minuto tendrás tu enlace público listo.
+3. En **Build and deployment > Source**, puedes elegir:
+   - **GitHub Actions (Recomendado)**: Se despliega automáticamente con cada push a la rama `main`.
+   - O bien **Deploy from a branch**: Selecciona la rama `main` y carpeta `/ (root)` y pulsa **Save**.
+4. Tu enlace público oficial estará activo en:
+   👉 **https://erimora-star.github.io/FisioPedia/**

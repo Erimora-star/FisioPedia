@@ -1,4 +1,4 @@
-// Fisio Pedía - Lógica de Aplicación Completa
+﻿// Fisio Pedía - Lógica de Aplicación Completa
 // SPA interactiva conectada a FisioStorage, con Diccionario Visual SVG integral, Flashcards 3D y Quizzes.
 
 (function () {
@@ -451,6 +451,225 @@
           </svg>
         `;
 
+      case 'nervio_ciatico':
+        return `
+          <svg class="w-full h-auto max-w-sm mx-auto" viewBox="0 0 360 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect width="360" height="200" rx="12" fill="#F8FAFC"/>
+            <!-- Pelvis / Sacro -->
+            <path d="M 120 30 C 150 20 210 20 240 30 C 230 65 190 75 180 80 C 170 75 130 65 120 30 Z" fill="#CBD5E1"/>
+            <text x="180" y="45" text-anchor="middle" fill="#475569" font-size="10" font-family="Inter">Sacro & Ilion</text>
+            <!-- MÃºsculo Piriforme -->
+            <path d="M 155 70 C 180 75 220 85 245 95 L 240 110 C 215 100 175 90 150 85 Z" fill="#0D9488" opacity="0.9"/>
+            <text x="250" y="85" fill="#0D9488" font-size="10" font-weight="bold" font-family="Plus Jakarta Sans">M. Piriforme</text>
+            <!-- Nervio CiÃ¡tico Principal -->
+            <path d="M 175 60 C 180 80 185 110 190 185" stroke="#F59E0B" stroke-width="8" stroke-linecap="round"/>
+            <path d="M 175 60 C 180 80 185 110 190 185" stroke="#FDE68A" stroke-width="3" stroke-linecap="round"/>
+            <!-- Zona de Atrapamiento -->
+            <circle cx="184" cy="98" r="8" fill="#F43F5E" fill-opacity="0.8"/>
+            <text x="75" y="105" fill="#F43F5E" font-size="10" font-weight="bold" font-family="Plus Jakarta Sans">Zona de CompresiÃ³n</text>
+            <text x="195" y="175" fill="#F59E0B" font-size="10" font-weight="bold" font-family="Plus Jakarta Sans">N. CiÃ¡tico (L4-S3)</text>
+          </svg>
+        `;
+
+      case 'tunel_carpiano':
+        return `
+          <svg class="w-full h-auto max-w-sm mx-auto" viewBox="0 0 360 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect width="360" height="200" rx="12" fill="#F8FAFC"/>
+            <!-- Huesos del Carpo (Piso Ã³seo) -->
+            <path d="M 80 130 C 110 160 250 160 280 130 C 260 175 100 175 80 130 Z" fill="#94A3B8"/>
+            <text x="180" y="175" text-anchor="middle" fill="#475569" font-size="10" font-family="Inter">Arco Ã“seo del Carpo</text>
+            <!-- RetinÃ¡culo Flexor (Techo fibroso) -->
+            <path d="M 80 120 Q 180 95 280 120" stroke="#00685f" stroke-width="7" stroke-linecap="round"/>
+            <text x="180" y="85" text-anchor="middle" fill="#00685f" font-size="10" font-weight="bold" font-family="Plus Jakarta Sans">RetinÃ¡culo Flexor (Techo)</text>
+            <!-- 9 Tendones Flexores -->
+            <g fill="#CBD5E1" stroke="#64748B" stroke-width="1.5">
+              <circle cx="120" cy="130" r="7"/><circle cx="140" cy="132" r="7"/><circle cx="160" cy="135" r="7"/>
+              <circle cx="200" cy="135" r="7"/><circle cx="220" cy="132" r="7"/><circle cx="240" cy="130" r="7"/>
+              <circle cx="140" cy="148" r="6"/><circle cx="180" cy="150" r="6"/><circle cx="220" cy="148" r="6"/>
+            </g>
+            <!-- Nervio Mediano Atrapado -->
+            <circle cx="180" cy="115" r="9" fill="#F59E0B" stroke="#B45309" stroke-width="2"/>
+            <circle cx="180" cy="115" r="4" fill="#FEF3C7"/>
+            <text x="180" y="138" text-anchor="middle" fill="#B45309" font-size="9" font-weight="bold" font-family="Plus Jakarta Sans">Nervio Mediano</text>
+          </svg>
+        `;
+
+      case 'gluteo_medio':
+        return `
+          <svg class="w-full h-auto max-w-sm mx-auto" viewBox="0 0 360 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect width="360" height="200" rx="12" fill="#F8FAFC"/>
+            <!-- LÃ­nea horizontal pÃ©lvica -->
+            <line x1="60" y1="60" x2="300" y2="60" stroke="#CBD5E1" stroke-width="3" stroke-dasharray="4 4"/>
+            <text x="180" y="45" text-anchor="middle" fill="#64748B" font-size="9" font-family="Inter">Pelvis Nivelada (Sin Trendelenburg)</text>
+            <!-- Pelvis esquemÃ¡tica -->
+            <path d="M 100 60 C 130 55 170 70 180 85 C 190 70 230 55 260 60" stroke="#94A3B8" stroke-width="8" stroke-linecap="round"/>
+            <!-- GlÃºteo Medio Activo (Lado de apoyo izquierdo) -->
+            <path d="M 105 65 L 140 120" stroke="#0D9488" stroke-width="12" stroke-linecap="round"/>
+            <text x="50" y="100" fill="#0D9488" font-size="10" font-weight="bold" font-family="Plus Jakarta Sans">GlÃºteo Medio</text>
+            <text x="50" y="112" fill="#64748B" font-size="8" font-family="Inter">(TracciÃ³n Abductora)</text>
+            <!-- FÃ©mur izquierdo (apoyo) -->
+            <line x1="140" y1="120" x2="140" y2="185" stroke="#64748B" stroke-width="8" stroke-linecap="round"/>
+            <circle cx="140" cy="120" r="8" fill="#F59E0B"/>
+            <text x="155" y="125" fill="#F59E0B" font-size="9" font-weight="bold" font-family="Plus Jakarta Sans">TrocÃ¡nter Mayor</text>
+            <!-- Pierna contralateral suspendida -->
+            <line x1="220" y1="85" x2="235" y2="155" stroke="#CBD5E1" stroke-width="6" stroke-linecap="round"/>
+            <text x="245" y="140" fill="#64748B" font-size="9" font-family="Inter">Pierna Oscilante</text>
+          </svg>
+        `;
+
+      case 'diafragma':
+        return `
+          <svg class="w-full h-auto max-w-sm mx-auto" viewBox="0 0 360 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect width="360" height="200" rx="12" fill="#F8FAFC"/>
+            <!-- Caja torÃ¡cica -->
+            <path d="M 70 40 C 70 110 90 150 120 175" stroke="#CBD5E1" stroke-width="4" stroke-linecap="round"/>
+            <path d="M 290 40 C 290 110 270 150 240 175" stroke="#CBD5E1" stroke-width="4" stroke-linecap="round"/>
+            <!-- CÃºpula diafragmÃ¡tica (EspiraciÃ³n / reposo - lÃ­nea punteada) -->
+            <path d="M 80 125 C 130 65 230 65 280 125" stroke="#94A3B8" stroke-width="2.5" stroke-dasharray="4 4" fill="none"/>
+            <text x="180" y="65" text-anchor="middle" fill="#94A3B8" font-size="9" font-family="Inter">EspiraciÃ³n (Asciende)</text>
+            <!-- Diafragma contraÃ­do (InspiraciÃ³n - cÃºpula aplanada) -->
+            <path d="M 80 135 C 130 105 230 105 280 135" stroke="#0D9488" stroke-width="7" stroke-linecap="round" fill="none"/>
+            <text x="180" y="125" text-anchor="middle" fill="#0D9488" font-size="11" font-weight="bold" font-family="Plus Jakarta Sans">InspiraciÃ³n (Desciende como PistÃ³n)</text>
+            <!-- Flechas de vector de descenso -->
+            <path d="M 180 85 L 180 105 M 175 100 L 180 105 L 185 100" stroke="#0D9488" stroke-width="2.5" stroke-linecap="round"/>
+            <!-- Nervio FrÃ©nico -->
+            <line x1="180" y1="20" x2="180" y2="70" stroke="#F59E0B" stroke-width="3" stroke-dasharray="3 3"/>
+            <text x="195" y="35" fill="#F59E0B" font-size="9" font-weight="bold" font-family="Plus Jakarta Sans">N. FrÃ©nico (C3-C5)</text>
+            <text x="180" y="165" text-anchor="middle" fill="#64748B" font-size="9" font-family="Inter">Aumento del volumen pulmonar</text>
+          </svg>
+        `;
+
+      case 'core_transverso':
+        return `
+          <svg class="w-full h-auto max-w-sm mx-auto" viewBox="0 0 360 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect width="360" height="200" rx="12" fill="#F8FAFC"/>
+            <!-- Cilindro abdominal corte axial -->
+            <ellipse cx="180" cy="100" rx="110" ry="65" fill="#F1F5F9" stroke="#E2E8F0" stroke-width="2"/>
+            <!-- VÃ©rtebra lumbar posterior -->
+            <circle cx="180" cy="55" r="14" fill="#94A3B8"/>
+            <text x="180" y="58" text-anchor="middle" fill="#FFFFFF" font-size="8" font-weight="bold" font-family="Inter">VÃ©rtebra</text>
+            <!-- LÃ­nea alba anterior -->
+            <circle cx="180" cy="160" r="5" fill="#0284C7"/>
+            <text x="180" y="180" text-anchor="middle" fill="#0284C7" font-size="9" font-weight="bold" font-family="Plus Jakarta Sans">LÃ­nea Alba (Ombligo)</text>
+            <!-- Faja del Transverso (Cincha circular) -->
+            <path d="M 166 55 C 100 65 80 120 160 158" stroke="#0D9488" stroke-width="6" stroke-linecap="round" fill="none"/>
+            <path d="M 194 55 C 260 65 280 120 200 158" stroke="#0D9488" stroke-width="6" stroke-linecap="round" fill="none"/>
+            <text x="60" y="105" fill="#0D9488" font-size="10" font-weight="bold" font-family="Plus Jakarta Sans">Faja Transversa</text>
+            <text x="240" y="105" fill="#0D9488" font-size="10" font-weight="bold" font-family="Plus Jakarta Sans">CorsÃ© Natural</text>
+            <text x="180" y="110" text-anchor="middle" fill="#64748B" font-size="9" font-family="Inter">PresiÃ³n Intraabdominal</text>
+          </svg>
+        `;
+
+      case 'lpaa':
+        return `
+          <svg class="w-full h-auto max-w-sm mx-auto" viewBox="0 0 360 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect width="360" height="200" rx="12" fill="#F8FAFC"/>
+            <!-- PeronÃ© / MalÃ©olo Externo -->
+            <path d="M 120 20 L 120 100 C 120 115 135 125 145 120 L 145 20 Z" fill="#94A3B8"/>
+            <text x="80" y="65" fill="#475569" font-size="10" font-family="Inter">PeronÃ©</text>
+            <!-- AstrÃ¡galo -->
+            <circle cx="190" cy="120" r="28" fill="#CBD5E1"/>
+            <text x="200" y="115" fill="#475569" font-size="10" font-family="Inter">AstrÃ¡galo</text>
+            <!-- CalcÃ¡neo inferior -->
+            <path d="M 145 140 C 160 135 220 135 240 160 L 150 175 Z" fill="#E2E8F0"/>
+            <!-- LPAA (Lig. Peroneoastragalino Anterior) -->
+            <line x1="140" y1="110" x2="175" y2="105" stroke="#F43F5E" stroke-width="7" stroke-linecap="round"/>
+            <circle cx="157" cy="107" r="5" fill="#F59E0B"/>
+            <text x="140" y="85" fill="#F43F5E" font-size="11" font-weight="bold" font-family="Plus Jakarta Sans">LPAA (85% Esguinces)</text>
+            <!-- Flecha de InversiÃ³n forzada -->
+            <path d="M 230 165 C 245 150 255 125 245 105" stroke="#0D9488" stroke-width="3" stroke-dasharray="3 3" fill="none"/>
+            <text x="255" y="140" fill="#0D9488" font-size="9" font-weight="bold" font-family="Plus Jakarta Sans">InversiÃ³n Forzada</text>
+          </svg>
+        `;
+
+      case 'cintilla_iliotibial':
+        return `
+          <svg class="w-full h-auto max-w-sm mx-auto" viewBox="0 0 360 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect width="360" height="200" rx="12" fill="#F8FAFC"/>
+            <!-- FÃ©mur lateral -->
+            <rect x="170" y="20" width="30" height="100" rx="6" fill="#CBD5E1"/>
+            <!-- CÃ³ndilo Femoral Externo (Prominencia) -->
+            <circle cx="185" cy="120" r="22" fill="#94A3B8"/>
+            <text x="70" y="125" fill="#475569" font-size="9" font-family="Inter">CÃ³ndilo Lateral</text>
+            <!-- Tibia con TubÃ©rculo de Gerdy -->
+            <rect x="172" y="142" width="28" height="50" rx="4" fill="#CBD5E1"/>
+            <circle cx="172" cy="150" r="6" fill="#0284C7"/>
+            <text x="70" y="155" fill="#0284C7" font-size="9" font-weight="bold" font-family="Plus Jakarta Sans">TubÃ©rculo de Gerdy</text>
+            <!-- Cintilla Iliotibial descendiendo -->
+            <path d="M 180 20 L 175 110 L 172 150" stroke="#0D9488" stroke-width="9" stroke-linecap="round"/>
+            <!-- Punto de roce / fricciÃ³n a 30 grados -->
+            <circle cx="175" cy="118" r="8" fill="#F43F5E"/>
+            <text x="200" y="115" fill="#F43F5E" font-size="10" font-weight="bold" font-family="Plus Jakarta Sans">FricciÃ³n a 30Â° de flexiÃ³n</text>
+            <text x="200" y="130" fill="#64748B" font-size="8" font-family="Inter">Rodilla del Corredor</text>
+            <text x="195" y="50" fill="#0D9488" font-size="10" font-weight="bold" font-family="Plus Jakarta Sans">Tracto Iliotibial</text>
+          </svg>
+        `;
+
+      case 'pata_ganso':
+        return `
+          <svg class="w-full h-auto max-w-sm mx-auto" viewBox="0 0 360 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect width="360" height="200" rx="12" fill="#F8FAFC"/>
+            <!-- Tibia Proximal Medial -->
+            <path d="M 190 40 L 190 180 L 225 180 L 225 40 Z" fill="#CBD5E1"/>
+            <text x="235" y="120" fill="#475569" font-size="10" font-family="Inter">Tibia Medial</text>
+            <!-- Los 3 Tendones Convergentes (Sartorio, GrÃ¡cil, Semitendinoso) -->
+            <!-- 1. Sartorio (Arriba) -->
+            <path d="M 60 45 C 110 65 150 95 190 105" stroke="#0D9488" stroke-width="5" stroke-linecap="round"/>
+            <text x="50" y="40" fill="#0D9488" font-size="10" font-weight="bold" font-family="Plus Jakarta Sans">1. Sartorio (N. Femoral)</text>
+            <!-- 2. GrÃ¡cil (Medio) -->
+            <path d="M 60 90 C 110 95 150 105 190 108" stroke="#0284C7" stroke-width="5" stroke-linecap="round"/>
+            <text x="50" y="85" fill="#0284C7" font-size="10" font-weight="bold" font-family="Plus Jakarta Sans">2. GrÃ¡cil (N. Obturador)</text>
+            <!-- 3. Semitendinoso (Abajo) -->
+            <path d="M 60 135 C 110 125 150 115 190 111" stroke="#F59E0B" stroke-width="5" stroke-linecap="round"/>
+            <text x="50" y="150" fill="#F59E0B" font-size="10" font-weight="bold" font-family="Plus Jakarta Sans">3. Semitendinoso (N. CiÃ¡tico)</text>
+            <!-- InserciÃ³n Conjunta en Pata de Ganso -->
+            <ellipse cx="193" cy="108" rx="8" ry="12" fill="#F43F5E"/>
+            <text x="140" y="180" text-anchor="middle" fill="#F43F5E" font-size="11" font-weight="bold" font-family="Plus Jakarta Sans">Pes Anserinus (Pata de Ganso)</text>
+          </svg>
+        `;
+
+      case 'bursa_subacromial':
+        return `
+          <svg class="w-full h-auto max-w-sm mx-auto" viewBox="0 0 360 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect width="360" height="200" rx="12" fill="#F8FAFC"/>
+            <!-- Techo Ã“seo: Acromion -->
+            <path d="M 120 40 L 220 40 C 230 40 240 50 240 60 L 120 60 Z" fill="#94A3B8"/>
+            <text x="180" y="32" text-anchor="middle" fill="#475569" font-size="10" font-weight="bold" font-family="Plus Jakarta Sans">Acromion (Techo)</text>
+            <!-- Cabeza del HÃºmero (Abajo) -->
+            <circle cx="180" cy="150" r="50" fill="#CBD5E1"/>
+            <text x="180" y="165" text-anchor="middle" fill="#475569" font-size="11" font-family="Inter">HÃºmero</text>
+            <!-- TendÃ³n del Supraespinoso -->
+            <path d="M 100 85 L 205 98" stroke="#0D9488" stroke-width="8" stroke-linecap="round"/>
+            <text x="60" y="80" fill="#0D9488" font-size="9" font-weight="bold" font-family="Plus Jakarta Sans">Supraespinoso</text>
+            <!-- Bursa Subacromial (Cojinete Seroso) -->
+            <ellipse cx="175" cy="73" rx="35" ry="8" fill="#F43F5E" fill-opacity="0.85"/>
+            <text x="250" y="75" fill="#F43F5E" font-size="10" font-weight="bold" font-family="Plus Jakarta Sans">Bursa Comprimida</text>
+            <text x="180" y="115" text-anchor="middle" fill="#B45309" font-size="9" font-weight="bold" font-family="Plus Jakarta Sans">Espacio Subacromial (9-10 mm)</text>
+          </svg>
+        `;
+
+      case 'bomba_muscular':
+        return `
+          <svg class="w-full h-auto max-w-sm mx-auto" viewBox="0 0 360 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect width="360" height="200" rx="12" fill="#F8FAFC"/>
+            <!-- Vena Profunda Central -->
+            <rect x="165" y="20" width="30" height="160" rx="6" fill="#DAE2FD" stroke="#6366F1" stroke-width="2"/>
+            <!-- VÃ¡lvulas Venosas Unidireccionales (Abiertas hacia arriba) -->
+            <path d="M 166 80 L 178 65 M 194 80 L 182 65" stroke="#6366F1" stroke-width="3" stroke-linecap="round"/>
+            <path d="M 166 140 L 178 125 M 194 140 L 182 125" stroke="#6366F1" stroke-width="3" stroke-linecap="round"/>
+            <!-- Flujo SanguÃ­neo Ascendente (Flechas azules) -->
+            <path d="M 180 150 L 180 100 M 175 108 L 180 100 L 185 108" stroke="#0284C7" stroke-width="3" stroke-linecap="round"/>
+            <path d="M 180 90 L 180 40 M 175 48 L 180 40 L 185 48" stroke="#0284C7" stroke-width="3" stroke-linecap="round"/>
+            <text x="180" y="32" text-anchor="middle" fill="#0284C7" font-size="9" font-weight="bold" font-family="Plus Jakarta Sans">Hacia el CorazÃ³n</text>
+            <!-- MÃºsculos Gemelos & SÃ³leo Comprimiendo (Vientres laterales) -->
+            <path d="M 115 40 C 135 70 135 130 115 160 L 145 160 C 160 130 160 70 145 40 Z" fill="#0D9488" opacity="0.9"/>
+            <path d="M 245 40 C 225 70 225 130 245 160 L 215 160 C 200 130 200 70 215 40 Z" fill="#0D9488" opacity="0.9"/>
+            <text x="60" y="105" fill="#0D9488" font-size="10" font-weight="bold" font-family="Plus Jakarta Sans">SÃ³leo / Gemelos</text>
+            <text x="60" y="118" fill="#64748B" font-size="8" font-family="Inter">(CompresiÃ³n Activa)</text>
+            <text x="260" y="105" fill="#6366F1" font-size="10" font-weight="bold" font-family="Plus Jakarta Sans">Retorno Venoso</text>
+            <text x="260" y="118" fill="#64748B" font-size="8" font-family="Inter">"Segundo CorazÃ³n"</text>
+          </svg>
+        `;
       default:
         return `
           <svg class="w-full h-auto max-w-sm mx-auto" viewBox="0 0 360 180" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -546,25 +765,81 @@
   }
 
   // --- FILTRADO DE TÉRMINOS ---
+  // --- NORMALIZACIÃ“N DE TEXTO PARA BÃšSQUEDA ROBUSTA (SIN TILDES, MAYÃšSCULAS/MINÃšSCULAS) ---
+  function normalizeSearchText(str) {
+    if (!str) return '';
+    return str
+      .normalize("NFD")
+      .replace(/[\u0300-\u036f]/g, "")
+      .toLowerCase()
+      .trim();
+  }
+
+  function getCategoryName(cat) {
+    const map = {
+      todos: 'Todos',
+      musculos: 'MÃºsculos',
+      huesos: 'Huesos y Tendones',
+      huesos_tendones: 'Huesos y Tendones',
+      articulaciones: 'Articulaciones',
+      movimientos: 'Movimientos'
+    };
+    return map[cat] || cat;
+  }
+
+  function getRegionName(reg) {
+    const map = {
+      todas: 'Todas',
+      columna: 'Columna',
+      hombro: 'Hombro',
+      codo: 'Codo',
+      mano: 'Mano',
+      cadera: 'Cadera',
+      rodilla: 'Rodilla',
+      tobillo: 'Tobillo',
+      general: 'Control Global'
+    };
+    return map[reg] || reg;
+  }
+
+  // --- FILTRADO DE TÃ‰RMINOS ---
   function getFilteredTerms() {
     return FISIOPEDIA_TERMS.filter(term => {
+      // BÃºsqueda por texto (nombre, pronunciaciÃ³n, explicaciones, ejemplos, clÃ­nica, etiquetas)
       if (state.searchTerm) {
-        const q = state.searchTerm.toLowerCase().trim();
-        const matchesName = term.name.toLowerCase().includes(q);
-        const matchesSimple = term.simpleExplanation.toLowerCase().includes(q);
-        const matchesTech = term.technicalDef.toLowerCase().includes(q);
-        const matchesExample = term.everydayExample.toLowerCase().includes(q);
-        if (!matchesName && !matchesSimple && !matchesTech && !matchesExample) return false;
+        const q = normalizeSearchText(state.searchTerm);
+        const matchesName = normalizeSearchText(term.name).includes(q);
+        const matchesPronun = normalizeSearchText(term.pronunciation).includes(q);
+        const matchesSimple = normalizeSearchText(term.simpleExplanation).includes(q);
+        const matchesTech = normalizeSearchText(term.technicalDef).includes(q);
+        const matchesExample = normalizeSearchText(term.everydayExample).includes(q);
+        const matchesExampleTitle = normalizeSearchText(term.everydayTitle).includes(q);
+        const matchesClinical = normalizeSearchText(term.clinicalRelevance).includes(q);
+        const matchesCase = normalizeSearchText(term.clinicalCase).includes(q);
+        const matchesCategory = normalizeSearchText(term.categoryLabel).includes(q);
+        const matchesRegion = normalizeSearchText(term.regionLabel).includes(q);
+        if (!matchesName && !matchesPronun && !matchesSimple && !matchesTech && !matchesExample && !matchesExampleTitle && !matchesClinical && !matchesCase && !matchesCategory && !matchesRegion) {
+          return false;
+        }
       }
+
+      // Filtro por categorÃ­a (MÃºsculos, Huesos & Tendones, Articulaciones, Movimientos)
       if (state.selectedCategory !== 'todos') {
-        if (term.category !== state.selectedCategory) return false;
+        if (state.selectedCategory === 'huesos' || state.selectedCategory === 'huesos_tendones') {
+          if (term.category !== 'huesos' && term.category !== 'huesos_tendones') return false;
+        } else if (term.category !== state.selectedCategory) {
+          return false;
+        }
       }
+
+      // Filtro por regiÃ³n corporal (Columna, Hombro, Codo, Mano, Cadera, Rodilla, Tobillo, Control Global)
       if (state.selectedRegion !== 'todas') {
-        if (term.region !== state.selectedRegion && term.region !== 'general') return false;
+        if (term.region !== state.selectedRegion) return false;
       }
+
       return true;
     }).sort((a, b) => {
-      if (state.sortBy === 'az') return a.name.localeCompare(b.name);
+      if (state.sortBy === 'az') return a.name.localeCompare(b.name, 'es');
       return 0;
     });
   }
@@ -660,7 +935,7 @@
           <span class="font-label-caps text-label-caps text-slate-muted font-bold">ANATOMÍA REGIONAL</span>
         </div>
 
-        <div class="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-8 gap-3" id="region-filter-group">
+        <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 lg:grid-cols-9 gap-2.5" id="region-filter-group">
           ${renderRegionButton('todas', 'Todas', 'dataset', state.selectedRegion === 'todas')}
           ${renderRegionButton('columna', 'Columna', 'view_column', state.selectedRegion === 'columna')}
           ${renderRegionButton('hombro', 'Hombro', 'sports_gymnastics', state.selectedRegion === 'hombro')}
@@ -669,6 +944,7 @@
           ${renderRegionButton('cadera', 'Cadera', 'airline_seat_recline_normal', state.selectedRegion === 'cadera')}
           ${renderRegionButton('rodilla', 'Rodilla', 'directions_walk', state.selectedRegion === 'rodilla')}
           ${renderRegionButton('tobillo', 'Tobillo', 'do_not_step', state.selectedRegion === 'tobillo')}
+          ${renderRegionButton('general', 'Control Global', 'neurology', state.selectedRegion === 'general')}
         </div>
       </section>
 
@@ -782,20 +1058,20 @@
 
       <!-- GRILLA DE CONCEPTOS DEL DICCIONARIO -->
       <section class="mt-14 w-full">
-        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-6">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-4">
           <div>
             <h2 class="font-headline-sm text-headline-sm text-on-surface font-bold">
-              ${state.searchTerm ? `Resultados de búsqueda (${filteredTerms.length})` : 'Términos Anatómicos y Biomecánicos'}
+              ${(state.searchTerm || state.selectedCategory !== 'todos' || state.selectedRegion !== 'todas') ? `Resultados Filtrados (${filteredTerms.length})` : 'TÃ©rminos AnatÃ³micos y BiomecÃ¡nicos'}
             </h2>
             <p class="font-body-sm text-body-sm text-on-surface-variant">
-              ${state.searchTerm ? `Mostrando conceptos coincidentes con "${state.searchTerm}"` : `Explora los ${FISIOPEDIA_TERMS.length} conceptos esenciales de Fisioterapia.`}
+              ${(state.searchTerm || state.selectedCategory !== 'todos' || state.selectedRegion !== 'todas') ? `Mostrando ${filteredTerms.length} de ${FISIOPEDIA_TERMS.length} conceptos segÃºn tus criterios de estudio.` : `Explora los ${FISIOPEDIA_TERMS.length} conceptos esenciales de Fisioterapia.`}
             </p>
           </div>
 
           <!-- Tabs de ordenamiento -->
           <div class="inline-flex p-1 rounded-xl bg-surface-container-high self-start sm:self-auto">
             <button data-sort="populares" class="sort-tab-btn px-3 py-1 rounded-lg font-label-sm text-label-sm transition-all ${state.sortBy === 'populares' ? 'bg-surface-container-lowest text-on-surface shadow-xs font-bold' : 'text-on-surface-variant hover:text-on-surface'}">
-              Más consultados
+              MÃ¡s consultados
             </button>
             <button data-sort="az" class="sort-tab-btn px-3 py-1 rounded-lg font-label-sm text-label-sm transition-all ${state.sortBy === 'az' ? 'bg-surface-container-lowest text-on-surface shadow-xs font-bold' : 'text-on-surface-variant hover:text-on-surface'}">
               Orden A-Z
@@ -803,6 +1079,37 @@
           </div>
         </div>
 
+        <!-- PÃ­ldoras de Filtros Activos y BotÃ³n Limpiar Filtros -->
+        ${(state.searchTerm || state.selectedCategory !== 'todos' || state.selectedRegion !== 'todas') ? `
+          <div class="flex flex-wrap items-center gap-2 mb-6 p-3 rounded-xl bg-surface-container-low border border-slate-border/60">
+            <span class="font-label-caps text-label-caps text-slate-muted uppercase font-bold flex items-center gap-1">
+              <span class="material-symbols-outlined text-sm">filter_alt</span>
+              Filtros:
+            </span>
+            ${state.searchTerm ? `
+              <button onclick="window.fisiopediaApp.clearSearchOnly()" class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-primary/10 text-primary font-label-sm text-xs font-bold hover:bg-primary/20 transition-colors" title="Quitar bÃºsqueda de texto">
+                <span>Texto: "${state.searchTerm}"</span>
+                <span class="material-symbols-outlined text-xs">close</span>
+              </button>
+            ` : ''}
+            ${state.selectedCategory !== 'todos' ? `
+              <button onclick="window.fisiopediaApp.clearCategoryOnly()" class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-cat-bones/10 text-cat-bones font-label-sm text-xs font-bold hover:bg-cat-bones/20 transition-colors" title="Quitar filtro de categorÃ­a">
+                <span>CategorÃ­a: ${getCategoryName(state.selectedCategory)}</span>
+                <span class="material-symbols-outlined text-xs">close</span>
+              </button>
+            ` : ''}
+            ${state.selectedRegion !== 'todas' ? `
+              <button onclick="window.fisiopediaApp.clearRegionOnly()" class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-cat-joints/10 text-cat-joints font-label-sm text-xs font-bold hover:bg-cat-joints/20 transition-colors" title="Quitar filtro de regiÃ³n">
+                <span>RegiÃ³n: ${getRegionName(state.selectedRegion)}</span>
+                <span class="material-symbols-outlined text-xs">close</span>
+              </button>
+            ` : ''}
+            <button onclick="window.fisiopediaApp.clearSearch()" class="ml-auto inline-flex items-center gap-1 px-3 py-1 rounded-lg bg-surface-container-lowest hover:bg-surface-container-high text-coral-alert font-label-sm text-xs font-bold border border-coral-alert/30 transition-colors">
+              <span class="material-symbols-outlined text-xs">filter_alt_off</span>
+              <span>Limpiar filtros</span>
+            </button>
+          </div>
+        ` : ''}
         ${filteredTerms.length === 0 ? `
           <div class="p-12 text-center rounded-2xl bg-surface-container-lowest border border-dashed border-slate-border">
             <span class="material-symbols-outlined text-5xl text-slate-muted mb-2">search_off</span>
@@ -1088,10 +1395,16 @@
                 <span>${isFav ? 'Guardado en Mis Favoritos' : 'Guardar en Mis Favoritos'}</span>
               </button>
 
-              <button onclick="window.location.hash='#favoritos'" class="inline-flex items-center gap-1.5 px-3 py-2 rounded-lg bg-surface-container-lowest text-on-surface-variant hover:text-primary font-label-sm text-label-sm shadow-sm transition-colors font-semibold">
-                <span class="material-symbols-outlined text-base text-primary">style</span>
-                <span>Repasar en Flashcards 3D</span>
-              </button>
+              <div class="flex items-center gap-2">
+                <button onclick="window.print()" class="no-print inline-flex items-center gap-1.5 px-3 py-2 rounded-lg bg-surface-container-lowest text-on-surface-variant hover:text-primary font-label-sm text-label-sm shadow-sm transition-colors font-semibold" title="Imprimir o guardar ficha en PDF">
+                  <span class="material-symbols-outlined text-base text-primary">print</span>
+                  <span>Exportar / Imprimir</span>
+                </button>
+                <button onclick="window.location.hash='#favoritos'" class="inline-flex items-center gap-1.5 px-3 py-2 rounded-lg bg-surface-container-lowest text-on-surface-variant hover:text-primary font-label-sm text-label-sm shadow-sm transition-colors font-semibold">
+                  <span class="material-symbols-outlined text-base text-primary">style</span>
+                  <span>Repasar en Flashcards 3D</span>
+                </button>
+              </div>
             </div>
           </div>
 
@@ -1792,6 +2105,19 @@
       state.selectedCategory = 'todos';
       state.selectedRegion = 'todas';
       renderCurrentRoute();
+      showToast('Filtros restablecidos', 'restart_alt');
+    },
+    clearSearchOnly: () => {
+      state.searchTerm = '';
+      renderCurrentRoute();
+    },
+    clearCategoryOnly: () => {
+      state.selectedCategory = 'todos';
+      renderCurrentRoute();
+    },
+    clearRegionOnly: () => {
+      state.selectedRegion = 'todas';
+      renderCurrentRoute();
     },
     selectQuizOption: (optionId) => {
       if (state.quizSubmitted[state.quizIndex]) return;
@@ -2119,6 +2445,13 @@
     loadInitialState();
     initRouter();
     initCloudSyncUI();
+
+    // Registro seguro de Service Worker para funcionamiento Offline / PWA
+    if ('serviceWorker' in navigator && window.location.protocol.startsWith('http')) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('./sw.js').catch(() => {});
+      });
+    }
 
     // Atajos de teclado:
     // Ctrl+K / Cmd+K para enfocar búsqueda

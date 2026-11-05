@@ -1,0 +1,25 @@
+{
+  "name": "Fisio Pedía - Diccionario del Cuerpo Humano",
+  "short_name": "FisioPedía",
+  "description": "Diccionario pedagógico interactivo de anatomía y biomecánica para estudiantes de Fisioterapia.",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#f5faf8",
+  "theme_color": "#00685f",
+  "icons": [
+    {
+      "src": "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 192 192'><rect width='192' height='192' rx='40' fill='%2300685f'/><path d='M96 45a12 12 0 1 0 0-24 12 12 0 0 0 0 24zm42 36h-24v87h-18v-54h-12v54H66V81H42V63h96v18z' fill='%23ffffff'/></svg>",
+      "sizes": "192x192",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'><rect width='512' height='512' rx='100' fill='%2300685f'/><path d='M256 120a32 32 0 1 0 0-64 32 32 0 0 0 0 64zm112 96H256v232h-48V304h-32v144h-48V216H64V168h304v48z' fill='%23ffffff'/></svg>",
+      "sizes": "512x512",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

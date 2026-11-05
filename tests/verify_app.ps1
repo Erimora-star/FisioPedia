@@ -1,5 +1,5 @@
 # Fisio Pedía - Automated Test Suite (PowerShell Native)
-# Valida la integridad de datos, esquemas SVG, enlaces HTML, capa de almacenamiento y servidor local.
+# Valida la integridad de datos, esquemas SVG, enlaces HTML, capa de almacenamiento y PWA.
 
 $ErrorActionPreference = "Stop"
 
@@ -18,9 +18,11 @@ Write-Host "Iniciando Suite de Pruebas Automatizadas de Fisio Pedía..."
 Write-Host ("=" * 60)
 
 try {
-    # 1. Verificar archivos esenciales
+    # 1. Verificar archivos esenciales del proyecto
     $requiredFiles = @(
         "index.html",
+        "manifest.json",
+        "sw.js",
         "css/custom.css",
         "js/firebase-config.js",
         "js/firebase-config.example.js",
@@ -43,13 +45,13 @@ try {
     }
     Log-Result "Todos los $($requiredFiles.Count) archivos requeridos existen y tienen contenido." "PASS"
 
-    # 2. Integridad de Términos Anatómicos
+    # 2. Integridad de Términos Anatómicos (30 términos completos)
     $termsContent = Get-Content -Raw -Encoding UTF8 "data/terms.js"
     $idMatches = [regex]::Matches($termsContent, 'id:\s*["'']([^"'']+)["'']')
     $termIds = @($idMatches | ForEach-Object { $_.Groups[1].Value })
 
-    if ($termIds.Count -lt 20) {
-        throw "Se esperaban al menos 20 términos, encontrados: $($termIds.Count)"
+    if ($termIds.Count -lt 30) {
+        throw "Se esperaban al menos 30 términos, encontrados: $($termIds.Count)"
     }
     $uniqueIds = $termIds | Select-Object -Unique
     if ($termIds.Count -ne $uniqueIds.Count) {
@@ -63,23 +65,28 @@ try {
             throw "Campo '$field' incompleto: solo $count encontrados para $($termIds.Count) términos."
         }
     }
-    Log-Result "Verificación de base de datos de términos: $($termIds.Count) términos anatómicos válidos." "PASS"
+    Log-Result "Base de datos anatómica: $($termIds.Count) términos válidos sin duplicados y con todos los campos." "PASS"
 
-    # 3. Integridad de Quizzes
+    # 3. Integridad de Quizzes Clínicos (15 preguntas)
     $quizzesContent = Get-Content -Raw -Encoding UTF8 "data/quizzes.js"
     $qMatches = [regex]::Matches($quizzesContent, 'id:\s*["''](q\d+)["'']')
     $qIds = @($qMatches | ForEach-Object { $_.Groups[1].Value })
-    if ($qIds.Count -lt 10) {
-        throw "Se esperaban al menos 10 quizzes, encontrados: $($qIds.Count)"
+    if ($qIds.Count -lt 15) {
+        throw "Se esperaban al menos 15 quizzes, encontrados: $($qIds.Count)"
+    }
+
+    $uniqueQ = $qIds | Select-Object -Unique
+    if ($qIds.Count -ne $uniqueQ.Count) {
+        throw "Existen IDs duplicados en quizzes.js"
     }
 
     $correctCount = [regex]::Matches($quizzesContent, 'isCorrect:\s*true').Count
     if ($correctCount -ne $qIds.Count) {
         throw "Cada quiz debe tener exactamente 1 respuesta correcta. Quizzes: $($qIds.Count), Correctas: $correctCount"
     }
-    Log-Result "Verificación de quizzes: $($qIds.Count) preguntas clínicas con 1 respuesta correcta cada una." "PASS"
+    Log-Result "Banco de evaluación: $($qIds.Count) preguntas clínicas, cada una con exactamente 1 respuesta correcta." "PASS"
 
-    # 4. Cobertura de Esquemas SVG
+    # 4. Cobertura de Esquemas SVG Didácticos (30 tipos)
     $appContent = Get-Content -Raw -Encoding UTF8 "js/app.js"
     $svgTypes = [regex]::Matches($termsContent, 'svgType:\s*["'']([^"'']+)["'']') | ForEach-Object { $_.Groups[1].Value } | Select-Object -Unique
 
@@ -88,9 +95,9 @@ try {
             throw "Falta caso SVG para: $st en js/app.js"
         }
     }
-    Log-Result "Cobertura de esquemas SVG: $($svgTypes.Count) tipos de esquemas anatómicos mapeados." "PASS"
+    Log-Result "Cobertura de esquemas SVG: $($svgTypes.Count) diagramas vectoriales implementados al 100%." "PASS"
 
-    # 5. Verificación de Capa Firebase / Storage
+    # 5. Verificación de Capa Híbrida de Almacenamiento & Firebase
     $storageContent = Get-Content -Raw -Encoding UTF8 "js/storage.js"
     if (-not ($storageContent -match "FirebaseAdapter")) {
         throw "js/storage.js no contiene la implementación de FirebaseAdapter"
@@ -101,9 +108,9 @@ try {
     if (-not ($storageContent -match "testCloudConnection")) {
         throw "Falta método testCloudConnection en js/storage.js"
     }
-    Log-Result "Capa de almacenamiento: Soporte híbrido LocalStorage + Firebase Firestore verificado." "PASS"
+    Log-Result "Capa de persistencia: Arquitectura híbrida (LocalStorage + Firebase Firestore) lista." "PASS"
 
-    # 6. Verificación de Interfaz HTML y Disclaimer Médico
+    # 6. Verificación de Interfaz HTML, PWA y Disclaimer Médico
     $htmlContent = [System.IO.File]::ReadAllText("$pwd/index.html", [System.Text.Encoding]::UTF8)
     if (-not ($htmlContent -match "Fisio Ped")) {
         throw "index.html no contiene el título Fisio Pedía"
@@ -114,14 +121,32 @@ try {
     if (-not ($htmlContent -match "firebase-firestore-compat.js")) {
         throw "index.html no incluye el SDK de Firestore"
     }
+    if (-not ($htmlContent -match "manifest.json")) {
+        throw "index.html no enlaza el manifest.json de PWA"
+    }
     if (-not ($htmlContent -match "modal-cloud-sync")) {
         throw "index.html no contiene el modal de sincronización en la nube"
     }
-    Log-Result "Interfaz HTML: Enlaces a scripts, disclaimer médico y modal de Firebase íntegros." "PASS"
 
-    # 7. Verificación de Recursos Estáticos y Enlaces Locales
+    # Validar manifest JSON
+    $manifestContent = Get-Content -Raw -Encoding UTF8 "manifest.json"
+    $manifestObj = $manifestContent | ConvertFrom-Json
+    if (-not $manifestObj.name) {
+        throw "manifest.json no es un JSON válido o no contiene campo 'name'"
+    }
+    Log-Result "Interfaz web y PWA: HTML, disclaimer ético, manifest PWA y modal de nube íntegros." "PASS"
+
+    # 7. Verificación de Búsqueda sin tildes e insensibilidad a mayúsculas
+    if (-not ($appContent -match "normalizeSearchText")) {
+        throw "Falta función normalizeSearchText en js/app.js para búsqueda insensible a acentos/tildes"
+    }
+    Log-Result "Buscador inteligente: Normalización NFD para búsquedas sin tildes y mayúsculas verificada." "PASS"
+
+    # 8. Verificación de Recursos Estáticos Locales
     $localAssets = @(
         "index.html",
+        "manifest.json",
+        "sw.js",
         "css/custom.css",
         "js/firebase-config.js",
         "js/storage.js",
@@ -140,10 +165,10 @@ try {
         }
     }
 
-    Log-Result "Servidor y recursos estáticos: Todos los 7 recursos se resuelven e integran sin errores." "PASS"
+    Log-Result "Recursos estáticos: Todos los $($localAssets.Count) archivos se resuelven y leen correctamente." "PASS"
 
     Write-Host ("=" * 60)
-    Log-Result "¡TODAS LAS PRUEBAS PASARON EXITOSAMENTE! (100% FUNCIONAL)" "PASS"
+    Log-Result "¡AUDITORÍA Y PRUEBAS COMPLETADAS EXITOSAMENTE! (100% OPERACIONAL)" "PASS"
     Write-Host ("=" * 60)
 }
 catch {

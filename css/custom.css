@@ -50,3 +50,24 @@
 .safe-bottom-padding {
   padding-bottom: calc(5rem + env(safe-area-inset-bottom, 0px));
 }
+
+/* Print & PDF Export Optimization for Students */
+@media print {
+  header, footer, nav, #btn-cloud-sync, #modal-cloud-sync, .fav-count-badge, .no-print, [data-route-mobile] {
+    display: none !important;
+  }
+  main {
+    padding-top: 0 !important;
+  }
+  body {
+    background: #ffffff !important;
+    color: #000000 !important;
+    padding-bottom: 0 !important;
+  }
+  .bg-surface-container-lowest, .bg-surface-container-low, .bg-surface {
+    background-color: #ffffff !important;
+  }
+  .border {
+    border-color: #cbd5e1 !important;
+  }
+}

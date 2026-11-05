@@ -1,4 +1,4 @@
-// Fisio Pedía - Banco de Cuestionarios de Autoevaluación
+﻿// Fisio Pedía - Banco de Cuestionarios de Autoevaluación
 // Preguntas de práctica basadas en casos clínicos reales y situaciones de la vida cotidiana.
 
 const FISIOPEDIA_QUIZZES = [
@@ -401,5 +401,206 @@ const FISIOPEDIA_QUIZZES = [
       }
     ],
     explanation: "¡Correcto! El **Goniómetro Universal** es la herramienta fundamental de la goniometría articular en fisioterapia para cuantificar de manera objetiva el rango de movimiento activo y pasivo."
+  }
+  },
+  {
+    id: "q11",
+    question: "Â¿QuÃ© nervio estÃ¡ comprometido si el paciente despierta con adormecimiento en pulgar, Ã­ndice y medio?",
+    scenario: "Una secretaria de 42 aÃ±os acude a consulta refiriendo que se despierta a las 3 a.m. sacudiendo la mano derecha por hormigueo y adormecimiento en la cara palmar del pulgar, Ã­ndice y dedo medio. Al flexionarle la muÃ±eca a 90Â° durante 60 segundos (Test de Phalen), los sÃ­ntomas se reproducen de inmediato.",
+    level: "Intermedio",
+    category: "Miembro Superior",
+    planeAxis: "NeuropatÃ­a por Atrapamiento",
+    hint: "Este nervio atraviesa el tÃºnel carpiano junto a nueve tendones flexores de los dedos.",
+    metrics: [
+      { label: "Conducto osteofibroso", value: "TÃºnel Carpiano" },
+      { label: "MÃºsculos afectados", value: "Eminencia Tenar" }
+    ],
+    options: [
+      {
+        id: "A",
+        text: "Nervio Cubital (Ulnar)",
+        detail: "Inerva el 5to dedo y la mitad del 4to dedo (canal de GuyÃ³n).",
+        isCorrect: false
+      },
+      {
+        id: "B",
+        text: "Nervio Mediano",
+        detail: "Discurre por el tÃºnel carpiano e inerva los tres primeros dedos y medio.",
+        isCorrect: true
+      },
+      {
+        id: "C",
+        text: "Nervio Radial",
+        detail: "Inerva el dorso de la mano y extiende la muÃ±eca; no cruza el tÃºnel carpiano.",
+        isCorrect: false
+      },
+      {
+        id: "D",
+        text: "Nervio MÃºsculocutÃ¡neo",
+        detail: "Inerva el compartimento anterior del brazo (bÃ­ceps y braquial anterior).",
+        isCorrect: false
+      }
+    ],
+    explanation: "Â¡Correcto! El **Nervio Mediano** transcurre dentro del tÃºnel carpiano bajo el retinÃ¡culo flexor. Su compresiÃ³n produce parestesias en los tres primeros dedos y signo de Phalen positivo caracterÃ­stico del SÃ­ndrome del TÃºnel Carpiano."
+  },
+  {
+    id: "q12",
+    question: "Â¿QuÃ© mÃºsculo presenta debilidad si al apoyar un pie, la pelvis opuesta cae de lado (Trendelenburg)?",
+    scenario: "Durante la evaluaciÃ³n de la marcha de un paciente, observas que en la fase de apoyo monopodal sobre su pierna izquierda, la hemipelvis derecha cae visiblemente hacia abajo en lugar de mantenerse horizontal. Â¿La debilidad o inhibiciÃ³n de quÃ© mÃºsculo produce este signo de Trendelenburg?",
+    level: "Intermedio - Avanzado",
+    category: "Pelvis y Marcha",
+    planeAxis: "Plano Frontal â€¢ Eje Anteroposterior",
+    hint: "Es el abductor primario de la cadera del lado de apoyo y se inserta en el trocÃ¡nter mayor.",
+    metrics: [
+      { label: "Lado de la debilidad", value: "GlÃºteo Medio Izquierdo (lado de apoyo)" },
+      { label: "Lado de la caÃ­da", value: "Hemipelvis Derecha (lado contralateral)" }
+    ],
+    options: [
+      {
+        id: "A",
+        text: "GlÃºteo Mayor",
+        detail: "Principal extensor de cadera en plano sagital; no controla la bÃ¡scula frontal de la pelvis.",
+        isCorrect: false
+      },
+      {
+        id: "B",
+        text: "GlÃºteo Medio del lado de apoyo",
+        detail: "MÃºsculo estabilizador transversal que impide el desplome de la pelvis contralateral.",
+        isCorrect: true
+      },
+      {
+        id: "C",
+        text: "Aductor Mayor contralateral",
+        detail: "Aproxima el muslo hacia la lÃ­nea media; no estabiliza el apoyo monopodal.",
+        isCorrect: false
+      },
+      {
+        id: "D",
+        text: "Psoas IlÃ­aco",
+        detail: "Es el flexor primordial de la cadera; no evita la caÃ­da de la pelvis en el plano frontal.",
+        isCorrect: false
+      }
+    ],
+    explanation: "Â¡Exacto! El **GlÃºteo Medio del lado de apoyo** es el tensor estabilizador primordial que mantiene nivelada la pelvis en apoyo monopodal. Si estÃ¡ dÃ©bil, la hemipelvis contralateral cae (Signo de Trendelenburg positivo)."
+  },
+  {
+    id: "q13",
+    question: "Â¿CuÃ¡l es el ligamento que con mayor frecuencia se rompe en un esguince de tobillo por inversiÃ³n?",
+    scenario: "Un jugador de baloncesto aterriza sobre el pie de un rival; su tobillo se dobla violentamente hacia adentro (inversiÃ³n forzada en flexiÃ³n plantar). Inmediatamente se forma una tumefacciÃ³n prominente en 'huevo de paloma' justo delante del malÃ©olo externo. Â¿QuÃ© estructura ligamentosa es la lesionada con mayor frecuencia?",
+    level: "BÃ¡sico - Intermedio",
+    category: "Miembro Inferior",
+    planeAxis: "InversiÃ³n Forzada del Pie",
+    hint: "Une el borde anterior del peronÃ© con el cuello del astrÃ¡galo y es el freno primario del complejo colateral lateral.",
+    metrics: [
+      { label: "Frecuencia lesional", value: "> 85% de los esguinces de tobillo" },
+      { label: "Prueba de cajÃ³n", value: "CajÃ³n Anterior de Tobillo" }
+    ],
+    options: [
+      {
+        id: "A",
+        text: "Ligamento Deltoideo",
+        detail: "Ligamento medial potente que se lesiona por eversiÃ³n forzada hacia afuera.",
+        isCorrect: false
+      },
+      {
+        id: "B",
+        text: "Ligamento Peroneoastragalino Anterior (LPAA)",
+        detail: "Primer ligamento anterolateral que se tensa y desgarra en la inversiÃ³n forzada.",
+        isCorrect: true
+      },
+      {
+        id: "C",
+        text: "Ligamento PeroneocalcÃ¡neo",
+        detail: "Se lesiona secundariamente tras rotura completa del LPAA en esguinces grado III.",
+        isCorrect: false
+      },
+      {
+        id: "D",
+        text: "Ligamento Cruzado Anterior",
+        detail: "Se ubica en el pivote central de la rodilla, no en el tobillo.",
+        isCorrect: false
+      }
+    ],
+    explanation: "Â¡Correcto! El **Ligamento Peroneoastragalino Anterior (LPAA)** es el primer estabilizador anterolateral que cede ante la inversiÃ³n del pie en flexiÃ³n plantar, participando en mÃ¡s del 85% de los esguinces de tobillo."
+  },
+  {
+    id: "q14",
+    question: "Â¿CuÃ¡les son los tres mÃºsculos que forman el tendÃ³n de la 'Pata de Ganso' (Pes Anserinus)?",
+    scenario: "Un corredor de media distancia refiere dolor exquisito a la palpaciÃ³n en la cara anteromedial de la tibia proximal, unos 4 cm por debajo de la interlÃ­nea de la rodilla. La profesora de fisioterapia le pregunta cuÃ¡les son los tres mÃºsculos que confluyen en esta inserciÃ³n conjunta ('regla del S-A-R-G-E-N-T-O').",
+    level: "Intermedio",
+    category: "Miembro Inferior",
+    planeAxis: "InserciÃ³n Tendinosa Medial",
+    hint: "Provienen de tres compartimentos distintos y estÃ¡n inervados por el nervio femoral, obturador y ciÃ¡tico.",
+    metrics: [
+      { label: "Mnemotecnia clÃ­nica", value: "S-A-R - G - E-N-T-O" },
+      { label: "Hueso de inserciÃ³n", value: "Tibia Anteromedial" }
+    ],
+    options: [
+      {
+        id: "A",
+        text: "BÃ­ceps femoral, Semitendinoso y Semimembranoso",
+        detail: "Son los tres isquiotibiales; el bÃ­ceps femoral va al peronÃ©, no a la pata de ganso.",
+        isCorrect: false
+      },
+      {
+        id: "B",
+        text: "Sartorio, GrÃ¡cil (Recto Interno) y Semitendinoso",
+        detail: "Los tres mÃºsculos que confluyen en la cara anteromedial de la tibia proximal.",
+        isCorrect: true
+      },
+      {
+        id: "C",
+        text: "Recto femoral, Vasto medial y Vasto lateral",
+        detail: "Forman el cuÃ¡driceps femoral e insertan en la tuberosidad anterior de la tibia.",
+        isCorrect: false
+      },
+      {
+        id: "D",
+        text: "Tibial anterior, Peroneo lateral y SÃ³leo",
+        detail: "MÃºsculos de la pierna y pie que no componen la pata de ganso.",
+        isCorrect: false
+      }
+    ],
+    explanation: "Â¡Correcto! La **Pata de Ganso (Pes Anserinus)** estÃ¡ formada por el **Sartorio**, el **GrÃ¡cil (Recto Interno)** y el **Semitendinoso**. Recuerda siempre la regla del 'Sargento'."
+  },
+  {
+    id: "q15",
+    question: "Â¿En quÃ© rango de abducciÃ³n del hombro se presenta el 'Arco Doloroso' por pinzamiento subacromial?",
+    scenario: "Un pintor de obra acude a fisioterapia refiriendo que al levantar el brazo de lado, el movimiento es indoloro al inicio, pero al alcanzar la altura del hombro siente un pinchazo agudo incapacitante que desaparece cuando logra subir la mano por encima de su cabeza. Â¿En quÃ© rango angular ocurre este 'arco doloroso' de Neer?",
+    level: "BÃ¡sico - Intermedio",
+    category: "Miembro Superior",
+    planeAxis: "Plano Frontal â€¢ AbducciÃ³n Glenohumeral",
+    hint: "Es el intervalo donde el troquÃ­ter humeral comprime la bursa subacromial contra el techo del acromion.",
+    metrics: [
+      { label: "PatologÃ­a", value: "Pinzamiento Subacromial (Impingement)" },
+      { label: "Estructura en conflicto", value: "Bursa subacromial y tendÃ³n del supraespinoso" }
+    ],
+    options: [
+      {
+        id: "A",
+        text: "0Â° a 30Â°",
+        detail: "Fase inicial dependiente principalmente del supraespinoso; no genera atrapamiento acromial.",
+        isCorrect: false
+      },
+      {
+        id: "B",
+        text: "60Â° a 120Â°",
+        detail: "Rango crÃ­tico donde el troquÃ­ter choca bajo el arco coracoacromial pellizcando la bursa.",
+        isCorrect: true
+      },
+      {
+        id: "C",
+        text: "150Â° a 180Â°",
+        detail: "Fase terminal que involucra bÃ¡scula escapular y articulaciÃ³n esternoclavicular.",
+        isCorrect: false
+      },
+      {
+        id: "D",
+        text: "Ãšnicamente a 0Â° en reposo",
+        detail: "El pinzamiento biomecÃ¡nico es dinÃ¡mico y se desencadena con la elevaciÃ³n activa.",
+        isCorrect: false
+      }
+    ],
+    explanation: "Â¡Correcto! El **Arco Doloroso Subacromial** se manifiesta tÃ­picamente entre los **60Â° y 120Â° de abducciÃ³n**, intervalo biomecÃ¡nico donde el espacio entre el acromion y el hÃºmero se reduce al mÃ­nimo, pinzando la bursa y el supraespinoso."
   }
 ];

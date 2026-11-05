@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
 Fisio Pedía - Automated Test Suite
-Verifica la integridad de datos, archivos JS, endpoints locales, Firebase hooks y cobertura del PRD.
+Verifica la integridad de datos, archivos JS, endpoints locales, Firebase hooks, PWA y cobertura del PRD.
 """
 
 import os
@@ -25,6 +25,8 @@ def log(msg, status="INFO"):
 def test_files_exist():
     required_files = [
         'index.html',
+        'manifest.json',
+        'sw.js',
         'css/custom.css',
         'js/firebase-config.js',
         'js/firebase-config.example.js',
@@ -46,7 +48,7 @@ def test_terms_integrity():
         content = f.read()
 
     ids = re.findall(r'id:\s*["\']([^"\']+)["\']', content)
-    assert len(ids) >= 20, f"Se esperaban al menos 20 términos, encontrados: {len(ids)}"
+    assert len(ids) >= 30, f"Se esperaban al menos 30 términos, encontrados: {len(ids)}"
     assert len(ids) == len(set(ids)), f"Existen IDs duplicados en términos: {ids}"
 
     required_fields = [
@@ -66,7 +68,8 @@ def test_quizzes_integrity():
         content = f.read()
 
     q_ids = re.findall(r'id:\s*["\'](q\d+)["\']', content)
-    assert len(q_ids) >= 10, f"Se esperaban al menos 10 preguntas de quiz, encontradas: {len(q_ids)}"
+    assert len(q_ids) >= 15, f"Se esperaban al menos 15 preguntas de quiz, encontradas: {len(q_ids)}"
+    assert len(q_ids) == len(set(q_ids)), f"Existen IDs duplicados en quizzes: {q_ids}"
 
     correct_counts = len(re.findall(r'isCorrect:\s*true', content))
     assert correct_counts == len(q_ids), f"Cada pregunta debe tener exactamente 1 respuesta correcta. Preguntas: {len(q_ids)}, Correctas: {correct_counts}"
@@ -98,6 +101,17 @@ def test_storage_and_firebase():
     assert 'modal-cloud-sync' in html, "index.html no incluye el modal de Firebase"
     log("Verificación de almacenamiento y Firebase: Adaptador híbrido y enlaces web íntegros.", "PASS")
 
+def test_search_and_pwa():
+    with open('js/app.js', 'r', encoding='utf-8') as f:
+        app_content = f.read()
+    with open('manifest.json', 'r', encoding='utf-8') as f:
+        manifest_data = json.load(f)
+
+    assert 'normalizeSearchText' in app_content, "Falta función normalizeSearchText en js/app.js"
+    assert manifest_data.get('name'), "manifest.json no contiene nombre de app"
+    assert os.path.exists('sw.js'), "Falta archivo sw.js para PWA"
+    log("Verificación de búsqueda y PWA: Normalización de tildes y manifest.json validados.", "PASS")
+
 def test_local_http_serving():
     port = 8765
     server_cmd = [sys.executable, "-m", "http.server", str(port)]
@@ -107,6 +121,7 @@ def test_local_http_serving():
     try:
         urls_to_test = [
             f"http://localhost:{port}/index.html",
+            f"http://localhost:{port}/manifest.json",
             f"http://localhost:{port}/css/custom.css",
             f"http://localhost:{port}/js/firebase-config.js",
             f"http://localhost:{port}/js/storage.js",
@@ -145,6 +160,7 @@ def main():
         test_quizzes_integrity()
         test_svg_types_covered(term_ids)
         test_storage_and_firebase()
+        test_search_and_pwa()
         try:
             test_local_http_serving()
         except Exception as e:
