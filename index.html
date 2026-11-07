@@ -169,10 +169,53 @@
     <!-- CONTENEDOR REACTIVO DONDE SE CARGA LA VISTA -->
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
       <div id="app-main-content" class="flex flex-col w-full min-h-[60vh]">
-        <!-- Renderizado dinámico por js/app.js -->
-        <div id="loader" class="p-12 text-center text-slate-muted flex flex-col items-center justify-center">
-          <span class="material-symbols-outlined text-4xl animate-spin text-primary mb-2">sync</span>
-          <p class="text-sm">Cargando compendio pedagógico...</p>
+        <!-- Indicador de carga inicial (se oculta de inmediato al cargar) -->
+        <div id="loader" class="p-6 text-center text-slate-muted flex items-center justify-center gap-2">
+          <span class="material-symbols-outlined text-2xl animate-spin text-primary">sync</span>
+          <p class="text-xs">Cargando compendio pedagógico...</p>
+        </div>
+
+        <!-- ESTRUCTURA INICIAL DEL HOME Y BUSCADOR (FALLBACK & SEO) -->
+        <div class="w-full flex flex-col gap-6">
+          <!-- Barra de Búsqueda Principal -->
+          <div class="w-full bg-surface-container-lowest rounded-2xl shadow-md p-3 sm:p-4 border border-slate-border/50">
+            <div class="relative flex items-center w-full">
+              <span class="material-symbols-outlined absolute left-4 text-primary text-2xl select-none">search</span>
+              <input
+                id="search-input"
+                name="search-input"
+                type="text"
+                autocomplete="off"
+                placeholder="Escribe un término (ej. Agonista, Flexión, Supinación, LCA, Menisco...)"
+                class="w-full pl-12 pr-12 py-3.5 bg-transparent font-body-md text-body-md text-on-surface placeholder:text-slate-muted focus:outline-none"
+              />
+            </div>
+
+            <!-- Botones de Filtros de Categoría -->
+            <div class="flex items-center gap-2 overflow-x-auto pb-1 px-1 mt-3 no-scrollbar" id="category-filter-chips">
+              <span class="font-label-sm text-slate-muted mr-1 hidden sm:inline-block font-bold">Tipo:</span>
+              <button data-cat="todos" class="px-3.5 py-1.5 rounded-full font-label-sm text-xs bg-primary text-on-primary font-bold shadow-xs cursor-pointer">
+                Todos
+              </button>
+              <button data-cat="musculos" class="px-3.5 py-1.5 rounded-full font-label-sm text-xs bg-surface-container-high text-on-surface-variant hover:bg-surface-container-highest font-medium transition-colors cursor-pointer">
+                <span class="inline-block w-2 h-2 rounded-full bg-cat-muscles mr-1.5"></span>Músculos
+              </button>
+              <button data-cat="huesos" class="px-3.5 py-1.5 rounded-full font-label-sm text-xs bg-surface-container-high text-on-surface-variant hover:bg-surface-container-highest font-medium transition-colors cursor-pointer">
+                <span class="inline-block w-2 h-2 rounded-full bg-cat-bones mr-1.5"></span>Huesos y Tendones
+              </button>
+              <button data-cat="articulaciones" class="px-3.5 py-1.5 rounded-full font-label-sm text-xs bg-surface-container-high text-on-surface-variant hover:bg-surface-container-highest font-medium transition-colors cursor-pointer">
+                <span class="inline-block w-2 h-2 rounded-full bg-cat-joints mr-1.5"></span>Articulaciones
+              </button>
+              <button data-cat="movimientos" class="px-3.5 py-1.5 rounded-full font-label-sm text-xs bg-surface-container-high text-on-surface-variant hover:bg-surface-container-highest font-medium transition-colors cursor-pointer">
+                <span class="inline-block w-2 h-2 rounded-full bg-cat-movements mr-1.5"></span>Movimientos
+              </button>
+            </div>
+          </div>
+
+          <!-- Contenedor de Resultados de Términos -->
+          <div id="terms-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <!-- Tarjetas de términos anatómicos renderizadas inmediatamente -->
+          </div>
         </div>
       </div>
     </div>

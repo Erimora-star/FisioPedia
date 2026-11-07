@@ -18,7 +18,13 @@
   transform: rotateY(180deg);
 }
 
-.flipped {
+.flipped,
+.active.transform-style-3d,
+.card-flip-transition.active,
+#flashcard-3d-element.active,
+#flashcard.active,
+#flashcard-3d-element.flipped,
+#flashcard.flipped {
   transform: rotateY(180deg);
 }
 

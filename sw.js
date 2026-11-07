@@ -1,5 +1,5 @@
 // Fisio Pedía - Service Worker (Modo 100% Offline para Estudiantes)
-const CACHE_NAME = 'fisiopedia-v7-final';
+const CACHE_NAME = 'fisiopedia-v8-final';
 
 const STATIC_ASSETS = [
   './',

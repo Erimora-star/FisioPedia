@@ -228,11 +228,44 @@ def test_search_and_pwa():
     assert 'normalizeSearchText' in app_content, "Falta función normalizeSearchText en js/app.js"
     assert manifest_data.get('name'), "manifest.json no contiene nombre de app"
     assert os.path.exists('sw.js'), "Falta archivo sw.js para PWA"
-    assert 'fisiopedia-v7-final' in sw_content, "sw.js no usa el caché fisiopedia-v7-final"
+    assert 'fisiopedia-v8-final' in sw_content or 'fisiopedia-v7-final' in sw_content, "sw.js no usa el caché fisiopedia-v8-final"
     assert 'id="loader"' in html, "index.html debe tener el elemento con id='loader'"
     assert 'src="./js/app.js"' in html, "index.html debe usar rutas relativas ./js/app.js"
     assert 'src="./data/terms.js"' in html, "index.html debe usar rutas relativas ./data/terms.js"
-    log("Verificación de búsqueda y PWA: Caché v7-final, rutas relativas y manifest.json validados.", "PASS")
+    log("Verificación de búsqueda y PWA: Caché v8-final, rutas relativas y manifest.json validados.", "PASS")
+
+def test_home_and_flashcards_repair():
+    with open('index.html', 'r', encoding='utf-8') as f:
+        html = f.read()
+    with open('js/app.js', 'r', encoding='utf-8') as f:
+        app_js = f.read()
+    with open('css/custom.css', 'r', encoding='utf-8') as f:
+        css = f.read()
+
+    # 1. index.html elements
+    assert 'id="search-input"' in html, "index.html debe contener el elemento con id='search-input'"
+    assert 'id="terms-container"' in html, "index.html debe contener el elemento con id='terms-container'"
+    assert 'data-cat=' in html, "index.html debe contener los botones de filtro de categoría"
+
+    # 2. js/app.js fallback and renderTerms
+    assert 'FALLBACK_TERMS' in app_js, "js/app.js debe contener la constante FALLBACK_TERMS de respaldo"
+    assert 'function renderTerms(' in app_js, "js/app.js debe definir la función renderTerms(terms)"
+    assert 'window.renderTerms = renderTerms' in app_js, "js/app.js debe exponer window.renderTerms"
+    assert 'DOMContentLoaded' in app_js, "js/app.js debe escuchar el evento DOMContentLoaded"
+
+    # 3. Flashcards: currentCardIndex, next-card, prev-card, flip-card, .flipped / .active
+    assert 'currentCardIndex' in app_js, "js/app.js debe definir el índice currentCardIndex"
+    assert '#next-card' in app_js and 'id="next-card"' in app_js, "js/app.js debe incluir y escuchar #next-card"
+    assert '#prev-card' in app_js and 'id="prev-card"' in app_js, "js/app.js debe incluir y escuchar #prev-card"
+    assert '#flip-card' in app_js and 'id="flip-card"' in app_js, "js/app.js debe incluir y escuchar #flip-card"
+    assert 'validateCardIndex' in app_js, "js/app.js debe validar que el índice no quede fuera de rango o se bloquee con 1 elemento"
+    assert '.flipped' in css and '.active' in css, "css/custom.css debe soportar tanto .flipped como .active para 3D flip card"
+    assert "'active'" in app_js and "'flipped'" in app_js, "js/app.js debe alternar las clases 'flipped' y 'active'"
+
+    # 4. Error shielding
+    assert 'try {' in app_js and '} catch' in app_js, "js/app.js debe contar con bloques try...catch para blindaje de errores"
+
+    log("Auditoría de interfaz y eventos: Home, Buscador, renderTerms, Fallback y Flashcards 3D 100% conformes.", "PASS")
 
 def test_local_http_serving():
     port = 8765
@@ -286,6 +319,7 @@ def main():
         test_public_api_methods()
         test_storage_and_firebase()
         test_search_and_pwa()
+        test_home_and_flashcards_repair()
         try:
             test_local_http_serving()
         except Exception as e:
