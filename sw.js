@@ -1,5 +1,5 @@
 // Fisio Pedía - Service Worker (Modo 100% Offline para Estudiantes)
-const CACHE_NAME = 'fisiopedia-v3-cache';
+const CACHE_NAME = 'fisiopedia-v5-cache';
 
 const STATIC_ASSETS = [
   './',
@@ -24,7 +24,7 @@ self.addEventListener('install', (event) => {
   );
 });
 
-// Activación: Limpieza de caches antiguos
+// Activación: Limpieza inmediata de todos los caches antiguos
 self.addEventListener('activate', (event) => {
   event.waitUntil(
     caches.keys().then((keys) => {
@@ -35,43 +35,40 @@ self.addEventListener('activate', (event) => {
   );
 });
 
-// Estrategia: Network-First con Fallback a Cache (o Cache-First para recursos estáticos)
+// Estrategia: Network-First con Fallback a Cache (asegura ver siempre la última versión online)
 self.addEventListener('fetch', (event) => {
   const req = event.request;
   if (req.method !== 'GET') return;
 
-  // Para peticiones hacia Firebase Firestore o Google Analytics, dejar que la red actúe
-  if (req.url.includes('firestore.googleapis.com') || req.url.includes('firebaseio.com')) {
+  // Para peticiones hacia Firebase Firestore o Google APIs, no interceptar
+  if (
+    req.url.includes('firestore.googleapis.com') ||
+    req.url.includes('firebaseio.com') ||
+    req.url.includes('gstatic.com') ||
+    req.url.includes('googleapis.com')
+  ) {
     return;
   }
 
   event.respondWith(
-    caches.match(req).then((cachedResponse) => {
-      if (cachedResponse) {
-        // En segundo plano revalidar cache
-        fetch(req).then((networkResponse) => {
-          if (networkResponse && networkResponse.status === 200) {
-            caches.open(CACHE_NAME).then((cache) => cache.put(req, networkResponse));
-          }
-        }).catch(() => {});
-        return cachedResponse;
-      }
-
-      return fetch(req).then((networkResponse) => {
-        if (!networkResponse || networkResponse.status !== 200 || networkResponse.type === 'opaque') {
-          return networkResponse;
+    fetch(req)
+      .then((networkResponse) => {
+        if (networkResponse && networkResponse.status === 200) {
+          const responseToCache = networkResponse.clone();
+          caches.open(CACHE_NAME).then((cache) => {
+            cache.put(req, responseToCache);
+          });
         }
-        const responseToCache = networkResponse.clone();
-        caches.open(CACHE_NAME).then((cache) => {
-          cache.put(req, responseToCache);
-        });
         return networkResponse;
-      }).catch(() => {
-        // Fallback a index si es navegación
-        if (req.mode === 'navigate') {
-          return caches.match('./index.html');
-        }
-      });
-    })
+      })
+      .catch(() => {
+        // Fallback a cache si no hay conexión a internet (modo offline)
+        return caches.match(req).then((cachedResponse) => {
+          if (cachedResponse) return cachedResponse;
+          if (req.mode === 'navigate') {
+            return caches.match('./index.html');
+          }
+        });
+      })
   );
 });
