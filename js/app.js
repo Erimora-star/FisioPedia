@@ -4,6 +4,11 @@
 (function () {
   'use strict';
 
+  // Respaldo de seguridad para garantizar datos definidos
+  if (typeof window.FISIOPEDIA_TERMS === 'undefined' || !Array.isArray(window.FISIOPEDIA_TERMS)) {
+    window.FISIOPEDIA_TERMS = [];
+  }
+
   // --- ESTADO GLOBAL REACTIVO ---
   const state = {
     route: 'explorador',
@@ -871,22 +876,42 @@
     });
   }
 
+  function hideLoader() {
+    const loader = document.getElementById('loader') || document.getElementById('app-loader');
+    if (loader) {
+      loader.style.setProperty('display', 'none', 'important');
+    }
+  }
+
   function renderCurrentRoute() {
+    hideLoader();
     const mainContainer = document.getElementById('app-main-content');
     if (!mainContainer) return;
 
-    if (state.route === 'explorador') {
-      mainContainer.innerHTML = renderExploradorView();
-      bindExploradorEvents();
-    } else if (state.route === 'termino') {
-      mainContainer.innerHTML = renderTerminoView();
-      bindTerminoEvents();
-    } else if (state.route === 'favoritos') {
-      mainContainer.innerHTML = renderFavoritosView();
-      bindFavoritosEvents();
-    } else if (state.route === 'quizzes') {
-      mainContainer.innerHTML = renderQuizzesView();
-      bindQuizzesEvents();
+    try {
+      if (state.route === 'termino') {
+        mainContainer.innerHTML = renderTerminoView();
+        bindTerminoEvents();
+      } else if (state.route === 'favoritos') {
+        mainContainer.innerHTML = renderFavoritosView();
+        bindFavoritosEvents();
+      } else if (state.route === 'quizzes') {
+        mainContainer.innerHTML = renderQuizzesView();
+        bindQuizzesEvents();
+      } else {
+        mainContainer.innerHTML = renderExploradorView();
+        bindExploradorEvents();
+      }
+    } catch (err) {
+      console.error('Error renderizando vista en FisioPedia:', err);
+      try {
+        mainContainer.innerHTML = renderExploradorView();
+        bindExploradorEvents();
+      } catch (e) {
+        console.error('Fallback error:', e);
+      }
+    } finally {
+      hideLoader();
     }
 
     updateFavoritesBadges();
@@ -2734,16 +2759,31 @@
     }
   }
 
-  // --- INICIALIZACIÓN DE LA APLICACIÓN ---
-  document.addEventListener('DOMContentLoaded', () => {
-    loadInitialState();
-    initRouter();
-    initCloudSyncUI();
+  // --- INICIALIZACIÓN ROBUSTA DE LA APLICACIÓN ---
+  function startApp() {
+    hideLoader();
+
+    try {
+      if (typeof window.FISIOPEDIA_TERMS === 'undefined' || !Array.isArray(window.FISIOPEDIA_TERMS)) {
+        window.FISIOPEDIA_TERMS = [];
+      }
+      loadInitialState();
+      initRouter();
+      initCloudSyncUI();
+    } catch (err) {
+      console.error('FisioPedia start error:', err);
+    } finally {
+      hideLoader();
+    }
 
     // Registro seguro de Service Worker para funcionamiento Offline / PWA
     if ('serviceWorker' in navigator && window.location.protocol.startsWith('http')) {
       window.addEventListener('load', () => {
-        navigator.serviceWorker.register('./sw.js').catch(() => {});
+        navigator.serviceWorker.register('./sw.js').then((reg) => {
+          reg.update().catch(() => {});
+        }).catch((err) => {
+          console.warn('ServiceWorker error:', err);
+        });
       });
     }
 
@@ -2802,6 +2842,13 @@
         }
       }
     });
-  });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', startApp);
+  } else {
+    // Si el DOM ya está listo (DOMContentLoaded ya disparó), iniciar inmediatamente
+    startApp();
+  }
 
 })();

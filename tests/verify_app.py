@@ -220,11 +220,19 @@ def test_search_and_pwa():
         app_content = f.read()
     with open('manifest.json', 'r', encoding='utf-8') as f:
         manifest_data = json.load(f)
+    with open('sw.js', 'r', encoding='utf-8') as f:
+        sw_content = f.read()
+    with open('index.html', 'r', encoding='utf-8') as f:
+        html = f.read()
 
     assert 'normalizeSearchText' in app_content, "Falta función normalizeSearchText en js/app.js"
     assert manifest_data.get('name'), "manifest.json no contiene nombre de app"
     assert os.path.exists('sw.js'), "Falta archivo sw.js para PWA"
-    log("Verificación de búsqueda y PWA: Normalización de tildes y manifest.json validados.", "PASS")
+    assert 'fisiopedia-v7-final' in sw_content, "sw.js no usa el caché fisiopedia-v7-final"
+    assert 'id="loader"' in html, "index.html debe tener el elemento con id='loader'"
+    assert 'src="./js/app.js"' in html, "index.html debe usar rutas relativas ./js/app.js"
+    assert 'src="./data/terms.js"' in html, "index.html debe usar rutas relativas ./data/terms.js"
+    log("Verificación de búsqueda y PWA: Caché v7-final, rutas relativas y manifest.json validados.", "PASS")
 
 def test_local_http_serving():
     port = 8765
