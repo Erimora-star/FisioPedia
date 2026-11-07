@@ -144,7 +144,12 @@ def test_search_and_filtering(terms):
         ("caudal", "caudal", "Caudal"),
         ("craneal", "craneal", "Craneal"),
         ("ipsilateral", "ipsilateral", "Ipsilateral"),
-        ("contralateral", "contralateral", "Contralateral")
+        ("contralateral", "contralateral", "Contralateral"),
+        ("isotonico", "isotonico", "Isotónico"),
+        ("valgo", "valgo", "Valgo"),
+        ("cifosis", "cifosis", "Cifosis"),
+        ("fascia", "fascia", "Fascia"),
+        ("osteocinematica", "osteocinematica", "Osteocinemática")
     ]
 
     for query, expected_id, expected_name in test_cases:
@@ -153,7 +158,28 @@ def test_search_and_filtering(terms):
         match_ids = [m['id'] for m in matches]
         assert expected_id in match_ids, f"Búsqueda sin tilde falló para '{query}': no encontró '{expected_id}'"
 
-    log("Búsqueda insensible a mayúsculas, minúsculas y tildes validada con éxito.", "PASS")
+    log("Búsqueda insensible a mayúsculas, minúsculas y tildes validada con éxito (incluye nuevos conceptos).", "PASS")
+
+def test_fifty_terms_coverage(terms):
+    required_50_names = [
+        "Agonista", "Antagonista", "Sinérgico", "Caudal", "Craneal",
+        "Ipsilateral", "Contralateral", "Proximal", "Distal", "Ventral",
+        "Dorsal", "Medial", "Lateral", "Supinación", "Pronación",
+        "Abducción", "Aducción", "Flexión", "Extensión", "Isométrico",
+        "Isotónico", "Isocinético", "Inversión", "Eversión", "Rotación Interna",
+        "Rotación Externa", "Circunducción", "Dorsiflexión", "Plantiflexión", "Anteversión",
+        "Retroversión", "Protracción", "Retracción", "Elevación", "Depresión",
+        "Propiocepción", "Valgo", "Varo", "Cifosis", "Lordosis",
+        "Escoliosis", "Fascia", "Tono Muscular", "Hipertrofia", "Atrofia",
+        "Rango de Movimiento (ROM)", "Artrocinemática", "Osteocinemática",
+        "Cadena Cinemática Abierta", "Cadena Cinemática Cerrada"
+    ]
+    terms_by_norm = {normalize_text(t['name']): t for t in terms}
+    for req_name in required_50_names:
+        n_req = normalize_text(req_name)
+        assert n_req in terms_by_norm, f"Falta concepto obligatorio de los 50 solicitados: {req_name}"
+
+    log(f"Cobertura de los 50 conceptos solicitados validada: 100% presentes en la base de datos sin duplicados.", "PASS")
 
 def test_quizzes_integrity():
     with open('data/quizzes.js', 'r', encoding='utf-8') as f:
@@ -313,6 +339,7 @@ def main():
         test_files_exist()
         terms = test_terms_integrity()
         test_twenty_fundamental_concepts(terms)
+        test_fifty_terms_coverage(terms)
         test_search_and_filtering(terms)
         test_quizzes_integrity()
         test_svg_types_covered(terms)

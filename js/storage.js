@@ -340,6 +340,25 @@ const FisioStorage = (function () {
       }
     },
 
+    syncTermsToCloud: async function (termsList) {
+      if (this.status === 'connected' && this.db) {
+        try {
+          const list = Array.isArray(termsList) ? termsList : (window.FISIOPEDIA_TERMS || []);
+          const summaryDoc = this.db.collection('compendio_terminos').doc('_resumen_compendio');
+          await summaryDoc.set({
+            totalTerms: list.length,
+            ids: list.map(t => t.id),
+            updatedAt: window.firebase.firestore.FieldValue.serverTimestamp()
+          }, { merge: true });
+          return true;
+        } catch (err) {
+          console.warn('FisioStorage: Advertencia al sincronizar términos con Firestore:', err);
+          return false;
+        }
+      }
+      return false;
+    },
+
     testConnection: async function (config) {
       if (!config || !config.apiKey || !config.projectId) {
         return { success: false, message: 'Faltan campos obligatorios (apiKey o projectId).' };
@@ -441,6 +460,10 @@ const FisioStorage = (function () {
         return true;
       }
       return false;
+    },
+
+    syncTerms: async function (terms) {
+      return await FirebaseAdapter.syncTermsToCloud(terms);
     },
 
     // Suscripciones reactivas

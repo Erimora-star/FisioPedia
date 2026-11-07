@@ -1,6 +1,6 @@
 // Fisio Pedía - Base de Datos Anatómica y Pedagógica Completa
 // Vocabulario esencial de anatomía, kinesiología, biomecánica y orientación para estudiantes de Fisioterapia.
-// Contiene los 20 conceptos fundamentales de orientación y biomecánica + compendio de estructuras clínicas.
+// Contiene 76 términos oficiales sin duplicados con soporte de doble esquema.
 
 const FISIOPEDIA_TERMS = [
   {
@@ -2117,5 +2117,1318 @@ const FISIOPEDIA_TERMS = [
     ],
     "svgType": "bomba_muscular",
     "isFeatured": false
+  },
+  {
+    "id": "isotonico",
+    "name": "Isotónico",
+    "termino": "Isotónico",
+    "pronunciation": "/isotonico/",
+    "fonetica": "ISOTONICO",
+    "etymology": "Término fundamental de contracción muscular en ciencias de la salud.",
+    "category": "musculos",
+    "categoryLabel": "Contracción Muscular",
+    "categoryClass": "bg-cat-muscles/15 text-cat-muscles",
+    "region": "general",
+    "regionLabel": "Global / General",
+    "level": "Básico (1er año)",
+    "readingTime": "2 min",
+    "technicalDef": "Contracción con cambio de longitud y movimiento articular.",
+    "defTecnica": "Contracción con cambio de longitud y movimiento articular.",
+    "simpleExplanation": "Contracción común con movimiento dinámico.",
+    "explicacionSencilla": "Contracción común con movimiento dinámico.",
+    "everydayTitle": "Ejemplo funcional: Flexión de bíceps con mancuerna.",
+    "everydayExample": "Flexión de bíceps con mancuerna.",
+    "analogia": "Como en la vida cotidiana: Flexión de bíceps con mancuerna.",
+    "clinicalTitle": "Relevancia de Isotónico en Fisioterapia",
+    "clinicalRelevance": "Comprender isotónico permite al kinesiólogo evaluar patrones biomecánicos alterados y programar prescripciones de ejercicio terapéutico seguras.",
+    "clinicalCase": "Evaluación funcional de isotónico durante la rehabilitación musculoesquelética.",
+    "keyDetails": [
+      {
+        "label": "Categoría clínica",
+        "value": "Contracción Muscular"
+      },
+      {
+        "label": "Región de aplicación",
+        "value": "Global / General"
+      },
+      {
+        "label": "Definición pedagógica",
+        "value": "Contracción común con movimiento dinámico."
+      },
+      {
+        "label": "Ejemplo en vida diaria",
+        "value": "Flexión de bíceps con mancuerna."
+      }
+    ],
+    "svgType": "isotonico",
+    "isFeatured": false
+  },
+  {
+    "id": "isocinetico",
+    "name": "Isocinético",
+    "termino": "Isocinético",
+    "pronunciation": "/isocinetico/",
+    "fonetica": "ISOCINETICO",
+    "etymology": "Término fundamental de contracción muscular en ciencias de la salud.",
+    "category": "musculos",
+    "categoryLabel": "Contracción Muscular",
+    "categoryClass": "bg-cat-muscles/15 text-cat-muscles",
+    "region": "general",
+    "regionLabel": "Global / General",
+    "level": "Básico (1er año)",
+    "readingTime": "2 min",
+    "technicalDef": "Contracción a velocidad angular constante mediante equipo especializado.",
+    "defTecnica": "Contracción a velocidad angular constante mediante equipo especializado.",
+    "simpleExplanation": "Ejercicio a velocidad fija constante en todo el arco.",
+    "explicacionSencilla": "Ejercicio a velocidad fija constante en todo el arco.",
+    "everydayTitle": "Ejemplo funcional: Pruebas dinamométricas en rehabilitación.",
+    "everydayExample": "Pruebas dinamométricas en rehabilitación.",
+    "analogia": "Como en la vida cotidiana: Pruebas dinamométricas en rehabilitación.",
+    "clinicalTitle": "Relevancia de Isocinético en Fisioterapia",
+    "clinicalRelevance": "Comprender isocinético permite al kinesiólogo evaluar patrones biomecánicos alterados y programar prescripciones de ejercicio terapéutico seguras.",
+    "clinicalCase": "Evaluación funcional de isocinético durante la rehabilitación musculoesquelética.",
+    "keyDetails": [
+      {
+        "label": "Categoría clínica",
+        "value": "Contracción Muscular"
+      },
+      {
+        "label": "Región de aplicación",
+        "value": "Global / General"
+      },
+      {
+        "label": "Definición pedagógica",
+        "value": "Ejercicio a velocidad fija constante en todo el arco."
+      },
+      {
+        "label": "Ejemplo en vida diaria",
+        "value": "Pruebas dinamométricas en rehabilitación."
+      }
+    ],
+    "svgType": "isocinetico",
+    "isFeatured": false
+  },
+  {
+    "id": "inversion",
+    "name": "Inversión",
+    "termino": "Inversión",
+    "pronunciation": "/inversion/",
+    "fonetica": "INVERSION",
+    "etymology": "Término fundamental de movimiento articular en ciencias de la salud.",
+    "category": "movimientos",
+    "categoryLabel": "Movimiento Articular",
+    "categoryClass": "bg-cat-movements/15 text-cat-movements",
+    "region": "tobillo",
+    "regionLabel": "Tobillo y Pie",
+    "level": "Básico (1er año)",
+    "readingTime": "2 min",
+    "technicalDef": "Movimiento triplanar que orienta la planta del pie hacia la línea media.",
+    "defTecnica": "Movimiento triplanar que orienta la planta del pie hacia la línea media.",
+    "simpleExplanation": "Mirar la planta del pie hacia adentro.",
+    "explicacionSencilla": "Mirar la planta del pie hacia adentro.",
+    "everydayTitle": "Ejemplo funcional: Apoyo sobre el borde externo del pie.",
+    "everydayExample": "Apoyo sobre el borde externo del pie.",
+    "analogia": "Como en la vida cotidiana: Apoyo sobre el borde externo del pie.",
+    "clinicalTitle": "Relevancia de Inversión en Fisioterapia",
+    "clinicalRelevance": "Comprender inversión permite al kinesiólogo evaluar patrones biomecánicos alterados y programar prescripciones de ejercicio terapéutico seguras.",
+    "clinicalCase": "Evaluación funcional de inversión durante la rehabilitación musculoesquelética.",
+    "keyDetails": [
+      {
+        "label": "Categoría clínica",
+        "value": "Movimiento Articular"
+      },
+      {
+        "label": "Región de aplicación",
+        "value": "Tobillo y Pie"
+      },
+      {
+        "label": "Definición pedagógica",
+        "value": "Mirar la planta del pie hacia adentro."
+      },
+      {
+        "label": "Ejemplo en vida diaria",
+        "value": "Apoyo sobre el borde externo del pie."
+      }
+    ],
+    "svgType": "inversion",
+    "isFeatured": false
+  },
+  {
+    "id": "eversion",
+    "name": "Eversión",
+    "termino": "Eversión",
+    "pronunciation": "/eversion/",
+    "fonetica": "EVERSION",
+    "etymology": "Término fundamental de movimiento articular en ciencias de la salud.",
+    "category": "movimientos",
+    "categoryLabel": "Movimiento Articular",
+    "categoryClass": "bg-cat-movements/15 text-cat-movements",
+    "region": "tobillo",
+    "regionLabel": "Tobillo y Pie",
+    "level": "Básico (1er año)",
+    "readingTime": "2 min",
+    "technicalDef": "Movimiento triplanar que orienta la planta del pie hacia afuera.",
+    "defTecnica": "Movimiento triplanar que orienta la planta del pie hacia afuera.",
+    "simpleExplanation": "Mirar la planta del pie hacia afuera.",
+    "explicacionSencilla": "Mirar la planta del pie hacia afuera.",
+    "everydayTitle": "Ejemplo funcional: Apoyo sobre el borde interno del pie.",
+    "everydayExample": "Apoyo sobre el borde interno del pie.",
+    "analogia": "Como en la vida cotidiana: Apoyo sobre el borde interno del pie.",
+    "clinicalTitle": "Relevancia de Eversión en Fisioterapia",
+    "clinicalRelevance": "Comprender eversión permite al kinesiólogo evaluar patrones biomecánicos alterados y programar prescripciones de ejercicio terapéutico seguras.",
+    "clinicalCase": "Evaluación funcional de eversión durante la rehabilitación musculoesquelética.",
+    "keyDetails": [
+      {
+        "label": "Categoría clínica",
+        "value": "Movimiento Articular"
+      },
+      {
+        "label": "Región de aplicación",
+        "value": "Tobillo y Pie"
+      },
+      {
+        "label": "Definición pedagógica",
+        "value": "Mirar la planta del pie hacia afuera."
+      },
+      {
+        "label": "Ejemplo en vida diaria",
+        "value": "Apoyo sobre el borde interno del pie."
+      }
+    ],
+    "svgType": "eversion",
+    "isFeatured": false
+  },
+  {
+    "id": "rotacion-interna",
+    "name": "Rotación Interna",
+    "termino": "Rotación Interna",
+    "pronunciation": "/rotacion-interna/",
+    "fonetica": "ROTACION-INTERNA",
+    "etymology": "Término fundamental de movimiento articular en ciencias de la salud.",
+    "category": "movimientos",
+    "categoryLabel": "Movimiento Articular",
+    "categoryClass": "bg-cat-movements/15 text-cat-movements",
+    "region": "hombro",
+    "regionLabel": "Hombro y Cadera",
+    "level": "Básico (1er año)",
+    "readingTime": "2 min",
+    "technicalDef": "Giro del hueso sobre su eje longitudinal hacia la línea media.",
+    "defTecnica": "Giro del hueso sobre su eje longitudinal hacia la línea media.",
+    "simpleExplanation": "Girar extremidad hacia adentro.",
+    "explicacionSencilla": "Girar extremidad hacia adentro.",
+    "everydayTitle": "Ejemplo funcional: Llevar la mano al vientre rotando el hombro.",
+    "everydayExample": "Llevar la mano al vientre rotando el hombro.",
+    "analogia": "Como en la vida cotidiana: Llevar la mano al vientre rotando el hombro.",
+    "clinicalTitle": "Relevancia de Rotación Interna en Fisioterapia",
+    "clinicalRelevance": "Comprender rotación interna permite al kinesiólogo evaluar patrones biomecánicos alterados y programar prescripciones de ejercicio terapéutico seguras.",
+    "clinicalCase": "Evaluación funcional de rotación interna durante la rehabilitación musculoesquelética.",
+    "keyDetails": [
+      {
+        "label": "Categoría clínica",
+        "value": "Movimiento Articular"
+      },
+      {
+        "label": "Región de aplicación",
+        "value": "Hombro y Cadera"
+      },
+      {
+        "label": "Definición pedagógica",
+        "value": "Girar extremidad hacia adentro."
+      },
+      {
+        "label": "Ejemplo en vida diaria",
+        "value": "Llevar la mano al vientre rotando el hombro."
+      }
+    ],
+    "svgType": "rotacion-interna",
+    "isFeatured": false
+  },
+  {
+    "id": "rotacion-externa",
+    "name": "Rotación Externa",
+    "termino": "Rotación Externa",
+    "pronunciation": "/rotacion-externa/",
+    "fonetica": "ROTACION-EXTERNA",
+    "etymology": "Término fundamental de movimiento articular en ciencias de la salud.",
+    "category": "movimientos",
+    "categoryLabel": "Movimiento Articular",
+    "categoryClass": "bg-cat-movements/15 text-cat-movements",
+    "region": "hombro",
+    "regionLabel": "Hombro y Cadera",
+    "level": "Básico (1er año)",
+    "readingTime": "2 min",
+    "technicalDef": "Giro del hueso sobre su eje longitudinal alejándose de la línea media.",
+    "defTecnica": "Giro del hueso sobre su eje longitudinal alejándose de la línea media.",
+    "simpleExplanation": "Girar extremidad hacia afuera.",
+    "explicacionSencilla": "Girar extremidad hacia afuera.",
+    "everydayTitle": "Ejemplo funcional: Abrir el antebrazo hacia afuera con el codo pegado.",
+    "everydayExample": "Abrir el antebrazo hacia afuera con el codo pegado.",
+    "analogia": "Como en la vida cotidiana: Abrir el antebrazo hacia afuera con el codo pegado.",
+    "clinicalTitle": "Relevancia de Rotación Externa en Fisioterapia",
+    "clinicalRelevance": "Comprender rotación externa permite al kinesiólogo evaluar patrones biomecánicos alterados y programar prescripciones de ejercicio terapéutico seguras.",
+    "clinicalCase": "Evaluación funcional de rotación externa durante la rehabilitación musculoesquelética.",
+    "keyDetails": [
+      {
+        "label": "Categoría clínica",
+        "value": "Movimiento Articular"
+      },
+      {
+        "label": "Región de aplicación",
+        "value": "Hombro y Cadera"
+      },
+      {
+        "label": "Definición pedagógica",
+        "value": "Girar extremidad hacia afuera."
+      },
+      {
+        "label": "Ejemplo en vida diaria",
+        "value": "Abrir el antebrazo hacia afuera con el codo pegado."
+      }
+    ],
+    "svgType": "rotacion-externa",
+    "isFeatured": false
+  },
+  {
+    "id": "circunduccion",
+    "name": "Circunducción",
+    "termino": "Circunducción",
+    "pronunciation": "/circunduccion/",
+    "fonetica": "CIRCUNDUCCION",
+    "etymology": "Término fundamental de movimiento articular en ciencias de la salud.",
+    "category": "movimientos",
+    "categoryLabel": "Movimiento Articular",
+    "categoryClass": "bg-cat-movements/15 text-cat-movements",
+    "region": "hombro",
+    "regionLabel": "Hombro y Cadera",
+    "level": "Básico (1er año)",
+    "readingTime": "2 min",
+    "technicalDef": "Movimiento circular secuencial que combina flexión, abducción, extensión y aducción.",
+    "defTecnica": "Movimiento circular secuencial que combina flexión, abducción, extensión y aducción.",
+    "simpleExplanation": "Trazar círculos cónicos completos con brazo o pierna.",
+    "explicacionSencilla": "Trazar círculos cónicos completos con brazo o pierna.",
+    "everydayTitle": "Ejemplo funcional: Hacer círculos amplios con el brazo en el aire.",
+    "everydayExample": "Hacer círculos amplios con el brazo en el aire.",
+    "analogia": "Como en la vida cotidiana: Hacer círculos amplios con el brazo en el aire.",
+    "clinicalTitle": "Relevancia de Circunducción en Fisioterapia",
+    "clinicalRelevance": "Comprender circunducción permite al kinesiólogo evaluar patrones biomecánicos alterados y programar prescripciones de ejercicio terapéutico seguras.",
+    "clinicalCase": "Evaluación funcional de circunducción durante la rehabilitación musculoesquelética.",
+    "keyDetails": [
+      {
+        "label": "Categoría clínica",
+        "value": "Movimiento Articular"
+      },
+      {
+        "label": "Región de aplicación",
+        "value": "Hombro y Cadera"
+      },
+      {
+        "label": "Definición pedagógica",
+        "value": "Trazar círculos cónicos completos con brazo o pierna."
+      },
+      {
+        "label": "Ejemplo en vida diaria",
+        "value": "Hacer círculos amplios con el brazo en el aire."
+      }
+    ],
+    "svgType": "circunduccion",
+    "isFeatured": false
+  },
+  {
+    "id": "dorsiflexion",
+    "name": "Dorsiflexión",
+    "termino": "Dorsiflexión",
+    "pronunciation": "/dorsiflexion/",
+    "fonetica": "DORSIFLEXION",
+    "etymology": "Término fundamental de movimiento articular en ciencias de la salud.",
+    "category": "movimientos",
+    "categoryLabel": "Movimiento Articular",
+    "categoryClass": "bg-cat-movements/15 text-cat-movements",
+    "region": "tobillo",
+    "regionLabel": "Tobillo",
+    "level": "Básico (1er año)",
+    "readingTime": "2 min",
+    "technicalDef": "Movimiento que eleva el dorso del pie acercándolo a la cara anterior de la tibia.",
+    "defTecnica": "Movimiento que eleva el dorso del pie acercándolo a la cara anterior de la tibia.",
+    "simpleExplanation": "Apuntar la punta del pie hacia arriba y el techo.",
+    "explicacionSencilla": "Apuntar la punta del pie hacia arriba y el techo.",
+    "everydayTitle": "Ejemplo funcional: Caminar apoyándose solo sobre los talones.",
+    "everydayExample": "Caminar apoyándose solo sobre los talones.",
+    "analogia": "Como en la vida cotidiana: Caminar apoyándose solo sobre los talones.",
+    "clinicalTitle": "Relevancia de Dorsiflexión en Fisioterapia",
+    "clinicalRelevance": "Comprender dorsiflexión permite al kinesiólogo evaluar patrones biomecánicos alterados y programar prescripciones de ejercicio terapéutico seguras.",
+    "clinicalCase": "Evaluación funcional de dorsiflexión durante la rehabilitación musculoesquelética.",
+    "keyDetails": [
+      {
+        "label": "Categoría clínica",
+        "value": "Movimiento Articular"
+      },
+      {
+        "label": "Región de aplicación",
+        "value": "Tobillo"
+      },
+      {
+        "label": "Definición pedagógica",
+        "value": "Apuntar la punta del pie hacia arriba y el techo."
+      },
+      {
+        "label": "Ejemplo en vida diaria",
+        "value": "Caminar apoyándose solo sobre los talones."
+      }
+    ],
+    "svgType": "dorsiflexion",
+    "isFeatured": false
+  },
+  {
+    "id": "plantiflexion",
+    "name": "Plantiflexión",
+    "termino": "Plantiflexión",
+    "pronunciation": "/plantiflexion/",
+    "fonetica": "PLANTIFLEXION",
+    "etymology": "Término fundamental de movimiento articular en ciencias de la salud.",
+    "category": "movimientos",
+    "categoryLabel": "Movimiento Articular",
+    "categoryClass": "bg-cat-movements/15 text-cat-movements",
+    "region": "tobillo",
+    "regionLabel": "Tobillo",
+    "level": "Básico (1er año)",
+    "readingTime": "2 min",
+    "technicalDef": "Movimiento que empuja la planta del pie hacia el suelo alejándola de la tibia.",
+    "defTecnica": "Movimiento que empuja la planta del pie hacia el suelo alejándola de la tibia.",
+    "simpleExplanation": "Apuntar la punta del pie hacia abajo.",
+    "explicacionSencilla": "Apuntar la punta del pie hacia abajo.",
+    "everydayTitle": "Ejemplo funcional: Ponerse de puntillas para alcanzar algo alto.",
+    "everydayExample": "Ponerse de puntillas para alcanzar algo alto.",
+    "analogia": "Como en la vida cotidiana: Ponerse de puntillas para alcanzar algo alto.",
+    "clinicalTitle": "Relevancia de Plantiflexión en Fisioterapia",
+    "clinicalRelevance": "Comprender plantiflexión permite al kinesiólogo evaluar patrones biomecánicos alterados y programar prescripciones de ejercicio terapéutico seguras.",
+    "clinicalCase": "Evaluación funcional de plantiflexión durante la rehabilitación musculoesquelética.",
+    "keyDetails": [
+      {
+        "label": "Categoría clínica",
+        "value": "Movimiento Articular"
+      },
+      {
+        "label": "Región de aplicación",
+        "value": "Tobillo"
+      },
+      {
+        "label": "Definición pedagógica",
+        "value": "Apuntar la punta del pie hacia abajo."
+      },
+      {
+        "label": "Ejemplo en vida diaria",
+        "value": "Ponerse de puntillas para alcanzar algo alto."
+      }
+    ],
+    "svgType": "plantiflexion",
+    "isFeatured": false
+  },
+  {
+    "id": "anteversion",
+    "name": "Anteversión",
+    "termino": "Anteversión",
+    "pronunciation": "/anteversion/",
+    "fonetica": "ANTEVERSION",
+    "etymology": "Término fundamental de biomecánica pelviana en ciencias de la salud.",
+    "category": "articulaciones",
+    "categoryLabel": "Biomecánica Pelviana",
+    "categoryClass": "bg-cat-joints/15 text-cat-joints",
+    "region": "cadera",
+    "regionLabel": "Pelvis y Cadera",
+    "level": "Básico (1er año)",
+    "readingTime": "2 min",
+    "technicalDef": "Inclinación anterior de la pelvis sobre la cabeza femoral que incrementa la lordosis lumbar.",
+    "defTecnica": "Inclinación anterior de la pelvis sobre la cabeza femoral que incrementa la lordosis lumbar.",
+    "simpleExplanation": "Sacar glúteos e inclinar la pelvis hacia adelante.",
+    "explicacionSencilla": "Sacar glúteos e inclinar la pelvis hacia adelante.",
+    "everydayTitle": "Ejemplo funcional: Acentuar la curvatura lumbar en bipedestación.",
+    "everydayExample": "Acentuar la curvatura lumbar en bipedestación.",
+    "analogia": "Como en la vida cotidiana: Acentuar la curvatura lumbar en bipedestación.",
+    "clinicalTitle": "Relevancia de Anteversión en Fisioterapia",
+    "clinicalRelevance": "Comprender anteversión permite al kinesiólogo evaluar patrones biomecánicos alterados y programar prescripciones de ejercicio terapéutico seguras.",
+    "clinicalCase": "Evaluación funcional de anteversión durante la rehabilitación musculoesquelética.",
+    "keyDetails": [
+      {
+        "label": "Categoría clínica",
+        "value": "Biomecánica Pelviana"
+      },
+      {
+        "label": "Región de aplicación",
+        "value": "Pelvis y Cadera"
+      },
+      {
+        "label": "Definición pedagógica",
+        "value": "Sacar glúteos e inclinar la pelvis hacia adelante."
+      },
+      {
+        "label": "Ejemplo en vida diaria",
+        "value": "Acentuar la curvatura lumbar en bipedestación."
+      }
+    ],
+    "svgType": "anteversion",
+    "isFeatured": false
+  },
+  {
+    "id": "retroversion",
+    "name": "Retroversión",
+    "termino": "Retroversión",
+    "pronunciation": "/retroversion/",
+    "fonetica": "RETROVERSION",
+    "etymology": "Término fundamental de biomecánica pelviana en ciencias de la salud.",
+    "category": "articulaciones",
+    "categoryLabel": "Biomecánica Pelviana",
+    "categoryClass": "bg-cat-joints/15 text-cat-joints",
+    "region": "cadera",
+    "regionLabel": "Pelvis y Cadera",
+    "level": "Básico (1er año)",
+    "readingTime": "2 min",
+    "technicalDef": "Inclinación posterior de la pelvis que aplana la curva lordótica lumbar.",
+    "defTecnica": "Inclinación posterior de la pelvis que aplana la curva lordótica lumbar.",
+    "simpleExplanation": "Meter la pelvis aplanando la espalda baja.",
+    "explicacionSencilla": "Meter la pelvis aplanando la espalda baja.",
+    "everydayTitle": "Ejemplo funcional: Aplanar la columna lumbar contra el suelo en colchoneta.",
+    "everydayExample": "Aplanar la columna lumbar contra el suelo en colchoneta.",
+    "analogia": "Como en la vida cotidiana: Aplanar la columna lumbar contra el suelo en colchoneta.",
+    "clinicalTitle": "Relevancia de Retroversión en Fisioterapia",
+    "clinicalRelevance": "Comprender retroversión permite al kinesiólogo evaluar patrones biomecánicos alterados y programar prescripciones de ejercicio terapéutico seguras.",
+    "clinicalCase": "Evaluación funcional de retroversión durante la rehabilitación musculoesquelética.",
+    "keyDetails": [
+      {
+        "label": "Categoría clínica",
+        "value": "Biomecánica Pelviana"
+      },
+      {
+        "label": "Región de aplicación",
+        "value": "Pelvis y Cadera"
+      },
+      {
+        "label": "Definición pedagógica",
+        "value": "Meter la pelvis aplanando la espalda baja."
+      },
+      {
+        "label": "Ejemplo en vida diaria",
+        "value": "Aplanar la columna lumbar contra el suelo en colchoneta."
+      }
+    ],
+    "svgType": "retroversion",
+    "isFeatured": false
+  },
+  {
+    "id": "protraccion",
+    "name": "Protracción",
+    "termino": "Protracción",
+    "pronunciation": "/protraccion/",
+    "fonetica": "PROTRACCION",
+    "etymology": "Término fundamental de movimiento escapular en ciencias de la salud.",
+    "category": "movimientos",
+    "categoryLabel": "Movimiento Escapular",
+    "categoryClass": "bg-cat-movements/15 text-cat-movements",
+    "region": "hombro",
+    "regionLabel": "Hombro y Escápula",
+    "level": "Básico (1er año)",
+    "readingTime": "2 min",
+    "technicalDef": "Desplazamiento anterolateral de las escápulas sobre la caja torácica.",
+    "defTecnica": "Desplazamiento anterolateral de las escápulas sobre la caja torácica.",
+    "simpleExplanation": "Llevar los hombros hacia adelante separando omóplatos.",
+    "explicacionSencilla": "Llevar los hombros hacia adelante separando omóplatos.",
+    "everydayTitle": "Ejemplo funcional: Empujar contra una pared al final de una flexión de brazos.",
+    "everydayExample": "Empujar contra una pared al final de una flexión de brazos.",
+    "analogia": "Como en la vida cotidiana: Empujar contra una pared al final de una flexión de brazos.",
+    "clinicalTitle": "Relevancia de Protracción en Fisioterapia",
+    "clinicalRelevance": "Comprender protracción permite al kinesiólogo evaluar patrones biomecánicos alterados y programar prescripciones de ejercicio terapéutico seguras.",
+    "clinicalCase": "Evaluación funcional de protracción durante la rehabilitación musculoesquelética.",
+    "keyDetails": [
+      {
+        "label": "Categoría clínica",
+        "value": "Movimiento Escapular"
+      },
+      {
+        "label": "Región de aplicación",
+        "value": "Hombro y Escápula"
+      },
+      {
+        "label": "Definición pedagógica",
+        "value": "Llevar los hombros hacia adelante separando omóplatos."
+      },
+      {
+        "label": "Ejemplo en vida diaria",
+        "value": "Empujar contra una pared al final de una flexión de brazos."
+      }
+    ],
+    "svgType": "protraccion",
+    "isFeatured": false
+  },
+  {
+    "id": "retraccion",
+    "name": "Retracción",
+    "termino": "Retracción",
+    "pronunciation": "/retraccion/",
+    "fonetica": "RETRACCION",
+    "etymology": "Término fundamental de movimiento escapular en ciencias de la salud.",
+    "category": "movimientos",
+    "categoryLabel": "Movimiento Escapular",
+    "categoryClass": "bg-cat-movements/15 text-cat-movements",
+    "region": "hombro",
+    "regionLabel": "Hombro y Escápula",
+    "level": "Básico (1er año)",
+    "readingTime": "2 min",
+    "technicalDef": "Desplazamiento posteromedial de las escápulas acercándose a la columna vertebral.",
+    "defTecnica": "Desplazamiento posteromedial de las escápulas acercándose a la columna vertebral.",
+    "simpleExplanation": "Juntar las escápulas atrás sacando pecho erguido.",
+    "explicacionSencilla": "Juntar las escápulas atrás sacando pecho erguido.",
+    "everydayTitle": "Ejemplo funcional: Juntar las paletas de la espalda al hacer remo en polea.",
+    "everydayExample": "Juntar las paletas de la espalda al hacer remo en polea.",
+    "analogia": "Como en la vida cotidiana: Juntar las paletas de la espalda al hacer remo en polea.",
+    "clinicalTitle": "Relevancia de Retracción en Fisioterapia",
+    "clinicalRelevance": "Comprender retracción permite al kinesiólogo evaluar patrones biomecánicos alterados y programar prescripciones de ejercicio terapéutico seguras.",
+    "clinicalCase": "Evaluación funcional de retracción durante la rehabilitación musculoesquelética.",
+    "keyDetails": [
+      {
+        "label": "Categoría clínica",
+        "value": "Movimiento Escapular"
+      },
+      {
+        "label": "Región de aplicación",
+        "value": "Hombro y Escápula"
+      },
+      {
+        "label": "Definición pedagógica",
+        "value": "Juntar las escápulas atrás sacando pecho erguido."
+      },
+      {
+        "label": "Ejemplo en vida diaria",
+        "value": "Juntar las paletas de la espalda al hacer remo en polea."
+      }
+    ],
+    "svgType": "retraccion",
+    "isFeatured": false
+  },
+  {
+    "id": "elevacion",
+    "name": "Elevación",
+    "termino": "Elevación",
+    "pronunciation": "/elevacion/",
+    "fonetica": "ELEVACION",
+    "etymology": "Término fundamental de movimiento escapular en ciencias de la salud.",
+    "category": "movimientos",
+    "categoryLabel": "Movimiento Escapular",
+    "categoryClass": "bg-cat-movements/15 text-cat-movements",
+    "region": "hombro",
+    "regionLabel": "Hombro y Mandíbula",
+    "level": "Básico (1er año)",
+    "readingTime": "2 min",
+    "technicalDef": "Desplazamiento en sentido craneal o hacia arriba de una estructura ósea.",
+    "defTecnica": "Desplazamiento en sentido craneal o hacia arriba de una estructura ósea.",
+    "simpleExplanation": "Subir los hombros o cerrar la mandíbula hacia arriba.",
+    "explicacionSencilla": "Subir los hombros o cerrar la mandíbula hacia arriba.",
+    "everydayTitle": "Ejemplo funcional: Gesto de encogerse de hombros diciendo 'no sé'.",
+    "everydayExample": "Gesto de encogerse de hombros diciendo 'no sé'.",
+    "analogia": "Como en la vida cotidiana: Gesto de encogerse de hombros diciendo 'no sé'.",
+    "clinicalTitle": "Relevancia de Elevación en Fisioterapia",
+    "clinicalRelevance": "Comprender elevación permite al kinesiólogo evaluar patrones biomecánicos alterados y programar prescripciones de ejercicio terapéutico seguras.",
+    "clinicalCase": "Evaluación funcional de elevación durante la rehabilitación musculoesquelética.",
+    "keyDetails": [
+      {
+        "label": "Categoría clínica",
+        "value": "Movimiento Escapular"
+      },
+      {
+        "label": "Región de aplicación",
+        "value": "Hombro y Mandíbula"
+      },
+      {
+        "label": "Definición pedagógica",
+        "value": "Subir los hombros o cerrar la mandíbula hacia arriba."
+      },
+      {
+        "label": "Ejemplo en vida diaria",
+        "value": "Gesto de encogerse de hombros diciendo 'no sé'."
+      }
+    ],
+    "svgType": "elevacion",
+    "isFeatured": false
+  },
+  {
+    "id": "depresion",
+    "name": "Depresión",
+    "termino": "Depresión",
+    "pronunciation": "/depresion/",
+    "fonetica": "DEPRESION",
+    "etymology": "Término fundamental de movimiento escapular en ciencias de la salud.",
+    "category": "movimientos",
+    "categoryLabel": "Movimiento Escapular",
+    "categoryClass": "bg-cat-movements/15 text-cat-movements",
+    "region": "hombro",
+    "regionLabel": "Hombro y Mandíbula",
+    "level": "Básico (1er año)",
+    "readingTime": "2 min",
+    "technicalDef": "Desplazamiento en sentido caudal o hacia abajo de una estructura ósea.",
+    "defTecnica": "Desplazamiento en sentido caudal o hacia abajo de una estructura ósea.",
+    "simpleExplanation": "Bajar los hombros o descender la mandíbula al abrir la boca.",
+    "explicacionSencilla": "Bajar los hombros o descender la mandíbula al abrir la boca.",
+    "everydayTitle": "Ejemplo funcional: Descender hombros activando dorsal y pectoral menor.",
+    "everydayExample": "Descender hombros activando dorsal y pectoral menor.",
+    "analogia": "Como en la vida cotidiana: Descender hombros activando dorsal y pectoral menor.",
+    "clinicalTitle": "Relevancia de Depresión en Fisioterapia",
+    "clinicalRelevance": "Comprender depresión permite al kinesiólogo evaluar patrones biomecánicos alterados y programar prescripciones de ejercicio terapéutico seguras.",
+    "clinicalCase": "Evaluación funcional de depresión durante la rehabilitación musculoesquelética.",
+    "keyDetails": [
+      {
+        "label": "Categoría clínica",
+        "value": "Movimiento Escapular"
+      },
+      {
+        "label": "Región de aplicación",
+        "value": "Hombro y Mandíbula"
+      },
+      {
+        "label": "Definición pedagógica",
+        "value": "Bajar los hombros o descender la mandíbula al abrir la boca."
+      },
+      {
+        "label": "Ejemplo en vida diaria",
+        "value": "Descender hombros activando dorsal y pectoral menor."
+      }
+    ],
+    "svgType": "depresion",
+    "isFeatured": false
+  },
+  {
+    "id": "valgo",
+    "name": "Valgo",
+    "termino": "Valgo",
+    "pronunciation": "/valgo/",
+    "fonetica": "VALGO",
+    "etymology": "Término fundamental de alineación articular en ciencias de la salud.",
+    "category": "articulaciones",
+    "categoryLabel": "Alineación Articular",
+    "categoryClass": "bg-cat-joints/15 text-cat-joints",
+    "region": "rodilla",
+    "regionLabel": "Rodilla y Codo",
+    "level": "Básico (1er año)",
+    "readingTime": "2 min",
+    "technicalDef": "Desviación angular del segmento distal hacia afuera alejándose de la línea media.",
+    "defTecnica": "Desviación angular del segmento distal hacia afuera alejándose de la línea media.",
+    "simpleExplanation": "Articulaciones aproximadas al centro ('rodillas en X').",
+    "explicacionSencilla": "Articulaciones aproximadas al centro ('rodillas en X').",
+    "everydayTitle": "Ejemplo funcional: Genu valgo visible al aterrizar de un salto.",
+    "everydayExample": "Genu valgo visible al aterrizar de un salto.",
+    "analogia": "Como en la vida cotidiana: Genu valgo visible al aterrizar de un salto.",
+    "clinicalTitle": "Relevancia de Valgo en Fisioterapia",
+    "clinicalRelevance": "Comprender valgo permite al kinesiólogo evaluar patrones biomecánicos alterados y programar prescripciones de ejercicio terapéutico seguras.",
+    "clinicalCase": "Evaluación funcional de valgo durante la rehabilitación musculoesquelética.",
+    "keyDetails": [
+      {
+        "label": "Categoría clínica",
+        "value": "Alineación Articular"
+      },
+      {
+        "label": "Región de aplicación",
+        "value": "Rodilla y Codo"
+      },
+      {
+        "label": "Definición pedagógica",
+        "value": "Articulaciones aproximadas al centro ('rodillas en X')."
+      },
+      {
+        "label": "Ejemplo en vida diaria",
+        "value": "Genu valgo visible al aterrizar de un salto."
+      }
+    ],
+    "svgType": "valgo",
+    "isFeatured": false
+  },
+  {
+    "id": "varo",
+    "name": "Varo",
+    "termino": "Varo",
+    "pronunciation": "/varo/",
+    "fonetica": "VARO",
+    "etymology": "Término fundamental de alineación articular en ciencias de la salud.",
+    "category": "articulaciones",
+    "categoryLabel": "Alineación Articular",
+    "categoryClass": "bg-cat-joints/15 text-cat-joints",
+    "region": "rodilla",
+    "regionLabel": "Rodilla y Codo",
+    "level": "Básico (1er año)",
+    "readingTime": "2 min",
+    "technicalDef": "Desviación angular del segmento distal hacia adentro acercándose a la línea media.",
+    "defTecnica": "Desviación angular del segmento distal hacia adentro acercándose a la línea media.",
+    "simpleExplanation": "Alineación arqueada hacia afuera ('piernas de vaquero').",
+    "explicacionSencilla": "Alineación arqueada hacia afuera ('piernas de vaquero').",
+    "everydayTitle": "Ejemplo funcional: Genu varo habitual en futbolistas y arqueros.",
+    "everydayExample": "Genu varo habitual en futbolistas y arqueros.",
+    "analogia": "Como en la vida cotidiana: Genu varo habitual en futbolistas y arqueros.",
+    "clinicalTitle": "Relevancia de Varo en Fisioterapia",
+    "clinicalRelevance": "Comprender varo permite al kinesiólogo evaluar patrones biomecánicos alterados y programar prescripciones de ejercicio terapéutico seguras.",
+    "clinicalCase": "Evaluación funcional de varo durante la rehabilitación musculoesquelética.",
+    "keyDetails": [
+      {
+        "label": "Categoría clínica",
+        "value": "Alineación Articular"
+      },
+      {
+        "label": "Región de aplicación",
+        "value": "Rodilla y Codo"
+      },
+      {
+        "label": "Definición pedagógica",
+        "value": "Alineación arqueada hacia afuera ('piernas de vaquero')."
+      },
+      {
+        "label": "Ejemplo en vida diaria",
+        "value": "Genu varo habitual en futbolistas y arqueros."
+      }
+    ],
+    "svgType": "varo",
+    "isFeatured": false
+  },
+  {
+    "id": "cifosis",
+    "name": "Cifosis",
+    "termino": "Cifosis",
+    "pronunciation": "/cifosis/",
+    "fonetica": "CIFOSIS",
+    "etymology": "Término fundamental de columna vertebral en ciencias de la salud.",
+    "category": "huesos",
+    "categoryLabel": "Columna Vertebral",
+    "categoryClass": "bg-cat-bones/15 text-cat-bones",
+    "region": "columna",
+    "regionLabel": "Columna Vertebral",
+    "level": "Básico (1er año)",
+    "readingTime": "2 min",
+    "technicalDef": "Curvatura fisiológica o patológica de convexidad posterior en el plano sagital dorsal.",
+    "defTecnica": "Curvatura fisiológica o patológica de convexidad posterior en el plano sagital dorsal.",
+    "simpleExplanation": "Curvatura convexa o joroba en la espalda alta.",
+    "explicacionSencilla": "Curvatura convexa o joroba en la espalda alta.",
+    "everydayTitle": "Ejemplo funcional: Incremento de cifosis dorsal por trabajo prolongado en computador.",
+    "everydayExample": "Incremento de cifosis dorsal por trabajo prolongado en computador.",
+    "analogia": "Como en la vida cotidiana: Incremento de cifosis dorsal por trabajo prolongado en computador.",
+    "clinicalTitle": "Relevancia de Cifosis en Fisioterapia",
+    "clinicalRelevance": "Comprender cifosis permite al kinesiólogo evaluar patrones biomecánicos alterados y programar prescripciones de ejercicio terapéutico seguras.",
+    "clinicalCase": "Evaluación funcional de cifosis durante la rehabilitación musculoesquelética.",
+    "keyDetails": [
+      {
+        "label": "Categoría clínica",
+        "value": "Columna Vertebral"
+      },
+      {
+        "label": "Región de aplicación",
+        "value": "Columna Vertebral"
+      },
+      {
+        "label": "Definición pedagógica",
+        "value": "Curvatura convexa o joroba en la espalda alta."
+      },
+      {
+        "label": "Ejemplo en vida diaria",
+        "value": "Incremento de cifosis dorsal por trabajo prolongado en computador."
+      }
+    ],
+    "svgType": "cifosis",
+    "isFeatured": false
+  },
+  {
+    "id": "lordosis",
+    "name": "Lordosis",
+    "termino": "Lordosis",
+    "pronunciation": "/lordosis/",
+    "fonetica": "LORDOSIS",
+    "etymology": "Término fundamental de columna vertebral en ciencias de la salud.",
+    "category": "huesos",
+    "categoryLabel": "Columna Vertebral",
+    "categoryClass": "bg-cat-bones/15 text-cat-bones",
+    "region": "columna",
+    "regionLabel": "Columna Vertebral",
+    "level": "Básico (1er año)",
+    "readingTime": "2 min",
+    "technicalDef": "Curvatura fisiológica o patológica de concavidad posterior en región cervical o lumbar.",
+    "defTecnica": "Curvatura fisiológica o patológica de concavidad posterior en región cervical o lumbar.",
+    "simpleExplanation": "Curva normal o aumentada hacia adentro en cuello o cintura.",
+    "explicacionSencilla": "Curva normal o aumentada hacia adentro en cuello o cintura.",
+    "everydayTitle": "Ejemplo funcional: Hiperlordosis lumbar adaptativa durante el embarazo.",
+    "everydayExample": "Hiperlordosis lumbar adaptativa durante el embarazo.",
+    "analogia": "Como en la vida cotidiana: Hiperlordosis lumbar adaptativa durante el embarazo.",
+    "clinicalTitle": "Relevancia de Lordosis en Fisioterapia",
+    "clinicalRelevance": "Comprender lordosis permite al kinesiólogo evaluar patrones biomecánicos alterados y programar prescripciones de ejercicio terapéutico seguras.",
+    "clinicalCase": "Evaluación funcional de lordosis durante la rehabilitación musculoesquelética.",
+    "keyDetails": [
+      {
+        "label": "Categoría clínica",
+        "value": "Columna Vertebral"
+      },
+      {
+        "label": "Región de aplicación",
+        "value": "Columna Vertebral"
+      },
+      {
+        "label": "Definición pedagógica",
+        "value": "Curva normal o aumentada hacia adentro en cuello o cintura."
+      },
+      {
+        "label": "Ejemplo en vida diaria",
+        "value": "Hiperlordosis lumbar adaptativa durante el embarazo."
+      }
+    ],
+    "svgType": "lordosis",
+    "isFeatured": false
+  },
+  {
+    "id": "escoliosis",
+    "name": "Escoliosis",
+    "termino": "Escoliosis",
+    "pronunciation": "/escoliosis/",
+    "fonetica": "ESCOLIOSIS",
+    "etymology": "Término fundamental de columna vertebral en ciencias de la salud.",
+    "category": "huesos",
+    "categoryLabel": "Columna Vertebral",
+    "categoryClass": "bg-cat-bones/15 text-cat-bones",
+    "region": "columna",
+    "regionLabel": "Columna Vertebral",
+    "level": "Básico (1er año)",
+    "readingTime": "2 min",
+    "technicalDef": "Desviación tridimensional lateral estructurada de la columna vertebral en 'S' o 'C'.",
+    "defTecnica": "Desviación tridimensional lateral estructurada de la columna vertebral en 'S' o 'C'.",
+    "simpleExplanation": "Columna torcida lateralmente hacia un costado.",
+    "explicacionSencilla": "Columna torcida lateralmente hacia un costado.",
+    "everydayTitle": "Ejemplo funcional: Asimetría en la altura de hombros o escápulas al inclinarse.",
+    "everydayExample": "Asimetría en la altura de hombros o escápulas al inclinarse.",
+    "analogia": "Como en la vida cotidiana: Asimetría en la altura de hombros o escápulas al inclinarse.",
+    "clinicalTitle": "Relevancia de Escoliosis en Fisioterapia",
+    "clinicalRelevance": "Comprender escoliosis permite al kinesiólogo evaluar patrones biomecánicos alterados y programar prescripciones de ejercicio terapéutico seguras.",
+    "clinicalCase": "Evaluación funcional de escoliosis durante la rehabilitación musculoesquelética.",
+    "keyDetails": [
+      {
+        "label": "Categoría clínica",
+        "value": "Columna Vertebral"
+      },
+      {
+        "label": "Región de aplicación",
+        "value": "Columna Vertebral"
+      },
+      {
+        "label": "Definición pedagógica",
+        "value": "Columna torcida lateralmente hacia un costado."
+      },
+      {
+        "label": "Ejemplo en vida diaria",
+        "value": "Asimetría en la altura de hombros o escápulas al inclinarse."
+      }
+    ],
+    "svgType": "escoliosis",
+    "isFeatured": false
+  },
+  {
+    "id": "fascia",
+    "name": "Fascia",
+    "termino": "Fascia",
+    "pronunciation": "/fascia/",
+    "fonetica": "FASCIA",
+    "etymology": "Término fundamental de tejido conectivo y fascias en ciencias de la salud.",
+    "category": "huesos",
+    "categoryLabel": "Tejido Conectivo y Fascias",
+    "categoryClass": "bg-cat-bones/15 text-cat-bones",
+    "region": "general",
+    "regionLabel": "Global / General",
+    "level": "Básico (1er año)",
+    "readingTime": "2 min",
+    "technicalDef": "Red viscoelástica continua de tejido conectivo denso que envuelve y conecta músculos y vísceras.",
+    "defTecnica": "Red viscoelástica continua de tejido conectivo denso que envuelve y conecta músculos y vísceras.",
+    "simpleExplanation": "Envoltura elástica continua que conecta todo el cuerpo.",
+    "explicacionSencilla": "Envoltura elástica continua que conecta todo el cuerpo.",
+    "everydayTitle": "Ejemplo funcional: Fascia toracolumbar o fascia plantar del pie.",
+    "everydayExample": "Fascia toracolumbar o fascia plantar del pie.",
+    "analogia": "Como en la vida cotidiana: Fascia toracolumbar o fascia plantar del pie.",
+    "clinicalTitle": "Relevancia de Fascia en Fisioterapia",
+    "clinicalRelevance": "Comprender fascia permite al kinesiólogo evaluar patrones biomecánicos alterados y programar prescripciones de ejercicio terapéutico seguras.",
+    "clinicalCase": "Evaluación funcional de fascia durante la rehabilitación musculoesquelética.",
+    "keyDetails": [
+      {
+        "label": "Categoría clínica",
+        "value": "Tejido Conectivo y Fascias"
+      },
+      {
+        "label": "Región de aplicación",
+        "value": "Global / General"
+      },
+      {
+        "label": "Definición pedagógica",
+        "value": "Envoltura elástica continua que conecta todo el cuerpo."
+      },
+      {
+        "label": "Ejemplo en vida diaria",
+        "value": "Fascia toracolumbar o fascia plantar del pie."
+      }
+    ],
+    "svgType": "fascia",
+    "isFeatured": false
+  },
+  {
+    "id": "tono-muscular",
+    "name": "Tono Muscular",
+    "termino": "Tono Muscular",
+    "pronunciation": "/tono-muscular/",
+    "fonetica": "TONO-MUSCULAR",
+    "etymology": "Término fundamental de neurofisiología en ciencias de la salud.",
+    "category": "musculos",
+    "categoryLabel": "Neurofisiología",
+    "categoryClass": "bg-cat-muscles/15 text-cat-muscles",
+    "region": "general",
+    "regionLabel": "Global / General",
+    "level": "Básico (1er año)",
+    "readingTime": "2 min",
+    "technicalDef": "Estado basal de tensión pasiva y semicontracción refleja continua del músculo en reposo.",
+    "defTecnica": "Estado basal de tensión pasiva y semicontracción refleja continua del músculo en reposo.",
+    "simpleExplanation": "Firmeza de base y resistencia pasiva del músculo sano.",
+    "explicacionSencilla": "Firmeza de base y resistencia pasiva del músculo sano.",
+    "everydayTitle": "Ejemplo funcional: Tono muscular de cuello para sostener la cabeza erguida.",
+    "everydayExample": "Tono muscular de cuello para sostener la cabeza erguida.",
+    "analogia": "Como en la vida cotidiana: Tono muscular de cuello para sostener la cabeza erguida.",
+    "clinicalTitle": "Relevancia de Tono Muscular en Fisioterapia",
+    "clinicalRelevance": "Comprender tono muscular permite al kinesiólogo evaluar patrones biomecánicos alterados y programar prescripciones de ejercicio terapéutico seguras.",
+    "clinicalCase": "Evaluación funcional de tono muscular durante la rehabilitación musculoesquelética.",
+    "keyDetails": [
+      {
+        "label": "Categoría clínica",
+        "value": "Neurofisiología"
+      },
+      {
+        "label": "Región de aplicación",
+        "value": "Global / General"
+      },
+      {
+        "label": "Definición pedagógica",
+        "value": "Firmeza de base y resistencia pasiva del músculo sano."
+      },
+      {
+        "label": "Ejemplo en vida diaria",
+        "value": "Tono muscular de cuello para sostener la cabeza erguida."
+      }
+    ],
+    "svgType": "tono-muscular",
+    "isFeatured": false
+  },
+  {
+    "id": "hipertrofia",
+    "name": "Hipertrofia",
+    "termino": "Hipertrofia",
+    "pronunciation": "/hipertrofia/",
+    "fonetica": "HIPERTROFIA",
+    "etymology": "Término fundamental de fisiología muscular en ciencias de la salud.",
+    "category": "musculos",
+    "categoryLabel": "Fisiología Muscular",
+    "categoryClass": "bg-cat-muscles/15 text-cat-muscles",
+    "region": "general",
+    "regionLabel": "Global / General",
+    "level": "Básico (1er año)",
+    "readingTime": "2 min",
+    "technicalDef": "Aumento volumétrico y transversal del diámetro de las fibras musculares esqueléticas.",
+    "defTecnica": "Aumento volumétrico y transversal del diámetro de las fibras musculares esqueléticas.",
+    "simpleExplanation": "Crecimiento del tamaño y masa del músculo por entrenamiento.",
+    "explicacionSencilla": "Crecimiento del tamaño y masa del músculo por entrenamiento.",
+    "everydayTitle": "Ejemplo funcional: Aumento del cuadríceps tras meses de sentadillas progresivas.",
+    "everydayExample": "Aumento del cuadríceps tras meses de sentadillas progresivas.",
+    "analogia": "Como en la vida cotidiana: Aumento del cuadríceps tras meses de sentadillas progresivas.",
+    "clinicalTitle": "Relevancia de Hipertrofia en Fisioterapia",
+    "clinicalRelevance": "Comprender hipertrofia permite al kinesiólogo evaluar patrones biomecánicos alterados y programar prescripciones de ejercicio terapéutico seguras.",
+    "clinicalCase": "Evaluación funcional de hipertrofia durante la rehabilitación musculoesquelética.",
+    "keyDetails": [
+      {
+        "label": "Categoría clínica",
+        "value": "Fisiología Muscular"
+      },
+      {
+        "label": "Región de aplicación",
+        "value": "Global / General"
+      },
+      {
+        "label": "Definición pedagógica",
+        "value": "Crecimiento del tamaño y masa del músculo por entrenamiento."
+      },
+      {
+        "label": "Ejemplo en vida diaria",
+        "value": "Aumento del cuadríceps tras meses de sentadillas progresivas."
+      }
+    ],
+    "svgType": "hipertrofia",
+    "isFeatured": false
+  },
+  {
+    "id": "atrofia",
+    "name": "Atrofia",
+    "termino": "Atrofia",
+    "pronunciation": "/atrofia/",
+    "fonetica": "ATROFIA",
+    "etymology": "Término fundamental de fisiología muscular en ciencias de la salud.",
+    "category": "musculos",
+    "categoryLabel": "Fisiología Muscular",
+    "categoryClass": "bg-cat-muscles/15 text-cat-muscles",
+    "region": "general",
+    "regionLabel": "Global / General",
+    "level": "Básico (1er año)",
+    "readingTime": "2 min",
+    "technicalDef": "Disminución de masa, calibre fibrilar y fuerza muscular debida a desuso, denervación o lesión.",
+    "defTecnica": "Disminución de masa, calibre fibrilar y fuerza muscular debida a desuso, denervación o lesión.",
+    "simpleExplanation": "Pérdida de volumen y masa muscular por no usar el miembro.",
+    "explicacionSencilla": "Pérdida de volumen y masa muscular por no usar el miembro.",
+    "everydayTitle": "Ejemplo funcional: Pérdida notable del volumen del muslo tras 6 semanas con yeso.",
+    "everydayExample": "Pérdida notable del volumen del muslo tras 6 semanas con yeso.",
+    "analogia": "Como en la vida cotidiana: Pérdida notable del volumen del muslo tras 6 semanas con yeso.",
+    "clinicalTitle": "Relevancia de Atrofia en Fisioterapia",
+    "clinicalRelevance": "Comprender atrofia permite al kinesiólogo evaluar patrones biomecánicos alterados y programar prescripciones de ejercicio terapéutico seguras.",
+    "clinicalCase": "Evaluación funcional de atrofia durante la rehabilitación musculoesquelética.",
+    "keyDetails": [
+      {
+        "label": "Categoría clínica",
+        "value": "Fisiología Muscular"
+      },
+      {
+        "label": "Región de aplicación",
+        "value": "Global / General"
+      },
+      {
+        "label": "Definición pedagógica",
+        "value": "Pérdida de volumen y masa muscular por no usar el miembro."
+      },
+      {
+        "label": "Ejemplo en vida diaria",
+        "value": "Pérdida notable del volumen del muslo tras 6 semanas con yeso."
+      }
+    ],
+    "svgType": "atrofia",
+    "isFeatured": false
+  },
+  {
+    "id": "rango-de-movimiento-rom",
+    "name": "Rango de Movimiento (ROM)",
+    "termino": "Rango de Movimiento (ROM)",
+    "pronunciation": "/rango-de-movimiento-(rom)/",
+    "fonetica": "RANGO-DE-MOVIMIENTO-(ROM)",
+    "etymology": "Término fundamental de evaluación kinesiológica en ciencias de la salud.",
+    "category": "movimientos",
+    "categoryLabel": "Evaluación Kinesiológica",
+    "categoryClass": "bg-cat-movements/15 text-cat-movements",
+    "region": "general",
+    "regionLabel": "Global / General",
+    "level": "Básico (1er año)",
+    "readingTime": "2 min",
+    "technicalDef": "Arco total de movilidad angular en grados que puede describir una articulación libre.",
+    "defTecnica": "Arco total de movilidad angular en grados que puede describir una articulación libre.",
+    "simpleExplanation": "Grados totales que una articulación puede doblar o estirar.",
+    "explicacionSencilla": "Grados totales que una articulación puede doblar o estirar.",
+    "everydayTitle": "Ejemplo funcional: Medir con goniómetro los 135 grados de flexión de rodilla.",
+    "everydayExample": "Medir con goniómetro los 135 grados de flexión de rodilla.",
+    "analogia": "Como en la vida cotidiana: Medir con goniómetro los 135 grados de flexión de rodilla.",
+    "clinicalTitle": "Relevancia de Rango de Movimiento (ROM) en Fisioterapia",
+    "clinicalRelevance": "Comprender rango de movimiento (rom) permite al kinesiólogo evaluar patrones biomecánicos alterados y programar prescripciones de ejercicio terapéutico seguras.",
+    "clinicalCase": "Evaluación funcional de rango de movimiento (rom) durante la rehabilitación musculoesquelética.",
+    "keyDetails": [
+      {
+        "label": "Categoría clínica",
+        "value": "Evaluación Kinesiológica"
+      },
+      {
+        "label": "Región de aplicación",
+        "value": "Global / General"
+      },
+      {
+        "label": "Definición pedagógica",
+        "value": "Grados totales que una articulación puede doblar o estirar."
+      },
+      {
+        "label": "Ejemplo en vida diaria",
+        "value": "Medir con goniómetro los 135 grados de flexión de rodilla."
+      }
+    ],
+    "svgType": "rango-de-movimiento-rom",
+    "isFeatured": false
+  },
+  {
+    "id": "artrocinematica",
+    "name": "Artrocinemática",
+    "termino": "Artrocinemática",
+    "pronunciation": "/artrocinematica/",
+    "fonetica": "ARTROCINEMATICA",
+    "etymology": "Término fundamental de biomecánica muscular en ciencias de la salud.",
+    "category": "musculos",
+    "categoryLabel": "Biomecánica Muscular",
+    "categoryClass": "bg-cat-muscles/15 text-cat-muscles",
+    "region": "general",
+    "regionLabel": "Global / General",
+    "level": "Básico (1er año)",
+    "readingTime": "2 min",
+    "technicalDef": "Movimientos microscópicos involuntarios de rodamiento, deslizamiento y giro entre carillas articulares.",
+    "defTecnica": "Movimientos microscópicos involuntarios de rodamiento, deslizamiento y giro entre carillas articulares.",
+    "simpleExplanation": "Pequeños rodamientos y deslizamientos internos entre huesos.",
+    "explicacionSencilla": "Pequeños rodamientos y deslizamientos internos entre huesos.",
+    "everydayTitle": "Ejemplo funcional: Deslizamiento inferior de la cabeza humeral al levantar el brazo.",
+    "everydayExample": "Deslizamiento inferior de la cabeza humeral al levantar el brazo.",
+    "analogia": "Como en la vida cotidiana: Deslizamiento inferior de la cabeza humeral al levantar el brazo.",
+    "clinicalTitle": "Relevancia de Artrocinemática en Fisioterapia",
+    "clinicalRelevance": "Comprender artrocinemática permite al kinesiólogo evaluar patrones biomecánicos alterados y programar prescripciones de ejercicio terapéutico seguras.",
+    "clinicalCase": "Evaluación funcional de artrocinemática durante la rehabilitación musculoesquelética.",
+    "keyDetails": [
+      {
+        "label": "Categoría clínica",
+        "value": "Biomecánica Muscular"
+      },
+      {
+        "label": "Región de aplicación",
+        "value": "Global / General"
+      },
+      {
+        "label": "Definición pedagógica",
+        "value": "Pequeños rodamientos y deslizamientos internos entre huesos."
+      },
+      {
+        "label": "Ejemplo en vida diaria",
+        "value": "Deslizamiento inferior de la cabeza humeral al levantar el brazo."
+      }
+    ],
+    "svgType": "artrocinematica",
+    "isFeatured": false
+  },
+  {
+    "id": "osteocinematica",
+    "name": "Osteocinemática",
+    "termino": "Osteocinemática",
+    "pronunciation": "/osteocinematica/",
+    "fonetica": "OSTEOCINEMATICA",
+    "etymology": "Término fundamental de biomecánica muscular en ciencias de la salud.",
+    "category": "musculos",
+    "categoryLabel": "Biomecánica Muscular",
+    "categoryClass": "bg-cat-muscles/15 text-cat-muscles",
+    "region": "general",
+    "regionLabel": "Global / General",
+    "level": "Básico (1er año)",
+    "readingTime": "2 min",
+    "technicalDef": "Movimiento macroscópico observable del hueso en los planos sagital, frontal o transversal.",
+    "defTecnica": "Movimiento macroscópico observable del hueso en los planos sagital, frontal o transversal.",
+    "simpleExplanation": "Movimiento amplio y visible del miembro en el espacio.",
+    "explicacionSencilla": "Movimiento amplio y visible del miembro en el espacio.",
+    "everydayTitle": "Ejemplo funcional: Elevar el muslo hacia adelante en flexión de cadera.",
+    "everydayExample": "Elevar el muslo hacia adelante en flexión de cadera.",
+    "analogia": "Como en la vida cotidiana: Elevar el muslo hacia adelante en flexión de cadera.",
+    "clinicalTitle": "Relevancia de Osteocinemática en Fisioterapia",
+    "clinicalRelevance": "Comprender osteocinemática permite al kinesiólogo evaluar patrones biomecánicos alterados y programar prescripciones de ejercicio terapéutico seguras.",
+    "clinicalCase": "Evaluación funcional de osteocinemática durante la rehabilitación musculoesquelética.",
+    "keyDetails": [
+      {
+        "label": "Categoría clínica",
+        "value": "Biomecánica Muscular"
+      },
+      {
+        "label": "Región de aplicación",
+        "value": "Global / General"
+      },
+      {
+        "label": "Definición pedagógica",
+        "value": "Movimiento amplio y visible del miembro en el espacio."
+      },
+      {
+        "label": "Ejemplo en vida diaria",
+        "value": "Elevar el muslo hacia adelante en flexión de cadera."
+      }
+    ],
+    "svgType": "osteocinematica",
+    "isFeatured": false
+  },
+  {
+    "id": "cadena-cinematica-abierta",
+    "name": "Cadena Cinemática Abierta",
+    "termino": "Cadena Cinemática Abierta",
+    "pronunciation": "/cadena-cinematica-abierta/",
+    "fonetica": "CADENA-CINEMATICA-ABIERTA",
+    "etymology": "Término fundamental de biomecánica muscular en ciencias de la salud.",
+    "category": "musculos",
+    "categoryLabel": "Biomecánica Muscular",
+    "categoryClass": "bg-cat-muscles/15 text-cat-muscles",
+    "region": "general",
+    "regionLabel": "Global / General",
+    "level": "Básico (1er año)",
+    "readingTime": "2 min",
+    "technicalDef": "Sistema biomecánico donde el segmento distal se encuentra libre en el espacio sin apoyo fijo.",
+    "defTecnica": "Sistema biomecánico donde el segmento distal se encuentra libre en el espacio sin apoyo fijo.",
+    "simpleExplanation": "Movimiento con manos o pies sueltos moviéndose en el aire.",
+    "explicacionSencilla": "Movimiento con manos o pies sueltos moviéndose en el aire.",
+    "everydayTitle": "Ejemplo funcional: Patear un balón de fútbol o extender la pierna sentado en máquina.",
+    "everydayExample": "Patear un balón de fútbol o extender la pierna sentado en máquina.",
+    "analogia": "Como en la vida cotidiana: Patear un balón de fútbol o extender la pierna sentado en máquina.",
+    "clinicalTitle": "Relevancia de Cadena Cinemática Abierta en Fisioterapia",
+    "clinicalRelevance": "Comprender cadena cinemática abierta permite al kinesiólogo evaluar patrones biomecánicos alterados y programar prescripciones de ejercicio terapéutico seguras.",
+    "clinicalCase": "Evaluación funcional de cadena cinemática abierta durante la rehabilitación musculoesquelética.",
+    "keyDetails": [
+      {
+        "label": "Categoría clínica",
+        "value": "Biomecánica Muscular"
+      },
+      {
+        "label": "Región de aplicación",
+        "value": "Global / General"
+      },
+      {
+        "label": "Definición pedagógica",
+        "value": "Movimiento con manos o pies sueltos moviéndose en el aire."
+      },
+      {
+        "label": "Ejemplo en vida diaria",
+        "value": "Patear un balón de fútbol o extender la pierna sentado en máquina."
+      }
+    ],
+    "svgType": "cadena-cinematica-abierta",
+    "isFeatured": false
+  },
+  {
+    "id": "cadena-cinematica-cerrada",
+    "name": "Cadena Cinemática Cerrada",
+    "termino": "Cadena Cinemática Cerrada",
+    "pronunciation": "/cadena-cinematica-cerrada/",
+    "fonetica": "CADENA-CINEMATICA-CERRADA",
+    "etymology": "Término fundamental de biomecánica muscular en ciencias de la salud.",
+    "category": "musculos",
+    "categoryLabel": "Biomecánica Muscular",
+    "categoryClass": "bg-cat-muscles/15 text-cat-muscles",
+    "region": "general",
+    "regionLabel": "Global / General",
+    "level": "Básico (1er año)",
+    "readingTime": "2 min",
+    "technicalDef": "Sistema biomecánico donde el segmento distal permanece fijo contra una superficie externa sólida.",
+    "defTecnica": "Sistema biomecánico donde el segmento distal permanece fijo contra una superficie externa sólida.",
+    "simpleExplanation": "Movimiento con pies o manos bien apoyados sobre piso o barra.",
+    "explicacionSencilla": "Movimiento con pies o manos bien apoyados sobre piso o barra.",
+    "everydayTitle": "Ejemplo funcional: Sentadillas profundas o flexiones de pecho apoyando palmas.",
+    "everydayExample": "Sentadillas profundas o flexiones de pecho apoyando palmas.",
+    "analogia": "Como en la vida cotidiana: Sentadillas profundas o flexiones de pecho apoyando palmas.",
+    "clinicalTitle": "Relevancia de Cadena Cinemática Cerrada en Fisioterapia",
+    "clinicalRelevance": "Comprender cadena cinemática cerrada permite al kinesiólogo evaluar patrones biomecánicos alterados y programar prescripciones de ejercicio terapéutico seguras.",
+    "clinicalCase": "Evaluación funcional de cadena cinemática cerrada durante la rehabilitación musculoesquelética.",
+    "keyDetails": [
+      {
+        "label": "Categoría clínica",
+        "value": "Biomecánica Muscular"
+      },
+      {
+        "label": "Región de aplicación",
+        "value": "Global / General"
+      },
+      {
+        "label": "Definición pedagógica",
+        "value": "Movimiento con pies o manos bien apoyados sobre piso o barra."
+      },
+      {
+        "label": "Ejemplo en vida diaria",
+        "value": "Sentadillas profundas o flexiones de pecho apoyando palmas."
+      }
+    ],
+    "svgType": "cadena-cinematica-cerrada",
+    "isFeatured": false
   }
 ];
+
+if (typeof window !== 'undefined') {
+  window.FISIOPEDIA_TERMS = FISIOPEDIA_TERMS;
+}
+
+if (typeof module !== 'undefined' && module.exports) {
+  module.exports = { FISIOPEDIA_TERMS };
+}
