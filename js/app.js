@@ -1,4 +1,4 @@
-﻿// Fisio Pedía - Lógica de Aplicación Completa
+// Fisio Pedía - Lógica de Aplicación Completa
 // SPA interactiva conectada a FisioStorage, con Diccionario Visual SVG integral, Flashcards 3D y Quizzes.
 
 (function () {
@@ -141,6 +141,8 @@
           </svg>
         `;
 
+      case 'flexion':
+      case 'extension':
       case 'flexion_extension':
         return `
           <svg class="w-full h-auto max-w-sm mx-auto" viewBox="0 0 360 200" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -149,16 +151,18 @@
             <!-- Brazo fijo -->
             <line x1="180" y1="120" x2="280" y2="120" stroke="#64748B" stroke-width="8" stroke-linecap="round"/>
             <!-- Flexión -->
-            <line x1="180" y1="120" x2="110" y2="40" stroke="#0D9488" stroke-width="8" stroke-linecap="round"/>
+            <line x1="180" y1="120" x2="110" y2="40" stroke="#0D9488" stroke-width="${type === 'flexion' ? '10' : '7'}" stroke-linecap="round"/>
             <!-- Extensión -->
-            <line x1="180" y1="120" x2="80" y2="120" stroke="#F59E0B" stroke-width="7" stroke-dasharray="6 4" stroke-linecap="round"/>
+            <line x1="180" y1="120" x2="80" y2="120" stroke="#F59E0B" stroke-width="${type === 'extension' ? '10' : '7'}" stroke-dasharray="6 4" stroke-linecap="round"/>
             <!-- Arco de movimiento -->
             <path d="M 240 120 A 60 60 0 0 0 135 65" stroke="#0D9488" stroke-width="2.5" fill="none" stroke-dasharray="4 3"/>
-            <text x="115" y="30" fill="#0D9488" font-size="11" font-weight="bold" font-family="Plus Jakarta Sans">FLEXIÓN (Disminuye ángulo)</text>
-            <text x="50" y="145" fill="#F59E0B" font-size="11" font-weight="bold" font-family="Plus Jakarta Sans">EXTENSIÓN (Aumenta ángulo)</text>
+            <text x="115" y="30" fill="${type === 'extension' ? '#64748B' : '#0D9488'}" font-size="11" font-weight="bold" font-family="Plus Jakarta Sans">FLEXIÓN (Disminuye ángulo)</text>
+            <text x="50" y="145" fill="${type === 'flexion' ? '#64748B' : '#F59E0B'}" font-size="11" font-weight="bold" font-family="Plus Jakarta Sans">EXTENSIÓN (Aumenta ángulo)</text>
           </svg>
         `;
 
+      case 'abduccion':
+      case 'aduccion':
       case 'abduccion_aduccion':
         return `
           <svg class="w-full h-auto max-w-sm mx-auto" viewBox="0 0 360 200" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -169,12 +173,12 @@
             <!-- Centro articular (Hombro / Cadera) -->
             <circle cx="180" cy="90" r="8" fill="#00685f"/>
             <!-- Abducción (se aleja) -->
-            <line x1="180" y1="90" x2="70" y2="40" stroke="#0D9488" stroke-width="7" stroke-linecap="round"/>
-            <path d="M 120 90 Q 110 65 90 55" stroke="#0D9488" stroke-width="2" fill="none" marker-end="url(#arrow)"/>
-            <text x="40" y="30" fill="#0D9488" font-size="11" font-weight="bold" font-family="Plus Jakarta Sans">ABDUCCIÓN (Separa)</text>
+            <line x1="180" y1="90" x2="70" y2="40" stroke="#0D9488" stroke-width="${type === 'abduccion' ? '10' : '6'}" stroke-linecap="round"/>
+            <path d="M 120 90 Q 110 65 90 55" stroke="#0D9488" stroke-width="2" fill="none"/>
+            <text x="40" y="30" fill="${type === 'aduccion' ? '#64748B' : '#0D9488'}" font-size="11" font-weight="bold" font-family="Plus Jakarta Sans">ABDUCCIÓN (Separa)</text>
             <!-- Aducción (se acerca) -->
-            <line x1="180" y1="90" x2="195" y2="160" stroke="#6366F1" stroke-width="7" stroke-linecap="round"/>
-            <text x="210" y="150" fill="#6366F1" font-size="11" font-weight="bold" font-family="Plus Jakarta Sans">ADUCCIÓN (Añade al centro)</text>
+            <line x1="180" y1="90" x2="195" y2="160" stroke="#6366F1" stroke-width="${type === 'aduccion' ? '10' : '6'}" stroke-linecap="round"/>
+            <text x="210" y="150" fill="${type === 'abduccion' ? '#64748B' : '#6366F1'}" font-size="11" font-weight="bold" font-family="Plus Jakarta Sans">ADUCCIÓN (Añade al centro)</text>
           </svg>
         `;
 
@@ -194,22 +198,24 @@
           </svg>
         `;
 
+      case 'supinacion':
+      case 'pronacion':
       case 'supinacion_pronacion':
         return `
           <svg class="w-full h-auto max-w-sm mx-auto" viewBox="0 0 360 200" fill="none" xmlns="http://www.w3.org/2000/svg">
             <rect width="360" height="200" rx="12" fill="#F8FAFC"/>
             <!-- Supinación (Radio y Cúbito paralelos) -->
             <g transform="translate(40, 30)">
-              <rect x="10" y="20" width="12" height="100" rx="4" fill="#0D9488"/>
+              <rect x="10" y="20" width="12" height="100" rx="4" fill="${type === 'pronacion' ? '#94A3B8' : '#0D9488'}"/>
               <rect x="35" y="20" width="12" height="100" rx="4" fill="#64748B"/>
-              <text x="30" y="140" text-anchor="middle" fill="#0D9488" font-size="11" font-weight="bold" font-family="Plus Jakarta Sans">SUPINACIÓN</text>
-              <text x="30" y="155" text-anchor="middle" fill="#64748B" font-size="9" font-family="Inter">Palma arriba (Paralelos)</text>
+              <text x="30" y="140" text-anchor="middle" fill="${type === 'pronacion' ? '#64748B' : '#0D9488'}" font-size="11" font-weight="bold" font-family="Plus Jakarta Sans">SUPINACIÓN</text>
+              <text x="30" y="155" text-anchor="middle" fill="#64748B" font-size="9" font-family="Inter">Palma arriba (Huesos paralelos)</text>
             </g>
             <!-- Pronación (Radio cruza cúbito) -->
             <g transform="translate(200, 30)">
               <rect x="35" y="20" width="12" height="100" rx="4" fill="#64748B"/>
-              <line x1="10" y1="20" x2="60" y2="120" stroke="#F59E0B" stroke-width="12" stroke-linecap="round"/>
-              <text x="35" y="140" text-anchor="middle" fill="#F59E0B" font-size="11" font-weight="bold" font-family="Plus Jakarta Sans">PRONACIÓN</text>
+              <line x1="10" y1="20" x2="60" y2="120" stroke="${type === 'supinacion' ? '#94A3B8' : '#F59E0B'}" stroke-width="12" stroke-linecap="round"/>
+              <text x="35" y="140" text-anchor="middle" fill="${type === 'supinacion' ? '#64748B' : '#F59E0B'}" font-size="11" font-weight="bold" font-family="Plus Jakarta Sans">PRONACIÓN</text>
               <text x="35" y="155" text-anchor="middle" fill="#64748B" font-size="9" font-family="Inter">Radio cruza sobre Cúbito</text>
             </g>
           </svg>
@@ -667,9 +673,131 @@
             <text x="60" y="105" fill="#0D9488" font-size="10" font-weight="bold" font-family="Plus Jakarta Sans">SÃ³leo / Gemelos</text>
             <text x="60" y="118" fill="#64748B" font-size="8" font-family="Inter">(CompresiÃ³n Activa)</text>
             <text x="260" y="105" fill="#6366F1" font-size="10" font-weight="bold" font-family="Plus Jakarta Sans">Retorno Venoso</text>
-            <text x="260" y="118" fill="#64748B" font-size="8" font-family="Inter">"Segundo CorazÃ³n"</text>
+            <text x="260" y="118" fill="#64748B" font-size="8" font-family="Inter">"Segundo Corazón"</text>
           </svg>
         `;
+
+      case 'agonista':
+      case 'antagonista':
+      case 'sinergico':
+        return `
+          <svg class="w-full h-auto max-w-sm mx-auto" viewBox="0 0 360 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect width="360" height="200" rx="12" fill="#F8FAFC"/>
+            <rect x="150" y="25" width="20" height="90" rx="6" fill="#CBD5E1"/>
+            <circle cx="160" cy="120" r="10" fill="#00685f"/>
+            <rect x="160" y="115" width="90" height="16" rx="5" fill="#94A3B8"/>
+            <path d="M 135 45 Q 115 80 148 115" stroke="${type === 'antagonista' ? '#94A3B8' : '#0D9488'}" stroke-width="${type === 'agonista' ? '14' : '9'}" stroke-linecap="round" fill="none"/>
+            <text x="60" y="65" fill="${type === 'antagonista' ? '#64748B' : '#0D9488'}" font-size="10" font-weight="bold" font-family="Plus Jakarta Sans">Agonista (Motor)</text>
+            <path d="M 175 45 Q 195 80 168 125" stroke="${type === 'agonista' ? '#94A3B8' : '#F59E0B'}" stroke-width="${type === 'antagonista' ? '14' : '9'}" stroke-linecap="round" fill="none"/>
+            <text x="215" y="65" fill="${type === 'agonista' ? '#64748B' : '#F59E0B'}" font-size="10" font-weight="bold" font-family="Plus Jakarta Sans">Antagonista (Freno)</text>
+            <path d="M 148 85 Q 135 105 160 120" stroke="${type === 'sinergico' ? '#6366F1' : '#94A3B8'}" stroke-width="${type === 'sinergico' ? '10' : '6'}" stroke-linecap="round" fill="none"/>
+            <text x="180" y="165" fill="#6366F1" font-size="10" font-weight="bold" font-family="Plus Jakarta Sans">Sinérgico (Asistente/Fijador)</text>
+          </svg>
+        `;
+
+      case 'isometrico':
+        return `
+          <svg class="w-full h-auto max-w-sm mx-auto" viewBox="0 0 360 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect width="360" height="200" rx="12" fill="#F8FAFC"/>
+            <rect x="260" y="20" width="20" height="160" rx="4" fill="#64748B"/>
+            <text x="290" y="105" fill="#64748B" font-size="10" font-weight="bold" font-family="Plus Jakarta Sans">Pared Fija</text>
+            <rect x="80" y="90" width="170" height="18" rx="6" fill="#0D9488"/>
+            <circle cx="80" cy="99" r="10" fill="#00685f"/>
+            <path d="M 120 70 L 170 70" stroke="#F59E0B" stroke-width="4"/>
+            <path d="M 230 70 L 180 70" stroke="#F43F5E" stroke-width="4"/>
+            <text x="180" y="55" text-anchor="middle" fill="#00685f" font-size="11" font-weight="bold" font-family="Plus Jakarta Sans">CONTRACCIÓN ISOMÉTRICA</text>
+            <text x="170" y="140" text-anchor="middle" fill="#0D9488" font-size="10" font-weight="bold" font-family="Plus Jakarta Sans">Δ Longitud = 0 (Sin movimiento)</text>
+            <text x="170" y="160" text-anchor="middle" fill="#F59E0B" font-size="10" font-family="Inter">Tensión activa interna máxima</text>
+          </svg>
+        `;
+
+      case 'caudal':
+      case 'craneal':
+        return `
+          <svg class="w-full h-auto max-w-sm mx-auto" viewBox="0 0 360 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect width="360" height="200" rx="12" fill="#F8FAFC"/>
+            <circle cx="180" cy="45" r="18" fill="#CBD5E1"/>
+            <rect x="172" y="65" width="16" height="75" rx="6" fill="#CBD5E1"/>
+            <line x1="175" y1="140" x2="165" y2="185" stroke="#CBD5E1" stroke-width="10" stroke-linecap="round"/>
+            <line x1="185" y1="140" x2="195" y2="185" stroke="#CBD5E1" stroke-width="10" stroke-linecap="round"/>
+            <path d="M 120 70 L 120 30" stroke="${type === 'caudal' ? '#94A3B8' : '#0D9488'}" stroke-width="5" stroke-linecap="round"/>
+            <polygon points="114,35 120,20 126,35" fill="${type === 'caudal' ? '#94A3B8' : '#0D9488'}"/>
+            <text x="105" y="55" text-anchor="end" fill="${type === 'caudal' ? '#64748B' : '#0D9488'}" font-size="11" font-weight="bold" font-family="Plus Jakarta Sans">CRANEAL</text>
+            <path d="M 240 120 L 240 160" stroke="${type === 'craneal' ? '#94A3B8' : '#F59E0B'}" stroke-width="5" stroke-linecap="round"/>
+            <polygon points="234,155 240,170 246,155" fill="${type === 'craneal' ? '#94A3B8' : '#F59E0B'}"/>
+            <text x="255" y="145" fill="${type === 'craneal' ? '#64748B' : '#F59E0B'}" font-size="11" font-weight="bold" font-family="Plus Jakarta Sans">CAUDAL</text>
+          </svg>
+        `;
+
+      case 'proximal':
+      case 'distal':
+        return `
+          <svg class="w-full h-auto max-w-sm mx-auto" viewBox="0 0 360 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect width="360" height="200" rx="12" fill="#F8FAFC"/>
+            <rect x="40" y="40" width="55" height="120" rx="12" fill="#CBD5E1"/>
+            <text x="67" y="105" text-anchor="middle" fill="#475569" font-size="10" font-weight="bold" font-family="Plus Jakarta Sans">Tronco</text>
+            <line x1="95" y1="75" x2="300" y2="75" stroke="#94A3B8" stroke-width="14" stroke-linecap="round"/>
+            <circle cx="125" cy="75" r="9" fill="${type === 'distal' ? '#64748B' : '#0D9488'}"/>
+            <text x="125" y="115" text-anchor="middle" fill="${type === 'distal' ? '#64748B' : '#0D9488'}" font-size="11" font-weight="bold" font-family="Plus Jakarta Sans">PROXIMAL</text>
+            <text x="125" y="130" text-anchor="middle" fill="#64748B" font-size="9" font-family="Inter">Cerca del origen</text>
+            <circle cx="280" cy="75" r="9" fill="${type === 'proximal' ? '#64748B' : '#F59E0B'}"/>
+            <text x="280" y="115" text-anchor="middle" fill="${type === 'proximal' ? '#64748B' : '#F59E0B'}" font-size="11" font-weight="bold" font-family="Plus Jakarta Sans">DISTAL</text>
+            <text x="280" y="130" text-anchor="middle" fill="#64748B" font-size="9" font-family="Inter">Lejos del origen</text>
+          </svg>
+        `;
+
+      case 'medial':
+      case 'lateral':
+        return `
+          <svg class="w-full h-auto max-w-sm mx-auto" viewBox="0 0 360 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect width="360" height="200" rx="12" fill="#F8FAFC"/>
+            <line x1="180" y1="20" x2="180" y2="180" stroke="#00685f" stroke-width="2.5" stroke-dasharray="6 4"/>
+            <text x="180" y="195" text-anchor="middle" fill="#00685f" font-size="10" font-weight="bold" font-family="Plus Jakarta Sans">Línea Media (Sagital)</text>
+            <path d="M 120 85 L 165 85" stroke="${type === 'lateral' ? '#94A3B8' : '#0D9488'}" stroke-width="5" stroke-linecap="round"/>
+            <polygon points="160,80 172,85 160,90" fill="${type === 'lateral' ? '#94A3B8' : '#0D9488'}"/>
+            <text x="110" y="65" text-anchor="middle" fill="${type === 'lateral' ? '#64748B' : '#0D9488'}" font-size="11" font-weight="bold" font-family="Plus Jakarta Sans">MEDIAL</text>
+            <path d="M 200 85 L 245 85" stroke="${type === 'medial' ? '#94A3B8' : '#F59E0B'}" stroke-width="5" stroke-linecap="round"/>
+            <polygon points="240,80 252,85 240,90" fill="${type === 'medial' ? '#94A3B8' : '#F59E0B'}"/>
+            <text x="250" y="65" text-anchor="middle" fill="${type === 'medial' ? '#64748B' : '#F59E0B'}" font-size="11" font-weight="bold" font-family="Plus Jakarta Sans">LATERAL</text>
+          </svg>
+        `;
+
+      case 'ventral':
+      case 'dorsal':
+        return `
+          <svg class="w-full h-auto max-w-sm mx-auto" viewBox="0 0 360 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect width="360" height="200" rx="12" fill="#F8FAFC"/>
+            <path d="M 180 30 Q 195 45 185 70 Q 200 95 190 130 Q 195 155 185 175 L 165 175 Q 155 140 165 110 Q 155 80 165 45 Z" fill="#CBD5E1"/>
+            <path d="M 215 100 L 265 100" stroke="${type === 'dorsal' ? '#94A3B8' : '#0D9488'}" stroke-width="5" stroke-linecap="round"/>
+            <polygon points="260,94 274,100 260,106" fill="${type === 'dorsal' ? '#94A3B8' : '#0D9488'}"/>
+            <text x="270" y="80" text-anchor="middle" fill="${type === 'dorsal' ? '#64748B' : '#0D9488'}" font-size="11" font-weight="bold" font-family="Plus Jakarta Sans">VENTRAL</text>
+            <path d="M 135 100 L 85 100" stroke="${type === 'ventral' ? '#94A3B8' : '#F59E0B'}" stroke-width="5" stroke-linecap="round"/>
+            <polygon points="90,94 76,100 90,106" fill="${type === 'ventral' ? '#94A3B8' : '#F59E0B'}"/>
+            <text x="85" y="80" text-anchor="middle" fill="${type === 'ventral' ? '#64748B' : '#F59E0B'}" font-size="11" font-weight="bold" font-family="Plus Jakarta Sans">DORSAL</text>
+          </svg>
+        `;
+
+      case 'ipsilateral':
+      case 'contralateral':
+        return `
+          <svg class="w-full h-auto max-w-sm mx-auto" viewBox="0 0 360 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect width="360" height="200" rx="12" fill="#F8FAFC"/>
+            <line x1="180" y1="20" x2="180" y2="180" stroke="#CBD5E1" stroke-width="2" stroke-dasharray="4 4"/>
+            <g transform="translate(20, 20)">
+              <text x="70" y="25" text-anchor="middle" fill="${type === 'contralateral' ? '#64748B' : '#0D9488'}" font-size="11" font-weight="bold" font-family="Plus Jakarta Sans">IPSILATERAL</text>
+              <circle cx="50" cy="65" r="12" fill="${type === 'contralateral' ? '#94A3B8' : '#0D9488'}"/>
+              <circle cx="50" cy="125" r="12" fill="${type === 'contralateral' ? '#94A3B8' : '#0D9488'}"/>
+              <line x1="50" y1="77" x2="50" y2="113" stroke="${type === 'contralateral' ? '#94A3B8' : '#0D9488'}" stroke-width="3"/>
+            </g>
+            <g transform="translate(190, 20)">
+              <text x="75" y="25" text-anchor="middle" fill="${type === 'ipsilateral' ? '#64748B' : '#6366F1'}" font-size="11" font-weight="bold" font-family="Plus Jakarta Sans">CONTRALATERAL</text>
+              <circle cx="35" cy="65" r="12" fill="${type === 'ipsilateral' ? '#94A3B8' : '#6366F1'}"/>
+              <circle cx="115" cy="125" r="12" fill="${type === 'ipsilateral' ? '#94A3B8' : '#6366F1'}"/>
+              <line x1="45" y1="75" x2="105" y2="115" stroke="${type === 'ipsilateral' ? '#94A3B8' : '#6366F1'}" stroke-width="3" stroke-dasharray="4 3"/>
+            </g>
+          </svg>
+        `;
+
       default:
         return `
           <svg class="w-full h-auto max-w-sm mx-auto" viewBox="0 0 360 180" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -764,66 +892,84 @@
     updateFavoritesBadges();
   }
 
-  // --- FILTRADO DE TÉRMINOS ---
-  // --- NORMALIZACIÃ“N DE TEXTO PARA BÃšSQUEDA ROBUSTA (SIN TILDES, MAYÃšSCULAS/MINÃšSCULAS) ---
-  function normalizeSearchText(str) {
+  // --- NORMALIZACIÓN Y BÚSQUEDA INTELIGENTE ---
+  function normalizeText(str) {
     if (!str) return '';
     return str
-      .normalize("NFD")
-      .replace(/[\u0300-\u036f]/g, "")
+      .toString()
+      .normalize('NFD')
+      .replace(/[\u0300-\u036f]/g, '')
       .toLowerCase()
       .trim();
   }
+  const normalizeSearchText = normalizeText;
 
-  function getCategoryName(cat) {
+  function getCategoryLabel(cat) {
     const map = {
-      todos: 'Todos',
-      musculos: 'MÃºsculos',
+      todos: 'Todos los tipos',
+      musculos: 'Músculos y Biomecánica',
       huesos: 'Huesos y Tendones',
       huesos_tendones: 'Huesos y Tendones',
       articulaciones: 'Articulaciones',
-      movimientos: 'Movimientos'
+      movimientos: 'Movimientos y Orientación'
     };
     return map[cat] || cat;
   }
+  const getCategoryName = getCategoryLabel;
 
-  function getRegionName(reg) {
+  function getRegionLabel(reg) {
     const map = {
-      todas: 'Todas',
-      columna: 'Columna',
+      todas: 'Todas las regiones',
+      columna: 'Columna Vertebral',
       hombro: 'Hombro',
-      codo: 'Codo',
-      mano: 'Mano',
+      codo: 'Codo y Antebrazo',
+      mano: 'Mano y Muñeca',
       cadera: 'Cadera',
       rodilla: 'Rodilla',
-      tobillo: 'Tobillo',
-      general: 'Control Global'
+      tobillo: 'Tobillo y Pie',
+      general: 'Global / General'
     };
     return map[reg] || reg;
   }
+  const getRegionName = getRegionLabel;
 
-  // --- FILTRADO DE TÃ‰RMINOS ---
+  // --- FILTRADO DE TÉRMINOS (INSENSIBLE A TILDES Y MAYÚSCULAS) ---
   function getFilteredTerms() {
-    return FISIOPEDIA_TERMS.filter(term => {
-      // BÃºsqueda por texto (nombre, pronunciaciÃ³n, explicaciones, ejemplos, clÃ­nica, etiquetas)
-      if (state.searchTerm) {
-        const q = normalizeSearchText(state.searchTerm);
-        const matchesName = normalizeSearchText(term.name).includes(q);
-        const matchesPronun = normalizeSearchText(term.pronunciation).includes(q);
-        const matchesSimple = normalizeSearchText(term.simpleExplanation).includes(q);
-        const matchesTech = normalizeSearchText(term.technicalDef).includes(q);
-        const matchesExample = normalizeSearchText(term.everydayExample).includes(q);
-        const matchesExampleTitle = normalizeSearchText(term.everydayTitle).includes(q);
-        const matchesClinical = normalizeSearchText(term.clinicalRelevance).includes(q);
-        const matchesCase = normalizeSearchText(term.clinicalCase).includes(q);
-        const matchesCategory = normalizeSearchText(term.categoryLabel).includes(q);
-        const matchesRegion = normalizeSearchText(term.regionLabel).includes(q);
-        if (!matchesName && !matchesPronun && !matchesSimple && !matchesTech && !matchesExample && !matchesExampleTitle && !matchesClinical && !matchesCase && !matchesCategory && !matchesRegion) {
-          return false;
-        }
+    const rawSearch = normalizeText(state.searchTerm);
+    const tokens = rawSearch.split(/\s+/).filter(Boolean);
+
+    let filtered = FISIOPEDIA_TERMS.filter(term => {
+      // 1. Coincidencia por texto completo o parcial en todos los campos académicos
+      if (tokens.length > 0) {
+        const corpus = normalizeText([
+          term.name,
+          term.termino,
+          term.id,
+          term.category,
+          term.categoryLabel,
+          term.region,
+          term.regionLabel,
+          term.simpleExplanation,
+          term.explicacionSencilla,
+          term.technicalDef,
+          term.defTecnica,
+          term.everydayTitle,
+          term.everydayExample,
+          term.analogia,
+          term.clinicalTitle,
+          term.clinicalRelevance,
+          term.clinicalCase,
+          term.pronunciation,
+          term.fonetica,
+          term.level,
+          ...(term.keyDetails ? term.keyDetails.map(d => `${d.label} ${d.value}`) : [])
+        ].join(' '));
+
+        const matchesAll = tokens.every(token => corpus.includes(token));
+        if (!matchesAll) return false;
       }
 
-      // Filtro por categorÃ­a (MÃºsculos, Huesos & Tendones, Articulaciones, Movimientos)
+      // 2. Filtro de Categoría
       if (state.selectedCategory !== 'todos') {
         if (state.selectedCategory === 'huesos' || state.selectedCategory === 'huesos_tendones') {
           if (term.category !== 'huesos' && term.category !== 'huesos_tendones') return false;
@@ -832,16 +978,39 @@
         }
       }
 
-      // Filtro por regiÃ³n corporal (Columna, Hombro, Codo, Mano, Cadera, Rodilla, Tobillo, Control Global)
+      // 3. Filtro de Región Corporal
       if (state.selectedRegion !== 'todas') {
         if (term.region !== state.selectedRegion) return false;
       }
 
       return true;
-    }).sort((a, b) => {
-      if (state.sortBy === 'az') return a.name.localeCompare(b.name, 'es');
-      return 0;
     });
+
+    // Ordenamiento por relevancia o por A-Z
+    if (tokens.length > 0) {
+      filtered.sort((a, b) => {
+        const aName = normalizeText(a.name || a.termino);
+        const bName = normalizeText(b.name || b.termino);
+
+        // Coincidencia que inicia con el texto de búsqueda
+        const aStarts = aName.startsWith(rawSearch);
+        const bStarts = bName.startsWith(rawSearch);
+        if (aStarts && !bStarts) return -1;
+        if (!aStarts && bStarts) return 1;
+
+        // Coincidencia que incluye el texto en el nombre
+        const aIncludes = aName.includes(rawSearch);
+        const bIncludes = bName.includes(rawSearch);
+        if (aIncludes && !bIncludes) return -1;
+        if (!aIncludes && bIncludes) return 1;
+
+        return (a.name || a.termino).localeCompare(b.name || b.termino, 'es');
+      });
+    } else if (state.sortBy === 'az') {
+      filtered.sort((a, b) => (a.name || a.termino).localeCompare(b.name || b.termino, 'es'));
+    }
+
+    return filtered;
   }
 
   // ==========================================
@@ -852,6 +1021,20 @@
     const isFeaturedFav = state.favorites.has(featuredTerm.id);
     const filteredTerms = getFilteredTerms();
 
+    const countTotal = FISIOPEDIA_TERMS.length;
+    const countMusculos = FISIOPEDIA_TERMS.filter(t => t.category === 'musculos').length;
+    const countHuesos = FISIOPEDIA_TERMS.filter(t => t.category === 'huesos').length;
+    const countArticulaciones = FISIOPEDIA_TERMS.filter(t => t.category === 'articulaciones').length;
+    const countMovimientos = FISIOPEDIA_TERMS.filter(t => t.category === 'movimientos').length;
+
+    const countColumna = FISIOPEDIA_TERMS.filter(t => t.region === 'columna').length;
+    const countHombro = FISIOPEDIA_TERMS.filter(t => t.region === 'hombro').length;
+    const countCodo = FISIOPEDIA_TERMS.filter(t => t.region === 'codo').length;
+    const countCadera = FISIOPEDIA_TERMS.filter(t => t.region === 'cadera').length;
+    const countRodilla = FISIOPEDIA_TERMS.filter(t => t.region === 'rodilla').length;
+    const countTobillo = FISIOPEDIA_TERMS.filter(t => t.region === 'tobillo').length;
+    const countGeneral = FISIOPEDIA_TERMS.filter(t => t.region === 'general').length;
+
     return `
       <!-- SEARCH & WELCOME HERO -->
       <section class="relative w-full rounded-2xl bg-surface-container-low p-6 sm:p-10 lg:p-12 overflow-hidden shadow-sm">
@@ -861,9 +1044,9 @@
         <div class="relative z-10 max-w-4xl mx-auto flex flex-col items-center text-center">
           <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-surface-container-lowest shadow-sm mb-4">
             <span class="flex h-2 w-2 rounded-full bg-cat-muscles animate-pulse"></span>
-            <span class="font-label-caps text-label-caps text-primary uppercase tracking-wider font-bold">Compendio Clínico Pedagógico</span>
+            <span class="font-label-caps text-label-caps text-primary uppercase tracking-wider font-bold">Diccionario Clínico Pedagógico</span>
             <span class="text-slate-muted text-xs">•</span>
-            <span class="font-label-sm text-label-sm text-on-surface-variant font-medium">Ciclo 2025</span>
+            <span class="font-label-sm text-label-sm text-on-surface-variant font-medium">${countTotal} Términos Oficiales</span>
           </div>
 
           <h1 class="font-headline-lg text-headline-lg text-on-surface tracking-tight max-w-2xl font-bold">
@@ -882,33 +1065,31 @@
                 type="text"
                 autocomplete="off"
                 value="${state.searchTerm}"
-                placeholder="Escribe un término (ej. Propiocepción, Isquiotibiales, Extensión, Menisco...)"
+                placeholder="Escribe un término (ej. Agonista, Flexión, Supinación, LCA, Menisco...)"
                 class="w-full pl-12 pr-12 py-3.5 bg-transparent font-body-md text-body-md text-on-surface placeholder:text-slate-muted focus:outline-none"
               />
-              ${state.searchTerm ? `
-                <button id="clear-search-btn" class="absolute right-3.5 p-1 text-slate-muted hover:text-on-surface transition-colors" type="button" aria-label="Limpiar búsqueda">
-                  <span class="material-symbols-outlined text-lg">close</span>
-                </button>
-              ` : ''}
+              <button id="clear-search-btn" class="absolute right-3.5 p-1 text-slate-muted hover:text-on-surface transition-colors ${state.searchTerm ? '' : 'hidden'}" type="button" aria-label="Limpiar búsqueda">
+                <span class="material-symbols-outlined text-lg">close</span>
+              </button>
             </div>
 
             <!-- CHIPS DE TIPO EN EL BUSCADOR -->
             <div class="flex items-center gap-2 overflow-x-auto pb-1 px-1 no-scrollbar" id="category-filter-chips">
               <span class="font-label-sm text-label-sm text-slate-muted mr-1 hidden sm:inline-block font-bold">Tipo:</span>
               <button data-cat="todos" class="px-3 py-1.5 rounded-full font-label-sm text-label-sm whitespace-nowrap transition-all ${state.selectedCategory === 'todos' ? 'bg-primary text-on-primary shadow-sm font-bold' : 'bg-surface-container-high text-on-surface-variant hover:bg-surface-container-highest'}">
-                Todos (${FISIOPEDIA_TERMS.length})
+                Todos (${countTotal})
               </button>
               <button data-cat="musculos" class="px-3 py-1.5 rounded-full font-label-sm text-label-sm whitespace-nowrap transition-all ${state.selectedCategory === 'musculos' ? 'bg-primary text-on-primary shadow-sm font-bold' : 'bg-surface-container-high text-on-surface-variant hover:bg-surface-container-highest'}">
-                <span class="inline-block w-2 h-2 rounded-full bg-cat-muscles mr-1.5"></span>Músculos
+                <span class="inline-block w-2 h-2 rounded-full bg-cat-muscles mr-1.5"></span>Músculos (${countMusculos})
               </button>
               <button data-cat="huesos" class="px-3 py-1.5 rounded-full font-label-sm text-label-sm whitespace-nowrap transition-all ${state.selectedCategory === 'huesos' ? 'bg-primary text-on-primary shadow-sm font-bold' : 'bg-surface-container-high text-on-surface-variant hover:bg-surface-container-highest'}">
-                <span class="inline-block w-2 h-2 rounded-full bg-cat-bones mr-1.5"></span>Huesos y Tendones
+                <span class="inline-block w-2 h-2 rounded-full bg-cat-bones mr-1.5"></span>Huesos y Tendones (${countHuesos})
               </button>
               <button data-cat="articulaciones" class="px-3 py-1.5 rounded-full font-label-sm text-label-sm whitespace-nowrap transition-all ${state.selectedCategory === 'articulaciones' ? 'bg-primary text-on-primary shadow-sm font-bold' : 'bg-surface-container-high text-on-surface-variant hover:bg-surface-container-highest'}">
-                <span class="inline-block w-2 h-2 rounded-full bg-cat-joints mr-1.5"></span>Articulaciones
+                <span class="inline-block w-2 h-2 rounded-full bg-cat-joints mr-1.5"></span>Articulaciones (${countArticulaciones})
               </button>
               <button data-cat="movimientos" class="px-3 py-1.5 rounded-full font-label-sm text-label-sm whitespace-nowrap transition-all ${state.selectedCategory === 'movimientos' ? 'bg-primary text-on-primary shadow-sm font-bold' : 'bg-surface-container-high text-on-surface-variant hover:bg-surface-container-highest'}">
-                <span class="inline-block w-2 h-2 rounded-full bg-cat-movements mr-1.5"></span>Movimientos
+                <span class="inline-block w-2 h-2 rounded-full bg-cat-movements mr-1.5"></span>Movimientos (${countMovimientos})
               </button>
             </div>
           </div>
@@ -916,11 +1097,12 @@
           <!-- TENDENCIAS RÁPIDAS -->
           <div class="flex flex-wrap items-center justify-center gap-2 mt-4 text-left">
             <span class="font-label-caps text-label-caps text-slate-muted uppercase font-bold">Tendencias:</span>
-            <button class="quick-tag-btn px-2.5 py-1 rounded bg-surface-container-high hover:bg-primary/10 font-label-sm text-label-sm text-on-surface-variant transition-colors" data-tag="Propiocepción">Propiocepción</button>
+            <button class="quick-tag-btn px-2.5 py-1 rounded bg-surface-container-high hover:bg-primary/10 font-label-sm text-label-sm text-on-surface-variant transition-colors" data-tag="Agonista">Agonista</button>
+            <button class="quick-tag-btn px-2.5 py-1 rounded bg-surface-container-high hover:bg-primary/10 font-label-sm text-label-sm text-on-surface-variant transition-colors" data-tag="Flexión">Flexión</button>
+            <button class="quick-tag-btn px-2.5 py-1 rounded bg-surface-container-high hover:bg-primary/10 font-label-sm text-label-sm text-on-surface-variant transition-colors" data-tag="Supinación">Supinación</button>
+            <button class="quick-tag-btn px-2.5 py-1 rounded bg-surface-container-high hover:bg-primary/10 font-label-sm text-label-sm text-on-surface-variant transition-colors" data-tag="Isométrico">Isométrico</button>
             <button class="quick-tag-btn px-2.5 py-1 rounded bg-surface-container-high hover:bg-primary/10 font-label-sm text-label-sm text-on-surface-variant transition-colors" data-tag="LCA">LCA Rodilla</button>
             <button class="quick-tag-btn px-2.5 py-1 rounded bg-surface-container-high hover:bg-primary/10 font-label-sm text-label-sm text-on-surface-variant transition-colors" data-tag="Manguito">Manguito Rotador</button>
-            <button class="quick-tag-btn px-2.5 py-1 rounded bg-surface-container-high hover:bg-primary/10 font-label-sm text-label-sm text-on-surface-variant transition-colors" data-tag="Menisco">Meniscos</button>
-            <button class="quick-tag-btn px-2.5 py-1 rounded bg-surface-container-high hover:bg-primary/10 font-label-sm text-label-sm text-on-surface-variant transition-colors" data-tag="Fascia">Fascia Plantar</button>
           </div>
         </div>
       </section>
@@ -935,16 +1117,15 @@
           <span class="font-label-caps text-label-caps text-slate-muted font-bold">ANATOMÍA REGIONAL</span>
         </div>
 
-        <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 lg:grid-cols-9 gap-2.5" id="region-filter-group">
-          ${renderRegionButton('todas', 'Todas', 'dataset', state.selectedRegion === 'todas')}
-          ${renderRegionButton('columna', 'Columna', 'view_column', state.selectedRegion === 'columna')}
-          ${renderRegionButton('hombro', 'Hombro', 'sports_gymnastics', state.selectedRegion === 'hombro')}
-          ${renderRegionButton('codo', 'Codo', 'fitness_center', state.selectedRegion === 'codo')}
-          ${renderRegionButton('mano', 'Mano', 'front_hand', state.selectedRegion === 'mano')}
-          ${renderRegionButton('cadera', 'Cadera', 'airline_seat_recline_normal', state.selectedRegion === 'cadera')}
-          ${renderRegionButton('rodilla', 'Rodilla', 'directions_walk', state.selectedRegion === 'rodilla')}
-          ${renderRegionButton('tobillo', 'Tobillo', 'do_not_step', state.selectedRegion === 'tobillo')}
-          ${renderRegionButton('general', 'Control Global', 'neurology', state.selectedRegion === 'general')}
+        <div class="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-8 gap-3" id="region-filter-group">
+          ${renderRegionButton('todas', `Todas (${countTotal})`, 'dataset', state.selectedRegion === 'todas')}
+          ${renderRegionButton('columna', `Columna (${countColumna})`, 'view_column', state.selectedRegion === 'columna')}
+          ${renderRegionButton('hombro', `Hombro (${countHombro})`, 'sports_gymnastics', state.selectedRegion === 'hombro')}
+          ${renderRegionButton('codo', `Codo (${countCodo})`, 'fitness_center', state.selectedRegion === 'codo')}
+          ${renderRegionButton('cadera', `Cadera (${countCadera})`, 'airline_seat_recline_normal', state.selectedRegion === 'cadera')}
+          ${renderRegionButton('rodilla', `Rodilla (${countRodilla})`, 'directions_walk', state.selectedRegion === 'rodilla')}
+          ${renderRegionButton('tobillo', `Tobillo (${countTobillo})`, 'do_not_step', state.selectedRegion === 'tobillo')}
+          ${renderRegionButton('general', `Global (${countGeneral})`, 'public', state.selectedRegion === 'general')}
         </div>
       </section>
 
@@ -978,14 +1159,14 @@
               </div>
 
               <div class="flex items-baseline gap-3">
-                <h3 class="font-headline-lg text-headline-lg text-primary tracking-tight font-bold">${featuredTerm.name}</h3>
-                <button onclick="window.fisiopediaApp.speak('${featuredTerm.name}')" class="p-1.5 rounded-full hover:bg-surface-container-high text-slate-muted hover:text-primary transition-colors" type="button" title="Escuchar pronunciación">
+                <h3 class="font-headline-lg text-headline-lg text-primary tracking-tight font-bold">${featuredTerm.name || featuredTerm.termino}</h3>
+                <button onclick="window.fisiopediaApp.speak('${featuredTerm.name || featuredTerm.termino}')" class="p-1.5 rounded-full hover:bg-surface-container-high text-slate-muted hover:text-primary transition-colors cursor-pointer" type="button" title="Escuchar pronunciación">
                   <span class="material-symbols-outlined text-xl">volume_up</span>
                 </button>
               </div>
 
               <p class="font-body-md text-body-md text-on-surface-variant mt-2 leading-relaxed max-w-xl">
-                <strong class="font-semibold text-on-surface">Definición técnica:</strong> ${featuredTerm.technicalDef}
+                <strong class="font-semibold text-on-surface">Definición técnica:</strong> ${featuredTerm.technicalDef || featuredTerm.defTecnica}
               </p>
 
               <!-- En palabras sencillas -->
@@ -998,22 +1179,22 @@
                     En palabras sencillas
                   </span>
                   <p class="font-body-md text-body-md text-on-surface font-medium">
-                    "${featuredTerm.simpleExplanation}"
+                    "${featuredTerm.simpleExplanation || featuredTerm.explicacionSencilla}"
                   </p>
                 </div>
               </div>
 
-              <!-- Ejemplo cotidiano -->
+              <!-- Ejemplo cotidiano / Analogía -->
               <div class="mt-4 p-4 rounded-xl bg-amber-quiz/10 flex items-start gap-3.5 border-l-4 border-amber-quiz">
                 <div class="p-2 rounded-lg bg-amber-quiz/20 text-amber-quiz shrink-0">
                   <span class="material-symbols-outlined text-2xl">emoji_objects</span>
                 </div>
                 <div>
                   <span class="font-label-caps text-label-caps uppercase text-amber-quiz font-bold block mb-1">
-                    Ejemplo Cotidiano de Evaluación
+                    Analogía de la Vida Cotidiana
                   </span>
                   <p class="font-body-sm text-body-sm text-on-surface leading-snug">
-                    ${featuredTerm.everydayExample}
+                    ${featuredTerm.everydayExample || featuredTerm.analogia}
                   </p>
                 </div>
               </div>
@@ -1024,7 +1205,7 @@
                   <span>Ver ficha anatómica completa</span>
                   <span class="material-symbols-outlined text-lg">arrow_forward</span>
                 </a>
-                <button onclick="window.fisiopediaApp.toggleFav('${featuredTerm.id}')" class="px-4 py-2.5 rounded-lg bg-surface-container-high hover:bg-surface-container-highest text-on-surface font-label-md text-label-md transition-all flex items-center gap-2">
+                <button onclick="window.fisiopediaApp.toggleFav('${featuredTerm.id}')" class="px-4 py-2.5 rounded-lg bg-surface-container-high hover:bg-surface-container-highest text-on-surface font-label-md text-label-md transition-all flex items-center gap-2 cursor-pointer">
                   <span class="material-symbols-outlined ${isFeaturedFav ? 'text-amber-quiz' : 'text-slate-muted'}" style="font-variation-settings: 'FILL' ${isFeaturedFav ? '1' : '0'};">bookmark</span>
                   <span>${isFeaturedFav ? 'Guardado en Mis Favoritos' : 'Guardar en Favoritos'}</span>
                 </button>
@@ -1055,75 +1236,9 @@
           </div>
         </div>
       </section>
-
-      <!-- GRILLA DE CONCEPTOS DEL DICCIONARIO -->
-      <section class="mt-14 w-full">
-        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-4">
-          <div>
-            <h2 class="font-headline-sm text-headline-sm text-on-surface font-bold">
-              ${(state.searchTerm || state.selectedCategory !== 'todos' || state.selectedRegion !== 'todas') ? `Resultados Filtrados (${filteredTerms.length})` : 'TÃ©rminos AnatÃ³micos y BiomecÃ¡nicos'}
-            </h2>
-            <p class="font-body-sm text-body-sm text-on-surface-variant">
-              ${(state.searchTerm || state.selectedCategory !== 'todos' || state.selectedRegion !== 'todas') ? `Mostrando ${filteredTerms.length} de ${FISIOPEDIA_TERMS.length} conceptos segÃºn tus criterios de estudio.` : `Explora los ${FISIOPEDIA_TERMS.length} conceptos esenciales de Fisioterapia.`}
-            </p>
-          </div>
-
-          <!-- Tabs de ordenamiento -->
-          <div class="inline-flex p-1 rounded-xl bg-surface-container-high self-start sm:self-auto">
-            <button data-sort="populares" class="sort-tab-btn px-3 py-1 rounded-lg font-label-sm text-label-sm transition-all ${state.sortBy === 'populares' ? 'bg-surface-container-lowest text-on-surface shadow-xs font-bold' : 'text-on-surface-variant hover:text-on-surface'}">
-              MÃ¡s consultados
-            </button>
-            <button data-sort="az" class="sort-tab-btn px-3 py-1 rounded-lg font-label-sm text-label-sm transition-all ${state.sortBy === 'az' ? 'bg-surface-container-lowest text-on-surface shadow-xs font-bold' : 'text-on-surface-variant hover:text-on-surface'}">
-              Orden A-Z
-            </button>
-          </div>
-        </div>
-
-        <!-- PÃ­ldoras de Filtros Activos y BotÃ³n Limpiar Filtros -->
-        ${(state.searchTerm || state.selectedCategory !== 'todos' || state.selectedRegion !== 'todas') ? `
-          <div class="flex flex-wrap items-center gap-2 mb-6 p-3 rounded-xl bg-surface-container-low border border-slate-border/60">
-            <span class="font-label-caps text-label-caps text-slate-muted uppercase font-bold flex items-center gap-1">
-              <span class="material-symbols-outlined text-sm">filter_alt</span>
-              Filtros:
-            </span>
-            ${state.searchTerm ? `
-              <button onclick="window.fisiopediaApp.clearSearchOnly()" class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-primary/10 text-primary font-label-sm text-xs font-bold hover:bg-primary/20 transition-colors" title="Quitar bÃºsqueda de texto">
-                <span>Texto: "${state.searchTerm}"</span>
-                <span class="material-symbols-outlined text-xs">close</span>
-              </button>
-            ` : ''}
-            ${state.selectedCategory !== 'todos' ? `
-              <button onclick="window.fisiopediaApp.clearCategoryOnly()" class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-cat-bones/10 text-cat-bones font-label-sm text-xs font-bold hover:bg-cat-bones/20 transition-colors" title="Quitar filtro de categorÃ­a">
-                <span>CategorÃ­a: ${getCategoryName(state.selectedCategory)}</span>
-                <span class="material-symbols-outlined text-xs">close</span>
-              </button>
-            ` : ''}
-            ${state.selectedRegion !== 'todas' ? `
-              <button onclick="window.fisiopediaApp.clearRegionOnly()" class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-cat-joints/10 text-cat-joints font-label-sm text-xs font-bold hover:bg-cat-joints/20 transition-colors" title="Quitar filtro de regiÃ³n">
-                <span>RegiÃ³n: ${getRegionName(state.selectedRegion)}</span>
-                <span class="material-symbols-outlined text-xs">close</span>
-              </button>
-            ` : ''}
-            <button onclick="window.fisiopediaApp.clearSearch()" class="ml-auto inline-flex items-center gap-1 px-3 py-1 rounded-lg bg-surface-container-lowest hover:bg-surface-container-high text-coral-alert font-label-sm text-xs font-bold border border-coral-alert/30 transition-colors">
-              <span class="material-symbols-outlined text-xs">filter_alt_off</span>
-              <span>Limpiar filtros</span>
-            </button>
-          </div>
-        ` : ''}
-        ${filteredTerms.length === 0 ? `
-          <div class="p-12 text-center rounded-2xl bg-surface-container-lowest border border-dashed border-slate-border">
-            <span class="material-symbols-outlined text-5xl text-slate-muted mb-2">search_off</span>
-            <h3 class="font-headline-sm text-headline-sm text-on-surface">No encontramos términos con esa búsqueda</h3>
-            <p class="font-body-md text-body-md text-slate-muted mt-1">Prueba con términos como flexión, ligamento, manguito o quita los filtros de categoría.</p>
-            <button onclick="window.fisiopediaApp.clearSearch()" class="mt-4 px-4 py-2 rounded-lg bg-primary text-on-primary font-label-md text-label-md shadow-sm font-bold">
-              Restablecer búsqueda
-            </button>
-          </div>
-        ` : `
-          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            ${filteredTerms.map(term => renderTermCard(term)).join('')}
-          </div>
-        `}
+      <!-- CONTENEDOR REACTIVO DE RESULTADOS Y GRILLA -->
+      <section class="mt-14 w-full" id="terms-results-container">
+        ${renderTermsResultsHTML(filteredTerms)}
       </section>
 
       <!-- BANNERS PEDAGÓGICOS: FLASHCARDS Y QUIZZES -->
@@ -1189,11 +1304,102 @@
     `;
   }
 
+  // --- SUB-RENDERER DE RESULTADOS DE TÉRMINOS ---
+  function renderTermsResultsHTML(filteredTerms) {
+    const hasActiveFilters = state.searchTerm !== '' || state.selectedCategory !== 'todos' || state.selectedRegion !== 'todas';
+
+    return `
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-4">
+        <div>
+          <h2 class="font-headline-sm text-headline-sm text-on-surface font-bold flex items-center gap-2">
+            <span>${state.searchTerm ? `Resultados de búsqueda` : 'Términos Anatómicos y Biomecánicos'}</span>
+            <span class="px-2.5 py-0.5 rounded-full bg-primary/10 text-primary text-xs font-bold">
+              ${filteredTerms.length} ${filteredTerms.length === 1 ? 'término' : 'términos'}
+            </span>
+          </h2>
+          <p class="font-body-sm text-body-sm text-on-surface-variant mt-0.5">
+            ${state.searchTerm ? `Coincidencias para "${state.searchTerm}" sin distinguir mayúsculas ni tildes.` : `Explora los ${FISIOPEDIA_TERMS.length} conceptos esenciales de Fisioterapia.`}
+          </p>
+        </div>
+
+        <!-- Tabs de ordenamiento -->
+        <div class="inline-flex p-1 rounded-xl bg-surface-container-high self-start sm:self-auto shrink-0">
+          <button data-sort="populares" class="sort-tab-btn px-3 py-1 rounded-lg font-label-sm text-label-sm transition-all ${state.sortBy === 'populares' ? 'bg-surface-container-lowest text-on-surface shadow-xs font-bold' : 'text-on-surface-variant hover:text-on-surface'}">
+            Relevancia
+          </button>
+          <button data-sort="az" class="sort-tab-btn px-3 py-1 rounded-lg font-label-sm text-label-sm transition-all ${state.sortBy === 'az' ? 'bg-surface-container-lowest text-on-surface shadow-xs font-bold' : 'text-on-surface-variant hover:text-on-surface'}">
+            Orden A-Z
+          </button>
+        </div>
+      </div>
+
+      <!-- Barra de Filtros Activos (si hay alguno aplicado) -->
+      ${hasActiveFilters ? `
+        <div class="flex flex-wrap items-center gap-2 p-3 rounded-xl bg-surface-container-low border border-slate-border/50 mb-6">
+          <span class="text-xs font-bold text-slate-muted uppercase tracking-wider flex items-center gap-1">
+            <span class="material-symbols-outlined text-sm">tune</span> Filtros aplicados:
+          </span>
+          ${state.searchTerm ? `
+            <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-primary/15 text-primary text-xs font-bold shadow-xs">
+              <span>Búsqueda: "${state.searchTerm}"</span>
+              <button onclick="window.fisiopediaApp.clearSearchQuery()" class="hover:text-coral-alert transition-colors flex items-center" title="Quitar búsqueda">
+                <span class="material-symbols-outlined text-sm">close</span>
+              </button>
+            </span>
+          ` : ''}
+          ${state.selectedCategory !== 'todos' ? `
+            <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-cat-bones/15 text-cat-bones text-xs font-bold shadow-xs">
+              <span>Tipo: ${getCategoryLabel(state.selectedCategory)}</span>
+              <button onclick="window.fisiopediaApp.setCategory('todos')" class="hover:text-coral-alert transition-colors flex items-center" title="Quitar filtro de tipo">
+                <span class="material-symbols-outlined text-sm">close</span>
+              </button>
+            </span>
+          ` : ''}
+          ${state.selectedRegion !== 'todas' ? `
+            <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-cat-joints/15 text-cat-joints text-xs font-bold shadow-xs">
+              <span>Región: ${getRegionLabel(state.selectedRegion)}</span>
+              <button onclick="window.fisiopediaApp.setRegion('todas')" class="hover:text-coral-alert transition-colors flex items-center" title="Quitar filtro de región">
+                <span class="material-symbols-outlined text-sm">close</span>
+              </button>
+            </span>
+          ` : ''}
+          <button onclick="window.fisiopediaApp.clearSearch()" class="ml-auto text-xs text-coral-alert hover:underline font-bold flex items-center gap-1 py-1 px-2 rounded hover:bg-coral-alert/10 transition-colors">
+            <span class="material-symbols-outlined text-sm">filter_alt_off</span>
+            Limpiar todos los filtros
+          </button>
+        </div>
+      ` : ''}
+
+      ${filteredTerms.length === 0 ? `
+        <div class="p-12 text-center rounded-2xl bg-surface-container-lowest border border-dashed border-slate-border">
+          <div class="w-16 h-16 mx-auto rounded-full bg-slate-subtle flex items-center justify-center text-slate-muted mb-3">
+            <span class="material-symbols-outlined text-4xl">search_off</span>
+          </div>
+          <h3 class="font-headline-sm text-headline-sm text-on-surface font-bold">No se encontraron términos coincidentes</h3>
+          <p class="font-body-md text-body-md text-slate-muted mt-2 max-w-lg mx-auto">
+            No encontramos ningún concepto anatómico con los criterios actuales.
+            Prueba buscando sin tildes (ej. <em>agonista</em>, <em>flexion</em>, <em>supinacion</em>, <em>isometrico</em>) o limpia los filtros para ver todo el compendio.
+          </p>
+          <div class="mt-6 flex items-center justify-center gap-3">
+            <button onclick="window.fisiopediaApp.clearSearch()" class="px-5 py-2.5 rounded-lg bg-primary hover:bg-primary/90 text-on-primary font-label-md text-label-md shadow-sm font-bold flex items-center gap-2 transition-all">
+              <span class="material-symbols-outlined text-lg">filter_alt_off</span>
+              <span>Restablecer búsqueda y filtros</span>
+            </button>
+          </div>
+        </div>
+      ` : `
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          ${filteredTerms.map(term => renderTermCard(term)).join('')}
+        </div>
+      `}
+    `;
+  }
+
   function renderRegionButton(id, label, icon, isActive) {
     return `
       <button
         data-region="${id}"
-        class="region-btn flex flex-col items-center justify-center p-3.5 rounded-xl ${isActive ? 'bg-primary text-on-primary shadow-md ring-2 ring-primary/30' : 'bg-surface-container-lowest hover:bg-surface-container-low shadow-sm text-on-surface'} transition-all text-center group border border-slate-border/40"
+        class="region-btn flex flex-col items-center justify-center p-3.5 rounded-xl ${isActive ? 'bg-primary text-on-primary shadow-md ring-2 ring-primary/30' : 'bg-surface-container-lowest hover:bg-surface-container-low shadow-sm text-on-surface'} transition-all text-center group border border-slate-border/40 cursor-pointer"
         type="button"
       >
         <div class="w-10 h-10 rounded-full ${isActive ? 'bg-white/20 text-white' : 'bg-primary/10 text-primary'} flex items-center justify-center group-hover:scale-110 transition-transform">
@@ -1206,16 +1412,18 @@
 
   function renderTermCard(term) {
     const isFav = state.favorites.has(term.id);
+    const titleName = term.name || term.termino;
+    const example = term.everydayExample || term.analogia;
     return `
       <article class="flex flex-col justify-between bg-surface-container-lowest rounded-2xl p-6 shadow-sm hover:shadow-md transition-shadow group border border-slate-border/50">
         <div>
           <div class="flex items-center justify-between">
-            <span class="px-3 py-1 rounded-full ${term.categoryClass} font-label-caps text-label-caps uppercase font-bold">
+            <span class="px-3 py-1 rounded-full ${term.categoryClass || 'bg-primary/10 text-primary'} font-label-caps text-label-caps uppercase font-bold">
               ${term.categoryLabel}
             </span>
             <button
               onclick="window.fisiopediaApp.toggleFav('${term.id}')"
-              class="p-1 text-slate-muted hover:text-amber-quiz transition-colors"
+              class="p-1 text-slate-muted hover:text-amber-quiz transition-colors cursor-pointer"
               type="button"
               aria-label="Agregar a favoritos"
             >
@@ -1226,19 +1434,19 @@
           </div>
 
           <h3 class="font-headline-sm text-headline-sm text-on-surface mt-4 group-hover:text-primary transition-colors cursor-pointer font-bold" onclick="window.location.hash='#termino/${term.id}'">
-            ${term.name}
+            ${titleName}
           </h3>
 
           <div class="mt-3 p-3 rounded-lg bg-surface-container-low border border-slate-border/30">
             <span class="font-label-caps text-label-caps uppercase text-cat-muscles block mb-1 font-bold">En el día a día</span>
             <p class="font-body-sm text-body-sm text-on-surface leading-snug line-clamp-3">
-              ${term.everydayExample}
+              ${example}
             </p>
           </div>
 
           <div class="mt-4 pt-2 text-xs text-on-surface-variant flex items-center justify-between">
             <span class="text-slate-muted">Región: <strong class="text-on-surface">${term.regionLabel}</strong></span>
-            <span class="text-slate-muted font-medium">${term.readingTime}</span>
+            <span class="text-slate-muted font-medium">${term.readingTime || '2 min'}</span>
           </div>
         </div>
 
@@ -1246,7 +1454,7 @@
           <a href="#termino/${term.id}" class="font-label-sm text-label-sm text-primary flex items-center gap-1 group-hover:translate-x-1 transition-transform font-bold">
             Ver explicación sencilla <span class="material-symbols-outlined text-base">arrow_forward</span>
           </a>
-          <button onclick="window.fisiopediaApp.speak('${term.name}')" class="text-slate-muted hover:text-primary p-1" title="Escuchar pronunciación">
+          <button onclick="window.fisiopediaApp.speak('${titleName}')" class="text-slate-muted hover:text-primary p-1 cursor-pointer" title="Escuchar pronunciación">
             <span class="material-symbols-outlined text-base">volume_up</span>
           </button>
         </div>
@@ -1254,26 +1462,52 @@
     `;
   }
 
+  function updateExploradorResultsOnly() {
+    const container = document.getElementById('terms-results-container');
+    if (container) {
+      const terms = getFilteredTerms();
+      container.innerHTML = renderTermsResultsHTML(terms);
+      bindSortTabEvents();
+    }
+    const clearBtn = document.getElementById('clear-search-btn');
+    if (clearBtn) {
+      clearBtn.classList.toggle('hidden', !state.searchTerm);
+    }
+  }
+
+  function bindSortTabEvents() {
+    document.querySelectorAll('.sort-tab-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        state.sortBy = btn.getAttribute('data-sort');
+        updateExploradorResultsOnly();
+      });
+    });
+  }
+
   function bindExploradorEvents() {
     const searchInput = document.getElementById('main-search-input');
     const clearBtn = document.getElementById('clear-search-btn');
+    const desktopSearch = document.getElementById('desktop-header-search');
 
     if (searchInput) {
       searchInput.addEventListener('input', (e) => {
         state.searchTerm = e.target.value;
-        renderCurrentRoute();
-        const freshInput = document.getElementById('main-search-input');
-        if (freshInput) {
-          freshInput.focus();
-          freshInput.setSelectionRange(freshInput.value.length, freshInput.value.length);
+        if (desktopSearch && desktopSearch.value !== state.searchTerm) {
+          desktopSearch.value = state.searchTerm;
         }
+        updateExploradorResultsOnly();
       });
     }
 
     if (clearBtn) {
       clearBtn.addEventListener('click', () => {
         state.searchTerm = '';
-        renderCurrentRoute();
+        if (searchInput) {
+          searchInput.value = '';
+          searchInput.focus();
+        }
+        if (desktopSearch) desktopSearch.value = '';
+        updateExploradorResultsOnly();
       });
     }
 
@@ -1285,10 +1519,12 @@
       });
     });
 
-    // Etiquetas rápidas
+    // Etiquetas rápidas de tendencias
     document.querySelectorAll('.quick-tag-btn').forEach(btn => {
       btn.addEventListener('click', () => {
         state.searchTerm = btn.getAttribute('data-tag');
+        if (searchInput) searchInput.value = state.searchTerm;
+        if (desktopSearch) desktopSearch.value = state.searchTerm;
         renderCurrentRoute();
       });
     });
@@ -1302,19 +1538,31 @@
     });
 
     // Ordenamiento
-    document.querySelectorAll('.sort-tab-btn').forEach(btn => {
-      btn.addEventListener('click', () => {
-        state.sortBy = btn.getAttribute('data-sort');
-        renderCurrentRoute();
-      });
-    });
+    bindSortTabEvents();
+  }
+
+
+  function findTermById(id) {
+    if (!id) return null;
+    const direct = FISIOPEDIA_TERMS.find(t => t.id === id);
+    if (direct) return direct;
+
+    const aliases = {
+      'flexion-extension': 'flexion',
+      'abduccion-aduccion': 'abduccion',
+      'supinacion-pronacion': 'supinacion'
+    };
+    if (aliases[id]) {
+      return FISIOPEDIA_TERMS.find(t => t.id === aliases[id]);
+    }
+    return null;
   }
 
   // ==========================================
   // VISTA 2: FICHA DE TÉRMINO ANATÓMICO (7:5)
   // ==========================================
   function renderTerminoView() {
-    const term = FISIOPEDIA_TERMS.find(t => t.id === state.selectedTermId) || FISIOPEDIA_TERMS[0];
+    const term = findTermById(state.selectedTermId) || FISIOPEDIA_TERMS[0];
     const isFav = state.favorites.has(term.id);
 
     return `
@@ -2104,6 +2352,10 @@
       state.searchTerm = '';
       state.selectedCategory = 'todos';
       state.selectedRegion = 'todas';
+      const mainInput = document.getElementById('main-search-input');
+      if (mainInput) mainInput.value = '';
+      const desktopSearch = document.getElementById('desktop-header-search');
+      if (desktopSearch) desktopSearch.value = '';
       renderCurrentRoute();
       showToast('Filtros restablecidos', 'restart_alt');
     },
@@ -2118,6 +2370,48 @@
     clearRegionOnly: () => {
       state.selectedRegion = 'todas';
       renderCurrentRoute();
+    },
+    clearSearchQuery: () => {
+      state.searchTerm = '';
+      const mainInput = document.getElementById('main-search-input');
+      if (mainInput) mainInput.value = '';
+      const desktopSearch = document.getElementById('desktop-header-search');
+      if (desktopSearch) desktopSearch.value = '';
+      if (state.route === 'explorador') {
+        updateExploradorResultsOnly();
+      } else {
+        renderCurrentRoute();
+      }
+    },
+    setCategory: (cat) => {
+      state.selectedCategory = cat;
+      renderCurrentRoute();
+    },
+    setRegion: (reg) => {
+      state.selectedRegion = reg;
+      renderCurrentRoute();
+    },
+    shareTerm: (id) => {
+      const term = findTermById(id);
+      const url = `${window.location.origin}${window.location.pathname}#termino/${id}`;
+      if (navigator.share) {
+        navigator.share({
+          title: term ? (term.name || term.termino) : 'Fisio Pedía',
+          text: term ? (term.simpleExplanation || term.explicacionSencilla) : 'Diccionario del cuerpo humano',
+          url: url
+        }).catch(() => {});
+      } else if (navigator.clipboard) {
+        navigator.clipboard.writeText(url).then(() => {
+          showToast('Enlace copiado al portapapeles', 'content_copy');
+        }).catch(() => {
+          showToast('Enlace: ' + url, 'link');
+        });
+      } else {
+        showToast('Enlace: ' + url, 'link');
+      }
+    },
+    printTerm: () => {
+      window.print();
     },
     selectQuizOption: (optionId) => {
       if (state.quizSubmitted[state.quizIndex]) return;
@@ -2450,6 +2744,27 @@
     if ('serviceWorker' in navigator && window.location.protocol.startsWith('http')) {
       window.addEventListener('load', () => {
         navigator.serviceWorker.register('./sw.js').catch(() => {});
+      });
+    }
+
+    const desktopSearch = document.getElementById('desktop-header-search');
+    if (desktopSearch) {
+      desktopSearch.addEventListener('input', (e) => {
+        state.searchTerm = e.target.value;
+        if (state.route !== 'explorador') {
+          navigateTo('#explorador');
+        } else {
+          const mainInput = document.getElementById('main-search-input');
+          if (mainInput && mainInput.value !== state.searchTerm) {
+            mainInput.value = state.searchTerm;
+          }
+          updateExploradorResultsOnly();
+        }
+      });
+      desktopSearch.addEventListener('focus', () => {
+        if (state.route !== 'explorador') {
+          navigateTo('#explorador');
+        }
       });
     }
 

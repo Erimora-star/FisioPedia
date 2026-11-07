@@ -53,7 +53,7 @@
 
 /* Print & PDF Export Optimization for Students */
 @media print {
-  header, footer, nav, #btn-cloud-sync, #modal-cloud-sync, .fav-count-badge, .no-print, [data-route-mobile] {
+  header, footer, nav, #btn-cloud-sync, #modal-cloud-sync, #fisiopedia-toast, .fav-count-badge, .no-print, [data-route-mobile] {
     display: none !important;
   }
   main {

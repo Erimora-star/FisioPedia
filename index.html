@@ -104,13 +104,17 @@
 
       <!-- BUSCADOR RÁPIDO DESKTOP -->
       <div class="hidden xl:flex items-center flex-1 max-w-md mx-4">
-        <a href="#explorador" class="w-full flex items-center justify-between px-4 py-2 bg-surface-container-low hover:bg-surface-container-high rounded-xl text-on-surface-variant transition-colors border border-slate-border/60">
-          <div class="flex items-center gap-2">
-            <span class="material-symbols-outlined text-slate-muted text-lg">search</span>
-            <span class="font-body-sm text-sm text-on-surface-variant">Buscar músculo, articulación...</span>
-          </div>
-          <kbd class="hidden sm:inline-block font-label-caps text-[11px] px-2 py-0.5 rounded bg-surface-container-highest text-on-surface-variant font-mono">Ctrl+K</kbd>
-        </a>
+        <div class="relative w-full flex items-center">
+          <span class="material-symbols-outlined absolute left-3.5 text-slate-muted text-lg pointer-events-none">search</span>
+          <input
+            id="desktop-header-search"
+            type="text"
+            autocomplete="off"
+            placeholder="Buscar término (ej. flexión, propiocepción, LCA)..."
+            class="w-full pl-10 pr-16 py-2 bg-surface-container-low hover:bg-surface-container-high focus:bg-surface-container-lowest rounded-xl text-on-surface text-sm border border-slate-border/60 focus:border-primary focus:outline-none transition-all placeholder:text-slate-muted font-body-sm"
+          />
+          <kbd class="absolute right-3 hidden sm:inline-block font-label-caps text-[10px] px-1.5 py-0.5 rounded bg-surface-container-highest text-slate-muted font-mono pointer-events-none">Ctrl+K</kbd>
+        </div>
       </div>
 
       <!-- MENÚ DE NAVEGACIÓN DESKTOP -->

@@ -12,6 +12,15 @@ import subprocess
 import urllib.request
 import time
 
+import os
+import re
+import sys
+import json
+import subprocess
+import urllib.request
+import time
+import unicodedata
+
 def log(msg, status="INFO"):
     colors = {
         "INFO": "\033[94m",
@@ -21,6 +30,13 @@ def log(msg, status="INFO"):
         "END": "\033[0m"
     }
     print(f"{colors.get(status, '')}[{status}] {msg}{colors['END']}")
+
+def load_terms():
+    with open('data/terms.js', 'r', encoding='utf-8') as f:
+        content = f.read()
+    m = re.search(r'const\s+FISIOPEDIA_TERMS\s*=\s*(\[[\s\S]*?\]);', content)
+    assert m, "No se pudo extraer FISIOPEDIA_TERMS de data/terms.js"
+    return json.loads(m.group(1))
 
 def test_files_exist():
     required_files = [
@@ -44,24 +60,100 @@ def test_files_exist():
     log(f"Todos los {len(required_files)} archivos requeridos existen y tienen contenido.", "PASS")
 
 def test_terms_integrity():
-    with open('data/terms.js', 'r', encoding='utf-8') as f:
-        content = f.read()
-
-    ids = re.findall(r'id:\s*["\']([^"\']+)["\']', content)
-    assert len(ids) >= 30, f"Se esperaban al menos 30 términos, encontrados: {len(ids)}"
+    terms = load_terms()
+    assert len(terms) >= 37, f"Se esperaban al menos 37 términos, encontrados: {len(terms)}"
+    
+    ids = [t['id'] for t in terms]
     assert len(ids) == len(set(ids)), f"Existen IDs duplicados en términos: {ids}"
 
-    required_fields = [
-        'name', 'pronunciation', 'category', 'categoryLabel', 'level',
-        'technicalDef', 'simpleExplanation', 'everydayExample', 'clinicalRelevance',
-        'keyDetails', 'svgType'
-    ]
-    for field in required_fields:
-        count = len(re.findall(rf'{field}:', content))
-        assert count >= len(ids), f"Campo '{field}' incompleto: solo {count} encontrados para {len(ids)} términos."
+    names = [t['name'] for t in terms]
+    assert len(names) == len(set(names)), f"Existen nombres duplicados en términos: {names}"
 
-    log(f"Verificación de base de datos de términos: {len(ids)} términos anatómicos válidos.", "PASS")
-    return ids
+    required_standard_fields = [
+        'id', 'name', 'pronunciation', 'category', 'categoryLabel', 'categoryClass',
+        'region', 'regionLabel', 'level', 'readingTime', 'technicalDef', 'simpleExplanation',
+        'everydayTitle', 'everydayExample', 'clinicalTitle', 'clinicalRelevance',
+        'clinicalCase', 'keyDetails', 'svgType'
+    ]
+    required_schema_fields = [
+        'termino', 'fonetica', 'defTecnica', 'explicacionSencilla', 'analogia'
+    ]
+
+    for t in terms:
+        for f in required_standard_fields:
+            assert f in t and t[f], f"Término '{t.get('id')}' carece del campo estándar obligatorio '{f}'"
+        for f in required_schema_fields:
+            assert f in t and t[f], f"Término '{t.get('id')}' carece del campo de compatibilidad '{f}'"
+        assert isinstance(t['keyDetails'], list) and len(t['keyDetails']) >= 3, f"keyDetails insuficiente en '{t.get('id')}'"
+
+    log(f"Verificación de base de datos de términos: {len(terms)} términos anatómicos válidos (100% campos y doble esquema).", "PASS")
+    return terms
+
+def test_twenty_fundamental_concepts(terms):
+    required_concepts = [
+        ("agonista", "Agonista"),
+        ("antagonista", "Antagonista"),
+        ("sinergico", "Sinérgico"),
+        ("caudal", "Caudal"),
+        ("craneal", "Craneal"),
+        ("ipsilateral", "Ipsilateral"),
+        ("contralateral", "Contralateral"),
+        ("proximal", "Proximal"),
+        ("distal", "Distal"),
+        ("ventral", "Ventral"),
+        ("dorsal", "Dorsal"),
+        ("medial", "Medial"),
+        ("lateral", "Lateral"),
+        ("supinacion", "Supinación"),
+        ("pronacion", "Pronación"),
+        ("abduccion", "Abducción"),
+        ("aduccion", "Aducción"),
+        ("flexion", "Flexión"),
+        ("extension", "Extensión"),
+        ("isometrico", "Isométrico")
+    ]
+    term_ids = {t['id']: t for t in terms}
+    for cid, cname in required_concepts:
+        assert cid in term_ids, f"Falta concepto fundamental obligatorio: {cid} ({cname})"
+        t = term_ids[cid]
+        assert t['name'].lower() == cname.lower() or t['termino'].lower() == cname.lower(), f"Nombre inconsistente para {cid}"
+
+    log(f"Los 20 conceptos fundamentales de orientación y biomecánica están presentes y completos.", "PASS")
+
+def normalize_text(text):
+    if not text:
+        return ""
+    nfkd = unicodedata.normalize('NFD', str(text))
+    without_diacritics = "".join([c for c in nfkd if unicodedata.category(c) != 'Mn'])
+    return without_diacritics.lower().strip()
+
+def test_search_and_filtering(terms):
+    test_cases = [
+        ("flexion", "flexion", "Flexión"),
+        ("FLEXION", "flexion", "Flexión"),
+        ("extension", "extension", "Extensión"),
+        ("isometrico", "isometrico", "Isométrico"),
+        ("propiocepcion", "propiocepcion", "Propiocepción"),
+        ("sinergico", "sinergico", "Sinérgico"),
+        ("supinacion", "supinacion", "Supinación"),
+        ("pronacion", "pronacion", "Pronación"),
+        ("abduccion", "abduccion", "Abducción"),
+        ("aduccion", "aduccion", "Aducción"),
+        ("agonista", "agonista", "Agonista"),
+        ("antagonista", "antagonista", "Antagonista"),
+        ("caudal", "caudal", "Caudal"),
+        ("craneal", "craneal", "Craneal"),
+        ("ipsilateral", "ipsilateral", "Ipsilateral"),
+        ("contralateral", "contralateral", "Contralateral")
+    ]
+
+    for query, expected_id, expected_name in test_cases:
+        norm_q = normalize_text(query)
+        matches = [t for t in terms if norm_q in normalize_text(t['name']) or norm_q in normalize_text(t['termino']) or norm_q in normalize_text(t['technicalDef']) or norm_q in normalize_text(t['simpleExplanation'])]
+        match_ids = [m['id'] for m in matches]
+        assert expected_id in match_ids, f"Búsqueda sin tilde falló para '{query}': no encontró '{expected_id}'"
+
+    log("Búsqueda insensible a mayúsculas, minúsculas y tildes validada con éxito.", "PASS")
 
 def test_quizzes_integrity():
     with open('data/quizzes.js', 'r', encoding='utf-8') as f:
@@ -76,17 +168,38 @@ def test_quizzes_integrity():
 
     log(f"Verificación de quizzes: {len(q_ids)} preguntas clínicas con 1 respuesta correcta cada una.", "PASS")
 
-def test_svg_types_covered(term_ids):
-    with open('data/terms.js', 'r', encoding='utf-8') as f:
-        terms_content = f.read()
+def test_svg_types_covered(terms):
     with open('js/app.js', 'r', encoding='utf-8') as f:
         app_content = f.read()
 
-    svg_types = set(re.findall(r'svgType:\s*["\']([^"\']+)["\']', terms_content))
+    svg_types = set(t['svgType'] for t in terms)
     for st in svg_types:
         assert f"case '{st}':" in app_content or f'case "{st}":' in app_content or 'default:' in app_content, f"Falta caso SVG para: {st}"
 
     log(f"Cobertura de esquemas SVG: {len(svg_types)} tipos de esquemas anatómicos mapeados.", "PASS")
+
+def test_public_api_methods():
+    with open('js/app.js', 'r', encoding='utf-8') as f:
+        app_content = f.read()
+
+    required_methods = [
+        'clearSearch',
+        'clearSearchQuery',
+        'setCategory',
+        'setRegion',
+        'toggleFav',
+        'speak',
+        'shareTerm',
+        'printTerm',
+        'selectQuizOption',
+        'submitQuizAnswer',
+        'nextQuizQuestion',
+        'resetQuiz'
+    ]
+    for m in required_methods:
+        assert f"{m}:" in app_content, f"Falta método público '{m}' en window.fisiopediaApp"
+
+    log(f"API pública window.fisiopediaApp contiene los {len(required_methods)} métodos necesarios.", "PASS")
 
 def test_storage_and_firebase():
     with open('js/storage.js', 'r', encoding='utf-8') as f:
@@ -99,6 +212,7 @@ def test_storage_and_firebase():
     assert 'testCloudConnection' in storage_content, "Falta testCloudConnection en js/storage.js"
     assert 'firebase-firestore-compat.js' in html, "index.html no incluye el SDK de Firestore"
     assert 'modal-cloud-sync' in html, "index.html no incluye el modal de Firebase"
+    assert 'desktop-header-search' in html, "index.html no incluye el input de búsqueda de cabecera"
     log("Verificación de almacenamiento y Firebase: Adaptador híbrido y enlaces web íntegros.", "PASS")
 
 def test_search_and_pwa():
@@ -156,9 +270,12 @@ def main():
     print("=" * 60)
     try:
         test_files_exist()
-        term_ids = test_terms_integrity()
+        terms = test_terms_integrity()
+        test_twenty_fundamental_concepts(terms)
+        test_search_and_filtering(terms)
         test_quizzes_integrity()
-        test_svg_types_covered(term_ids)
+        test_svg_types_covered(terms)
+        test_public_api_methods()
         test_storage_and_firebase()
         test_search_and_pwa()
         try:
