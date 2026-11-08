@@ -6905,8 +6905,10 @@
     if (normalized === 'quizzes') {
       const quizzesEl = document.getElementById('quizzes');
       if (quizzesEl) {
-        quizzesEl.innerHTML = renderQuizzesView();
-        bindQuizzesEvents();
+        quizzesEl.classList.remove('hidden');
+        quizzesEl.classList.add('active');
+        quizzesEl.style.display = 'block';
+        renderQuizzes();
       }
     } else if (normalized === 'terminos') {
       const terminosEl = document.getElementById('terminos');
@@ -7398,7 +7400,7 @@
               </div>
               <div class="mt-6">
                 <h3 class="font-headline-sm text-headline-sm text-on-surface font-bold">
-                  Cuestionarios de Práctica (${FISIOPEDIA_QUIZZES.length} Preguntas)
+                  Cuestionarios de Práctica (${getQuizzes().length || 25} Preguntas)
                 </h3>
                 <p class="font-body-md text-body-md text-on-surface-variant mt-2 max-w-md">
                   Responde preguntas cortas de la vida cotidiana para comprobar lo aprendido con justificación anatómica y cálculo de puntaje.
@@ -8535,8 +8537,37 @@
   // ==========================================
   // VISTA 4: CUESTIONARIOS DE AUTOEVALUACIÓN
   // ==========================================
+  function getQuizzes() {
+    if (typeof window !== 'undefined' && Array.isArray(window.FISIOPEDIA_QUIZZES) && window.FISIOPEDIA_QUIZZES.length > 0) {
+      return window.FISIOPEDIA_QUIZZES;
+    }
+    try {
+      if (typeof FISIOPEDIA_QUIZZES !== 'undefined' && Array.isArray(FISIOPEDIA_QUIZZES)) {
+        return FISIOPEDIA_QUIZZES;
+      }
+    } catch (e) {}
+    return [];
+  }
+
+  function renderQuizzes() {
+    const quizzesEl = document.getElementById('quizzes');
+    if (!quizzesEl) return '';
+    try {
+      quizzesEl.classList.remove('hidden');
+      quizzesEl.classList.add('active');
+      quizzesEl.style.display = 'block';
+      const html = renderQuizzesView();
+      quizzesEl.innerHTML = html;
+      bindQuizzesEvents();
+      return html;
+    } catch (err) {
+      console.error('Error al renderizar cuestionarios:', err);
+      return '';
+    }
+  }
+
   function getActiveQuizzes() {
-    const all = FISIOPEDIA_QUIZZES;
+    const all = getQuizzes();
     const filter = state.quizFilter || 'todos';
     if (filter === 'verdadero_falso') {
       return all.filter(q => q.quizType === 'verdadero_falso' || q.options.length === 2);
@@ -8552,7 +8583,7 @@
 
   function renderQuizzesView() {
     const activeQuizzes = getActiveQuizzes();
-    const totalQuestions = activeQuizzes.length || FISIOPEDIA_QUIZZES.length;
+    const totalQuestions = activeQuizzes.length || (getQuizzes().length || 25);
 
     // Si terminó el cuestionario, mostrar pantalla de resultados / resumen
     if (state.quizCompleted) {
@@ -8647,7 +8678,7 @@
         <div class="flex items-center gap-2 overflow-x-auto py-2 px-1 no-scrollbar my-2" id="quiz-filter-chips">
           <span class="text-xs font-bold text-slate-muted mr-1 hidden sm:inline-block">Modalidad:</span>
           <button data-quiz-filter="todos" class="px-3.5 py-1.5 rounded-full text-xs font-bold transition-all ${(state.quizFilter || 'todos') === 'todos' ? 'bg-primary text-on-primary shadow-xs' : 'bg-surface-container-high text-on-surface-variant hover:bg-surface-container-highest'} cursor-pointer">
-            Todas (${FISIOPEDIA_QUIZZES.length})
+            Todas (${getQuizzes().length || 25})
           </button>
           <button data-quiz-filter="multiple" class="px-3.5 py-1.5 rounded-full text-xs font-bold transition-all ${state.quizFilter === 'multiple' ? 'bg-primary text-on-primary shadow-xs' : 'bg-surface-container-high text-on-surface-variant hover:bg-surface-container-highest'} cursor-pointer">
             Opción Múltiple (15)
@@ -8679,7 +8710,7 @@
       <div class="grid grid-cols-1 lg:grid-cols-12 gap-space-lg items-start">
         <!-- Columna de Pregunta y Opciones (8 cols) -->
         <div class="lg:col-span-8 flex flex-col gap-space-lg min-w-0">
-          <article class="bg-surface-container-lowest rounded-xl p-space-lg shadow-sm flex flex-col gap-space-md relative overflow-hidden border border-slate-border/50">
+          <article class="quiz-card bg-surface-container-lowest rounded-xl p-space-lg shadow-sm flex flex-col gap-space-md relative overflow-hidden border border-slate-border/50">
             <div class="flex items-center justify-between flex-wrap gap-2">
               <div class="flex items-center gap-2">
                 <span class="px-2.5 py-1 rounded-full font-label-caps text-label-caps text-primary bg-primary/10 font-bold">
@@ -8968,7 +8999,8 @@
       renderCurrentRoute();
     },
     nextQuizQuestion: () => {
-      if (state.quizIndex + 1 < FISIOPEDIA_QUIZZES.length) {
+      const total = getQuizzes().length || 25;
+      if (state.quizIndex + 1 < total) {
         state.quizIndex++;
         renderCurrentRoute();
       } else {
@@ -8976,9 +9008,9 @@
         state.quizCompleted = true;
         if (typeof FisioStorage !== 'undefined') {
           FisioStorage.saveQuizStats({
-            totalAttempted: FISIOPEDIA_QUIZZES.length,
+            totalAttempted: total,
             totalCorrect: state.quizScore,
-            lastScore: Math.round((state.quizScore / FISIOPEDIA_QUIZZES.length) * 100),
+            lastScore: Math.round((state.quizScore / total) * 100),
             streak: state.quizStreak + 1,
             completedAt: new Date().toISOString()
           });
@@ -8994,7 +9026,8 @@
       state.quizCompleted = false;
       renderCurrentRoute();
       showToast('Cuestionario reiniciado', 'restart_alt');
-    }
+    },
+    renderQuizzes: () => renderQuizzes()
   };
 
   // --- GESTIÓN DE LA NUBE Y FIREBASE MODAL ---
@@ -9411,6 +9444,8 @@
   window.startApp = startApp;
   window.switchTab = switchTab;
   window.handleHashChange = handleHashChange;
+  window.renderQuizzes = renderQuizzes;
+  window.renderQuizzesView = renderQuizzesView;
 
   function onReady() {
     try {
