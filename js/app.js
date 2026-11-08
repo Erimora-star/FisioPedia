@@ -6813,7 +6813,22 @@
     }
   }
 
-  // --- NAVEGACIÓN Y ENRUTAMIENTO (HASH ROUTER) ---
+  // --- NAVEGACIÓN Y ENRUTAMIENTO (SPA TABS & HASH ROUTER) ---
+  function normalizeTabName(raw) {
+    if (!raw) return 'explorador';
+    const clean = raw.toString().toLowerCase().trim().replace(/^#\/?/, '').split('/')[0];
+    if (clean === 'quizzes' || clean === 'cuestionarios' || clean === 'cuestionario' || clean === 'evaluacion' || clean === 'quizzes-de-autoevaluacion') {
+      return 'quizzes';
+    }
+    if (clean === 'terminos' || clean === 'termino' || clean === 'catalogo') {
+      return 'terminos';
+    }
+    if (clean === 'favoritos' || clean === 'flashcards' || clean === 'mis-favoritos-flashcards') {
+      return 'favoritos';
+    }
+    return 'explorador';
+  }
+
   function initRouter() {
     window.addEventListener('hashchange', handleHashChange);
     handleHashChange();
@@ -6824,54 +6839,154 @@
     const parts = rawHash.split('/');
     const route = parts[0] || 'explorador';
 
-    if (route === 'terminos' || route === 'termino') {
-      if (parts[1]) {
-        state.route = 'termino';
-        state.selectedTermId = parts[1];
-      } else {
-        state.route = 'terminos';
-      }
-    } else if (route === 'favoritos' || route === 'flashcards' || route === 'mis-favoritos-flashcards') {
-      state.route = 'favoritos';
-    } else if (route === 'quizzes' || route === 'evaluacion' || route === 'quizzes-de-autoevaluacion') {
-      state.route = 'quizzes';
+    if ((route === 'terminos' || route === 'termino') && parts[1]) {
+      state.route = 'termino';
+      state.selectedTermId = parts[1];
+      showTermDetailView(parts[1]);
     } else {
-      state.route = 'explorador';
+      const norm = normalizeTabName(route);
+      switchTab(norm);
     }
-
-    renderCurrentRoute();
-    updateNavActiveStates();
-    window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 
   function navigateTo(hash) {
-    window.location.hash = hash;
+    const targetHash = hash.startsWith('#') ? hash : '#' + hash;
+    if (window.location.hash === targetHash) {
+      handleHashChange();
+    } else {
+      window.location.hash = targetHash;
+    }
   }
 
-  function updateNavActiveStates() {
-    const navLinks = document.querySelectorAll('[data-route-nav]');
-    navLinks.forEach(link => {
-      const targetRoute = link.getAttribute('data-route-nav');
-      const isActive = targetRoute === state.route || (targetRoute === 'termino' && (state.route === 'terminos' || state.route === 'termino'));
-      if (isActive) {
-        link.classList.remove('text-on-surface-variant', 'hover:bg-surface-container-high');
-        link.classList.add('bg-primary-container', 'text-on-primary-container', 'font-semibold', 'shadow-sm');
-      } else {
-        link.classList.add('text-on-surface-variant', 'hover:bg-surface-container-high');
-        link.classList.remove('bg-primary-container', 'text-on-primary-container', 'font-semibold', 'shadow-sm');
+  function showTermDetailView(termId) {
+    hideLoader();
+    ['explorador', 'favoritos', 'quizzes'].forEach(id => {
+      const el = document.getElementById(id);
+      if (el) {
+        el.classList.add('hidden');
+        el.classList.remove('active');
+        el.style.display = 'none';
       }
     });
 
-    const mobileLinks = document.querySelectorAll('[data-route-mobile]');
-    mobileLinks.forEach(link => {
-      const targetRoute = link.getAttribute('data-route-mobile');
-      const isActive = targetRoute === state.route || (targetRoute === 'termino' && (state.route === 'terminos' || state.route === 'termino'));
+    const terminosEl = document.getElementById('terminos');
+    if (terminosEl) {
+      terminosEl.classList.remove('hidden');
+      terminosEl.classList.add('active');
+      terminosEl.style.display = '';
+      terminosEl.innerHTML = renderTerminoView();
+      bindTerminoEvents();
+    }
+    updateNavActiveStates('terminos');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  function switchTab(tabName) {
+    hideLoader();
+    const normalized = normalizeTabName(tabName);
+    state.route = normalized;
+
+    const tabIds = ['explorador', 'terminos', 'favoritos', 'quizzes'];
+    tabIds.forEach(id => {
+      const el = document.getElementById(id);
+      if (el) {
+        if (id === normalized) {
+          el.classList.remove('hidden');
+          el.classList.add('active');
+          el.style.display = '';
+        } else {
+          el.classList.add('hidden');
+          el.classList.remove('active');
+          el.style.display = 'none';
+        }
+      }
+    });
+
+    if (normalized === 'quizzes') {
+      const quizzesEl = document.getElementById('quizzes');
+      if (quizzesEl) {
+        quizzesEl.innerHTML = renderQuizzesView();
+        bindQuizzesEvents();
+      }
+    } else if (normalized === 'terminos') {
+      const terminosEl = document.getElementById('terminos');
+      if (terminosEl) {
+        terminosEl.innerHTML = renderCatalogoTerminosView();
+        bindCatalogoTerminosEvents();
+      }
+    } else if (normalized === 'favoritos') {
+      const favEl = document.getElementById('favoritos');
+      if (favEl) {
+        favEl.innerHTML = renderFavoritosView();
+        bindFavoritosEvents();
+      }
+    } else if (normalized === 'explorador') {
+      const expEl = document.getElementById('explorador');
+      if (expEl) {
+        const termsContainer = document.getElementById('terms-container');
+        const resultsContainer = document.getElementById('terms-results-container');
+        if (!termsContainer && !resultsContainer) {
+          expEl.innerHTML = renderExploradorView();
+          bindExploradorEvents();
+        }
+        renderTerms(getFilteredTerms());
+      }
+    }
+
+    // Sincronizar hash si difiere
+    const currentHashClean = window.location.hash.replace(/^#\/?/, '').split('/')[0];
+    if (normalizeTabName(currentHashClean) !== normalized) {
+      try {
+        history.replaceState(null, '', '#' + normalized);
+      } catch (e) {
+        window.location.hash = '#' + normalized;
+      }
+    }
+
+    updateNavActiveStates(normalized);
+    updateFavoritesBadges();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  function updateNavActiveStates(activeTab) {
+    const current = normalizeTabName(activeTab || state.route || 'explorador');
+
+    // Desktop nav links
+    const desktopLinks = document.querySelectorAll('#desktop-nav a, [data-route-nav]');
+    desktopLinks.forEach(link => {
+      const target = normalizeTabName(link.getAttribute('data-tab') || link.getAttribute('data-route-nav') || link.getAttribute('href'));
+      const isActive = target === current;
       if (isActive) {
-        link.classList.remove('text-slate-muted');
-        link.classList.add('text-primary', 'font-bold');
+        link.classList.add('active', 'bg-primary-container', 'text-on-primary-container', 'font-semibold', 'shadow-sm');
+        link.classList.remove('text-on-surface-variant', 'hover:bg-surface-container-high');
       } else {
+        link.classList.remove('active', 'bg-primary-container', 'text-on-primary-container', 'font-semibold', 'shadow-sm');
+        link.classList.add('text-on-surface-variant', 'hover:bg-surface-container-high');
+      }
+    });
+
+    // Mobile bottom nav links
+    const mobileLinks = document.querySelectorAll('#mobile-nav a, [data-route-mobile]');
+    mobileLinks.forEach(link => {
+      const target = normalizeTabName(link.getAttribute('data-tab') || link.getAttribute('data-route-mobile') || link.getAttribute('href'));
+      const isActive = target === current;
+      if (isActive) {
+        link.classList.add('active', 'text-primary', 'font-bold');
+        link.classList.remove('text-slate-muted');
+      } else {
+        link.classList.remove('active', 'text-primary', 'font-bold');
         link.classList.add('text-slate-muted');
-        link.classList.remove('text-primary', 'font-bold');
+      }
+    });
+
+    // Enlaces globales con clase .nav-link
+    const allNavLinks = document.querySelectorAll('.nav-link');
+    allNavLinks.forEach(link => {
+      const target = normalizeTabName(link.getAttribute('data-tab') || link.getAttribute('href'));
+      if (target === current) {
+        link.classList.add('active');
+      } else {
+        link.classList.remove('active');
       }
     });
   }
@@ -6884,40 +6999,7 @@
   }
 
   function renderCurrentRoute() {
-    hideLoader();
-    const mainContainer = document.getElementById('app-main-content');
-    if (!mainContainer) return;
-
-    try {
-      if (state.route === 'terminos') {
-        mainContainer.innerHTML = renderCatalogoTerminosView();
-        bindCatalogoTerminosEvents();
-      } else if (state.route === 'termino') {
-        mainContainer.innerHTML = renderTerminoView();
-        bindTerminoEvents();
-      } else if (state.route === 'favoritos') {
-        mainContainer.innerHTML = renderFavoritosView();
-        bindFavoritosEvents();
-      } else if (state.route === 'quizzes') {
-        mainContainer.innerHTML = renderQuizzesView();
-        bindQuizzesEvents();
-      } else {
-        mainContainer.innerHTML = renderExploradorView();
-        bindExploradorEvents();
-      }
-    } catch (err) {
-      console.error('Error renderizando vista en FisioPedia:', err);
-      try {
-        mainContainer.innerHTML = renderExploradorView();
-        bindExploradorEvents();
-      } catch (e) {
-        console.error('Fallback error:', e);
-      }
-    } finally {
-      hideLoader();
-    }
-
-    updateFavoritesBadges();
+    switchTab(state.route);
   }
 
   // --- NORMALIZACIÓN Y BÚSQUEDA INTELIGENTE ---
@@ -8755,6 +8837,8 @@
 
   // --- MÉTODOS PÚBLICOS GLOBALES ---
   window.fisiopediaApp = {
+    switchTab: (tab) => switchTab(tab),
+    navigateTo: (hash) => navigateTo(hash),
     toggleFav: (id) => toggleFavorite(id),
     speak: (term) => speakTerm(term),
     clearSearch: () => {
@@ -9287,7 +9371,41 @@
         if (input) input.focus();
       }
     });
+
+    // Delegación unificada para enlaces de navegación por pestañas (.nav-link / data-tab)
+    document.addEventListener('click', (e) => {
+      const link = e.target.closest('a[href^="#"], .nav-link, [data-tab], [data-route-nav], [data-route-mobile]');
+      if (!link) return;
+      const href = link.getAttribute('href') || '';
+      const dataTab = link.getAttribute('data-tab') || link.getAttribute('data-route-nav') || link.getAttribute('data-route-mobile');
+      
+      let target = dataTab || '';
+      if (!target && href.startsWith('#')) {
+        target = href.replace(/^#\/?/, '').split('/')[0];
+      }
+
+      if (target) {
+        if (href.includes('/') && href.split('/')[1]) {
+          return;
+        }
+        const norm = normalizeTabName(target);
+        if (['explorador', 'terminos', 'favoritos', 'quizzes'].includes(norm)) {
+          e.preventDefault();
+          switchTab(norm);
+          if (window.location.hash !== '#' + norm) {
+            try {
+              history.pushState(null, '', '#' + norm);
+            } catch (err) {
+              window.location.hash = '#' + norm;
+            }
+          }
+        }
+      }
+    });
   }
+
+  window.switchTab = switchTab;
+  window.handleHashChange = handleHashChange;
 
   function onReady() {
     try {

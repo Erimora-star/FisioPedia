@@ -92,7 +92,7 @@
     <div class="h-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between gap-4">
       
       <!-- LOGO -->
-      <a href="#explorador" class="flex items-center gap-3 group">
+      <a href="#explorador" data-tab="explorador" class="nav-link flex items-center gap-3 group">
         <div class="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center text-primary group-hover:scale-105 transition-transform shadow-xs">
           <span class="material-symbols-outlined text-2xl font-bold">accessibility_new</span>
         </div>
@@ -118,18 +118,18 @@
       </div>
 
       <!-- MENÚ DE NAVEGACIÓN DESKTOP -->
-      <nav class="hidden lg:flex items-center gap-1">
-        <a href="#explorador" data-route-nav="explorador" class="px-3.5 py-2 rounded-lg font-label-md text-sm text-on-surface-variant hover:bg-surface-container-high transition-colors">
+      <nav id="desktop-nav" class="hidden lg:flex items-center gap-1">
+        <a href="#explorador" data-tab="explorador" data-route-nav="explorador" class="nav-link px-3.5 py-2 rounded-lg font-label-md text-sm text-on-surface-variant hover:bg-surface-container-high transition-colors">
           Explorador
         </a>
-        <a href="#terminos" data-route-nav="termino" class="px-3.5 py-2 rounded-lg font-label-md text-sm text-on-surface-variant hover:bg-surface-container-high transition-colors">
+        <a href="#terminos" data-tab="terminos" data-route-nav="termino" class="nav-link px-3.5 py-2 rounded-lg font-label-md text-sm text-on-surface-variant hover:bg-surface-container-high transition-colors">
           Términos Anatómicos
         </a>
-        <a href="#favoritos" data-route-nav="favoritos" class="px-3.5 py-2 rounded-lg font-label-md text-sm text-on-surface-variant hover:bg-surface-container-high transition-colors flex items-center gap-1.5">
+        <a href="#favoritos" data-tab="favoritos" data-route-nav="favoritos" class="nav-link px-3.5 py-2 rounded-lg font-label-md text-sm text-on-surface-variant hover:bg-surface-container-high transition-colors flex items-center gap-1.5">
           <span>Mis Favoritos &amp; Flashcards</span>
           <span class="fav-count-badge hidden px-2 py-0.5 rounded-full bg-amber-quiz/20 text-amber-quiz text-xs font-bold">0</span>
         </a>
-        <a href="#quizzes" data-route-nav="quizzes" class="px-3.5 py-2 rounded-lg font-label-md text-sm text-on-surface-variant hover:bg-surface-container-high transition-colors">
+        <a href="#quizzes" data-tab="quizzes" data-route-nav="quizzes" class="nav-link px-3.5 py-2 rounded-lg font-label-md text-sm text-on-surface-variant hover:bg-surface-container-high transition-colors">
           Cuestionarios
         </a>
       </nav>
@@ -146,7 +146,7 @@
         <div class="hidden sm:flex items-center gap-1.5 px-3 py-1 rounded-full bg-amber-quiz/10 border border-amber-quiz/20">
           <span class="font-label-sm text-xs font-bold text-amber-quiz">🔥 Repaso Activo</span>
         </div>
-        <a href="#favoritos" class="relative p-2 rounded-full text-on-surface-variant hover:bg-surface-container-high transition-colors" title="Mis Favoritos">
+        <a href="#favoritos" data-tab="favoritos" class="nav-link relative p-2 rounded-full text-on-surface-variant hover:bg-surface-container-high transition-colors" title="Mis Favoritos">
           <span class="material-symbols-outlined text-xl">bookmark</span>
           <span class="fav-count-badge hidden absolute top-1 right-1 w-4 h-4 rounded-full bg-amber-quiz text-slate-strong text-[10px] font-bold flex items-center justify-center">0</span>
         </a>
@@ -175,8 +175,8 @@
           <p class="text-xs">Cargando compendio pedagógico...</p>
         </div>
 
-        <!-- ESTRUCTURA INICIAL DEL HOME Y BUSCADOR (FALLBACK & SEO) -->
-        <div class="w-full flex flex-col gap-6">
+        <!-- SECCIÓN 1: EXPLORADOR / BUSCADOR -->
+        <section id="explorador" class="tab-view active w-full flex flex-col gap-6">
           <!-- Barra de Búsqueda Principal -->
           <div class="w-full bg-surface-container-lowest rounded-2xl shadow-md p-3 sm:p-4 border border-slate-border/50">
             <div class="relative flex items-center w-full">
@@ -184,11 +184,15 @@
               <input
                 id="search-input"
                 name="search-input"
+                data-id="main-search-input"
                 type="text"
                 autocomplete="off"
                 placeholder="Escribe un término (ej. Agonista, Flexión, Supinación, LCA, Menisco...)"
                 class="w-full pl-12 pr-12 py-3.5 bg-transparent font-body-md text-body-md text-on-surface placeholder:text-slate-muted focus:outline-none"
               />
+              <button id="clear-search-btn" class="absolute right-3.5 p-1 text-slate-muted hover:text-on-surface transition-colors hidden" type="button" aria-label="Limpiar búsqueda">
+                <span class="material-symbols-outlined text-lg">close</span>
+              </button>
             </div>
 
             <!-- Botones de Filtros de Categoría -->
@@ -216,7 +220,19 @@
           <div id="terms-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             <!-- Tarjetas de términos anatómicos renderizadas inmediatamente -->
           </div>
-        </div>
+        </section>
+
+        <!-- SECCIÓN 2: TÉRMINOS ANATÓMICOS (CATÁLOGO COMPLETO) -->
+        <section id="terminos" class="tab-view hidden w-full">
+        </section>
+
+        <!-- SECCIÓN 3: MIS FAVORITOS & FLASHCARDS 3D -->
+        <section id="favoritos" class="tab-view hidden w-full">
+        </section>
+
+        <!-- SECCIÓN 4: CUESTIONARIOS INTERACTIVOS -->
+        <section id="quizzes" class="tab-view hidden w-full">
+        </section>
       </div>
     </div>
   </main>
@@ -235,10 +251,10 @@
       </div>
 
       <div class="flex flex-wrap items-center justify-center gap-6 text-sm">
-        <a href="#explorador" class="text-on-surface-variant hover:text-primary transition-colors">Inicio</a>
-        <a href="#terminos" class="text-on-surface-variant hover:text-primary transition-colors">Términos Anatómicos</a>
-        <a href="#favoritos" class="text-on-surface-variant hover:text-primary transition-colors">Mis Favoritos &amp; Flashcards</a>
-        <a href="#quizzes" class="text-on-surface-variant hover:text-primary transition-colors">Cuestionarios</a>
+        <a href="#explorador" data-tab="explorador" class="nav-link text-on-surface-variant hover:text-primary transition-colors">Inicio</a>
+        <a href="#terminos" data-tab="terminos" class="nav-link text-on-surface-variant hover:text-primary transition-colors">Términos Anatómicos</a>
+        <a href="#favoritos" data-tab="favoritos" class="nav-link text-on-surface-variant hover:text-primary transition-colors">Mis Favoritos &amp; Flashcards</a>
+        <a href="#quizzes" data-tab="quizzes" class="nav-link text-on-surface-variant hover:text-primary transition-colors">Cuestionarios</a>
         <button id="btn-footer-cloud" class="text-primary font-semibold hover:underline flex items-center gap-1 cursor-pointer">
           <span class="material-symbols-outlined text-sm">cloud</span> Conectar Nube (Firebase)
         </button>
@@ -252,21 +268,21 @@
   </footer>
 
   <!-- BARRA DE NAVEGACIÓN INFERIOR PARA CELULARES (MOBILE BOTTOM NAV) -->
-  <nav class="lg:hidden fixed bottom-0 left-0 w-full z-40 bg-surface-container-lowest/95 backdrop-blur-md border-t border-slate-border flex items-center justify-around py-2 px-2 shadow-lg">
-    <a href="#explorador" data-route-mobile="explorador" class="flex flex-col items-center justify-center p-1 text-primary">
+  <nav id="mobile-nav" class="lg:hidden fixed bottom-0 left-0 w-full z-40 bg-surface-container-lowest/95 backdrop-blur-md border-t border-slate-border flex items-center justify-around py-2 px-2 shadow-lg">
+    <a href="#explorador" data-tab="explorador" data-route-mobile="explorador" class="nav-link flex flex-col items-center justify-center p-1 text-primary">
       <span class="material-symbols-outlined text-2xl">search</span>
       <span class="text-[11px] font-medium mt-0.5">Explorador</span>
     </a>
-    <a href="#terminos" data-route-mobile="termino" class="flex flex-col items-center justify-center p-1 text-slate-muted">
+    <a href="#terminos" data-tab="terminos" data-route-mobile="termino" class="nav-link flex flex-col items-center justify-center p-1 text-slate-muted">
       <span class="material-symbols-outlined text-2xl">menu_book</span>
       <span class="text-[11px] font-medium mt-0.5">Términos</span>
     </a>
-    <a href="#favoritos" data-route-mobile="favoritos" class="flex flex-col items-center justify-center p-1 text-slate-muted relative">
+    <a href="#favoritos" data-tab="favoritos" data-route-mobile="favoritos" class="nav-link flex flex-col items-center justify-center p-1 text-slate-muted relative">
       <span class="material-symbols-outlined text-2xl">style</span>
       <span class="fav-count-badge hidden absolute top-0 right-2 w-3.5 h-3.5 rounded-full bg-amber-quiz text-slate-strong text-[9px] font-bold flex items-center justify-center">0</span>
       <span class="text-[11px] font-medium mt-0.5">Flashcards</span>
     </a>
-    <a href="#quizzes" data-route-mobile="quizzes" class="flex flex-col items-center justify-center p-1 text-slate-muted">
+    <a href="#quizzes" data-tab="quizzes" data-route-mobile="quizzes" class="nav-link flex flex-col items-center justify-center p-1 text-slate-muted">
       <span class="material-symbols-outlined text-2xl">quiz</span>
       <span class="text-[11px] font-medium mt-0.5">Quizzes</span>
     </a>
