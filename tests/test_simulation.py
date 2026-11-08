@@ -181,6 +181,15 @@ def test_tab_navigation_simulation():
         assert has_href or has_datatab, f"Enlace nav-link sin href o data-tab: {link_html}"
     print(f"[PASS] Auditoría de botones y enlaces de navegación: {len(nav_links)} enlaces .nav-link con data-tab/href conformes.")
 
+    # 5. Verificación de renderQuizzes autónomo y blindaje contra pantallas en blanco
+    assert 'FALLBACK_QUIZZES' in app_js, "js/app.js debe contener la constante FALLBACK_QUIZZES de respaldo"
+    assert 'function renderQuizzes(' in app_js, "js/app.js debe definir la función renderQuizzes()"
+    assert 'renderQuizzes' in app_js and 'renderQuizzesView' in app_js, "js/app.js debe invocar renderQuizzes/renderQuizzesView"
+    assert 'quiz-card' in app_js, "js/app.js debe generar elementos con la clase .quiz-card"
+    assert re.search(r'class="[^"]*quiz-card[^"]*"', app_js), "El HTML de renderQuizzesView debe contener la clase quiz-card"
+    assert 'data/quizzes.js' in html, "index.html debe cargar data/quizzes.js antes de app.js"
+    print("[PASS] Verificación de inyección de cuestionarios: switchTab('quizzes') inyecta HTML con tarjetas .quiz-card y blindaje ante pantallas en blanco.")
+
 if __name__ == '__main__':
     test_simulation()
     test_tab_navigation_simulation()
