@@ -6893,7 +6893,7 @@
         if (id === normalized) {
           el.classList.remove('hidden');
           el.classList.add('active');
-          el.style.display = '';
+          el.style.display = 'block';
         } else {
           el.classList.add('hidden');
           el.classList.remove('active');
@@ -6903,11 +6903,19 @@
     });
 
     if (normalized === 'quizzes') {
-      const quizzesEl = document.getElementById('quizzes');
+      const quizzesEl = document.getElementById('quizzes') || document.getElementById('cuestionarios') || document.getElementById('quizzes-section');
       if (quizzesEl) {
         quizzesEl.classList.remove('hidden');
         quizzesEl.classList.add('active');
         quizzesEl.style.display = 'block';
+        ['explorador', 'terminos', 'favoritos'].forEach(otherId => {
+          const otherEl = document.getElementById(otherId);
+          if (otherEl) {
+            otherEl.classList.add('hidden');
+            otherEl.classList.remove('active');
+            otherEl.style.display = 'none';
+          }
+        });
         renderQuizzes();
       }
     } else if (normalized === 'terminos') {
@@ -8550,12 +8558,9 @@
   }
 
   function renderQuizzes() {
-    const quizzesEl = document.getElementById('quizzes');
+    const quizzesEl = document.getElementById('quizzes') || document.getElementById('cuestionarios') || document.getElementById('quizzes-section');
     if (!quizzesEl) return '';
     try {
-      quizzesEl.classList.remove('hidden');
-      quizzesEl.classList.add('active');
-      quizzesEl.style.display = 'block';
       const html = renderQuizzesView();
       quizzesEl.innerHTML = html;
       bindQuizzesEvents();
@@ -8583,6 +8588,18 @@
 
   function renderQuizzesView() {
     const activeQuizzes = getActiveQuizzes();
+    if (!activeQuizzes || activeQuizzes.length === 0) {
+      return `
+        <div class="max-w-2xl mx-auto my-8 p-8 bg-surface-container-lowest rounded-2xl shadow-md border border-slate-border text-center">
+          <div class="w-16 h-16 mx-auto rounded-full bg-primary/10 flex items-center justify-center text-primary mb-3">
+            <span class="material-symbols-outlined text-3xl animate-spin">sync</span>
+          </div>
+          <h2 class="font-headline-sm text-slate-strong font-bold">Cuestionarios de Autoevaluación</h2>
+          <p class="text-slate-muted text-sm mt-2">Cargando preguntas de biomecánica y casos clínicos...</p>
+        </div>
+      `;
+    }
+
     const totalQuestions = activeQuizzes.length || (getQuizzes().length || 25);
 
     // Si terminó el cuestionario, mostrar pantalla de resultados / resumen
@@ -9313,6 +9330,7 @@
       loadInitialState();
       initRouter();
       initCloudSyncUI();
+      renderQuizzes();
     } catch (err) {
       console.error('FisioPedia start error:', err);
     } finally {
@@ -9452,6 +9470,7 @@
       hideLoader();
       initApp();
       renderTerms(window.FISIOPEDIA_TERMS);
+      renderQuizzes();
     } catch (err) {
       console.error('Error al iniciar FisioPedia:', err);
     } finally {
