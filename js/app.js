@@ -6385,6 +6385,422 @@
         `;
 
 
+      case 'rango-de-movimiento-rom':
+        return `
+          <svg class="w-full h-auto max-w-sm mx-auto" viewBox="0 0 360 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect width="360" height="200" rx="12" fill="#F8FAFC"/>
+            <!-- Goniómetro circular -->
+            <circle cx="180" cy="110" r="60" stroke="#CBD5E1" stroke-width="2" stroke-dasharray="4 4"/>
+            <path d="M 120 110 A 60 60 0 0 1 230 65" stroke="#0D9488" stroke-width="6" fill="none"/>
+            <circle cx="180" cy="110" r="10" fill="#00685f"/>
+            <!-- Brazo fijo -->
+            <line x1="180" y1="110" x2="260" y2="110" stroke="#64748B" stroke-width="5" stroke-linecap="round"/>
+            <!-- Brazo móvil -->
+            <line x1="180" y1="110" x2="230" y2="40" stroke="#0D9488" stroke-width="5" stroke-linecap="round"/>
+            <text x="215" y="85" fill="#0D9488" font-size="12" font-weight="bold">ROM: 0° - 135°</text>
+            <text x="180" y="30" text-anchor="middle" fill="#00685f" font-size="11" font-weight="bold">Rango de Movimiento Articular (Goniometría)</text>
+            <text x="180" y="185" text-anchor="middle" fill="#64748B" font-size="10" font-weight="bold">Amplitud angular completa alcanzable por una articulación</text>
+          </svg>
+        `;
+
+      case 'lordosis':
+        return `
+          <svg class="w-full h-auto max-w-sm mx-auto" viewBox="0 0 360 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect width="360" height="200" rx="12" fill="#F8FAFC"/>
+            <!-- Perfil anatómico y curvatura lordótica (concavidad posterior) -->
+            <path d="M 160 30 Q 140 70 170 100 Q 210 135 170 170" stroke="#0D9488" stroke-width="6" fill="none" stroke-linecap="round"/>
+            <line x1="200" y1="90" x2="200" y2="150" stroke="#F59E0B" stroke-width="2" stroke-dasharray="4 3"/>
+            <path d="M 180 120 L 220 120 M 215 115 L 225 120 L 215 125" stroke="#F59E0B" stroke-width="3"/>
+            <text x="235" y="125" fill="#D97706" font-size="10" font-weight="bold">Concavidad Posterior</text>
+            <text x="180" y="25" text-anchor="middle" fill="#00685f" font-size="11" font-weight="bold">Lordosis Cervical y Lumbar</text>
+            <text x="180" y="188" text-anchor="middle" fill="#64748B" font-size="10" font-weight="bold">Curvatura fisiológica adaptada a la bipedestación</text>
+          </svg>
+        `;
+
+      case 'cifosis':
+        return `
+          <svg class="w-full h-auto max-w-sm mx-auto" viewBox="0 0 360 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect width="360" height="200" rx="12" fill="#F8FAFC"/>
+            <!-- Curvatura cifótica (convexidad posterior torácica) -->
+            <path d="M 150 30 Q 220 90 150 170" stroke="#E11D48" stroke-width="6" fill="none" stroke-linecap="round"/>
+            <line x1="140" y1="30" x2="140" y2="170" stroke="#94A3B8" stroke-width="2" stroke-dasharray="4 4"/>
+            <path d="M 140 100 L 205 100 M 200 95 L 210 100 L 200 105" stroke="#E11D48" stroke-width="3"/>
+            <text x="215" y="105" fill="#E11D48" font-size="10" font-weight="bold">Convexidad Posterior</text>
+            <text x="180" y="25" text-anchor="middle" fill="#E11D48" font-size="11" font-weight="bold">Cifosis Torácica y Sacra</text>
+            <text x="180" y="188" text-anchor="middle" fill="#64748B" font-size="10" font-weight="bold">Curvatura primaria protectora de la caja torácica</text>
+          </svg>
+        `;
+
+      case 'escoliosis':
+        return `
+          <svg class="w-full h-auto max-w-sm mx-auto" viewBox="0 0 360 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect width="360" height="200" rx="12" fill="#F8FAFC"/>
+            <line x1="180" y1="20" x2="180" y2="180" stroke="#CBD5E1" stroke-width="2" stroke-dasharray="4 4"/>
+            <!-- Curva en S escoliótica en plano frontal -->
+            <path d="M 180 30 C 230 65 220 100 180 115 C 140 130 145 155 180 175" stroke="#E11D48" stroke-width="6" fill="none" stroke-linecap="round"/>
+            <circle cx="215" cy="75" r="8" fill="#E11D48" fill-opacity="0.3"/>
+            <circle cx="150" cy="145" r="8" fill="#E11D48" fill-opacity="0.3"/>
+            <text x="180" y="22" text-anchor="middle" fill="#E11D48" font-size="11" font-weight="bold">Escoliosis (Plano Frontal)</text>
+            <text x="180" y="190" text-anchor="middle" fill="#334155" font-size="10" font-weight="bold">Desviación lateral tridimensional de la columna vertebral</text>
+          </svg>
+        `;
+
+      case 'atrofia':
+        return `
+          <svg class="w-full h-auto max-w-sm mx-auto" viewBox="0 0 360 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect width="360" height="200" rx="12" fill="#F8FAFC"/>
+            <!-- Músculo normal -->
+            <g transform="translate(60, 40)">
+              <text x="50" y="0" text-anchor="middle" fill="#0D9488" font-size="10" font-weight="bold">Normal</text>
+              <path d="M 0 50 C 30 10 70 10 100 50 C 70 90 30 90 0 50 Z" fill="#0D9488" fill-opacity="0.7"/>
+            </g>
+            <!-- Flecha de pérdida -->
+            <path d="M 175 90 L 195 90 M 190 85 L 198 90 L 190 95" stroke="#64748B" stroke-width="3"/>
+            <!-- Músculo atrófico reducido -->
+            <g transform="translate(210, 50)">
+              <text x="45" y="-10" text-anchor="middle" fill="#E11D48" font-size="10" font-weight="bold">Atrofia</text>
+              <path d="M 0 40 C 25 25 65 25 90 40 C 65 55 25 55 0 40 Z" fill="#E11D48" fill-opacity="0.4"/>
+            </g>
+            <text x="180" y="185" text-anchor="middle" fill="#64748B" font-size="10" font-weight="bold">Disminución de masa, sarcómeros y sección transversal</text>
+          </svg>
+        `;
+
+      case 'hipertrofia':
+        return `
+          <svg class="w-full h-auto max-w-sm mx-auto" viewBox="0 0 360 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect width="360" height="200" rx="12" fill="#F8FAFC"/>
+            <!-- Músculo base -->
+            <g transform="translate(60, 50)">
+              <text x="45" y="-10" text-anchor="middle" fill="#64748B" font-size="10" font-weight="bold">Basal</text>
+              <path d="M 0 40 C 25 20 65 20 90 40 C 65 60 25 60 0 40 Z" fill="#CBD5E1"/>
+            </g>
+            <!-- Flecha de crecimiento -->
+            <path d="M 170 90 L 195 90 M 190 85 L 198 90 L 190 95" stroke="#0D9488" stroke-width="4"/>
+            <!-- Músculo hipertrofiado -->
+            <g transform="translate(210, 30)">
+              <text x="55" y="0" text-anchor="middle" fill="#0D9488" font-size="10" font-weight="bold">Hipertrofia</text>
+              <path d="M 0 60 C 35 5 75 5 110 60 C 75 115 35 115 0 60 Z" fill="#0D9488" fill-opacity="0.85"/>
+            </g>
+            <text x="180" y="185" text-anchor="middle" fill="#00685f" font-size="10" font-weight="bold">Aumento de miofibrillas y fuerza contráctil por sobrecarga</text>
+          </svg>
+        `;
+
+      case 'tono-muscular':
+        return `
+          <svg class="w-full h-auto max-w-sm mx-auto" viewBox="0 0 360 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect width="360" height="200" rx="12" fill="#F8FAFC"/>
+            <!-- Resorte / Tensión activa continua -->
+            <path d="M 60 100 L 90 100 L 105 70 L 125 130 L 145 70 L 165 130 L 185 70 L 205 130 L 225 70 L 245 130 L 260 100 L 300 100" stroke="#0D9488" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+            <text x="180" y="50" text-anchor="middle" fill="#0D9488" font-size="11" font-weight="bold">Tono Muscular Basal</text>
+            <text x="180" y="185" text-anchor="middle" fill="#334155" font-size="10" font-weight="bold">Resistencia elástica pasiva y semicontracción continua refleja</text>
+          </svg>
+        `;
+
+      case 'fascia':
+        return `
+          <svg class="w-full h-auto max-w-sm mx-auto" viewBox="0 0 360 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect width="360" height="200" rx="12" fill="#F8FAFC"/>
+            <!-- Fibras musculares envueltas en red fascial -->
+            <rect x="70" y="45" width="220" height="110" rx="12" fill="#E11D48" fill-opacity="0.3"/>
+            <!-- Trama de colágeno fascial entrecruzado -->
+            <g stroke="#0D9488" stroke-width="2.5" opacity="0.85">
+              <line x1="80" y1="50" x2="280" y2="150"/>
+              <line x1="120" y1="50" x2="280" y2="130"/>
+              <line x1="80" y1="80" x2="240" y2="150"/>
+              <line x1="280" y1="50" x2="80" y2="150"/>
+              <line x1="240" y1="50" x2="80" y2="130"/>
+              <line x1="280" y1="80" x2="120" y2="150"/>
+            </g>
+            <text x="180" y="32" text-anchor="middle" fill="#0D9488" font-size="11" font-weight="bold">Red Fascial y Tejido Conectivo</text>
+            <text x="180" y="185" text-anchor="middle" fill="#334155" font-size="10" font-weight="bold">Transmisión miofascial de tensiones corporales en red continua</text>
+          </svg>
+        `;
+
+      case 'artrocinematica':
+        return `
+          <svg class="w-full h-auto max-w-sm mx-auto" viewBox="0 0 360 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect width="360" height="200" rx="12" fill="#F8FAFC"/>
+            <!-- Carilla cóncava -->
+            <path d="M 60 160 C 130 130 230 130 300 160" stroke="#64748B" stroke-width="8" stroke-linecap="round"/>
+            <!-- Carilla convexa rodando y deslizando -->
+            <circle cx="160" cy="95" r="45" fill="#0D9488" fill-opacity="0.3" stroke="#0D9488" stroke-width="3"/>
+            <!-- Giro y deslizamiento -->
+            <path d="M 130 85 C 135 65 175 65 185 85" stroke="#F59E0B" stroke-width="4" fill="none"/>
+            <path d="M 130 135 L 200 135 M 195 130 L 205 135 L 195 140" stroke="#0D9488" stroke-width="4"/>
+            <text x="215" y="140" fill="#00685f" font-size="10" font-weight="bold">Deslizamiento</text>
+            <text x="160" y="55" text-anchor="middle" fill="#D97706" font-size="10" font-weight="bold">Rodamiento</text>
+            <text x="180" y="188" text-anchor="middle" fill="#334155" font-size="10" font-weight="bold">Movimientos articulares microscópicos: rodar, deslizar y girar</text>
+          </svg>
+        `;
+
+      case 'osteocinematica':
+        return `
+          <svg class="w-full h-auto max-w-sm mx-auto" viewBox="0 0 360 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect width="360" height="200" rx="12" fill="#F8FAFC"/>
+            <circle cx="180" cy="140" r="12" fill="#00685f"/>
+            <!-- Hueso fijo -->
+            <line x1="180" y1="140" x2="280" y2="140" stroke="#64748B" stroke-width="8" stroke-linecap="round"/>
+            <!-- Palanca ósea rotando en el espacio -->
+            <line x1="180" y1="140" x2="100" y2="50" stroke="#0D9488" stroke-width="8" stroke-linecap="round"/>
+            <path d="M 230 140 A 50 50 0 0 0 135 75" stroke="#F59E0B" stroke-width="3" stroke-dasharray="4 3" fill="none"/>
+            <text x="180" y="30" text-anchor="middle" fill="#00685f" font-size="11" font-weight="bold">Osteocinemática (Plano Sagital)</text>
+            <text x="180" y="185" text-anchor="middle" fill="#334155" font-size="10" font-weight="bold">Desplazamiento angular macroscópico de los huesos en el espacio</text>
+          </svg>
+        `;
+
+      case 'cadena-cinematica-abierta':
+        return `
+          <svg class="w-full h-auto max-w-sm mx-auto" viewBox="0 0 360 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect width="360" height="200" rx="12" fill="#F8FAFC"/>
+            <!-- Muslo fijo / pierna libre pateando en el aire -->
+            <rect x="70" y="60" width="100" height="24" rx="6" fill="#64748B"/>
+            <circle cx="170" cy="72" r="10" fill="#00685f"/>
+            <line x1="170" y1="72" x2="270" y2="130" stroke="#0D9488" stroke-width="8" stroke-linecap="round"/>
+            <!-- Pie libre en el aire -->
+            <circle cx="270" cy="130" r="12" fill="#0D9488"/>
+            <path d="M 260 150 C 275 160 295 150 290 120" stroke="#F59E0B" stroke-width="4" fill="none"/>
+            <text x="280" y="175" text-anchor="middle" fill="#F59E0B" font-size="10" font-weight="bold">Extremo Libre (0 Carga)</text>
+            <text x="180" y="30" text-anchor="middle" fill="#0D9488" font-size="11" font-weight="bold">Cadena Cinemática Abierta (CCA)</text>
+          </svg>
+        `;
+
+      case 'cadena-cinematica-cerrada':
+        return `
+          <svg class="w-full h-auto max-w-sm mx-auto" viewBox="0 0 360 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect width="360" height="200" rx="12" fill="#F8FAFC"/>
+            <!-- Suelo de soporte fijo -->
+            <line x1="40" y1="170" x2="320" y2="170" stroke="#334155" stroke-width="6"/>
+            <!-- Pies apoyados firmemente -->
+            <rect x="150" y="155" width="60" height="15" rx="4" fill="#00685f"/>
+            <!-- Articulación de tobillo, rodilla y cadera flexionándose con carga -->
+            <line x1="180" y1="155" x2="150" y2="90" stroke="#0D9488" stroke-width="7" stroke-linecap="round"/>
+            <line x1="150" y1="90" x2="190" y2="40" stroke="#0D9488" stroke-width="7" stroke-linecap="round"/>
+            <circle cx="150" cy="90" r="8" fill="#F59E0B"/>
+            <text x="180" y="30" text-anchor="middle" fill="#00685f" font-size="11" font-weight="bold">Cadena Cinemática Cerrada (CCC)</text>
+            <text x="180" y="190" text-anchor="middle" fill="#334155" font-size="10" font-weight="bold">Extremo distal fijo al suelo (Co-contracción y estabilidad axial)</text>
+          </svg>
+        `;
+
+      case 'isocinetico':
+        return `
+          <svg class="w-full h-auto max-w-sm mx-auto" viewBox="0 0 360 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect width="360" height="200" rx="12" fill="#F8FAFC"/>
+            <circle cx="180" cy="110" r="50" stroke="#0D9488" stroke-width="4" stroke-dasharray="8 6"/>
+            <line x1="180" y1="110" x2="225" y2="80" stroke="#00685f" stroke-width="6" stroke-linecap="round"/>
+            <text x="180" y="40" text-anchor="middle" fill="#0D9488" font-size="12" font-weight="bold">VELOCIDAD CONSTANTE (60°/s)</text>
+            <text x="180" y="185" text-anchor="middle" fill="#334155" font-size="10" font-weight="bold">Contracción Isocinética: Resistencia acomodada a velocidad fija</text>
+          </svg>
+        `;
+
+      case 'isotonico':
+        return `
+          <svg class="w-full h-auto max-w-sm mx-auto" viewBox="0 0 360 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect width="360" height="200" rx="12" fill="#F8FAFC"/>
+            <!-- Mancuerna de carga constante -->
+            <rect x="70" y="70" width="80" height="60" rx="8" fill="#64748B"/>
+            <path d="M 180 50 L 180 150 M 160 90 L 180 50 L 200 90" stroke="#0D9488" stroke-width="4" fill="none"/>
+            <text x="245" y="80" fill="#0D9488" font-size="10" font-weight="bold">Concéntrico</text>
+            <text x="245" y="130" fill="#F59E0B" font-size="10" font-weight="bold">Excéntrico</text>
+            <text x="180" y="35" text-anchor="middle" fill="#00685f" font-size="11" font-weight="bold">Contracción Isotónica (Tensión Dinámica)</text>
+            <text x="180" y="185" text-anchor="middle" fill="#334155" font-size="10" font-weight="bold">Carga externa constante con variación angular de longitud muscular</text>
+          </svg>
+        `;
+
+      case 'inversion':
+        return `
+          <svg class="w-full h-auto max-w-sm mx-auto" viewBox="0 0 360 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect width="360" height="200" rx="12" fill="#F8FAFC"/>
+            <!-- Planta del pie inclinada hacia medial -->
+            <ellipse cx="180" cy="100" rx="40" ry="70" transform="rotate(-25 180 100)" fill="#CBD5E1" stroke="#64748B" stroke-width="2"/>
+            <path d="M 180 140 C 140 140 120 110 135 85" stroke="#0D9488" stroke-width="5" fill="none"/>
+            <polygon points="135,75 125,85 140,90" fill="#0D9488"/>
+            <text x="100" y="65" fill="#0D9488" font-size="11" font-weight="bold">Planta hacia Medial</text>
+            <text x="180" y="25" text-anchor="middle" fill="#0D9488" font-size="11" font-weight="bold">Inversión del Pie (Supinación + Aducción)</text>
+          </svg>
+        `;
+
+      case 'eversion':
+        return `
+          <svg class="w-full h-auto max-w-sm mx-auto" viewBox="0 0 360 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect width="360" height="200" rx="12" fill="#F8FAFC"/>
+            <!-- Planta del pie inclinada hacia lateral -->
+            <ellipse cx="180" cy="100" rx="40" ry="70" transform="rotate(25 180 100)" fill="#CBD5E1" stroke="#64748B" stroke-width="2"/>
+            <path d="M 180 140 C 220 140 240 110 225 85" stroke="#F59E0B" stroke-width="5" fill="none"/>
+            <polygon points="225,75 235,85 220,90" fill="#F59E0B"/>
+            <text x="260" y="65" fill="#D97706" font-size="11" font-weight="bold">Planta hacia Lateral</text>
+            <text x="180" y="25" text-anchor="middle" fill="#D97706" font-size="11" font-weight="bold">Eversión del Pie (Pronación + Abducción)</text>
+          </svg>
+        `;
+
+      case 'dorsiflexion':
+        return `
+          <svg class="w-full h-auto max-w-sm mx-auto" viewBox="0 0 360 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect width="360" height="200" rx="12" fill="#F8FAFC"/>
+            <!-- Pierna vertical -->
+            <rect x="110" y="30" width="30" height="110" rx="6" fill="#CBD5E1"/>
+            <!-- Pie levantándose hacia arriba -->
+            <line x1="125" y1="140" x2="230" y2="105" stroke="#0D9488" stroke-width="8" stroke-linecap="round"/>
+            <path d="M 230 150 C 240 135 240 115 225 105" stroke="#0D9488" stroke-width="4" fill="none"/>
+            <text x="245" y="95" fill="#0D9488" font-size="11" font-weight="bold">DORSIFLEXIÓN</text>
+            <text x="180" y="185" text-anchor="middle" fill="#334155" font-size="10" font-weight="bold">Acercamiento del dorso del pie hacia la espinilla anterior</text>
+          </svg>
+        `;
+
+      case 'plantiflexion':
+        return `
+          <svg class="w-full h-auto max-w-sm mx-auto" viewBox="0 0 360 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect width="360" height="200" rx="12" fill="#F8FAFC"/>
+            <!-- Pierna vertical -->
+            <rect x="110" y="30" width="30" height="110" rx="6" fill="#CBD5E1"/>
+            <!-- Pie apuntando hacia abajo -->
+            <line x1="125" y1="140" x2="210" y2="175" stroke="#F59E0B" stroke-width="8" stroke-linecap="round"/>
+            <path d="M 180 140 C 195 150 205 160 215 170" stroke="#F59E0B" stroke-width="4" fill="none"/>
+            <text x="225" y="165" fill="#D97706" font-size="11" font-weight="bold">PLANTIFLEXIÓN</text>
+            <text x="180" y="188" text-anchor="middle" fill="#334155" font-size="10" font-weight="bold">Descenso de la punta del pie hacia el suelo (Puntillas)</text>
+          </svg>
+        `;
+
+      case 'elevacion':
+        return `
+          <svg class="w-full h-auto max-w-sm mx-auto" viewBox="0 0 360 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect width="360" height="200" rx="12" fill="#F8FAFC"/>
+            <rect x="140" y="80" width="80" height="60" rx="10" fill="#0D9488" fill-opacity="0.3" stroke="#0D9488" stroke-width="3"/>
+            <path d="M 180 130 L 180 50 M 165 65 L 180 45 L 195 65" stroke="#0D9488" stroke-width="5" stroke-linecap="round"/>
+            <text x="180" y="35" text-anchor="middle" fill="#0D9488" font-size="12" font-weight="bold">ELEVACIÓN ESCAPULAR</text>
+            <text x="180" y="185" text-anchor="middle" fill="#64748B" font-size="10" font-weight="bold">Desplazamiento en sentido craneal / hacia arriba</text>
+          </svg>
+        `;
+
+      case 'depresion':
+        return `
+          <svg class="w-full h-auto max-w-sm mx-auto" viewBox="0 0 360 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect width="360" height="200" rx="12" fill="#F8FAFC"/>
+            <rect x="140" y="60" width="80" height="60" rx="10" fill="#64748B" fill-opacity="0.3" stroke="#64748B" stroke-width="3"/>
+            <path d="M 180 70 L 180 150 M 165 135 L 180 155 L 195 135" stroke="#F59E0B" stroke-width="5" stroke-linecap="round"/>
+            <text x="180" y="40" text-anchor="middle" fill="#D97706" font-size="12" font-weight="bold">DEPRESIÓN ESCAPULAR</text>
+            <text x="180" y="185" text-anchor="middle" fill="#64748B" font-size="10" font-weight="bold">Desplazamiento en sentido caudal / hacia abajo</text>
+          </svg>
+        `;
+
+      case 'protraccion':
+        return `
+          <svg class="w-full h-auto max-w-sm mx-auto" viewBox="0 0 360 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect width="360" height="200" rx="12" fill="#F8FAFC"/>
+            <rect x="100" y="65" width="80" height="70" rx="10" fill="#CBD5E1"/>
+            <path d="M 160 100 L 250 100 M 235 85 L 255 100 L 235 115" stroke="#0D9488" stroke-width="5" stroke-linecap="round"/>
+            <text x="210" y="75" text-anchor="middle" fill="#0D9488" font-size="11" font-weight="bold">PROTRACCIÓN</text>
+            <text x="180" y="185" text-anchor="middle" fill="#334155" font-size="10" font-weight="bold">Desplazamiento anterior (hacia adelante) de escápula o mandíbula</text>
+          </svg>
+        `;
+
+      case 'retraccion':
+        return `
+          <svg class="w-full h-auto max-w-sm mx-auto" viewBox="0 0 360 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect width="360" height="200" rx="12" fill="#F8FAFC"/>
+            <rect x="180" y="65" width="80" height="70" rx="10" fill="#CBD5E1"/>
+            <path d="M 200 100 L 110 100 M 125 85 L 105 100 L 125 115" stroke="#F59E0B" stroke-width="5" stroke-linecap="round"/>
+            <text x="150" y="75" text-anchor="middle" fill="#D97706" font-size="11" font-weight="bold">RETRACCIÓN</text>
+            <text x="180" y="185" text-anchor="middle" fill="#334155" font-size="10" font-weight="bold">Desplazamiento posterior (hacia atrás / aproximación a línea media)</text>
+          </svg>
+        `;
+
+      case 'rotacion-interna':
+        return `
+          <svg class="w-full h-auto max-w-sm mx-auto" viewBox="0 0 360 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect width="360" height="200" rx="12" fill="#F8FAFC"/>
+            <rect x="170" y="30" width="20" height="130" rx="8" fill="#CBD5E1"/>
+            <line x1="180" y1="15" x2="180" y2="185" stroke="#64748B" stroke-width="2" stroke-dasharray="4 3"/>
+            <path d="M 160 80 C 120 90 120 110 160 120" stroke="#0D9488" stroke-width="4" fill="none"/>
+            <polygon points="150,110 165,120 150,126" fill="#0D9488"/>
+            <text x="80" y="105" text-anchor="middle" fill="#0D9488" font-size="11" font-weight="bold">Rotación Interna</text>
+            <text x="180" y="188" text-anchor="middle" fill="#334155" font-size="10" font-weight="bold">Giro anterior hacia el plano medial del cuerpo</text>
+          </svg>
+        `;
+
+      case 'rotacion-externa':
+        return `
+          <svg class="w-full h-auto max-w-sm mx-auto" viewBox="0 0 360 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect width="360" height="200" rx="12" fill="#F8FAFC"/>
+            <rect x="170" y="30" width="20" height="130" rx="8" fill="#CBD5E1"/>
+            <line x1="180" y1="15" x2="180" y2="185" stroke="#64748B" stroke-width="2" stroke-dasharray="4 3"/>
+            <path d="M 200 80 C 240 90 240 110 200 120" stroke="#F59E0B" stroke-width="4" fill="none"/>
+            <polygon points="210,110 195,120 210,126" fill="#F59E0B"/>
+            <text x="280" y="105" text-anchor="middle" fill="#D97706" font-size="11" font-weight="bold">Rotación Externa</text>
+            <text x="180" y="188" text-anchor="middle" fill="#334155" font-size="10" font-weight="bold">Giro posterior alejándose del plano medial</text>
+          </svg>
+        `;
+
+      case 'circunduccion':
+        return `
+          <svg class="w-full h-auto max-w-sm mx-auto" viewBox="0 0 360 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect width="360" height="200" rx="12" fill="#F8FAFC"/>
+            <!-- Vértice articular -->
+            <circle cx="90" cy="100" r="12" fill="#00685f"/>
+            <!-- Cono de movimiento -->
+            <path d="M 90 100 L 260 40 L 260 160 Z" fill="#0D9488" fill-opacity="0.15"/>
+            <ellipse cx="260" cy="100" rx="25" ry="60" stroke="#0D9488" stroke-width="3" fill="none"/>
+            <text x="260" y="28" text-anchor="middle" fill="#00685f" font-size="11" font-weight="bold">Base Cónica Circular</text>
+            <text x="180" y="188" text-anchor="middle" fill="#334155" font-size="10" font-weight="bold">Circunducción: Secuencia continua flexión-abducción-extensión-aducción</text>
+          </svg>
+        `;
+
+      case 'anteversion':
+        return `
+          <svg class="w-full h-auto max-w-sm mx-auto" viewBox="0 0 360 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect width="360" height="200" rx="12" fill="#F8FAFC"/>
+            <!-- Pelvis inclinada hacia anterior -->
+            <ellipse cx="180" cy="100" rx="70" ry="40" transform="rotate(20 180 100)" fill="#0D9488" fill-opacity="0.25" stroke="#0D9488" stroke-width="3"/>
+            <path d="M 230 80 L 270 95 M 260 85 L 275 97 L 265 105" stroke="#0D9488" stroke-width="4"/>
+            <text x="260" y="65" fill="#00685f" font-size="11" font-weight="bold">Inclinación Anterior</text>
+            <text x="180" y="30" text-anchor="middle" fill="#00685f" font-size="11" font-weight="bold">Anteversión Pélvica / Femoral</text>
+          </svg>
+        `;
+
+      case 'retroversion':
+        return `
+          <svg class="w-full h-auto max-w-sm mx-auto" viewBox="0 0 360 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect width="360" height="200" rx="12" fill="#F8FAFC"/>
+            <!-- Pelvis inclinada hacia posterior -->
+            <ellipse cx="180" cy="100" rx="70" ry="40" transform="rotate(-20 180 100)" fill="#F59E0B" fill-opacity="0.25" stroke="#F59E0B" stroke-width="3"/>
+            <path d="M 130 80 L 90 95 M 100 85 L 85 97 L 95 105" stroke="#F59E0B" stroke-width="4"/>
+            <text x="100" y="65" fill="#D97706" font-size="11" font-weight="bold">Inclinación Posterior</text>
+            <text x="180" y="30" text-anchor="middle" fill="#D97706" font-size="11" font-weight="bold">Retroversión Pélvica</text>
+          </svg>
+        `;
+
+      case 'valgo':
+        return `
+          <svg class="w-full h-auto max-w-sm mx-auto" viewBox="0 0 360 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect width="360" height="200" rx="12" fill="#F8FAFC"/>
+            <!-- Rodillas aproximadas hacia adentro (X) y pies separados hacia afuera -->
+            <line x1="120" y1="40" x2="160" y2="105" stroke="#E11D48" stroke-width="6" stroke-linecap="round"/>
+            <line x1="240" y1="40" x2="200" y2="105" stroke="#E11D48" stroke-width="6" stroke-linecap="round"/>
+            <circle cx="160" cy="105" r="8" fill="#E11D48"/>
+            <circle cx="200" cy="105" r="8" fill="#E11D48"/>
+            <line x1="160" y1="105" x2="100" y2="170" stroke="#E11D48" stroke-width="6" stroke-linecap="round"/>
+            <line x1="200" y1="105" x2="260" y2="170" stroke="#E11D48" stroke-width="6" stroke-linecap="round"/>
+            <text x="180" y="30" text-anchor="middle" fill="#E11D48" font-size="11" font-weight="bold">GENU VALGO (Rodillas en X)</text>
+            <text x="180" y="190" text-anchor="middle" fill="#64748B" font-size="10" font-weight="bold">Segmento distal se desvía hacia lateral respecto a la línea media</text>
+          </svg>
+        `;
+
+      case 'varo':
+        return `
+          <svg class="w-full h-auto max-w-sm mx-auto" viewBox="0 0 360 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect width="360" height="200" rx="12" fill="#F8FAFC"/>
+            <!-- Rodillas separadas hacia afuera (paréntesis) y pies juntos -->
+            <line x1="150" y1="40" x2="105" y2="105" stroke="#0D9488" stroke-width="6" stroke-linecap="round"/>
+            <line x1="210" y1="40" x2="255" y2="105" stroke="#0D9488" stroke-width="6" stroke-linecap="round"/>
+            <circle cx="105" cy="105" r="8" fill="#0D9488"/>
+            <circle cx="255" cy="105" r="8" fill="#0D9488"/>
+            <line x1="105" y1="105" x2="160" y2="170" stroke="#0D9488" stroke-width="6" stroke-linecap="round"/>
+            <line x1="255" y1="105" x2="200" y2="170" stroke="#0D9488" stroke-width="6" stroke-linecap="round"/>
+            <text x="180" y="30" text-anchor="middle" fill="#0D9488" font-size="11" font-weight="bold">GENU VARO (Rodillas en Paréntesis)</text>
+            <text x="180" y="190" text-anchor="middle" fill="#64748B" font-size="10" font-weight="bold">Segmento distal se desvía hacia medial respecto a la línea media</text>
+          </svg>
+        `;
+
+
       default:
         return `
           <svg class="w-full h-auto max-w-sm mx-auto" viewBox="0 0 360 180" fill="none" xmlns="http://www.w3.org/2000/svg">
