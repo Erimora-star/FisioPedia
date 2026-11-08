@@ -602,5 +602,415 @@ const FISIOPEDIA_QUIZZES = [
       }
     ],
     explanation: "Â¡Correcto! El **Arco Doloroso Subacromial** se manifiesta tÃ­picamente entre los **60Â° y 120Â° de abducciÃ³n**, intervalo biomecÃ¡nico donde el espacio entre el acromion y el hÃºmero se reduce al mÃ­nimo, pinzando la bursa y el supraespinoso."
+  },
+  {
+    id: "q16",
+    quizType: "verdadero_falso",
+    question: "Verdadero o Falso: Las suturas de la bóveda craneal son diartrosis móviles que permiten expansión encefálica en la adultez.",
+    scenario: "Durante una discusión clínica sobre biomecánica articular, un estudiante afirma que las suturas del cráneo adulto son diartrosis porque tienen cartílago hialino y movimiento activo.",
+    level: "Básico (1er año)",
+    category: "Biomecánica Articular",
+    planeAxis: "Inmóvil (Sinartrosis)",
+    hint: "Recuerda que las suturas craneales son articulaciones fibrosas inmóviles unidas sólidamente por tejido conectivo denso.",
+    metrics: [
+      {
+        label: "Clasificación Real",
+        value: "Sinartrosis Fibrosa"
+      },
+      {
+        label: "Rango de Movimiento",
+        value: "0° (Inmóvil)"
+      }
+    ],
+    options: [
+      {
+        id: "A",
+        text: "Verdadero",
+        detail: "Afirma erróneamente que las suturas son diartrosis con movimiento activo.",
+        isCorrect: false
+      },
+      {
+        id: "B",
+        text: "Falso",
+        detail: "Correcto: las suturas del cráneo son sinartrosis inmóviles fibrosas, no diartrosis.",
+        isCorrect: true
+      }
+    ],
+    explanation: "¡Correcto! Es FALSO. Las suturas craneales son **sinartrosis** (articulaciones fibrosas inmóviles). Las diartrosis son articulaciones sinoviales de libre movimiento como la rodilla o el hombro."
+  },
+  {
+    id: "q17",
+    quizType: "verdadero_falso",
+    question: "Verdadero o Falso: El periostio es una membrana ósea ricamente inervada por nociceptores, responsable del dolor agudo ante un impacto directo sobre la tibia.",
+    scenario: "Un futbolista recibe una patada directa en la cara anterior de la tibia («espinilla») experimentando dolor punzante inmediato e intenso sin presentar fractura evidente.",
+    level: "Básico (1er año)",
+    category: "Tejido Óseo",
+    planeAxis: "Inervación Nociceptiva Somática",
+    hint: "El hueso compacto subyacente tiene pocas terminaciones sensitivas; la capa que lo recubre es la que posee la mayor densidad de fibras del dolor.",
+    metrics: [
+      {
+        label: "Estructura Receptora",
+        value: "Periostio"
+      },
+      {
+        label: "Fibras Nerviosas",
+        value: "A-delta y C Nociceptivas"
+      }
+    ],
+    options: [
+      {
+        id: "A",
+        text: "Verdadero",
+        detail: "El periostio posee una altísima concentración de nociceptores sensibles a contusiones y tracción.",
+        isCorrect: true
+      },
+      {
+        id: "B",
+        text: "Falso",
+        detail: "Incorrecto: el periostio sí es sumamente inervado y responsable del dolor óseo agudo.",
+        isCorrect: false
+      }
+    ],
+    explanation: "¡Correcto! Es VERDADERO. El **periostio** está profusamente vascularizado e inervado por fibras sensitivas somáticas. Por ello, cualquier contusión directa en zonas subcutáneas como la espinilla despierta un dolor exquisito e inmediato."
+  },
+  {
+    id: "q18",
+    quizType: "verdadero_falso",
+    question: "Verdadero o Falso: En una contracción isométrica, la distancia entre el origen y la inserción del músculo varía significativamente produciendo aceleración angular articular.",
+    scenario: "Un paciente realiza la postura de 'plancha abdominal' o mantiene una bandeja cargada con los codos en 90° sin mover los brazos.",
+    level: "Básico (1er año)",
+    category: "Biomecánica Muscular",
+    planeAxis: "Estático • Torque Interno = Torque Externo",
+    hint: "El prefijo 'iso' significa igual y 'metro' medida; no hay desplazamiento angular.",
+    metrics: [
+      {
+        label: "Variación de Longitud",
+        value: "Nula (constante)"
+      },
+      {
+        label: "Trabajo Mecánico Externo",
+        value: "0 Joules"
+      }
+    ],
+    options: [
+      {
+        id: "A",
+        text: "Verdadero",
+        detail: "Incorrecto: confunde la contracción isométrica con la isotónica concéntrica/excéntrica.",
+        isCorrect: false
+      },
+      {
+        id: "B",
+        text: "Falso",
+        detail: "Correcto: en la contracción isométrica la longitud muscular y el ángulo articular permanecen constantes.",
+        isCorrect: true
+      }
+    ],
+    explanation: "¡Correcto! Es FALSO. En una contracción **isométrica**, la tensión se incrementa pero la longitud del músculo y el ángulo articular no cambian (longitud constante, trabajo angular cero)."
+  },
+  {
+    id: "q19",
+    quizType: "verdadero_falso",
+    question: "Verdadero o Falso: Los meniscos de la rodilla aumentan la superficie de contacto articular reduciendo el estrés de contacto sobre el cartílago hialino.",
+    scenario: "Se evalúa la mecánica de amortiguación en la rodilla de un saltador de longitud durante la fase de recepción.",
+    level: "Intermedio (2do año)",
+    category: "Cartílago y Meniscos",
+    planeAxis: "Distribución de Carga Femorotibial",
+    hint: "Al interponerse entre el cóndilo curvo y el platillo tibial plano, multiplican el área de contacto (Estrés = Fuerza / Área).",
+    metrics: [
+      {
+        label: "Carga Absorbida",
+        value: "50% a 70% de carga compresiva"
+      },
+      {
+        label: "Morfología",
+        value: "Fibrocartílago en cuña"
+      }
+    ],
+    options: [
+      {
+        id: "A",
+        text: "Verdadero",
+        detail: "Al aumentar el área de contacto reducen significativamente el estrés compresivo por unidad de superficie.",
+        isCorrect: true
+      },
+      {
+        id: "B",
+        text: "Falso",
+        detail: "Incorrecto: los meniscos sí incrementan el área de contacto y protegen el cartílago.",
+        isCorrect: false
+      }
+    ],
+    explanation: "¡Correcto! Es VERDADERO. Los **meniscos** transforman el contacto puntual en un contacto amplio y congruente, distribuyendo entre el 50% y 70% de las fuerzas axiales y protegiendo el cartílago hialino del desgaste."
+  },
+  {
+    id: "q20",
+    quizType: "verdadero_falso",
+    question: "Verdadero o Falso: El retináculo extensor del tobillo permite que los tendones se despeguen libremente hacia adelante (efecto cuerda de arco) para ganar mayor palanca.",
+    scenario: "Al realizar una dorsiflexión máxima para subir un escalón alto, se observa la alineación de los tendones tibial anterior y extensor largo de los dedos.",
+    level: "Intermedio (2do año)",
+    category: "Tejido Conectivo y Fascias",
+    planeAxis: "Polea Osteofibrosa de Contención",
+    hint: "La función primordial del retináculo es justamente evitar que los tendones se separen o hagan 'cuerda de arco'.",
+    metrics: [
+      {
+        label: "Función",
+        value: "Contención y guía tendinosa"
+      },
+      {
+        label: "Fenómeno Evitado",
+        value: "Bowstringing (Cuerda de arco)"
+      }
+    ],
+    options: [
+      {
+        id: "A",
+        text: "Verdadero",
+        detail: "Incorrecto: el retináculo no permite que se despeguen, sino que los fija sólidamente al hueso.",
+        isCorrect: false
+      },
+      {
+        id: "B",
+        text: "Falso",
+        detail: "Correcto: la función del retináculo es mantener los tendones adosados contra el plano óseo.",
+        isCorrect: true
+      }
+    ],
+    explanation: "¡Correcto! Es FALSO. La función biomecánica del **retináculo** es mantener los tendones adosados al hueso actuando como polea anatómica y evitando a toda costa el efecto cuerda de arco (bowstringing)."
+  },
+  {
+    id: "q21",
+    quizType: "caso_clinico",
+    question: "Caso Clínico: Paciente con marcha en 'steppage' y caída del antepié tras traumatismo en cuello de peroné. ¿Qué miotoma y nervio están comprometidos?",
+    scenario: "Un paciente acude a consulta de Fisioterapia tras sufrir un golpe en la cara lateral de la rodilla derecha. Presenta incapacidad para elevar la punta del pie (dorsiflexión) al caminar, tropezando con los dedos y viéndose obligado a elevar exageradamente la rodilla para avanzar.",
+    level: "Avanzado (3er año)",
+    category: "Control Neuromuscular",
+    planeAxis: "Plano Sagital • Miotoma L4-L5",
+    hint: "El nervio rodea el cuello del peroné superficialmente y el miotoma principal de la dorsiflexión del tobillo corresponde a L4.",
+    metrics: [
+      {
+        label: "Músculo Afectado",
+        value: "Tibial Anterior"
+      },
+      {
+        label: "Signo Clínico",
+        value: "Marcha en Steppage (Pie Caído)"
+      }
+    ],
+    options: [
+      {
+        id: "A",
+        text: "Nervio Peroneo Común y Miotoma L4 (Tibial anterior)",
+        detail: "El nervio peroneo común inerva los dorsiflexores y se lesiona típicamente en el cuello del peroné.",
+        isCorrect: true
+      },
+      {
+        id: "B",
+        text: "Nervio Tibial y Miotoma S1 (Gastrocnemios)",
+        detail: "La lesión del nervio tibial comprometería la flexión plantar y la sensibilidad de la planta, no la dorsiflexión.",
+        isCorrect: false
+      },
+      {
+        id: "C",
+        text: "Nervio Femoral y Miotoma L3 (Cuádriceps)",
+        detail: "El nervio femoral inerva los extensores de rodilla, no los dorsiflexores del tobillo.",
+        isCorrect: false
+      },
+      {
+        id: "D",
+        text: "Nervio Obturador y Miotoma L2 (Aductores)",
+        detail: "El nervio obturador inerva la aducción de cadera en cara medial del muslo.",
+        isCorrect: false
+      }
+    ],
+    explanation: "¡Correcto! La compresión o traumatismo en el cuello del peroné afecta al **Nervio Peroneo Común** (fibular común), anulando la inervación del tibial anterior (**miotoma L4**), produciendo pie caído (steppage gait)."
+  },
+  {
+    id: "q22",
+    quizType: "caso_clinico",
+    question: "Caso Clínico: Bloqueo articular brusco de rodilla a 30° de flexión tras pivoteo en básquetbol. ¿Qué estructura anatómica se encuentra atrapada?",
+    scenario: "Una jugadora de baloncesto pivota bruscamente sobre su pie plantado y escucha un chasquido. De inmediato su rodilla queda atascada a 30° de flexión, siendo incapaz de extender la pierna completamente por un tope elástico doloroso.",
+    level: "Intermedio - Avanzado",
+    category: "Cartílago y Meniscos",
+    planeAxis: "Plano Sagital • Bloqueo Artrocinemático",
+    hint: "Un desgarro longitudinal con desplazamiento medial ('asa de cubo') de esta estructura semilunar se interpone entre cóndilo y platillo tibial.",
+    metrics: [
+      {
+        label: "Estructura Lesionada",
+        value: "Menisco Medial (Asa de cubo)"
+      },
+      {
+        label: "Prueba Positiva",
+        value: "Test de McMurray / Apley"
+      }
+    ],
+    options: [
+      {
+        id: "A",
+        text: "Tendón rotuliano desinsertado",
+        detail: "La rotura del tendón rotuliano produce imposibilidad de extensión activa pero sin tope elástico.",
+        isCorrect: false
+      },
+      {
+        id: "B",
+        text: "Desgarro en asa de cubo del menisco medial",
+        detail: "El fragmento meniscal luxado se interpone en la fosa intercondílea impidiendo la extensión terminal.",
+        isCorrect: true
+      },
+      {
+        id: "C",
+        text: "Distensión del ligamento colateral medial",
+        detail: "Produce dolor medial al estrés en valgo, pero no un bloqueo mecánico rígido de la extensión.",
+        isCorrect: false
+      },
+      {
+        id: "D",
+        text: "Luxación patelar lateral",
+        detail: "La rótula se desplaza hacia el exterior de la tróclea con deformidad visible anterior, no bloqueo interno.",
+        isCorrect: false
+      }
+    ],
+    explanation: "¡Correcto! El bloqueo mecánico en flexión con imposibilidad de extensión completa es el signo patognomónico de una rotura del **menisco medial en asa de cubo**, donde la porción desgarrada se luxa en la escotadura intercondílea actuando como cuña."
+  },
+  {
+    id: "q23",
+    quizType: "caso_clinico",
+    question: "Caso Clínico: Caída de la pelvis contralateral al dar un paso (Signo de Trendelenburg). ¿Qué músculo agonista y qué trocánter están implicados?",
+    scenario: "Un paciente adulto mayor presenta claudicación al caminar: cada vez que levanta la pierna izquierda del suelo para dar el paso, su pelvis cae hacia ese lado izquierdo en vez de mantenerse horizontal.",
+    level: "Intermedio (2do año)",
+    category: "Biomecánica Muscular",
+    planeAxis: "Plano Frontal • Eje Anteroposterior",
+    hint: "El músculo abductor de la cadera derecha de apoyo debe contraerse firmemente en su inserción en el trocánter mayor para estabilizar la pelvis opuesta.",
+    metrics: [
+      {
+        label: "Músculo Insuficiente",
+        value: "Glúteo Medio Derecho"
+      },
+      {
+        label: "Punto de Inserción",
+        value: "Trocánter Mayor Femoral"
+      }
+    ],
+    options: [
+      {
+        id: "A",
+        text: "Debilidad del Glúteo Mayor en la cresta ilíaca",
+        detail: "El glúteo mayor es extensor de cadera en plano sagital, no estabilizador frontal pelviano.",
+        isCorrect: false
+      },
+      {
+        id: "B",
+        text: "Insuficiencia del Glúteo Medio derecho insertado en el trocánter mayor",
+        detail: "El glúteo medio de la pierna en apoyo actúa como palanca de primer grado estabilizando la pelvis contralateral.",
+        isCorrect: true
+      },
+      {
+        id: "C",
+        text: "Acortamiento del psoas ilíaco en trocánter menor",
+        detail: "El psoas ilíaco flexiona la cadera pero no genera la basculación frontal observada en Trendelenburg.",
+        isCorrect: false
+      },
+      {
+        id: "D",
+        text: "Contractura de aductores en línea áspera",
+        detail: "Los aductores aproximan el muslo pero no provocan la caída pelviana contralateral.",
+        isCorrect: false
+      }
+    ],
+    explanation: "¡Correcto! El Signo de Trendelenburg positivo revela debilidad o inhibición del **Glúteo Medio de la pierna en apoyo (derecha)**, cuya inserción en el **trocánter mayor** es biomecánicamente incapaz de generar el torque abductor para sostener la pelvis nivelada."
+  },
+  {
+    id: "q24",
+    quizType: "caso_clinico",
+    question: "Caso Clínico: Dolor inguinal agudo en sentadillas profundas con test FADIR positivo en futbolista. ¿Qué lesión del fibrocartílago acetabular sospechas?",
+    scenario: "Un jugador de fútbol de 24 años consulta por dolor inguinal punzante profundo al realizar flexión, aducción y rotación interna de cadera (test FADIR). La resonancia magnética confirma pinzamiento femoroacetabular.",
+    level: "Avanzado (3er año)",
+    category: "Cartílago y Rodetes",
+    planeAxis: "Choque Femoroacetabular Anterosuperior",
+    hint: "Este rodete fibrocartilaginoso bordea el acetábulo aumentando su profundidad y el sellado articular.",
+    metrics: [
+      {
+        label: "Estructura Lesionada",
+        value: "Labrum Acetabular"
+      },
+      {
+        label: "Mecanismo",
+        value: "Compresión y cizallamiento en flexión/rotación"
+      }
+    ],
+    options: [
+      {
+        id: "A",
+        text: "Desgarro del Labrum Acetabular por pinzamiento",
+        detail: "El choque de la unión cabeza-cuello femoral contra el labrum acetabular anterosuperior produce dolor y desgarro.",
+        isCorrect: true
+      },
+      {
+        id: "B",
+        text: "Avulsión de la sínfisis púbica",
+        detail: "Causaría dolor en la línea media púbica, no positivo al test FADIR intraarticular de cadera.",
+        isCorrect: false
+      },
+      {
+        id: "C",
+        text: "Bursitis trocantérica lateral",
+        detail: "El dolor sería palpable en la cara lateral del muslo, no un dolor profundo inguinal.",
+        isCorrect: false
+      },
+      {
+        id: "D",
+        text: "Fractura por estrés del cuello femoral",
+        detail: "Produce dolor difuso al cargar peso continuo, pero el FADIR positivo selectivo es específico de patología labral.",
+        isCorrect: false
+      }
+    ],
+    explanation: "¡Correcto! El dolor inguinal reproducible con la maniobra FADIR es característico del desgarro del **Labrum Acetabular**, el anillo fibrocartilaginoso que sella y ahonda la cavidad articular de la cadera."
+  },
+  {
+    id: "q25",
+    quizType: "caso_clinico",
+    question: "Caso Clínico: Parestesias en cara anteromedial de pierna y pérdida del reflejo rotuliano. ¿Qué raíz nerviosa y dermatoma se encuentran comprometidos?",
+    scenario: "Un levantador de pesas presenta dolor lumbar bajo irradiado por la cara anterior del muslo y cara anteromedial de la tibia hasta el maléolo medial. En la exploración neurológica el reflejo rotuliano o patelar se encuentra abolido.",
+    level: "Avanzado (3er año)",
+    category: "Neuroanatomía y Control Motor",
+    planeAxis: "Raíz Espinal L4 • Arco Reflejo Monosináptico",
+    hint: "El reflejo patelar evalúa la raíz L4 y su dermatoma recorre la cara medial de la pierna y maléolo interno.",
+    metrics: [
+      {
+        label: "Segmento Medular",
+        value: "Raíz L4"
+      },
+      {
+        label: "Reflejo Clave",
+        value: "Reflejo Patelar / Rotuliano"
+      }
+    ],
+    options: [
+      {
+        id: "A",
+        text: "Raíz Espinal L4 (Dermatoma anteromedial de pierna y reflejo patelar)",
+        detail: "L4 inerva sensitivamente la cara medial de la pierna y comanda el arco reflejo rotuliano del cuádriceps.",
+        isCorrect: true
+      },
+      {
+        id: "B",
+        text: "Raíz Espinal S1 (Reflejo aquileo y cara lateral del pie)",
+        detail: "S1 se evalúa con el reflejo aquileo y el dermatoma de la planta y borde externo del pie.",
+        isCorrect: false
+      },
+      {
+        id: "C",
+        text: "Raíz Espinal L5 (Dermatoma del dorso del pie y hallux)",
+        detail: "L5 no tiene reflejo osteotendinoso principal y su dermatoma abarca el dorso del pie y dedo gordo.",
+        isCorrect: false
+      },
+      {
+        id: "D",
+        text: "Raíz Espinal L2 (Cara superior de muslo sin reflejo patelar)",
+        detail: "L2 inerva la flexión de cadera y cara anterior alta del muslo, sin relación con el tendón rotuliano.",
+        isCorrect: false
+      }
+    ],
+    explanation: "¡Correcto! La combinación de hipoestesia en el **dermatoma L4** (cara medial de pierna hasta maléolo medial) y la abolición del **reflejo rotuliano** confirma radiculopatía compresiva de la raíz nerviosa **L4**."
   }
 ];

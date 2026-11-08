@@ -1,6 +1,6 @@
 // Fisio Pedía - Base de Datos Anatómica y Pedagógica Completa
 // Vocabulario esencial de anatomía, kinesiología, biomecánica y orientación para estudiantes de Fisioterapia.
-// Contiene 76 términos oficiales sin duplicados con soporte de doble esquema.
+// Contiene 116 términos oficiales sin duplicados con soporte de doble esquema.
 
 const FISIOPEDIA_TERMS = [
   {
@@ -3422,6 +3422,1606 @@ const FISIOPEDIA_TERMS = [
     ],
     "svgType": "cadena-cinematica-cerrada",
     "isFeatured": false
+  },
+  {
+    "id": "sinartrosis",
+    "name": "Sinartrosis",
+    "pronunciation": "/si-nar-tro-sis/",
+    "fonetica": "si-nar-TRO-sis",
+    "etymology": "Del griego syn ('junto') y arthron ('articulación').",
+    "category": "articulaciones",
+    "categoryLabel": "Biomecánica Articular",
+    "categoryClass": "bg-cat-joints/15 text-cat-joints",
+    "region": "craneo",
+    "regionLabel": "Cráneo y Cara",
+    "level": "Básico (1er año)",
+    "readingTime": "2 min",
+    "technicalDef": "Articulación fibrosa inmóvil cuyos huesos están unidos sólidamente por tejido conectivo denso o cartílago hialino, sin cavidad articular.",
+    "defTecnica": "Articulación inmóvil unida por tejido fibroso o cartílago que carece de cavidad sinovial.",
+    "simpleExplanation": "Unión fija entre dos huesos que no se mueve nada, como piezas de un rompecabezas soldadas.",
+    "explicacionSencilla": "Unión que no se mueve nada.",
+    "everydayTitle": "Suturas protectoras de la bóveda craneal",
+    "everydayExample": "Las suturas de tu cráneo encajan como los dientes de una cremallera cerrada protegiendo el cerebro de impactos.",
+    "analogia": "Como dos placas metálicas remachadas sólidamente una con otra para que nunca se deslicen.",
+    "clinicalTitle": "Craneosinostosis y rigidez sutural",
+    "clinicalRelevance": "El cierre prematuro de una sinartrosis craneal en infantes restringe el crecimiento encefálico y requiere descompresión quirúrgica o moldeamiento.",
+    "clinicalCase": "Fusión prematura de la sutura sagital en un lactante que produce escafocefalia.",
+    "keyDetails": [
+      {
+        "label": "Movilidad",
+        "value": "Nula (inmóvil)"
+      },
+      {
+        "label": "Tejido de unión",
+        "value": "Fibroso denso o cartilaginoso"
+      },
+      {
+        "label": "Ejemplo clásico",
+        "value": "Suturas del cráneo"
+      }
+    ],
+    "svgType": "sinartrosis",
+    "termino": "Sinartrosis"
+  },
+  {
+    "id": "anfiartrosis",
+    "name": "Anfiartrosis",
+    "pronunciation": "/an-fiar-tro-sis/",
+    "fonetica": "an-fiar-TRO-sis",
+    "etymology": "Del griego amphi ('ambos lados / parcial') y arthron ('articulación').",
+    "category": "articulaciones",
+    "categoryLabel": "Biomecánica Articular",
+    "categoryClass": "bg-cat-joints/15 text-cat-joints",
+    "region": "columna",
+    "regionLabel": "Columna y Pelvis",
+    "level": "Básico (1er año)",
+    "readingTime": "2 min",
+    "technicalDef": "Articulación semimóvil cartilaginosa unida por fibrocartílago o cartílago hialino que permite microdesplazamientos de amortiguación.",
+    "defTecnica": "Articulación de movimiento muy limitado unida por cartílago, especializada en absorber cargas.",
+    "simpleExplanation": "Una unión que se mueve un poquitico para amortiguar golpes, como un bloque elástico entre dos ladrillos.",
+    "explicacionSencilla": "Se mueve poquitico.",
+    "everydayTitle": "Flexibilidad sutil de la columna vertebral",
+    "everydayExample": "Al caminar o trotar, los discos fibrocartilaginosos entre tus vértebras ceden ligeramente para que el impacto no dañe la médula.",
+    "analogia": "Como las almohadillas de caucho debajo de una lavadora que oscilan milímetros absorbiendo la vibración.",
+    "clinicalTitle": "Sobrecarga discal y lumbalgia mecánica",
+    "clinicalRelevance": "La pérdida de hidratación del núcleo pulposo en estas articulaciones genera compresión facetaria y radiculopatía.",
+    "clinicalCase": "Degeneración discal L5-S1 en un conductor de carga por vibración axial continuada.",
+    "keyDetails": [
+      {
+        "label": "Movilidad",
+        "value": "Limitada (semimóvil)"
+      },
+      {
+        "label": "Tejido de unión",
+        "value": "Fibrocartílago elástico"
+      },
+      {
+        "label": "Ejemplo clásico",
+        "value": "Discos entre vértebras"
+      }
+    ],
+    "svgType": "anfiartrosis",
+    "termino": "Anfiartrosis"
+  },
+  {
+    "id": "diartrosis",
+    "name": "Diartrosis",
+    "pronunciation": "/diar-tro-sis/",
+    "fonetica": "diar-TRO-sis",
+    "etymology": "Del griego dia ('a través de') y arthron ('articulación').",
+    "category": "articulaciones",
+    "categoryLabel": "Biomecánica Articular",
+    "categoryClass": "bg-cat-joints/15 text-cat-joints",
+    "region": "general",
+    "regionLabel": "Sistema Articular Periférico",
+    "level": "Básico (1er año)",
+    "readingTime": "2 min",
+    "technicalDef": "Articulación sinovial de gran movilidad caracterizada por cartílago articular, cavidad articular cerrada, cápsula fibrosa y líquido sinovial.",
+    "defTecnica": "Articulación sinovial de movimiento libre y amplio con cápsula y líquido lubricante.",
+    "simpleExplanation": "La que sí se mueve bastante en múltiples direcciones: tiene lubricante adentro para doblarse sin desgastarse.",
+    "explicacionSencilla": "La que sí se mueve bastante.",
+    "everydayTitle": "Movilidad ágil de rodilla, cadera y codo",
+    "everydayExample": "Cuando te agachas a amarrarte los cordones, tu rodilla se dobla libremente gracias al líquido sinovial que baña el cartílago.",
+    "analogia": "Como una bisagra de puerta engrasada con aceite de alta gama que abre y cierra con suavidad.",
+    "clinicalTitle": "Osteoartritis y desgaste articular",
+    "clinicalRelevance": "En fisioterapia, restaurar la artrocinemática de deslizamiento y rodamiento en diartrosis previene la anquilosis postquirúrgica.",
+    "clinicalCase": "Rigidez capsular glenohumeral postinmovilización con yeso en fractura de radio.",
+    "keyDetails": [
+      {
+        "label": "Movilidad",
+        "value": "Libre y amplia (multiaxial/uniaxial)"
+      },
+      {
+        "label": "Estructuras clave",
+        "value": "Cápsula, membrana sinovial y cartílago"
+      },
+      {
+        "label": "Ejemplo clásico",
+        "value": "Rodilla, hombro y cadera"
+      }
+    ],
+    "svgType": "diartrosis",
+    "termino": "Diartrosis"
+  },
+  {
+    "id": "sincondrosis",
+    "name": "Sincondrosis",
+    "pronunciation": "/sin-con-dro-sis/",
+    "fonetica": "sin-con-DRO-sis",
+    "etymology": "Del griego syn ('junto') y chondros ('cartílago').",
+    "category": "articulaciones",
+    "categoryLabel": "Biomecánica Articular",
+    "categoryClass": "bg-cat-joints/15 text-cat-joints",
+    "region": "general",
+    "regionLabel": "Esqueleto Axial y Apendicular",
+    "level": "Intermedio (2do año)",
+    "readingTime": "2 min",
+    "technicalDef": "Articulación cartilaginosa primaria unida por cartílago hialino, frecuentemente temporal durante el desarrollo óseo endocondral.",
+    "defTecnica": "Unión por cartílago hialino entre dos huesos que habitualmente se osifica con la edad.",
+    "simpleExplanation": "Unión con cartílago que durante el crecimiento se va transformando en hueso definitivo.",
+    "explicacionSencilla": "Cartílago que luego se vuelve hueso.",
+    "everydayTitle": "Placa de crecimiento infantil y juvenil",
+    "everydayExample": "La placa fisis de los huesos largos de un niño permite que siga creciendo en estatura antes de cerrarse al llegar a la adultez.",
+    "analogia": "Como un puente de cera dura entre dos piezas de metal que con el tiempo se funde y convierte en metal macizo.",
+    "clinicalTitle": "Lesiones ficiarias de Salter-Harris",
+    "clinicalRelevance": "Un traumatismo sobre una sincondrosis en crecimiento puede causar dismetría o deformidad angular permanente en la extremidad.",
+    "clinicalCase": "Fractura Salter-Harris tipo II distal de tibia en un futbolista adolescente de 13 años.",
+    "keyDetails": [
+      {
+        "label": "Cartílago",
+        "value": "Hialino especializado"
+      },
+      {
+        "label": "Durabilidad",
+        "value": "Frecuentemente temporal (se osifica)"
+      },
+      {
+        "label": "Ejemplo clásico",
+        "value": "Placa de crecimiento de tibia"
+      }
+    ],
+    "svgType": "sincondrosis",
+    "termino": "Sincondrosis"
+  },
+  {
+    "id": "sinfisis",
+    "name": "Sínfisis",
+    "pronunciation": "/sin-fi-sis/",
+    "fonetica": "SIN-fi-sis",
+    "etymology": "Del griego symphysis ('crecer juntos').",
+    "category": "articulaciones",
+    "categoryLabel": "Biomecánica Articular",
+    "categoryClass": "bg-cat-joints/15 text-cat-joints",
+    "region": "pelvis",
+    "regionLabel": "Pelvis y Columna",
+    "level": "Intermedio (2do año)",
+    "readingTime": "2 min",
+    "technicalDef": "Articulación cartilaginosa secundaria donde los extremos óseos revestidos de cartílago hialino se unen mediante un disco grueso de fibrocartílago intermedio.",
+    "defTecnica": "Unión por fibrocartílago entre dos huesos diseñada para soportar fuerzas de compresión y cizallamiento.",
+    "simpleExplanation": "Una unión resistente con un disco amortiguador en el centro que mantiene los huesos firmes pero capaces de ceder.",
+    "explicacionSencilla": "Unión con disco amortiguador.",
+    "everydayTitle": "Unión de los huesos púbicos en la pelvis",
+    "everydayExample": "Al correr y cambiar de dirección en el fútbol, la sínfisis púbica disipa el cizallamiento entre las dos mitades de la pelvis.",
+    "analogia": "Como un taco de goma dura remachado entre dos vigas de acero de un edificio antisísmico.",
+    "clinicalTitle": "Osteopatía dinámica de pubis (pubalgia)",
+    "clinicalRelevance": "El desbalance de fuerzas entre aductores potentes y recto abdominal débil inflama la sínfisis púbica generando dolor inguinal severo.",
+    "clinicalCase": "Pubalgia en deportista por sobreuso de patada con cizallamiento asimétrico de la sínfisis.",
+    "keyDetails": [
+      {
+        "label": "Componente central",
+        "value": "Disco de fibrocartílago"
+      },
+      {
+        "label": "Función",
+        "value": "Amortiguación de cargas y cizallamiento"
+      },
+      {
+        "label": "Ejemplo clásico",
+        "value": "Sínfisis púbica y sínfisis intervertebral"
+      }
+    ],
+    "svgType": "sinfisis",
+    "termino": "Sínfisis"
+  },
+  {
+    "id": "sindesmosis",
+    "name": "Sindesmosis",
+    "pronunciation": "/sin-des-mo-sis/",
+    "fonetica": "sin-des-MO-sis",
+    "etymology": "Del griego syndesmos ('ligamento, atadura').",
+    "category": "articulaciones",
+    "categoryLabel": "Biomecánica Articular",
+    "categoryClass": "bg-cat-joints/15 text-cat-joints",
+    "region": "pierna",
+    "regionLabel": "Pierna y Tobillo",
+    "level": "Intermedio (2do año)",
+    "readingTime": "2 min",
+    "technicalDef": "Articulación fibrosa en la que dos huesos vecinos están conectados por una lámina o cordón de ligamento o membrana interósea.",
+    "defTecnica": "Unión por ligamento entre dos huesos separados que permite escasa movilidad coordinada.",
+    "simpleExplanation": "Dos huesos amarrados de lado a lado por ligamentos fuertes como si estuvieran atados con cuerdas tensas.",
+    "explicacionSencilla": "Huesos amarrados por ligamento.",
+    "everydayTitle": "Fijación entre la tibia y el peroné",
+    "everydayExample": "Cuando apoyas todo tu peso al saltar, la sindesmosis impide que la tibia y el peroné se abran hacia los lados.",
+    "analogia": "Como dos maderos amarrados fuertemente con cuerdas elásticas de nailon para que no se separen.",
+    "clinicalTitle": "Esguince alto de tobillo (lesión sindesmótica)",
+    "clinicalRelevance": "Una rotura de los ligamentos tibioperoneos distales desestabiliza la mortaja y requiere periodos prolongados de descarga y propiocepción.",
+    "clinicalCase": "Esguince por rotación externa forzada de tobillo con dolor exquisito sobre la membrana interósea.",
+    "keyDetails": [
+      {
+        "label": "Tipo de unión",
+        "value": "Membrana interósea y ligamentos"
+      },
+      {
+        "label": "Estabilidad",
+        "value": "Mantiene unida la mortaja articular"
+      },
+      {
+        "label": "Ejemplo clásico",
+        "value": "Sindesmosis tibioperonea distal"
+      }
+    ],
+    "svgType": "sindesmosis",
+    "termino": "Sindesmosis"
+  },
+  {
+    "id": "gonfosis",
+    "name": "Gónfosis",
+    "pronunciation": "/gon-fo-sis/",
+    "fonetica": "gon-FO-sis",
+    "etymology": "Del griego gomphos ('clavija, perno') y osis ('proceso').",
+    "category": "articulaciones",
+    "categoryLabel": "Biomecánica Articular",
+    "categoryClass": "bg-cat-joints/15 text-cat-joints",
+    "region": "cabeza",
+    "regionLabel": "Cabeza y Cara",
+    "level": "Básico (1er año)",
+    "readingTime": "2 min",
+    "technicalDef": "Articulación fibrosa especializada en forma de clavija que encaja en un alvéolo, sostenida firmemente por el ligamento periodontal.",
+    "defTecnica": "Articulación fibrosa tipo clavija en cavidad que sujeta las raíces dentales en los maxilares.",
+    "simpleExplanation": "Un diente metido en su hueco óseo y fijado como un clavo con micropuntas elásticas.",
+    "explicacionSencilla": "Diente metido en su hueco.",
+    "everydayTitle": "Fijación dental y propiocepción masticatoria",
+    "everydayExample": "Cuando muerdes una cáscara de nuez o un grano duro, el ligamento periodontal de la gónfosis siente la presión y activa el reflejo de soltar.",
+    "analogia": "Como una clavija de madera encajada a presión en un orificio con un forro de fieltro que absorbe impactos.",
+    "clinicalTitle": "Movilidad dental y ortodoncia biomecánica",
+    "clinicalRelevance": "La fuerza continua y controlada de un bracket remodela el hueso alveolar a través de la mecanotransducción en la gónfosis.",
+    "clinicalCase": "Sensibilidad periodontal aguda post-ajuste de arco ortodóncico.",
+    "keyDetails": [
+      {
+        "label": "Estructura",
+        "value": "Clavija (raíz) dentro de alvéolo"
+      },
+      {
+        "label": "Ligamento",
+        "value": "Periodontal rico en mecanorreceptores"
+      },
+      {
+        "label": "Ejemplo clásico",
+        "value": "Diente en el alvéolo mandibular/maxilar"
+      }
+    ],
+    "svgType": "gonfosis",
+    "termino": "Gónfosis"
+  },
+  {
+    "id": "apofisis",
+    "name": "Apófisis",
+    "pronunciation": "/a-po-fi-sis/",
+    "fonetica": "a-PO-fi-sis",
+    "etymology": "Del griego apophysis ('saliente, brote de hueso').",
+    "category": "huesos",
+    "categoryLabel": "Anatomía Ósea",
+    "categoryClass": "bg-cat-bones/15 text-cat-bones",
+    "region": "general",
+    "regionLabel": "Esqueleto Axial y Apendicular",
+    "level": "Básico (1er año)",
+    "readingTime": "2 min",
+    "technicalDef": "Prominencia, saliente o proceso óseo natural que sirve de punto de inserción para tendones y ligamentos o como superficie articular.",
+    "defTecnica": "Saliente ósea para inserción muscular y ligamentosa que incrementa el brazo de palanca biomecánico.",
+    "simpleExplanation": "Un piquito o saliente del hueso donde se engancha el músculo para tirar de él con más fuerza.",
+    "explicacionSencilla": "Piquito del hueso donde se pega el músculo.",
+    "everydayTitle": "Los salientes palpables de la espalda",
+    "everydayExample": "Si pasas tus dedos por el centro de tu columna, sientes bolitas duras una tras otra: son las apófisis espinosas vertebrales.",
+    "analogia": "Como el mango sobresaliente de una llave inglesa que permite aplicar fuerza con mucho menos esfuerzo.",
+    "clinicalTitle": "Avulsiones apofisarias en deportistas",
+    "clinicalRelevance": "Tracciones musculares violentas en atletas adolescentes pueden desprender la apófisis ósea antes de su completa fusión.",
+    "clinicalCase": "Avulsión de la apófisis espinosa C7 por esfuerzo brusco de carga cervical (fractura del paleo).",
+    "keyDetails": [
+      {
+        "label": "Función",
+        "value": "Inserción muscular y brazo de palanca"
+      },
+      {
+        "label": "Tipos",
+        "value": "Espinosas, transversas, articulares, estiloides"
+      },
+      {
+        "label": "Ejemplo clásico",
+        "value": "Apófisis espinosa vertebral"
+      }
+    ],
+    "svgType": "apofisis",
+    "termino": "Apófisis"
+  },
+  {
+    "id": "fosa",
+    "name": "Fosa",
+    "pronunciation": "/fo-sa/",
+    "fonetica": "FO-sa",
+    "etymology": "Del latín fossa ('zanja, hoyo, cavidad').",
+    "category": "huesos",
+    "categoryLabel": "Anatomía Ósea",
+    "categoryClass": "bg-cat-bones/15 text-cat-bones",
+    "region": "general",
+    "regionLabel": "Esqueleto General",
+    "level": "Básico (1er año)",
+    "readingTime": "2 min",
+    "technicalDef": "Depresión, concavidad o hendidura poco profunda en la superficie de un hueso, destinada a alojar un músculo, glándula o extremo articular.",
+    "defTecnica": "Depresión o hueco poco profundo en hueso que alberga masas musculares o vísceras.",
+    "simpleExplanation": "Un huequito o cuenco excavado en el hueso para que quepa un músculo o encaje otra pieza.",
+    "explicacionSencilla": "Huequito en el hueso.",
+    "everydayTitle": "El hueco detrás de la rodilla y la fosa escapular",
+    "everydayExample": "La fosa subescapular es el hueco ancho en la cara anterior del omóplato donde descansa el músculo del mismo nombre.",
+    "analogia": "Como la concavidad de una cuchara de sopa diseñada para contener líquido sin desbordarse.",
+    "clinicalTitle": "Atrapamiento en fosas osteofibrosas",
+    "clinicalRelevance": "Procesos inflamatorios en fosas anatómicas cerradas elevan la presión interna comprimiendo estructuras neurovasculares.",
+    "clinicalCase": "Quiste de Baker con distensión palpable de la fosa poplítea tras desgarro meniscal.",
+    "keyDetails": [
+      {
+        "label": "Morfología",
+        "value": "Depresión cóncava suave"
+      },
+      {
+        "label": "Utilidad",
+        "value": "Alojamiento muscular y protección neurovascular"
+      },
+      {
+        "label": "Ejemplo clásico",
+        "value": "Fosa poplítea y fosa supraespinosa"
+      }
+    ],
+    "svgType": "fosa",
+    "termino": "Fosa"
+  },
+  {
+    "id": "surco",
+    "name": "Surco",
+    "pronunciation": "/sur-co/",
+    "fonetica": "SUR-co",
+    "etymology": "Del latín sulcus ('zanja, hendidura lineal').",
+    "category": "huesos",
+    "categoryLabel": "Anatomía Ósea",
+    "categoryClass": "bg-cat-bones/15 text-cat-bones",
+    "region": "general",
+    "regionLabel": "Esqueleto General",
+    "level": "Básico (1er año)",
+    "readingTime": "2 min",
+    "technicalDef": "Ranura, hendidura o canal alargado en la superficie ósea que guía y protege el trayecto de un vaso sanguíneo, tendón o nervio periférico.",
+    "defTecnica": "Ranura alargada en hueso para el paso guiado de vaso sanguíneo o nervio.",
+    "simpleExplanation": "Una canaleta tallada en el hueso por donde resbala un cable importante sin ser aplastado.",
+    "explicacionSencilla": "Canaleta del hueso.",
+    "everydayTitle": "El carril del tendón del bíceps en el hombro",
+    "everydayExample": "El tendón largo del bíceps corre a lo largo del surco intertubercular del húmero como un tren sobre sus rieles.",
+    "analogia": "Como la canaleta plástica de pared que organiza y protege cables eléctricos para que nadie los pise.",
+    "clinicalTitle": "Inestabilidad tendinosa en surcos óseos",
+    "clinicalRelevance": "La ruptura del retináculo del surco permite la subluxación dolorosa del tendón durante arcos de movimiento activo.",
+    "clinicalCase": "Tendinopatía bicipital con chasquido doloroso por subluxación del tendón fuera de su surco humeral.",
+    "keyDetails": [
+      {
+        "label": "Forma",
+        "value": "Canal alargado estrecho"
+      },
+      {
+        "label": "Función",
+        "value": "Direccionamiento y protección de tendones y nervios"
+      },
+      {
+        "label": "Ejemplo clásico",
+        "value": "Surco del nervio radial y surco bicipital"
+      }
+    ],
+    "svgType": "surco",
+    "termino": "Surco"
+  },
+  {
+    "id": "meato",
+    "name": "Meato",
+    "pronunciation": "/me-a-to/",
+    "fonetica": "me-A-to",
+    "etymology": "Del latín meatus ('pasaje, camino, conducto').",
+    "category": "huesos",
+    "categoryLabel": "Anatomía Ósea",
+    "categoryClass": "bg-cat-bones/15 text-cat-bones",
+    "region": "cabeza",
+    "regionLabel": "Cabeza y Oído",
+    "level": "Intermedio (2do año)",
+    "readingTime": "2 min",
+    "technicalDef": "Conducto, túnel u orificio alargado que atraviesa una estructura ósea comunicando espacios anatómicos profundos con el exterior.",
+    "defTecnica": "Conducto u orificio estrecho en hueso para la conducción de estructuras acústicas o vasculares.",
+    "simpleExplanation": "Un tunelcito dentro del hueso por donde viaja el sonido o los nervios hacia el interior de la cabeza.",
+    "explicacionSencilla": "Tunelcito dentro del hueso.",
+    "everydayTitle": "El túnel por el que escuchas en el oído",
+    "everydayExample": "El meato acústico externo es el túnel óseo del hueso temporal que conduce las ondas sonoras hacia el tímpano.",
+    "analogia": "Como un túnel carretero excavado a través de una montaña de roca sólida para permitir el paso del tráfico.",
+    "clinicalTitle": "Patología del meato acústico y vértigo",
+    "clinicalRelevance": "Compresiones del nervio vestibulococlear en el meato acústico interno provocan acúfenos, hipoacusia y alteración del equilibrio.",
+    "clinicalCase": "Schwannoma vestibular diagnosticado por asimetría auditiva en el meato acústico interno.",
+    "keyDetails": [
+      {
+        "label": "Morfología",
+        "value": "Conducto cilíndrico óseo"
+      },
+      {
+        "label": "Estructuras que lo cruzan",
+        "value": "Nervios acústicos, facial y vasos laberínticos"
+      },
+      {
+        "label": "Ejemplo clásico",
+        "value": "Meato acústico interno y externo"
+      }
+    ],
+    "svgType": "meato",
+    "termino": "Meato"
+  },
+  {
+    "id": "foramen",
+    "name": "Foramen",
+    "pronunciation": "/fo-ra-men/",
+    "fonetica": "fo-RA-men",
+    "etymology": "Del latín foramen ('agujero, perforación').",
+    "category": "huesos",
+    "categoryLabel": "Anatomía Ósea",
+    "categoryClass": "bg-cat-bones/15 text-cat-bones",
+    "region": "general",
+    "regionLabel": "Esqueleto General",
+    "level": "Básico (1er año)",
+    "readingTime": "2 min",
+    "technicalDef": "Orificio, agujero o perforación en un hueso que permite el paso de nervios, arterias o venas hacia cavidades corporales adyacentes.",
+    "defTecnica": "Orificio en hueso para paso de nervios o vasos sanguíneos esenciales.",
+    "simpleExplanation": "Un hueco o ventanita redonda en el hueso para que los cables nerviosos y tuberías de sangre puedan cruzar.",
+    "explicacionSencilla": "Hueco para nervio o sangre.",
+    "everydayTitle": "Ventanitas de salida en las vértebras",
+    "everydayExample": "Entre cada par de vértebras hay un foramen intervertebral por donde sale el nervio ciático hacia tu pierna.",
+    "analogia": "Como el orificio con aro de goma en un escritorio de oficina por donde descienden los cables de la computadora sin rasparse.",
+    "clinicalTitle": "Estenosis foraminal y radiculopatía",
+    "clinicalRelevance": "El estrechamiento del foramen por osteofitos pinza la raíz nerviosa generando dolor irradiado, parestesias y debilidad motora.",
+    "clinicalCase": "Ciática por estenosis foraminal L4-L5 con reflejo patelar disminuido.",
+    "keyDetails": [
+      {
+        "label": "Geometría",
+        "value": "Perforación circular u ovalada"
+      },
+      {
+        "label": "Contenido",
+        "value": "Paquete vasculonervioso"
+      },
+      {
+        "label": "Ejemplo clásico",
+        "value": "Foramen magno y foramen intervertebral"
+      }
+    ],
+    "svgType": "foramen",
+    "termino": "Foramen"
+  },
+  {
+    "id": "hiato",
+    "name": "Hiato",
+    "pronunciation": "/ia-to/",
+    "fonetica": "ia-TO",
+    "etymology": "Del latín hiatus ('abertura, hendidura, separación').",
+    "category": "musculos",
+    "categoryLabel": "Anatomía Topográfica",
+    "categoryClass": "bg-cat-muscles/15 text-cat-muscles",
+    "region": "general",
+    "regionLabel": "Esqueleto y Fascias",
+    "level": "Intermedio (2do año)",
+    "readingTime": "2 min",
+    "technicalDef": "Abertura, hendidura o espacio libre natural en un músculo, fascia o hueso que permite el tránsito de un conducto o vaso sanguíneo.",
+    "defTecnica": "Abertura en estructura anatómica para el paso continuado de otra estructura vital.",
+    "simpleExplanation": "Una rendija o puerta abierta entre fibras musculares o fascias para dejar pasar un vaso o tubo sin estrangularlo.",
+    "explicacionSencilla": "Rendija por donde pasa algo.",
+    "everydayTitle": "El paso del esófago a través del diafragma",
+    "everydayExample": "El hiato esofágico del diafragma permite que los alimentos pasen del tórax al estómago mientras respiras con normalidad.",
+    "analogia": "Como un ojal elástico en una prenda de vestir por donde pasa un botón grueso manteniéndolo en su sitio.",
+    "clinicalTitle": "Hernias y atrapamientos hiatales",
+    "clinicalRelevance": "La laxitud del hiato permite la protrusión anormal de órganos provocando reflujo gastroesofágico o congestión venosa.",
+    "clinicalCase": "Hernia hiatal diafragmática que empeora la mecánica ventilatoria costodiafragmática.",
+    "keyDetails": [
+      {
+        "label": "Estructura",
+        "value": "Abertura delimitada por bordes musculares o fibrosos"
+      },
+      {
+        "label": "Función",
+        "value": "Transición entre compartimentos"
+      },
+      {
+        "label": "Ejemplo clásico",
+        "value": "Hiato esofágico y hiato safeno"
+      }
+    ],
+    "svgType": "hiato",
+    "termino": "Hiato"
+  },
+  {
+    "id": "condilo",
+    "name": "Cóndilo",
+    "pronunciation": "/con-di-lo/",
+    "fonetica": "CON-di-lo",
+    "etymology": "Del griego kondylos ('nudo, protuberancia redondeada').",
+    "category": "huesos",
+    "categoryLabel": "Anatomía Ósea",
+    "categoryClass": "bg-cat-bones/15 text-cat-bones",
+    "region": "general",
+    "regionLabel": "Esqueleto Apendicular y Cráneo",
+    "level": "Básico (1er año)",
+    "readingTime": "2 min",
+    "technicalDef": "Eminencia o protuberancia ósea redondeada, lisa y convexa que forma parte de una articulación móvil sinovial.",
+    "defTecnica": "Protuberancia redondeada articular que rueda y desliza sobre una fosa cóncava.",
+    "simpleExplanation": "Una bolita lisa en el extremo del hueso que encaja en un hueco para rodar suavemente.",
+    "explicacionSencilla": "Bolita del hueso que encaja.",
+    "everydayTitle": "Las ruedas del fémur al doblar la rodilla",
+    "everydayExample": "Los cóndilos femorales actúan como dos cilindros lisos que ruedan sobre la tibia cuando haces sentadillas profundas.",
+    "analogia": "Como las ruedas de un vagón de tren apoyadas sobre los rieles curvos de la vía.",
+    "clinicalTitle": "Osteocondritis disecante de cóndilo",
+    "clinicalRelevance": "La necrosis focal del cartílago y hueso subcondral del cóndilo femoral provoca bloqueos mecánicos y derrame articular.",
+    "clinicalCase": "Lesión osteocondral en cóndilo femoral medial en corredor de fondo con dolor al cargar peso.",
+    "keyDetails": [
+      {
+        "label": "Superficie",
+        "value": "Cartílago hialino articular convexo"
+      },
+      {
+        "label": "Mecánica",
+        "value": "Rodamiento y deslizamiento artrocinemático"
+      },
+      {
+        "label": "Ejemplo clásico",
+        "value": "Cóndilo femoral y cóndilo occipital"
+      }
+    ],
+    "svgType": "condilo",
+    "termino": "Cóndilo"
+  },
+  {
+    "id": "epicondilo",
+    "name": "Epicóndilo",
+    "pronunciation": "/e-pi-con-di-lo/",
+    "fonetica": "e-pi-CON-di-lo",
+    "etymology": "Del griego epi ('sobre, encima') y kondylos ('cóndilo').",
+    "category": "huesos",
+    "categoryLabel": "Anatomía Ósea",
+    "categoryClass": "bg-cat-bones/15 text-cat-bones",
+    "region": "pierna",
+    "regionLabel": "Miembro Superior e Inferior",
+    "level": "Básico (1er año)",
+    "readingTime": "2 min",
+    "technicalDef": "Eminencia ósea no articular situada por encima o al lado de un cóndilo que sirve de inserción a ligamentos colaterales y tendones.",
+    "defTecnica": "Protuberancia sobre un cóndilo para la fijación de ligamentos y músculos estabilizadores.",
+    "simpleExplanation": "Un bultico situado justo encima de la bolita del hueso donde se amarran ligamentos fuertes.",
+    "explicacionSencilla": "Bultico encima de la bolita.",
+    "everydayTitle": "El codo de tenista y la rodilla del corredor",
+    "everydayExample": "En el codo, el epicóndilo lateral es el bulto donde se originan todos los músculos que levantan la muñeca.",
+    "analogia": "Como un gancho de amarre instalado en el techo de un remolque para sujetar cuerdas tensoras.",
+    "clinicalTitle": "Epicondilalgia y fricción de cintilla iliotibial",
+    "clinicalRelevance": "La sobrecarga por movimientos repetitivos inflama la entesis del epicóndilo produciendo dolor incapacitante al prensar o flexionar.",
+    "clinicalCase": "Epicondilitis lateral en oficinista por digitación y uso de ratón prolongado.",
+    "keyDetails": [
+      {
+        "label": "Naturaleza",
+        "value": "Eminencia no articular (extraarticular)"
+      },
+      {
+        "label": "Función",
+        "value": "Inserción de ligamentos colaterales y tendones"
+      },
+      {
+        "label": "Ejemplo clásico",
+        "value": "Epicóndilo lateral del codo y fémur"
+      }
+    ],
+    "svgType": "epicondilo",
+    "termino": "Epicóndilo"
+  },
+  {
+    "id": "tuberculo",
+    "name": "Tubérculo",
+    "pronunciation": "/tu-ber-cu-lo/",
+    "fonetica": "tu-BER-cu-lo",
+    "etymology": "Del latín tuberculum ('pequeño bulto, protuberancia').",
+    "category": "huesos",
+    "categoryLabel": "Anatomía Ósea",
+    "categoryClass": "bg-cat-bones/15 text-cat-bones",
+    "region": "general",
+    "regionLabel": "Esqueleto General",
+    "level": "Básico (1er año)",
+    "readingTime": "2 min",
+    "technicalDef": "Protuberancia ósea pequeña, redondeada o nodular que proporciona anclaje firme a un tendón o fascículo ligamentoso.",
+    "defTecnica": "Protuberancia pequeña y redondeada en la superficie ósea para inserción fascial o ligamentosa.",
+    "simpleExplanation": "Un bultico chiquito y firme en el hueso que sirve como agarradera para un tendón delgado.",
+    "explicacionSencilla": "Bultico chiquito del hueso.",
+    "everydayTitle": "El anclaje de la rodilla en la tibia",
+    "everydayExample": "El tubérculo de Gerdy en la tibia es el bulto externo donde se inserta la banda iliotibial estabilizando la marcha.",
+    "analogia": "Como un pequeño botón de anclaje donde se engancha el cable elástico de una carpa.",
+    "clinicalTitle": "Síndrome de fricción en tubérculos óseos",
+    "clinicalRelevance": "La fricción excesiva entre una banda fascial y un tubérculo óseo genera bursitis y tendinopatía de fricción.",
+    "clinicalCase": "Dolor punzante sobre el tubérculo de Gerdy en corredor tras aumento repentino de kilometraje.",
+    "keyDetails": [
+      {
+        "label": "Tamaño",
+        "value": "Pequeño / discreto"
+      },
+      {
+        "label": "Función",
+        "value": "Anclaje de bandas y ligamentos"
+      },
+      {
+        "label": "Ejemplo clásico",
+        "value": "Tubérculo de Gerdy y tubérculo mayor del húmero"
+      }
+    ],
+    "svgType": "tuberculo",
+    "termino": "Tubérculo"
+  },
+  {
+    "id": "tuberosidad",
+    "name": "Tuberosidad",
+    "pronunciation": "/tu-be-ro-si-dad/",
+    "fonetica": "tu-be-ro-si-DAD",
+    "etymology": "Del latín tuberositas ('masa nudosa, protuberancia amplia').",
+    "category": "huesos",
+    "categoryLabel": "Anatomía Ósea",
+    "categoryClass": "bg-cat-bones/15 text-cat-bones",
+    "region": "general",
+    "regionLabel": "Esqueleto General",
+    "level": "Básico (1er año)",
+    "readingTime": "2 min",
+    "technicalDef": "Gran protuberancia ósea ancha, redondeada y rugosa adaptada biomecánicamente para anclar tendones de músculos potentes.",
+    "defTecnica": "Protuberancia grande y rugosa en hueso que soporta tracciones mecánicas elevadas.",
+    "simpleExplanation": "Un bulto grande y áspero en el hueso diseñado para soportar los tirones de los músculos más fuertes del cuerpo.",
+    "explicacionSencilla": "Bulto grande y áspero.",
+    "everydayTitle": "El bulto debajo de tu rodilla y los huesos de sentarse",
+    "everydayExample": "Justo debajo de la rótula palpas la tuberosidad tibial anterior, donde se inserta el tendón rotuliano que sostiene todo tu peso al patear.",
+    "analogia": "Como una placa de hierro rugosa soldada con múltiples remaches para sujetar una grúa de carga pesada.",
+    "clinicalTitle": "Apofisitis por tracción de Osgood-Schlatter",
+    "clinicalRelevance": "En jóvenes deportistas, la tracción repetida del cuádriceps sobre la tuberosidad tibial inmadura causa inflamación y prominencia ósea dolorosa.",
+    "clinicalCase": "Osgood-Schlatter bilateral en adolescente practicante de baloncesto con dolor al arrodillarse.",
+    "keyDetails": [
+      {
+        "label": "Tamaño y textura",
+        "value": "Grande, prominente y rugosa"
+      },
+      {
+        "label": "Fuerza mecánica",
+        "value": "Soporta tracciones de alta tensión"
+      },
+      {
+        "label": "Ejemplo clásico",
+        "value": "Tuberosidad tibial y tuberosidad isquiática"
+      }
+    ],
+    "svgType": "tuberosidad",
+    "termino": "Tuberosidad"
+  },
+  {
+    "id": "espina",
+    "name": "Espina",
+    "pronunciation": "/es-pi-na/",
+    "fonetica": "es-PI-na",
+    "etymology": "Del latín spina ('espina, púa, púa afilada').",
+    "category": "huesos",
+    "categoryLabel": "Anatomía Ósea",
+    "categoryClass": "bg-cat-bones/15 text-cat-bones",
+    "region": "general",
+    "regionLabel": "Esqueleto Axial y Pelvis",
+    "level": "Básico (1er año)",
+    "readingTime": "2 min",
+    "technicalDef": "Proyección ósea puntiaguda, alargada o delgada que emerge de un hueso proporcionando inserción y actuando como referencia anatómica de superficie.",
+    "defTecnica": "Proyección ósea delgada y puntiaguda que sirve de anclaje ligamentoso o muscular.",
+    "simpleExplanation": "Una puntica filosa o cresta delgada del hueso que sobresale como una pequeña espina guía.",
+    "explicacionSencilla": "Puntica filosa del hueso.",
+    "everydayTitle": "Los huesos salientes en el frente de tu cadera",
+    "everydayExample": "Al ponerte las manos en la cintura, tus pulgares tocan la espina ilíaca anterosuperior, clave para medir la longitud de las piernas.",
+    "analogia": "Como la púa de una flecha o mástil delgado que sobresale para enganchar una guía tensora.",
+    "clinicalTitle": "Palpación en evaluación pelviana y dismetría",
+    "clinicalRelevance": "La altura comparativa de las espinas ilíacas permite diagnosticar báscula pélvica, torsión sacra o dismetría de miembros inferiores.",
+    "clinicalCase": "Asimetría de espinas ilíacas posterosuperiores por anteversión hemipélvica derecha.",
+    "keyDetails": [
+      {
+        "label": "Forma",
+        "value": "Puntiaguda, afilada y esbelta"
+      },
+      {
+        "label": "Relevancia clínica",
+        "value": "Hito palpatorio para mediciones antropométricas"
+      },
+      {
+        "label": "Ejemplo clásico",
+        "value": "Espina ilíaca anterosuperior y espina de la escápula"
+      }
+    ],
+    "svgType": "espina",
+    "termino": "Espina"
+  },
+  {
+    "id": "cresta",
+    "name": "Cresta",
+    "pronunciation": "/cres-ta/",
+    "fonetica": "CRES-ta",
+    "etymology": "Del latín crista ('penacho, reborde saliente').",
+    "category": "huesos",
+    "categoryLabel": "Anatomía Ósea",
+    "categoryClass": "bg-cat-bones/15 text-cat-bones",
+    "region": "general",
+    "regionLabel": "Pelvis y Esqueleto General",
+    "level": "Básico (1er año)",
+    "readingTime": "2 min",
+    "technicalDef": "Borde, reborde o margen óseo alargado, estrecho y prominente que divide superficies y sirve de anclaje para capas musculares extensas.",
+    "defTecnica": "Borde óseo prominente y alargado que delimita superficies y ancla paredes musculares.",
+    "simpleExplanation": "Un filo largo y sobresaliente en el hueso, como el lomo de un libro cerrado.",
+    "explicacionSencilla": "Filo largo del hueso.",
+    "everydayTitle": "El borde curvo superior de tus caderas",
+    "everydayExample": "La cresta ilíaca es el filo óseo curvo donde apoyas las manos cuando descansas en posición de jarra.",
+    "analogia": "Como la cresta afilada de una cordillera montañosa que separa dos valles.",
+    "clinicalTitle": "Dolor miofascial en cresta ilíaca",
+    "clinicalRelevance": "La inserción del cuadrado lumbar y glúteo medio en la cresta ilíaca es un punto gatillo frecuente en pacientes con lumbalgia crónica.",
+    "clinicalCase": "Puntos gatillo en cresta ilíaca con dolor irradiado a nalga por sobrecarga en hiperlordosis.",
+    "keyDetails": [
+      {
+        "label": "Forma",
+        "value": "Reborde lineal prominente y sinuoso"
+      },
+      {
+        "label": "Inserciones",
+        "value": "Músculos anchos del abdomen y glúteos"
+      },
+      {
+        "label": "Ejemplo clásico",
+        "value": "Cresta ilíaca y cresta supracondílea"
+      }
+    ],
+    "svgType": "cresta",
+    "termino": "Cresta"
+  },
+  {
+    "id": "linea",
+    "name": "Línea",
+    "pronunciation": "/li-ne-a/",
+    "fonetica": "LI-ne-a",
+    "etymology": "Del latín linea ('hilo de lino, trazo fino').",
+    "category": "huesos",
+    "categoryLabel": "Anatomía Ósea",
+    "categoryClass": "bg-cat-bones/15 text-cat-bones",
+    "region": "general",
+    "regionLabel": "Esqueleto General",
+    "level": "Intermedio (2do año)",
+    "readingTime": "2 min",
+    "technicalDef": "Elevación o reborde óseo sutil, estrecho y alargado, menos prominente que una cresta, producido por la tracción suave y continua de una fascia o músculo.",
+    "defTecnica": "Elevación ósea leve y alargada que marca la separación o anclaje de fibras musculares.",
+    "simpleExplanation": "Una rayita o cordón sobresalido en el hueso provocada por los músculos que tiran de ella.",
+    "explicacionSencilla": "Rayita sobresalida del hueso.",
+    "everydayTitle": "El carril de los aductores en la parte trasera del fémur",
+    "everydayExample": "A lo largo de la cara posterior del fémur corre la línea áspera, donde se fijan los potentes músculos aductores del muslo.",
+    "analogia": "Como una costura en relieve en la suela de un zapato deportivo.",
+    "clinicalTitle": "Puntos de inserción y periostitis femoral",
+    "clinicalRelevance": "Fuerzas de cizallamiento continuas a lo largo de la línea áspera producen entesopatías en velocistas y saltadores.",
+    "clinicalCase": "Dolor en cara medial del muslo por sobrecarga de aductores en su anclaje a la línea áspera.",
+    "keyDetails": [
+      {
+        "label": "Perfil",
+        "value": "Relieve bajo y alargado (sutil)"
+      },
+      {
+        "label": "Origen",
+        "value": "Modelado óseo por tracción muscular"
+      },
+      {
+        "label": "Ejemplo clásico",
+        "value": "Línea áspera del fémur y línea del sóleo"
+      }
+    ],
+    "svgType": "linea",
+    "termino": "Línea"
+  },
+  {
+    "id": "acetabulo",
+    "name": "Acetábulo",
+    "pronunciation": "/a-ce-ta-bu-lo/",
+    "fonetica": "a-ce-TA-bu-lo",
+    "etymology": "Del latín acetabulum ('pequeña copa o vinagrera').",
+    "category": "huesos",
+    "categoryLabel": "Anatomía Ósea",
+    "categoryClass": "bg-cat-bones/15 text-cat-bones",
+    "region": "pelvis",
+    "regionLabel": "Pelvis y Cadera",
+    "level": "Básico (1er año)",
+    "readingTime": "2 min",
+    "technicalDef": "Gran cavidad cotiloidea hemisférica y profunda del hueso coxal formada por ilion, isquion y pubis, donde encaja la cabeza articular del fémur.",
+    "defTecnica": "Cavidad donde encaja la cabeza del fémur para constituir la articulación coxofemoral.",
+    "simpleExplanation": "El hueco en forma de cuenco hondo en la pelvis donde entra la bola de la pierna para que puedas caminar.",
+    "explicacionSencilla": "Hueco donde entra la pierna.",
+    "everydayTitle": "El encaje perfecto de tu cadera",
+    "everydayExample": "Cuando te mantienes de pie en una sola pierna, todo el peso de tu tronco se transmite a través del techo de ese acetábulo.",
+    "analogia": "Como una taza de café honda donde encaja una esfera maciza permitiéndole girar sin salirse.",
+    "clinicalTitle": "Displasia del desarrollo de la cadera (DDC)",
+    "clinicalRelevance": "Un acetábulo plano y poco profundo no cubre adecuadamente la cabeza femoral provocando luxaciones precoces y artrosis prematura.",
+    "clinicalCase": "Displasia acetabular derecha en adulto joven con choque femoroacetabular e inicio de coxartrosis.",
+    "keyDetails": [
+      {
+        "label": "Geometría",
+        "value": "Copa hemisférica profunda revestida de cartílago"
+      },
+      {
+        "label": "Huesos formativos",
+        "value": "Ilion, isquion y pubis"
+      },
+      {
+        "label": "Ejemplo clásico",
+        "value": "Articulación coxofemoral (cadera)"
+      }
+    ],
+    "svgType": "acetabulo",
+    "termino": "Acetábulo"
+  },
+  {
+    "id": "foramen-magno",
+    "name": "Foramen magno",
+    "pronunciation": "/fo-ra-men mag-no/",
+    "fonetica": "fo-RA-men MAG-no",
+    "etymology": "Del latín foramen magnum ('gran orificio o gran agujero').",
+    "category": "huesos",
+    "categoryLabel": "Anatomía Ósea",
+    "categoryClass": "bg-cat-bones/15 text-cat-bones",
+    "region": "craneo",
+    "regionLabel": "Base del Cráneo",
+    "level": "Básico (1er año)",
+    "readingTime": "2 min",
+    "technicalDef": "Gran orificio oval en la base del cráneo (hueso occipital) que comunica la cavidad craneal con el conducto vertebral, dando paso al bulbo raquídeo y médula espinal.",
+    "defTecnica": "Orificio en la base del cráneo por donde transita la médula espinal y arterias vertebrales.",
+    "simpleExplanation": "El gran hueco en el piso del cráneo por donde baja el cable maestro del cerebro hacia la espalda.",
+    "explicacionSencilla": "Hueco por donde baja la médula.",
+    "everydayTitle": "La autopista principal del sistema nervioso",
+    "everydayExample": "A través de este orificio el cerebro envía en milisegundos las órdenes motoras que mueven tus dedos y piernas.",
+    "analogia": "Como el túnel principal de salida por donde el cable troncal de fibra óptica abandona el edificio central.",
+    "clinicalTitle": "Malformación de Chiari y herniación amigdalina",
+    "clinicalRelevance": "El descenso de las amígdalas cerebelosas a través del foramen magno comprime el tronco encefálico alterando la dinámica del LCR.",
+    "clinicalCase": "Cefalea suboccipital pulsátil que empeora con maniobras de Valsalva por Chiari tipo I.",
+    "keyDetails": [
+      {
+        "label": "Ubicación",
+        "value": "Hueso occipital en base craneal"
+      },
+      {
+        "label": "Estructuras clave",
+        "value": "Bulbo raquídeo, arterias vertebrales y nervios accesorios"
+      },
+      {
+        "label": "Ejemplo clásico",
+        "value": "Unión bulbomedular en base de cráneo"
+      }
+    ],
+    "svgType": "foramen_magno",
+    "termino": "Foramen magno"
+  },
+  {
+    "id": "silla-turca",
+    "name": "Silla turca",
+    "pronunciation": "/si-lla tur-ca/",
+    "fonetica": "SI-lla TUR-ca",
+    "etymology": "Del latín sella turcica, por su semejanza con la montura de caballo otomana.",
+    "category": "huesos",
+    "categoryLabel": "Anatomía Ósea",
+    "categoryClass": "bg-cat-bones/15 text-cat-bones",
+    "region": "craneo",
+    "regionLabel": "Cráneo Profundo",
+    "level": "Intermedio (2do año)",
+    "readingTime": "2 min",
+    "technicalDef": "Depresión ósea transversal en la cara superior del cuerpo del hueso esfenoides que aloja y protege la glándula hipófisis (pituitaria).",
+    "defTecnica": "Depresión en hueso esfenoides destinada a albergar la glándula hipófisis.",
+    "simpleExplanation": "Una sillita tallada en el centro del cráneo donde descansa la glándula reina de las hormonas.",
+    "explicacionSencilla": "Sillita para la glándula.",
+    "everydayTitle": "La cuna protegida del centro de tu cabeza",
+    "everydayExample": "En el centro geométrico de tu cráneo, la hipófisis reposa en esta silla coordinando tu crecimiento, tiroides y metabolismo.",
+    "analogia": "Como la butaca acolchada del comandante en el centro del puente de mando de un barco.",
+    "clinicalTitle": "Adenomas hipofisarios y compresión quiasmática",
+    "clinicalRelevance": "El crecimiento de un tumor dentro de la silla turca erosiona sus paredes óseas y comprime el quiasma óptico causando hemianopsia bitemporal.",
+    "clinicalCase": "Pérdida de visión periférica bilateral en paciente con macroadenoma expansivo en la silla turca.",
+    "keyDetails": [
+      {
+        "label": "Hueso",
+        "value": "Esfenoides (fosa craneal media)"
+      },
+      {
+        "label": "Órgano protegido",
+        "value": "Glándula hipófisis (pituitaria)"
+      },
+      {
+        "label": "Ejemplo clásico",
+        "value": "Fosa hipofisaria en el centro del cráneo"
+      }
+    ],
+    "svgType": "silla_turca",
+    "termino": "Silla turca"
+  },
+  {
+    "id": "lamina-cribosa",
+    "name": "Lámina cribosa",
+    "pronunciation": "/la-mi-na cri-bo-sa/",
+    "fonetica": "LA-mi-na cri-BO-sa",
+    "etymology": "Del latín lamina y cribrum ('criba, colador con múltiples agujeros').",
+    "category": "huesos",
+    "categoryLabel": "Anatomía Ósea",
+    "categoryClass": "bg-cat-bones/15 text-cat-bones",
+    "region": "craneo",
+    "regionLabel": "Cráneo Anterior y Nariz",
+    "level": "Intermedio (2do año)",
+    "readingTime": "2 min",
+    "technicalDef": "Porción horizontal y perforada del hueso etmoides en el techo de las fosas nasales que permite el paso de los filetes del nervio olfatorio hacia el bulbo olfatorio.",
+    "defTecnica": "Placa con diminutos orificios para el paso de las fibras del nervio olfatorio (I par).",
+    "simpleExplanation": "Una coladera de hueso en el techo de la nariz por donde pasan los cablecitos que captan los olores.",
+    "explicacionSencilla": "Coladera del olfato.",
+    "everydayTitle": "El puente sensitivo del olfato",
+    "everydayExample": "Cuando hueles una flor o café recién tostado, las moléculas químicas envían señales eléctricas a través de los poros de esta lámina.",
+    "analogia": "Como un colador metálico de cocina con decenas de agujeritos pequeños para filtrar agua.",
+    "clinicalTitle": "Anosmia y fístula de LCR postraumática",
+    "clinicalRelevance": "Un traumatismo frontal puede fracturar la frágil lámina cribosa provocando pérdida del olfato y salida de líquido cefalorraquídeo por la nariz (rinorrea de LCR).",
+    "clinicalCase": "Rinorrea clara de líquido cefalorraquídeo tras golpe frontal en accidente ciclista.",
+    "keyDetails": [
+      {
+        "label": "Hueso",
+        "value": "Etmoides (fosa craneal anterior)"
+      },
+      {
+        "label": "Función",
+        "value": "Paso de axones del I par craneal (nervio olfatorio)"
+      },
+      {
+        "label": "Ejemplo clásico",
+        "value": "Techo de la cavidad nasal"
+      }
+    ],
+    "svgType": "lamina_cribosa",
+    "termino": "Lámina cribosa"
+  },
+  {
+    "id": "promontorio",
+    "name": "Promontorio",
+    "pronunciation": "/pro-mon-to-rio/",
+    "fonetica": "pro-mon-TO-rio",
+    "etymology": "Del latín promontorium ('montaña saliente hacia adelante').",
+    "category": "huesos",
+    "categoryLabel": "Anatomía Ósea",
+    "categoryClass": "bg-cat-bones/15 text-cat-bones",
+    "region": "pelvis",
+    "regionLabel": "Columna y Pelvis",
+    "level": "Intermedio (2do año)",
+    "readingTime": "2 min",
+    "technicalDef": "Borde anterior y saliente prominente del cuerpo de la primera vértebra sacra (S1) que delimita el estrecho superior de la pelvis.",
+    "defTecnica": "Borde anterior saliente de la 1ª vértebra sacra que marca la entrada superior a la pelvis menor.",
+    "simpleExplanation": "La puntica sobresaliente del sacro que se asoma hacia adelante marcando la entrada de la pelvis.",
+    "explicacionSencilla": "Puntica sobresaliente del sacro.",
+    "everydayTitle": "El escalón de transición entre la espalda baja y la pelvis",
+    "everydayExample": "Al estar erguido, la curva de la zona lumbar se apoya sobre el promontorio transfiriendo el peso hacia las alas del sacro.",
+    "analogia": "Como un acantilado o proa de barco que sobresale al frente en la entrada de un puerto.",
+    "clinicalTitle": "Pelvimetría obstétrica y espondilolistesis",
+    "clinicalRelevance": "La distancia entre el promontorio y el pubis (diámetro conjugado) determina la viabilidad del canal de parto natural.",
+    "clinicalCase": "Deslizamiento L5 sobre el promontorio sacro (espondilolistesis ístmica de grado II).",
+    "keyDetails": [
+      {
+        "label": "Ubicación",
+        "value": "Borde anterosuperior de la vértebra S1"
+      },
+      {
+        "label": "Relevancia",
+        "value": "Límite posterior del estrecho superior pelviano"
+      },
+      {
+        "label": "Ejemplo clásico",
+        "value": "Entrada de la pelvis menor"
+      }
+    ],
+    "svgType": "promontorio",
+    "termino": "Promontorio"
+  },
+  {
+    "id": "trocanter-mayor",
+    "name": "Trocánter mayor",
+    "pronunciation": "/tro-can-ter ma-yor/",
+    "fonetica": "tro-CAN-ter ma-YOR",
+    "etymology": "Del griego trochos ('rueda, polea') por su acción rotatoria biomecánica.",
+    "category": "huesos",
+    "categoryLabel": "Anatomía Ósea",
+    "categoryClass": "bg-cat-bones/15 text-cat-bones",
+    "region": "pierna",
+    "regionLabel": "Cadera y Muslo",
+    "level": "Básico (1er año)",
+    "readingTime": "2 min",
+    "technicalDef": "Gran saliente cuadrilátera y rugosa en la porción lateral del extremo proximal del fémur donde se insertan los potentes músculos glúteos y rotadores.",
+    "defTecnica": "Gran saliente lateral en el extremo superior del fémur para la inserción glútea y palanca abductora.",
+    "simpleExplanation": "El bulto duro que sientes al lado de la cadera donde se pegan los glúteos para mantenerte en equilibrio.",
+    "explicacionSencilla": "Bulto al lado de la cadera.",
+    "everydayTitle": "El ancla de soporte lateral de la pierna",
+    "everydayExample": "Al dormir de lado sobre un colchón muy firme, sientes la presión justamente sobre el trocánter mayor del fémur.",
+    "analogia": "Como el brazo largo de una palanca lateral de elevación que multiplica la fuerza del motor.",
+    "clinicalTitle": "Síndrome de dolor trocantérico mayor (bursitis trocantérea)",
+    "clinicalRelevance": "La fricción de la fascia lata sobre el trocánter provoca bursitis trocantérea, una de las causas más frecuentes de dolor lateral de cadera.",
+    "clinicalCase": "Dolor agudo al caminar y al dormir sobre el lado afectado en paciente con trocanteritis.",
+    "keyDetails": [
+      {
+        "label": "Morfología",
+        "value": "Saliente ósea prominente lateral"
+      },
+      {
+        "label": "Músculos insertados",
+        "value": "Glúteo medio, glúteo menor y piriforme"
+      },
+      {
+        "label": "Ejemplo clásico",
+        "value": "Lado externo superior del muslo"
+      }
+    ],
+    "svgType": "trocanter_mayor",
+    "termino": "Trocánter mayor"
+  },
+  {
+    "id": "maleolo",
+    "name": "Maléolo",
+    "pronunciation": "/ma-le-o-lo/",
+    "fonetica": "ma-LE-o-lo",
+    "etymology": "Del latín malleolus ('pequeño martillo').",
+    "category": "huesos",
+    "categoryLabel": "Anatomía Ósea",
+    "categoryClass": "bg-cat-bones/15 text-cat-bones",
+    "region": "tobillo",
+    "regionLabel": "Tobillo y Pie",
+    "level": "Básico (1er año)",
+    "readingTime": "2 min",
+    "technicalDef": "Eminencia ósea redondeada visible a cada lado de la articulación talocrural (maléolo medial de la tibia y lateral del peroné), formando la mortaja.",
+    "defTecnica": "Saliente ósea a cada lado del tobillo que estabiliza el astrágalo en la mortaja articular.",
+    "simpleExplanation": "Los dos huesitos que sobresalen a los lados del tobillo para abrazar el pie y evitar que se tuerza.",
+    "explicacionSencilla": "Huesitos del tobillo.",
+    "everydayTitle": "Las columnas de amarre de tus tobillos",
+    "everydayExample": "El huesito interno es el maléolo tibial y el externo es el del peroné; juntos sujetan tu pie en cada pisada irregular.",
+    "analogia": "Como las dos tenazas laterales de una pinza de freno que abrazan y estabilizan el disco.",
+    "clinicalTitle": "Fracturas maleolares y clasificación de Weber",
+    "clinicalRelevance": "Una torsión violenta del tobillo fractura uno o ambos maléolos rompiendo la congruencia de la mortaja articular.",
+    "clinicalCase": "Fractura bimaleolar por mecanismo de supinación-rotación externa con edema y equimosis.",
+    "keyDetails": [
+      {
+        "label": "Huesos",
+        "value": "Medial (tibia) y lateral (peroné)"
+      },
+      {
+        "label": "Función",
+        "value": "Conformación de la mortaja tibioperoneoastragalina"
+      },
+      {
+        "label": "Ejemplo clásico",
+        "value": "Maléolos del tobillo"
+      }
+    ],
+    "svgType": "maleolo",
+    "termino": "Maléolo"
+  },
+  {
+    "id": "trigono-femoral",
+    "name": "Trígono femoral",
+    "pronunciation": "/tri-go-no fe-mo-ral/",
+    "fonetica": "tri-GO-no fe-mo-RAL",
+    "etymology": "Del griego trigonon ('triángulo de tres esquinas') y del latín femoralis ('del muslo').",
+    "category": "musculos",
+    "categoryLabel": "Anatomía Topográfica",
+    "categoryClass": "bg-cat-muscles/15 text-cat-muscles",
+    "region": "pierna",
+    "regionLabel": "Muslo y Pelvis",
+    "level": "Intermedio (2do año)",
+    "readingTime": "2 min",
+    "technicalDef": "Espacio anatómico triangular subfascial en la cara anterior y superior del muslo (triángulo de Scarpa) por donde transita el paquete neurovascular femoral.",
+    "defTecnica": "Depresión triangular anterior del muslo que alberga el nervio, arteria y vena femorales.",
+    "simpleExplanation": "Un triangulito hundido justo debajo de la ingle por donde pasa la tubería principal de sangre hacia la pierna.",
+    "explicacionSencilla": "Triangulito hundido del muslo.",
+    "everydayTitle": "Donde se toma el pulso de la pierna en la ingle",
+    "everydayExample": "Si presionas suavemente dos dedos en el centro de tu ingle, sientes los latidos de la arteria femoral cruzando este trígono.",
+    "analogia": "Como una encrucijada triangular de autopistas donde se agrupan los cables y tuberías maestras de una ciudad.",
+    "clinicalTitle": "Cateterismo y hernias femorales",
+    "clinicalRelevance": "El trígono femoral es el punto de acceso vascular preferido para cateterismos cardíacos e intervenciones de urgencia.",
+    "clinicalCase": "Hematoma pulsátil en el trígono femoral tras punción diagnóstica de la arteria femoral.",
+    "keyDetails": [
+      {
+        "label": "Límites",
+        "value": "Ligamento inguinal, sartorio y aductor largo"
+      },
+      {
+        "label": "Contenido (NAVE)",
+        "value": "Nervio femoral, arteria femoral, vena femoral y ganglios"
+      },
+      {
+        "label": "Ejemplo clásico",
+        "value": "Triángulo de Scarpa en la ingle"
+      }
+    ],
+    "svgType": "trigono_femoral",
+    "termino": "Trígono femoral"
+  },
+  {
+    "id": "fosa-poplitea",
+    "name": "Fosa poplítea",
+    "pronunciation": "/fo-sa po-pli-te-a/",
+    "fonetica": "FO-sa po-PLI-te-a",
+    "etymology": "Del latín poples ('corva o parte posterior de la rodilla').",
+    "category": "musculos",
+    "categoryLabel": "Anatomía Topográfica",
+    "categoryClass": "bg-cat-muscles/15 text-cat-muscles",
+    "region": "rodilla",
+    "regionLabel": "Rodilla y Pierna",
+    "level": "Básico (1er año)",
+    "readingTime": "2 min",
+    "technicalDef": "Espacio romboidal situado en la cara posterior de la articulación de la rodilla delimitado por músculos isquiotibiales y gastrocnemios, protegido por grasa.",
+    "defTecnica": "Depresión en rombo detrás de la rodilla que da paso a vasos poplíteos y nervios ciáticos.",
+    "simpleExplanation": "El hueco blando en forma de rombo que tienes detrás de la rodilla, conocido popularmente como la corva.",
+    "explicacionSencilla": "Hueco detrás de la rodilla.",
+    "everydayTitle": "La corva detrás de tu rodilla",
+    "everydayExample": "Cuando te sientas con las piernas colgando, notas el hueco suave detrás de la articulación: es la fosa poplítea.",
+    "analogia": "Como el fuelle flexible detrás de una puerta corrediza que resguarda mangueras hidráulicas cuando la puerta se pliega.",
+    "clinicalTitle": "Quiste de Baker y pulso poplíteo",
+    "clinicalRelevance": "La acumulación de líquido articular en la bolsa del semimembranoso forma el quiste de Baker, provocando tensión y limitación de la flexión.",
+    "clinicalCase": "Masa indolora pero tensa en la fosa poplítea izquierda tras meniscopatía medial crónica.",
+    "keyDetails": [
+      {
+        "label": "Límites",
+        "value": "Bíceps femoral, semitendinoso, semimembranoso y gemelos"
+      },
+      {
+        "label": "Contenido",
+        "value": "Arteria y vena poplítea, nervio tibial y peroneo común"
+      },
+      {
+        "label": "Ejemplo clásico",
+        "value": "Rombo poplíteo posterior"
+      }
+    ],
+    "svgType": "fosa_poplitea",
+    "termino": "Fosa poplítea"
+  },
+  {
+    "id": "retinaculo",
+    "name": "Retináculo",
+    "pronunciation": "/re-ti-na-cu-lo/",
+    "fonetica": "re-ti-NA-cu-lo",
+    "etymology": "Del latín retinaculum ('cuerda, rienda, lazo que retiene').",
+    "category": "musculos",
+    "categoryLabel": "Tejido Conectivo y Fascias",
+    "categoryClass": "bg-cat-muscles/15 text-cat-muscles",
+    "region": "pierna",
+    "regionLabel": "Tobillo, Muñeca y Pie",
+    "level": "Básico (1er año)",
+    "readingTime": "2 min",
+    "technicalDef": "Banda gruesa de tejido conectivo fibroso denso que sujeta y retiene tendones contra el hueso, impidiendo el efecto cuerda de arco durante la contracción muscular.",
+    "defTecnica": "Banda fibrosa que mantiene los tendones adosados a los planos óseos al flexionar o extender.",
+    "simpleExplanation": "Una correa de reloj o pulsera interna que mantiene los tendones pegaditos al hueso para que no salten como la cuerda de un arco.",
+    "explicacionSencilla": "Correa que sujeta tendones.",
+    "everydayTitle": "La pulsera que sujeta los tendones de tu empeine",
+    "everydayExample": "Al levantar con fuerza los dedos de los pies, los tendones del empeine se tensan pero no se despegan del tobillo gracias al retináculo extensor.",
+    "analogia": "Como las anillas metálicas a lo largo de una caña de pescar que mantienen el hilo adherido a la vara.",
+    "clinicalTitle": "Ruptura de retináculo y tendón luxado",
+    "clinicalRelevance": "La ruptura del retináculo peroneo en esguinces de tobillo permite la subluxación anterior de los tendones peroneos provocando chasquidos dolorosos.",
+    "clinicalCase": "Subluxación recidivante del tendón peroneo lateral corto con chasquido palpable tras trauma deportivo.",
+    "keyDetails": [
+      {
+        "label": "Composición",
+        "value": "Fascia profunda engrosada"
+      },
+      {
+        "label": "Función mecánica",
+        "value": "Evita el bowstringing (cuerda de arco) tendinoso"
+      },
+      {
+        "label": "Ejemplo clásico",
+        "value": "Retináculo extensor y flexor del tobillo"
+      }
+    ],
+    "svgType": "retinaculo",
+    "termino": "Retináculo"
+  },
+  {
+    "id": "menisco",
+    "name": "Menisco",
+    "pronunciation": "/me-nis-co/",
+    "fonetica": "me-NIS-co",
+    "etymology": "Del griego mēniskos ('pequeña luna, medialuna').",
+    "category": "articulaciones",
+    "categoryLabel": "Cartílago y Meniscos",
+    "categoryClass": "bg-cat-joints/15 text-cat-joints",
+    "region": "rodilla",
+    "regionLabel": "Rodilla",
+    "level": "Básico (1er año)",
+    "readingTime": "2 min",
+    "technicalDef": "Estructura fibrocartilaginosa semilunar bicóncava intraarticular que mejora la congruencia entre los cóndilos femorales convexos y los platillos tibiales planos, distribuyendo presiones.",
+    "defTecnica": "Fibrocartílago en forma de C que absorbe impactos y congruencia las superficies articulares de la rodilla.",
+    "simpleExplanation": "Una almohadilla de goma en forma de medialuna que amortigua los golpes entre el muslo y la pierna al saltar.",
+    "explicacionSencilla": "Almohadilla en luna de la rodilla.",
+    "everydayTitle": "El amortiguador interno de cada salto",
+    "everydayExample": "Al caer de un salto o bajar gradas, el menisco multiplica el área de contacto repartiendo los kilos de impacto para no desgastar el cartílago.",
+    "analogia": "Como una almohadilla de silicona debajo de una pata de mesa pesada sobre un suelo de baldosas lisas.",
+    "clinicalTitle": "Roturas meniscales en asa de cubo",
+    "clinicalRelevance": "Un giro brusco con el pie clavado desgarra el menisco; el fragmento desprendido puede bloquear mecánicamente la extensión completa de la rodilla.",
+    "clinicalCase": "Bloqueo articular agudo a 30° de flexión tras torsión en fútbol con test de McMurray positivo.",
+    "keyDetails": [
+      {
+        "label": "Geometría",
+        "value": "Medialuna fibrocartilaginosa (C medial, O lateral)"
+      },
+      {
+        "label": "Vascularización",
+        "value": "Zona roja (periférica vascular) y zona blanca (avascular)"
+      },
+      {
+        "label": "Ejemplo clásico",
+        "value": "Menisco medial y lateral de la rodilla"
+      }
+    ],
+    "svgType": "menisco",
+    "termino": "Menisco"
+  },
+  {
+    "id": "labrum",
+    "name": "Labrum",
+    "pronunciation": "/la-brum/",
+    "fonetica": "LA-brum",
+    "etymology": "Del latín labrum ('borde, labio').",
+    "category": "articulaciones",
+    "categoryLabel": "Cartílago y Rodetes",
+    "categoryClass": "bg-cat-joints/15 text-cat-joints",
+    "region": "cadera",
+    "regionLabel": "Cadera y Hombro",
+    "level": "Intermedio (2do año)",
+    "readingTime": "2 min",
+    "technicalDef": "Anillo o rodete de fibrocartílago denso unido al borde óseo de cavidades articulares cotiloideas que profundiza la concavidad y optimiza el sellado hidrostático.",
+    "defTecnica": "Anillo de fibrocartílago que profundiza cavidades articulares para evitar luxaciones.",
+    "simpleExplanation": "Un labio de goma que rodea el borde del cuenco para hacerlo más hondo y que la bola no se salga de su lugar.",
+    "explicacionSencilla": "Borde que ahonda el hueco.",
+    "everydayTitle": "El sello que asegura la cabeza de tu fémur o húmero",
+    "everydayExample": "En la cadera, el labrum acetabular crea un vacío de succión que mantiene la cabeza del fémur firmemente encajada durante movimientos amplios.",
+    "analogia": "Como el aro de goma de una ventosa que crea vacío al apoyarse en un cristal impidiendo que se desprenda.",
+    "clinicalTitle": "Desgarro del labrum acetabular o glenoideo (SLAP)",
+    "clinicalRelevance": "El pinzamiento femoroacetabular repetido desgarra el labrum, generando dolor inguinal punzante y pérdida progresiva del sellado articular.",
+    "clinicalCase": "Dolor inguinal profundo en posición de sentadilla con signo de FADIR positivo por rotura labral.",
+    "keyDetails": [
+      {
+        "label": "Estructura",
+        "value": "Anillo fibrocartilaginoso perimetral"
+      },
+      {
+        "label": "Mecanismo",
+        "value": "Profundización de cavidad y sellado por succión"
+      },
+      {
+        "label": "Ejemplo clásico",
+        "value": "Labrum acetabular y labrum glenoideo"
+      }
+    ],
+    "svgType": "labrum",
+    "termino": "Labrum"
+  },
+  {
+    "id": "capsula-articular",
+    "name": "Cápsula articular",
+    "pronunciation": "/cap-su-la ar-ti-cu-lar/",
+    "fonetica": "CAP-su-la ar-ti-cu-LAR",
+    "etymology": "Del latín capsula ('pequeña caja, estuche cerrado').",
+    "category": "articulaciones",
+    "categoryLabel": "Biomecánica Articular",
+    "categoryClass": "bg-cat-joints/15 text-cat-joints",
+    "region": "general",
+    "regionLabel": "Articulaciones Sinoviales",
+    "level": "Básico (1er año)",
+    "readingTime": "2 min",
+    "technicalDef": "Membrana fibrosa densa en forma de manguito tubular que envuelve por completo la articulación diartrodial, sellando la cavidad sinovial y fijándose al periostio contiguo.",
+    "defTecnica": "Membrana fibrosa envolvente que confina el líquido sinovial y contiene ligamentos intrínsecos.",
+    "simpleExplanation": "Una bolsa o funda hermética que encierra la articulación para que el líquido lubricante no se escape.",
+    "explicacionSencilla": "Bolsa que encierra la articulación.",
+    "everydayTitle": "La funda hermética de tus articulaciones",
+    "everydayExample": "Tu hombro está totalmente cubierto por una cápsula articular que es laxa para permitir vueltas completas pero firme para evitar luxaciones.",
+    "analogia": "Como la bolsa hermética de fuelle que cubre las juntas mecánicas de un automóvil reteniendo la grasa adentro.",
+    "clinicalTitle": "Capsulitis adhesiva (hombro congelado)",
+    "clinicalRelevance": "La inflamación y fibrosis retráctil de la cápsula produce una pérdida drástica de todos los arcos de movimiento glenohumerales.",
+    "clinicalCase": "Pérdida severa de rotación externa activa y pasiva en paciente con capsulitis adhesiva idiopática.",
+    "keyDetails": [
+      {
+        "label": "Capas",
+        "value": "Capa fibrosa externa y membrana sinovial interna"
+      },
+      {
+        "label": "Propiedad",
+        "value": "Rica en propioceptores de Ruffini y Pacini"
+      },
+      {
+        "label": "Ejemplo clásico",
+        "value": "Cápsula glenohumeral y cápsula de rodilla"
+      }
+    ],
+    "svgType": "capsula_articular",
+    "termino": "Cápsula articular"
+  },
+  {
+    "id": "cavidad-sinovial",
+    "name": "Cavidad sinovial",
+    "pronunciation": "/ca-vi-dad si-no-vial/",
+    "fonetica": "ca-vi-DAD si-no-VIAL",
+    "etymology": "Del latín cavitas ('hueco') y synovia (del griego syn y latín ovum: 'similar a la clara de huevo').",
+    "category": "articulaciones",
+    "categoryLabel": "Biomecánica Articular",
+    "categoryClass": "bg-cat-joints/15 text-cat-joints",
+    "region": "general",
+    "regionLabel": "Articulaciones Móviles",
+    "level": "Básico (1er año)",
+    "readingTime": "2 min",
+    "technicalDef": "Espacio físico interno sellado herméticamente por la membrana sinovial y la cápsula articular que contiene líquido sinovial con baja fricción.",
+    "defTecnica": "Espacio articular cerrado bañado por líquido sinovial para nutrición y movimiento sin roce.",
+    "simpleExplanation": "El espacio con lubricante adentro de la articulación que permite doblar los huesos sin que rechinen.",
+    "explicacionSencilla": "Espacio con lubricante.",
+    "everydayTitle": "La cámara de aceite de tus huesos",
+    "everydayExample": "Cada vez que flexionas y extiendes la rodilla, los extremos de los huesos se deslizan dentro de esta cavidad sin tocarse en seco.",
+    "analogia": "Como la cámara sellada de una suspensión hidráulica llena de aceite mineral para absorber impactos.",
+    "clinicalTitle": "Derrame articular y artrocentesis",
+    "clinicalRelevance": "Un traumatismo o proceso inflamatorio provoca hiperproducción de líquido distendiendo la cavidad sinovial con dolor y limitación.",
+    "clinicalCase": "Hidrartros agudo de rodilla postrauma que requiere aspiración evacuadora y reposo.",
+    "keyDetails": [
+      {
+        "label": "Líquido",
+        "value": "Sinovial rico en ácido hialurónico y lubricina"
+      },
+      {
+        "label": "Coeficiente de fricción",
+        "value": "Casi nulo (0.001 - 0.01)"
+      },
+      {
+        "label": "Ejemplo clásico",
+        "value": "Cavidad articular de la rodilla y cadera"
+      }
+    ],
+    "svgType": "cavidad_sinovial",
+    "termino": "Cavidad sinovial"
+  },
+  {
+    "id": "dermatoma",
+    "name": "Dermatoma",
+    "pronunciation": "/der-ma-to-ma/",
+    "fonetica": "der-ma-TO-ma",
+    "etymology": "Del griego derma ('piel') y tome ('corte, sección').",
+    "category": "musculos",
+    "categoryLabel": "Neuroanatomía y Control Motor",
+    "categoryClass": "bg-cat-muscles/15 text-cat-muscles",
+    "region": "general",
+    "regionLabel": "Sistema Nervioso Periférico",
+    "level": "Básico (1er año)",
+    "readingTime": "2 min",
+    "technicalDef": "Área o franja topográfica de la piel cuya inervación sensitiva procede de las fibras aferentes de una única raíz nerviosa o segmento medular espinal.",
+    "defTecnica": "Zona de piel inervada sensitivamente por un solo nervio espinal.",
+    "simpleExplanation": "Un pedazo o franja de piel conectado a un solo cable nervioso que sale de la columna vertebral.",
+    "explicacionSencilla": "Pedazo de piel de un nervio.",
+    "everydayTitle": "El mapa táctil que conecta tu piel con la columna",
+    "everydayExample": "Si sientes hormigueo en la franja del empeine y el dedo gordo del pie, el fisioterapeuta sabe que la raíz L5 de tu columna lumbar está irritada.",
+    "analogia": "Como el plano de zonas eléctricas de una casa donde un fusible individual controla los tomacorrientes de una sola habitación.",
+    "clinicalTitle": "Exploración de sensibilidad en radiculopatías",
+    "clinicalRelevance": "El test de tacto ligero y pinchazo con alfiler sobre los dermatomas clave localiza el nivel exacto de una lesión medular o hernia discal.",
+    "clinicalCase": "Hipoestesia en banda a lo largo de la cara lateral del pie correspondiente al dermatoma S1.",
+    "keyDetails": [
+      {
+        "label": "Inervación",
+        "value": "Raíz dorsal aferente de un segmento medular"
+      },
+      {
+        "label": "Distribución",
+        "value": "Bandas metaméricas horizontales en tronco y longitudinales en extremidades"
+      },
+      {
+        "label": "Ejemplo clásico",
+        "value": "Dermatoma L4 (cara medial de pierna) y C6 (pulgar)"
+      }
+    ],
+    "svgType": "dermatoma",
+    "termino": "Dermatoma"
+  },
+  {
+    "id": "miotoma",
+    "name": "Miotoma",
+    "pronunciation": "/mio-to-ma/",
+    "fonetica": "mio-TO-ma",
+    "etymology": "Del griego mys ('músculo') y tome ('corte, segmento').",
+    "category": "musculos",
+    "categoryLabel": "Neuroanatomía y Control Motor",
+    "categoryClass": "bg-cat-muscles/15 text-cat-muscles",
+    "region": "general",
+    "regionLabel": "Sistema Nervioso Periférico",
+    "level": "Básico (1er año)",
+    "readingTime": "2 min",
+    "technicalDef": "Grupo o conjunto de músculos esqueléticos inervados por los axones motores somáticos de una única raíz nerviosa o segmento de la médula espinal.",
+    "defTecnica": "Músculos inervados por las fibras motoras de un solo nervio espinal.",
+    "simpleExplanation": "El grupo de músculos que reciben la orden de encenderse desde un mismo cable de la médula espinal.",
+    "explicacionSencilla": "Músculos de un solo nervio.",
+    "everydayTitle": "La prueba de fuerza en la camilla",
+    "everydayExample": "Cuando el terapeuta te pide levantar el dedo gordo contra su mano, está evaluando directamente la potencia del miotoma L5.",
+    "analogia": "Como un interruptor maestro de tablero que enciende todas las bombillas de un pasillo al mismo tiempo.",
+    "clinicalTitle": "Balance muscular manual y nivel neurológico",
+    "clinicalRelevance": "La debilidad aislada en un movimiento articular orienta la raíz espinal afectada antes de solicitar resonancia magnética.",
+    "clinicalCase": "Debilidad en dorsiflexión de tobillo (miotoma L4) tras hernia discal foraminal L3-L4.",
+    "keyDetails": [
+      {
+        "label": "Inervación",
+        "value": "Raíz ventral eferente somática"
+      },
+      {
+        "label": "Evaluación",
+        "value": "Fuerza muscular contra resistencia en acción clave"
+      },
+      {
+        "label": "Ejemplo clásico",
+        "value": "Miotoma L5 (extensión del hallux) y C5 (abducción de hombro)"
+      }
+    ],
+    "svgType": "miotoma",
+    "termino": "Miotoma"
+  },
+  {
+    "id": "esclerotoma",
+    "name": "Esclerotoma",
+    "pronunciation": "/es-cle-ro-to-ma/",
+    "fonetica": "es-cle-ro-TO-ma",
+    "etymology": "Del griego skleros ('duro, hueso') y tome ('sección').",
+    "category": "huesos",
+    "categoryLabel": "Embriología y Tejidos",
+    "categoryClass": "bg-cat-bones/15 text-cat-bones",
+    "region": "general",
+    "regionLabel": "Embriogénesis y Columna",
+    "level": "Avanzado (3er año)",
+    "readingTime": "2 min",
+    "technicalDef": "Subdivisión ventromedial del somita embrionario cuyas células mesenquimales migran para originar las vértebras, costillas y cartílagos del esqueleto axial.",
+    "defTecnica": "Parte del somita que origina las estructuras óseas y cartilaginosas del esqueleto axial.",
+    "simpleExplanation": "El pedacito de tejido en el embrión que con los meses se convierte en los huesos y discos de tu columna.",
+    "explicacionSencilla": "Pedacito embrionario para hueso.",
+    "everydayTitle": "El origen de tus vértebras antes de nacer",
+    "everydayExample": "En las primeras semanas de vida en el vientre materno, las células del esclerotoma envuelven la notocorda para formar la columna.",
+    "analogia": "Como las placas de encofrado y varillas de acero colocadas para fundir los pilares de concreto de una obra.",
+    "clinicalTitle": "Dolor referido esclerotomal en fisioterapia",
+    "clinicalRelevance": "El dolor esclerotomal se origina en estructuras somáticas profundas (periostio, facetas) y produce dolor difuso, sordo y mal delimitado.",
+    "clinicalCase": "Dolor lumbar bajo y glúteo difuso de origen esclerotomal por artrosis facetaria L4-L5.",
+    "keyDetails": [
+      {
+        "label": "Origen embrionario",
+        "value": "Porción ventromedial del somita"
+      },
+      {
+        "label": "Derivados adultos",
+        "value": "Cuerpos vertebrales, arcos costales y base occipital"
+      },
+      {
+        "label": "Ejemplo clásico",
+        "value": "Esclerotoma vertebral en formación"
+      }
+    ],
+    "svgType": "esclerotoma",
+    "termino": "Esclerotoma"
+  },
+  {
+    "id": "somita",
+    "name": "Somita",
+    "pronunciation": "/so-mi-ta/",
+    "fonetica": "so-MI-ta",
+    "etymology": "Del griego soma ('cuerpo') con sufijo diminutivo -ita.",
+    "category": "huesos",
+    "categoryLabel": "Embriología y Morfogénesis",
+    "categoryClass": "bg-cat-bones/15 text-cat-bones",
+    "region": "general",
+    "regionLabel": "Desarrollo Embrionario",
+    "level": "Intermedio (2do año)",
+    "readingTime": "2 min",
+    "technicalDef": "Bloque par y segmentario de mesodermo paraaxial que se forma a ambos lados del tubo neural en el embrión, diferenciándose en esclerotoma, miotoma y dermatoma.",
+    "defTecnica": "Segmento de mesodermo embrionario que da origen metamerizado a músculos, vértebras y dermis.",
+    "simpleExplanation": "Los bloques de construcción alineados en el embrión que dan forma organizada a la espalda, costillas y músculos.",
+    "explicacionSencilla": "Bloques del embrión.",
+    "everydayTitle": "Los ladrillos originales del cuerpo humano",
+    "everydayExample": "Al igual que los vagones de un tren, los somitas aparecen uno a uno marcando la segmentación metamera de tu cuerpo.",
+    "analogia": "Como bloques modulares de construcción Lego que se ensamblan en fila para formar una estructura compleja.",
+    "clinicalTitle": "Segmentación metamerica y malformaciones congénitas",
+    "clinicalRelevance": "Fallas en la separación de somitas embrionarios provocan hemivértebras y escoliosis congénita de progresión rápida.",
+    "clinicalCase": "Hemivértebra torácica diagnosticada en niño con escoliosis congénita por defecto de segmentación somítica.",
+    "keyDetails": [
+      {
+        "label": "Organización",
+        "value": "Pares metaméricos a ambos lados de la línea media"
+      },
+      {
+        "label": "Trilogía celular",
+        "value": "Esclerotoma, miotoma y dermatoma"
+      },
+      {
+        "label": "Ejemplo clásico",
+        "value": "Somitas paraaxiales embrionarios"
+      }
+    ],
+    "svgType": "somita",
+    "termino": "Somita"
+  },
+  {
+    "id": "notocorda",
+    "name": "Notocorda",
+    "pronunciation": "/no-to-cor-da/",
+    "fonetica": "no-to-COR-da",
+    "etymology": "Del griego noton ('espalda, dorso') y chorde ('cuerda, tira').",
+    "category": "articulaciones",
+    "categoryLabel": "Embriología y Columna",
+    "categoryClass": "bg-cat-joints/15 text-cat-joints",
+    "region": "columna",
+    "regionLabel": "Eje Embrionario y Columna",
+    "level": "Intermedio (2do año)",
+    "readingTime": "2 min",
+    "technicalDef": "Varilla celular flexible longitudinal que define el eje primitivo del embrión cordado, induce la formación del tubo neural y persiste en el adulto como el núcleo pulposo discal.",
+    "defTecnica": "Estructura embrionaria que guía el desarrollo del sistema nervioso y la columna vertebral.",
+    "simpleExplanation": "El eje o cuerda guía en el embrión alrededor de la cual se construye toda la columna vertebral.",
+    "explicacionSencilla": "Eje guía de la columna.",
+    "everydayTitle": "El núcleo gel de tus discos intervertebrales",
+    "everydayExample": "El remanente directo de tu notocorda primitiva es el gel amortiguador (núcleo pulposo) en el centro de cada disco de tu columna.",
+    "analogia": "Como el hilo guía o plomada que un maestro de obra coloca en el centro para levantar un muro perfectamente alineado.",
+    "clinicalTitle": "Hernias de disco y cordomas",
+    "clinicalRelevance": "El desplazamiento del remanente notocordal (núcleo pulposo) hacia el canal medular comprime las raíces nerviosas provocando radiculalgia.",
+    "clinicalCase": "Hernia discal extruida L5-S1 con migración del material notocordal hacia el espacio epidural.",
+    "keyDetails": [
+      {
+        "label": "Rol inductor",
+        "value": "Induce la placa neural y cuerpos vertebrales"
+      },
+      {
+        "label": "Remanente adulto",
+        "value": "Núcleo pulposo del disco intervertebral"
+      },
+      {
+        "label": "Ejemplo clásico",
+        "value": "Eje longitudinal embrionario"
+      }
+    ],
+    "svgType": "notocorda",
+    "termino": "Notocorda"
+  },
+  {
+    "id": "periostio",
+    "name": "Periostio",
+    "pronunciation": "/pe-rios-tio/",
+    "fonetica": "pe-RIOS-tio",
+    "etymology": "Del griego peri ('alrededor') y osteon ('hueso').",
+    "category": "huesos",
+    "categoryLabel": "Tejido Óseo y Envolturas",
+    "categoryClass": "bg-cat-bones/15 text-cat-bones",
+    "region": "general",
+    "regionLabel": "Esqueleto General",
+    "level": "Básico (1er año)",
+    "readingTime": "2 min",
+    "technicalDef": "Membrana vascularizada y densa de tejido conectivo fibroso que recubre todas las superficies óseas externas excepto las caras articulares, clave en nutrición, sensibilidad y crecimiento.",
+    "defTecnica": "Membrana vascularizada ricamente inervada que cubre el hueso y permite su reparación y engrosamiento.",
+    "simpleExplanation": "La piel viva y muy sensible que envuelve el hueso, llena de vasos de sangre que lo alimentan y hacen crecer.",
+    "explicacionSencilla": "Piel del hueso que lo hace crecer.",
+    "everydayTitle": "Por qué duele tanto un golpe en la espinilla",
+    "everydayExample": "Si te golpeas la espinilla con la esquina de una mesa, el dolor agudo e insoportable proviene de las terminaciones nerviosas del periostio tibial.",
+    "analogia": "Como la corteza viva de un árbol que protege el tronco de madera, conduce la savia y duele si se raspa.",
+    "clinicalTitle": "Periostitis tibial en corredores (Shin Splints)",
+    "clinicalRelevance": "El impacto repetido y la tracción del músculo sóleo o tibial posterior inflama el periostio tibial provocando dolor quemante al apoyar.",
+    "clinicalCase": "Periostitis tibial medial bilateral en recluta militar tras marchas forzadas con calzado rígido.",
+    "keyDetails": [
+      {
+        "label": "Capas",
+        "value": "Fibrosa externa (protección) y celular interna osteogénica (reparación)"
+      },
+      {
+        "label": "Inervación",
+        "value": "Sumamente sensible al dolor por abundantes nociceptores"
+      },
+      {
+        "label": "Ejemplo clásico",
+        "value": "Periostio diafisario del fémur y tibia"
+      }
+    ],
+    "svgType": "periostio",
+    "termino": "Periostio"
   }
 ];
 

@@ -181,6 +181,24 @@ def test_fifty_terms_coverage(terms):
 
     log(f"Cobertura de los 50 conceptos solicitados validada: 100% presentes en la base de datos sin duplicados.", "PASS")
 
+def test_forty_new_terms_coverage(terms):
+    required_40_names = [
+        "Sinartrosis", "Anfiartrosis", "Diartrosis", "Sincondrosis", "Sínfisis",
+        "Sindesmosis", "Gónfosis", "Apófisis", "Fosa", "Surco",
+        "Meato", "Foramen", "Hiato", "Cóndilo", "Epicóndilo",
+        "Tubérculo", "Tuberosidad", "Espina", "Cresta", "Línea",
+        "Acetábulo", "Foramen magno", "Silla turca", "Lámina cribosa", "Promontorio",
+        "Trocánter mayor", "Maléolo", "Trígono femoral", "Fosa poplítea", "Retináculo",
+        "Menisco", "Labrum", "Cápsula articular", "Cavidad sinovial", "Dermatoma",
+        "Miotoma", "Esclerotoma", "Somita", "Notocorda", "Periostio"
+    ]
+    terms_by_norm = {normalize_text(t['name']): t for t in terms}
+    for req_name in required_40_names:
+        n_req = normalize_text(req_name)
+        assert n_req in terms_by_norm, f"Falta nuevo concepto obligatorio de los 40 solicitados: {req_name}"
+
+    log(f"Cobertura de los 40 nuevos conceptos solicitados validada: 100% presentes en la base de datos sin duplicados.", "PASS")
+
 def test_quizzes_integrity():
     with open('data/quizzes.js', 'r', encoding='utf-8') as f:
         content = f.read()
@@ -340,6 +358,7 @@ def main():
         terms = test_terms_integrity()
         test_twenty_fundamental_concepts(terms)
         test_fifty_terms_coverage(terms)
+        test_forty_new_terms_coverage(terms)
         test_search_and_filtering(terms)
         test_quizzes_integrity()
         test_svg_types_covered(terms)
