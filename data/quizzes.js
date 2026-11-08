@@ -1,4 +1,4 @@
-// Fisio Pedía - Banco de Cuestionarios de Autoevaluación
+﻿// Fisio Pedía - Banco de Cuestionarios de Autoevaluación
 // Preguntas de práctica basadas en casos clínicos reales y situaciones de la vida cotidiana.
 
 const FISIOPEDIA_QUIZZES = [
@@ -1014,7 +1014,3 @@ const FISIOPEDIA_QUIZZES = [
     explanation: "¡Correcto! La combinación de hipoestesia en el **dermatoma L4** (cara medial de pierna hasta maléolo medial) y la abolición del **reflejo rotuliano** confirma radiculopatía compresiva de la raíz nerviosa **L4**."
   }
 ];
-
-if (typeof window !== 'undefined') {
-  window.FISIOPEDIA_QUIZZES = FISIOPEDIA_QUIZZES;
-}
