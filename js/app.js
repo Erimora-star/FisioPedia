@@ -8837,6 +8837,8 @@
 
   // --- MÉTODOS PÚBLICOS GLOBALES ---
   window.fisiopediaApp = {
+    initApp: () => initApp(),
+    startApp: () => startApp(),
     switchTab: (tab) => switchTab(tab),
     navigateTo: (hash) => navigateTo(hash),
     toggleFav: (id) => toggleFavorite(id),
@@ -9404,15 +9406,21 @@
     });
   }
 
+  const initApp = startApp;
+  window.initApp = initApp;
+  window.startApp = startApp;
   window.switchTab = switchTab;
   window.handleHashChange = handleHashChange;
 
   function onReady() {
     try {
-      startApp();
+      hideLoader();
+      initApp();
       renderTerms(window.FISIOPEDIA_TERMS);
     } catch (err) {
       console.error('Error al iniciar FisioPedia:', err);
+    } finally {
+      hideLoader();
     }
   }
 
